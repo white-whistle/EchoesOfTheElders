@@ -1,0 +1,8 @@
+{
+  "item.biotech.fluid_cell": "Fluid Cell",
+  "item.biotech.sulfur": "Sulfur",
+  "item.biotech.lemon": "Lemon",
+  "item.biotech.orange": "Orange",
+
+  "itemgroup.bio": "Bio Tech Items"
+}
