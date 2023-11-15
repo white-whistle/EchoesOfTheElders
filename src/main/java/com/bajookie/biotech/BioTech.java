@@ -1,7 +1,9 @@
 package com.bajookie.biotech;
 
+import com.bajookie.biotech.block.ModBlocks;
 import com.bajookie.biotech.item.ModItemGroups;
 import com.bajookie.biotech.item.ModItems;
+import com.bajookie.biotech.util.ModLootTablesModifiers;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -15,6 +17,8 @@ public class BioTech implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 		ModItemGroups.registerGroups();
+		ModLootTablesModifiers.modifyLootTabels();
 	}
 }

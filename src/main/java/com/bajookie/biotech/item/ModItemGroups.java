@@ -18,6 +18,8 @@ public class ModItemGroups {
                 entries.add(ModItems.SULFUR);
                 entries.add(ModItems.LEMON);
                 entries.add(ModItems.ORANGE);
+                entries.add(ModItems.UNFERMENTEDBIOMASS);
+                entries.add(ModItems.FERMENTEDBIOMASS);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
