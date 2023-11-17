@@ -2,11 +2,15 @@ package com.bajookie.biotech.block;
 
 import com.bajookie.biotech.BioTech;
 import com.bajookie.biotech.block.custom.BearTrapBlock;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -16,8 +20,8 @@ import net.minecraft.util.Identifier;
 import static com.bajookie.biotech.BioTech.MOD_ID;
 
 public class ModBlocks {
-    public static final Block FUEL = registerBlock("fuel_block", new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block BEARTRAPBLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().notSolid()));
+    public static final Block EXPLORER_FRUIT_BLOCK = registerBlock("explorer_fruit_block",new FlowerBlock(StatusEffects.GLOWING,1,FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
 
     private static Item registerBlockItem(String name, Block block) {
         return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
@@ -30,5 +34,6 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         BioTech.LOGGER.info("Registering blocks for ---> " + MOD_ID);
+        BlockRenderLayerMap.INSTANCE.putBlock(EXPLORER_FRUIT_BLOCK, RenderLayer.getCutout());
     }
 }

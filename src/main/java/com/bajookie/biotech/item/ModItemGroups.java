@@ -23,7 +23,11 @@ public class ModItemGroups {
                 entries.add(ModItems.FERMENTEDBIOMASS);
                 entries.add(ModItems.MORTAR_AND_PESTLE);
                 entries.add(ModItems.CITRUSJUICE);
+                entries.add(ModItems.EXPLORER_FRUIT);
+                //blocks
                 entries.add(ModBlocks.BEARTRAPBLOCK);
+                //flowers
+                entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
