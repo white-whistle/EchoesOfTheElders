@@ -3,8 +3,8 @@
   "parent": "bear_trap",
   "texture_size": [32, 32],
   "textures": {
-    "0": "bear_trap",
-    "particle": "bear_trap"
+    "0": "biotech:block/bear_trap_block",
+    "particle": "biotech:block/bear_trap_block"
   },
   "elements": [
     {

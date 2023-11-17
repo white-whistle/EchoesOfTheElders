@@ -20,7 +20,7 @@ import net.minecraft.util.Identifier;
 import static com.bajookie.biotech.BioTech.MOD_ID;
 
 public class ModBlocks {
-    public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().notSolid()));
+    public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).nonOpaque().notSolid()));
     public static final Block EXPLORER_FRUIT_BLOCK = registerBlock("explorers_fruit_block",new FlowerBlock(StatusEffects.GLOWING,1,FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
     public static final Block POTTED_EXPLORER_FRUIT_BLOCK = Registry.register(Registries.BLOCK,new Identifier(MOD_ID,"potted_explorers_fruit_block"),new FlowerPotBlock(EXPLORER_FRUIT_BLOCK,FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
 
