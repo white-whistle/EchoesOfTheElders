@@ -1,7 +1,6 @@
-// 1.20.2	2023-11-17T12:45:10.4890607	BioTech/Model Definitions
-f18ffcfcb69d998c54cfd752cac1c11fed924f24 assets\biotech\blockstates\explorers_fruit_block.json
+// 1.20.2	2023-11-17T13:03:19.9271869	BioTech/Model Definitions
 3f3baff13e29afc17eaa2e537bfdd7daf3883881 assets\biotech\blockstates\potted_explorers_fruit_block.json
+f18ffcfcb69d998c54cfd752cac1c11fed924f24 assets\biotech\blockstates\explorers_fruit_block.json
 ebb782779cb576326188fd7c267e00759049b00b assets\biotech\models\block\potted_explorers_fruit_block.json
 2f4893f48a48b075637badc2732759592bd3d319 assets\biotech\models\block\explorers_fruit_block.json
 6602b8bab71fa339219d670fcc60e2c7b41fe408 assets\biotech\models\item\explorers_fruit_block.json
-2e184f929d2621348d635d7342231a13b694d926 assets\biotech\models\item\potted_explorers_fruit_block.json

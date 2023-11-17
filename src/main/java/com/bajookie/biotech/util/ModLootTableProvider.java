@@ -31,7 +31,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         //         .exactMatch(CornCropBlock.AGE, 8)); crop drop mature
 
         //addDrop(ModBlocks.CORN_CROP, cropDrops(ModBlocks.CORN_CROP, ModItems.CORN, ModItems.CORN_SEEDS, builder2)); crop drop normal
-        addDrop(ModBlocks.EXPLORER_FRUIT_BLOCK, ModItems.EXPLORER_FRUIT);
+        addDrop(ModBlocks.EXPLORER_FRUIT_BLOCK,BlockLootTableGenerator.dropsWithShears(ModBlocks.EXPLORER_FRUIT_BLOCK, ItemEntry.builder(ModItems.EXPLORER_FRUIT)));
         addDrop(ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK,ModBlocks.EXPLORER_FRUIT_BLOCK);
     }
 
