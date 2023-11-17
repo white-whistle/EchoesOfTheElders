@@ -25,7 +25,7 @@ public class ModItemGroups {
                 entries.add(ModItems.CITRUSJUICE);
                 entries.add(ModItems.EXPLORER_FRUIT);
                 //blocks
-                entries.add(ModBlocks.BEARTRAPBLOCK);
+                entries.add(ModBlocks.BEAR_TRAP_BLOCK);
                 //flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
             }).build());

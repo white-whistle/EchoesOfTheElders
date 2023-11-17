@@ -6,9 +6,9 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -20,8 +20,9 @@ import net.minecraft.util.Identifier;
 import static com.bajookie.biotech.BioTech.MOD_ID;
 
 public class ModBlocks {
-    public static final Block BEARTRAPBLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().notSolid()));
-    public static final Block EXPLORER_FRUIT_BLOCK = registerBlock("explorer_fruit_block",new FlowerBlock(StatusEffects.GLOWING,1,FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().notSolid()));
+    public static final Block EXPLORER_FRUIT_BLOCK = registerBlock("explorers_fruit_block",new FlowerBlock(StatusEffects.GLOWING,1,FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
+    public static final Block POTTED_EXPLORER_FRUIT_BLOCK = registerBlock("potted_explorers_fruit_block",new FlowerPotBlock(EXPLORER_FRUIT_BLOCK,FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque()));
 
     private static Item registerBlockItem(String name, Block block) {
         return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));
@@ -34,6 +35,5 @@ public class ModBlocks {
 
     public static void registerModBlocks() {
         BioTech.LOGGER.info("Registering blocks for ---> " + MOD_ID);
-        BlockRenderLayerMap.INSTANCE.putBlock(EXPLORER_FRUIT_BLOCK, RenderLayer.getCutout());
     }
 }
