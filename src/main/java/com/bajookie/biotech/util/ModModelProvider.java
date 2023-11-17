@@ -61,6 +61,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.RUBY_BOOTS));
         * */
         itemModelGenerator.register(ModItems.MINERS_FRUIT,Models.GENERATED);
+        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD,Models.GENERATED);
 
     }
 }
