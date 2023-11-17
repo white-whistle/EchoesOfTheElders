@@ -1,9 +1,11 @@
 package com.bajookie.biotech.block;
 
 import com.bajookie.biotech.BioTech;
+import com.bajookie.biotech.block.custom.BearTrapBlock;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSetType;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -15,6 +17,7 @@ import static com.bajookie.biotech.BioTech.MOD_ID;
 
 public class ModBlocks {
     public static final Block FUEL = registerBlock("fuel_block", new Block(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block BEARTRAPBLOCK = registerBlock("bear_trap_block",new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque().notSolid()));
 
     private static Item registerBlockItem(String name, Block block) {
         return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), new BlockItem(block, new FabricItemSettings()));

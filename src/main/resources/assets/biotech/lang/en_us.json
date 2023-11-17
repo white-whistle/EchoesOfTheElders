@@ -3,6 +3,10 @@
   "item.biotech.sulfur": "Sulfur",
   "item.biotech.lemon": "Lemon",
   "item.biotech.orange": "Orange",
+  "item.biotech.unfermented_biomass": "Unfermented Biomass",
+  "item.biotech.fermented_biomass": "Fermented Biomass",
+  "item.biotech.mortar_and_pestle": "Mortar And Pestle",
+  "item.biotech.bottle_of_citrus_juice": "Bottle Of Citrus Juice",
 
   "itemgroup.bio": "Bio Tech Items"
 }

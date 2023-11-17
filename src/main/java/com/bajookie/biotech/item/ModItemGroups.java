@@ -1,6 +1,7 @@
 package com.bajookie.biotech.item;
 
 import com.bajookie.biotech.BioTech;
+import com.bajookie.biotech.block.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -20,6 +21,9 @@ public class ModItemGroups {
                 entries.add(ModItems.ORANGE);
                 entries.add(ModItems.UNFERMENTEDBIOMASS);
                 entries.add(ModItems.FERMENTEDBIOMASS);
+                entries.add(ModItems.MORTAR_AND_PESTLE);
+                entries.add(ModItems.CITRUSJUICE);
+                entries.add(ModBlocks.BEARTRAPBLOCK);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);

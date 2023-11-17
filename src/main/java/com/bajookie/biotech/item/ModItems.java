@@ -1,6 +1,7 @@
 package com.bajookie.biotech.item;
 
 import com.bajookie.biotech.BioTech;
+import com.bajookie.biotech.item.custom.MortarAndPestleItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -21,8 +22,10 @@ public class ModItems {
     public static final Item SULFUR = registerItem("sulfur",new Item(new FabricItemSettings()));
     public static final Item ORANGE = registerItem("orange",new Item(new FabricItemSettings().food(ModFoodComponents.ORANGE)));
     public static final Item LEMON = registerItem("lemon",new Item(new FabricItemSettings().food(ModFoodComponents.LEMON)));
+    public static final Item CITRUSJUICE = registerItem("bottle_of_citrus_juice",new Item(new FabricItemSettings().food(ModFoodComponents.CITRUSJUICE)));
     public static final Item UNFERMENTEDBIOMASS = registerItem("unfermented_biomass",new Item(new FabricItemSettings()));
     public static final Item FERMENTEDBIOMASS = registerItem("fermented_biomass",new Item(new FabricItemSettings()));
+    public static final Item MORTAR_AND_PESTLE = registerItem("mortar_and_pestle",new MortarAndPestleItem(new FabricItemSettings().maxDamage(100)));
 
     //Register methods
     public static Item registerItem(String name,Item item){
