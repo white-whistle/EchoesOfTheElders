@@ -1,6 +1,7 @@
 package com.bajookie.biotech.util;
 
 import com.bajookie.biotech.block.ModBlocks;
+import com.bajookie.biotech.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
@@ -59,6 +60,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.RUBY_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.RUBY_BOOTS));
         * */
+        itemModelGenerator.register(ModItems.MINERS_FRUIT,Models.GENERATED);
 
     }
 }
