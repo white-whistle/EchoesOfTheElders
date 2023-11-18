@@ -44,7 +44,9 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         //addDrop(ModBlocks.CORN_CROP, cropDrops(ModBlocks.CORN_CROP, ModItems.CORN, ModItems.CORN_SEEDS, builder2)); crop drop normal
         addDrop(ModBlocks.EXPLORER_FRUIT_BLOCK,BlockLootTableGenerator.dropsWithShears(ModBlocks.EXPLORER_FRUIT_BLOCK, ItemEntry.builder(ModItems.EXPLORER_FRUIT)));
+        addDrop(ModBlocks.MINERS_FRUIT_BLOCK);
         addDrop(ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK,ModBlocks.EXPLORER_FRUIT_BLOCK);
+        addDrop(ModBlocks.POTTED_MINERS_FRUIT_BLOCK,ModBlocks.MINERS_FRUIT_BLOCK);
         addDrop(ModBlocks.RELIC_CONTAINER_BLOCK,cursedRelicPool());
     }
 
@@ -68,7 +70,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
     }
 
     private LootTable.Builder cursedRelicPool(){
-        LootPool.Builder builder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(Arrays.asList(ItemEntry.builder(ModItems.MINERS_FRUIT).weight(1).build(),ItemEntry.builder(ModItems.EXPLORER_FRUIT).weight(1).build()));
+        LootPool.Builder builder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(Arrays.asList(ItemEntry.builder(ModBlocks.MINERS_FRUIT_BLOCK).weight(1).build(),ItemEntry.builder(ModItems.EXPLORER_FRUIT).weight(1).build()));
         return LootTable.builder().pool(builder.build());
     }
 }

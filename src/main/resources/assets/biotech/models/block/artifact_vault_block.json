@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/cube_all",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "biotech:block/artifact_vault_block",

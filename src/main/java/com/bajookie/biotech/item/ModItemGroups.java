@@ -14,17 +14,8 @@ import static com.bajookie.biotech.BioTech.MOD_ID;
 
 public class ModItemGroups {
     public static final ItemGroup MOD_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,new Identifier(MOD_ID,"mod_item_group"),
-            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.bio")).icon(()->new ItemStack(ModItems.MINERS_FRUIT)).entries((displayContext, entries) -> {
-                // entries.add(ModItems.FLUID_CELL);
-                // entries.add(ModItems.SULFUR);
-                // entries.add(ModItems.LEMON);
-                // entries.add(ModItems.ORANGE);
-                // entries.add(ModItems.UNFERMENTEDBIOMASS);
-                // entries.add(ModItems.FERMENTEDBIOMASS);
-                // entries.add(ModItems.MORTAR_AND_PESTLE);
-                // entries.add(ModItems.CITRUSJUICE);
+            FabricItemGroup.builder().displayName(Text.translatable("itemgroup.bio")).icon(()->new ItemStack(ModBlocks.MINERS_FRUIT_BLOCK)).entries((displayContext, entries) -> {
                 entries.add(ModItems.EXPLORER_FRUIT);
-                entries.add(ModItems.MINERS_FRUIT);
                 entries.add(ModItems.ANCIENT_STONE_SWORD);
                 entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 //blocks
@@ -32,6 +23,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 //flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
+                entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
