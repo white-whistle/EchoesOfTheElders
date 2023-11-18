@@ -24,5 +24,6 @@ public abstract class ModelLoaderMixin {
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
     public void addCustomModels(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
         this.addModel(new ModelIdentifier(BioTech.MOD_ID, "ancient_stone_sword_3d", "inventory"));
+        this.addModel(new ModelIdentifier(BioTech.MOD_ID, "shiny_ancient_stone_sword_3d", "inventory"));
     }
 }
