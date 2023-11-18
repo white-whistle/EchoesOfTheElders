@@ -9,7 +9,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.WorldView;
 
 public class MinersFruitBlock extends PlantBlock {
-    private static final VoxelShape SHAPE = Block.createCuboidShape(10,0,10,10,10,10);
+    private static final VoxelShape SHAPE = Block.createCuboidShape(5,0,5,10,10,10);
     public MinersFruitBlock() {
         super(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM));
     }
