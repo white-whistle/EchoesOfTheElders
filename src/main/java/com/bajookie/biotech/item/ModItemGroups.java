@@ -29,6 +29,7 @@ public class ModItemGroups {
                 entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 //blocks
                 entries.add(ModBlocks.BEAR_TRAP_BLOCK);
+                entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 //flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
             }).build());
