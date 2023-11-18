@@ -62,6 +62,7 @@ public class ModModelProvider extends FabricModelProvider {
         * */
         itemModelGenerator.register(ModItems.MINERS_FRUIT,Models.GENERATED);
         itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD,Models.GENERATED);
+        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD,Models.GENERATED);
 
     }
 }
