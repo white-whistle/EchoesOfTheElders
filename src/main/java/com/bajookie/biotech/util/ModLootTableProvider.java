@@ -4,17 +4,29 @@ import com.bajookie.biotech.block.ModBlocks;
 import com.bajookie.biotech.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.loot.v2.FabricLootPoolBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.data.server.loottable.LootTableGenerator;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
 import net.minecraft.loot.entry.LootPoolEntry;
 import net.minecraft.loot.function.ApplyBonusLootFunction;
 import net.minecraft.loot.function.SetCountLootFunction;
+import net.minecraft.loot.provider.number.ConstantLootNumberProvider;
+import net.minecraft.loot.provider.number.LootNumberProvider;
 import net.minecraft.loot.provider.number.UniformLootNumberProvider;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {
@@ -32,7 +44,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         //addDrop(ModBlocks.CORN_CROP, cropDrops(ModBlocks.CORN_CROP, ModItems.CORN, ModItems.CORN_SEEDS, builder2)); crop drop normal
         addDrop(ModBlocks.EXPLORER_FRUIT_BLOCK,BlockLootTableGenerator.dropsWithShears(ModBlocks.EXPLORER_FRUIT_BLOCK, ItemEntry.builder(ModItems.EXPLORER_FRUIT)));
+        addDrop(ModBlocks.MINERS_FRUIT_BLOCK);
         addDrop(ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK,ModBlocks.EXPLORER_FRUIT_BLOCK);
+        addDrop(ModBlocks.POTTED_MINERS_FRUIT_BLOCK,ModBlocks.MINERS_FRUIT_BLOCK);
+        addDrop(ModBlocks.RELIC_CONTAINER_BLOCK,cursedRelicPool());
     }
 
     public LootTable.Builder copperLikeOreDrops(Block drop, Item item, float minLoot, float maxLoot) {
@@ -52,5 +67,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
 
         // add silk touch logic + return loot table
         return BlockLootTableGenerator.dropsWithSilkTouch(drop, lootEntry);
+    }
+
+    private LootTable.Builder cursedRelicPool(){
+        LootPool.Builder builder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1)).with(Arrays.asList(ItemEntry.builder(ModBlocks.MINERS_FRUIT_BLOCK).weight(1).build(),ItemEntry.builder(ModItems.EXPLORER_FRUIT).weight(1).build()));
+        return LootTable.builder().pool(builder.build());
     }
 }

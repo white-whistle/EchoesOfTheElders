@@ -34,7 +34,9 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerCrop(ModBlocks.CORN_CROP, CornCropBlock.AGE, 0, 1, 2, 3, 4, 5, 6, 7, 8);
         * */
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.EXPLORER_FRUIT_BLOCK,ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.MINERS_FRUIT_BLOCK,ModBlocks.POTTED_MINERS_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
+        blockStateModelGenerator.registerSimpleState(ModBlocks.RELIC_CONTAINER_BLOCK);
     }
 
     @Override
@@ -60,9 +62,8 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.RUBY_LEGGINGS));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.RUBY_BOOTS));
         * */
-        itemModelGenerator.register(ModItems.MINERS_FRUIT,Models.GENERATED);
-        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD,Models.GENERATED);
-        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD,Models.GENERATED);
+        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD,Models.HANDHELD);
+        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD,Models.HANDHELD);
 
     }
 }
