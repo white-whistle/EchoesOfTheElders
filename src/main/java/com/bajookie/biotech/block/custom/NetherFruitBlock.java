@@ -18,6 +18,13 @@ public class NetherFruitBlock extends PlantBlock {
         return false;
     }
 
+    /**
+     * lets the block only to be set under netherrack
+     * @param state
+     * @param world
+     * @param pos
+     * @return
+     */
     @Override
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos oneUnder = new BlockPos(pos.getX(),pos.getY()-1,pos.getZ());
