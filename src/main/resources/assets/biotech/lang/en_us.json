@@ -1,13 +1,15 @@
 {
-  "item.biotech.fluid_cell": "Fluid Cell",
-  "item.biotech.sulfur": "Sulfur",
-  "item.biotech.lemon": "Lemon",
-  "item.biotech.orange": "Orange",
+  "item.biotech.shiny_ancient_stone_sword": "\u00A7a Shiny Ancient Stone Sword",
+  "item.biotech.ancient_stone_sword": "Ancient Stone Sword",
   "item.biotech.explorers_fruit": "Explorer's Fruit",
-  "item.biotech.unfermented_biomass": "Unfermented Biomass",
-  "item.biotech.fermented_biomass": "Fermented Biomass",
-  "item.biotech.mortar_and_pestle": "Mortar And Pestle",
-  "item.biotech.bottle_of_citrus_juice": "Bottle Of Citrus Juice",
 
-  "itemgroup.bio": "Bio Tech Items"
+  "block.biotech.bear_trap_block": "Bear Trap",
+  "block.biotech.artifact_vault_block": "Artifact Vault",
+  "block.biotech.explorers_fruit_block": "Explorer's Fruit Plant",
+  "block.biotech.miners_fruit_block": "Miner's Shroom",
+  "block.biotech.nether_fruit_block": "Nether Fruit",
+
+
+  "itemgroup.bio": "BioTech Items",
+  "artifact-group.bio": "BioTech Artifacts"
 }

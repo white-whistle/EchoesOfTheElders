@@ -16,14 +16,20 @@ public class ModItemGroups {
     public static final ItemGroup MOD_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,new Identifier(MOD_ID,"mod_item_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.bio")).icon(()->new ItemStack(ModBlocks.MINERS_FRUIT_BLOCK)).entries((displayContext, entries) -> {
                 entries.add(ModItems.EXPLORER_FRUIT);
-                entries.add(ModItems.ANCIENT_STONE_SWORD);
-                entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 //blocks
                 entries.add(ModBlocks.BEAR_TRAP_BLOCK);
-                entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 //flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
+                entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
+            }).build());
+    public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP,new Identifier(MOD_ID,"mod_artifact_group"),
+            FabricItemGroup.builder().displayName(Text.translatable("artifact-group.bio")).icon(()->new ItemStack(ModBlocks.RELIC_CONTAINER_BLOCK)).entries((displayContext, entries) -> {
+                entries.add(ModItems.ANCIENT_STONE_SWORD);
+                entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
+                //blocks
+                entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
+                //flowers
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
