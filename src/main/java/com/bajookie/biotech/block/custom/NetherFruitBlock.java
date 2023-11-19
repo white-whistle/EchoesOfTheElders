@@ -10,7 +10,7 @@ import net.minecraft.world.WorldView;
 
 public class NetherFruitBlock extends PlantBlock {
     public NetherFruitBlock() {
-        super(FabricBlockSettings.copyOf(Blocks.RED_MUSHROOM));
+        super(FabricBlockSettings.copyOf(Blocks.NETHER_WART));
     }
 
     @Override
@@ -22,7 +22,7 @@ public class NetherFruitBlock extends PlantBlock {
     public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
         BlockPos oneUnder = new BlockPos(pos.getX(),pos.getY()-1,pos.getZ());
         BlockPos oneUp = new BlockPos(pos.getX(),pos.getY()+1,pos.getZ());
-        if (world.getBlockState(oneUnder).getBlock() == Blocks.AIR && world.getBlockState(oneUp).getBlock() != Blocks.AIR ){
+        if (world.getBlockState(oneUnder).getBlock() == Blocks.AIR && world.getBlockState(oneUp).getBlock() == Blocks.NETHERRACK ){
             return true;
         }
         else return false;
