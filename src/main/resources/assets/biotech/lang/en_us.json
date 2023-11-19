@@ -9,6 +9,8 @@
   "block.biotech.miners_fruit_block": "Miner's Shroom",
   "block.biotech.nether_fruit_block": "Nether Fruit",
 
+  "tooltip.biotech.seeker_relic.info": "Targeted Mob:",
+
 
   "itemgroup.bio": "BioTech Items",
   "artifact-group.bio": "BioTech Artifacts"
