@@ -1,6 +1,7 @@
 package com.bajookie.biotech;
 
 import com.bajookie.biotech.block.ModBlocks;
+import com.bajookie.biotech.entity.ModEntities;
 import com.bajookie.biotech.item.ModItemGroups;
 import com.bajookie.biotech.item.ModItems;
 import com.bajookie.biotech.util.ModLootTablesModifiers;
@@ -20,5 +21,7 @@ public class BioTech implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModItemGroups.registerGroups();
 		ModLootTablesModifiers.modifyLootTables();
+
+		ModEntities.registerMobAttributes();
 	}
 }

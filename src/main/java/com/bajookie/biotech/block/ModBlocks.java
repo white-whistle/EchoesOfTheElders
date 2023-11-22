@@ -44,4 +44,13 @@ public class ModBlocks {
     public static void registerModBlocks() {
         BioTech.LOGGER.info("Registering blocks for ---> " + MOD_ID);
     }
+
+    public static void registerModBlocksModelLayers(){
+        BlockRenderLayerMap.INSTANCE.putBlock(EXPLORER_FRUIT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(MINERS_FRUIT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(NETHER_FRUIT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(POTTED_EXPLORER_FRUIT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(POTTED_MINERS_FRUIT_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(RELIC_CONTAINER_BLOCK,RenderLayer.getCutout());
+    }
 }
