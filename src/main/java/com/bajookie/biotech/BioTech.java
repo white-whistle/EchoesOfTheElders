@@ -21,4 +21,6 @@ public class BioTech implements ModInitializer {
 		ModItemGroups.registerGroups();
 		ModLootTablesModifiers.modifyLootTables();
 	}
+
+
 }
