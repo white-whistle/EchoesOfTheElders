@@ -23,10 +23,8 @@ import org.joml.Quaternionf;
 import org.lwjgl.opengl.GL11;
 
 
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class EntityEffectRenderer {
@@ -107,49 +105,31 @@ public class EntityEffectRenderer {
 
     public static void render(MatrixStack matrix, LivingEntity entity, double x, double y) {
 
-        Relation relation = EntityUtil.determineRelation(entity);
-
-        int outlineColor = relation.equals(Relation.FRIEND) ? (
-                    0x00FF00
-                ): (
-                relation.equals(Relation.FOE) ? (
-                        0xFF0000
-                        ): (
-                        0xACACAC
-                        )
-                );
-
-        Matrix4f m4f = matrix.peek().getPositionMatrix(); //  .getModel();
-
-        var statusEffects = entity.getStatusEffects();
-        if (entity.hasStatusEffect(StatusEffects.SLOWNESS)) {
-        System.out.println("yo!!!");
-
-        }
+        // Relation relation = EntityUtil.determineRelation(entity);
         //
-        // drawStatusEffect(m4f, x, y, FULL_SIZE, outlineColor, statusEffects);
+        // int outlineColor = relation.equals(Relation.FRIEND) ? (
+        //             0x00FF00
+        //         ): (
+        //         relation.equals(Relation.FOE) ? (
+        //                 0xFF0000
+        //                 ): (
+        //                 0xACACAC
+        //                 )
+        //         );
 
-        // var statusEffects = Collections.nCopies(10,new StatusEffectInstance(StatusEffects.NAUSEA));
-
-        // System.out.println(statusEffects.size());
-
-        drawStatusEffect(m4f, x, y, FULL_SIZE, outlineColor, statusEffects);
+        // Matrix4f m4f = matrix.peek().getPositionMatrix(); //  .getModel();
+        //
+        // var statusEffects = entity.getStatusEffects();
+        //
+        // drawStatusEffect(m4f, x, y, FULL_SIZE, statusEffects);
     }
 
 
-    private static void drawStatusEffect(Matrix4f matrix4f, double x, double y, float size, int outlineColor, Collection<StatusEffectInstance> effects) {
+    private static void drawStatusEffect(Matrix4f matrix4f, double x, double y, float size, Collection<StatusEffectInstance> effects) {
         var client = MinecraftClient.getInstance();
-
-        float c = 0.00390625F;
-
-        // float r = (outlineColor >> 16 & 255) / 255.0F;
-        // float g = (outlineColor >> 8 & 255) / 255.0F;
-        // float b = (outlineColor & 255) / 255.0F;
 
         StatusEffectSpriteManager statusEffectSpriteManager = client.getStatusEffectSpriteManager();
 
-        // RenderSystem.setShaderColor(r, g, b, 1);
-        // RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderTexture(0, STATUS_EFFECT_ATLAS);
         RenderSystem.enableBlend();
@@ -158,7 +138,6 @@ public class EntityEffectRenderer {
         BufferBuilder buffer = tessellator.getBuffer();
 
         float offsetX = - effects.size() * size / 2;
-        // float offsetX = 0;
 
 
         for (StatusEffectInstance statusEffectInstance : Ordering.natural().reverse().sortedCopy(effects)) {
