@@ -26,6 +26,7 @@ public class ModItemGroups {
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP,new Identifier(MOD_ID,"mod_artifact_group"),
             FabricItemGroup.builder().displayName(Text.translatable("artifact-group.bio")).icon(()->new ItemStack(ModBlocks.RELIC_CONTAINER_BLOCK)).entries((displayContext, entries) -> {
                 entries.add(ModItems.ANCIENT_STONE_SWORD);
+                entries.add(ModItems.RADIANT_LOTUS);
                 entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 //blocks
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
