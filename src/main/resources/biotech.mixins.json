@@ -6,6 +6,8 @@
     "ExampleMixin"
   ],
   "client": [
+    "ClientPlayerEntityMixin",
+    "HeldItemRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
