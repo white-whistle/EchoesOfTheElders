@@ -3,7 +3,6 @@
   "package": "com.bajookie.biotech.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ExampleMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

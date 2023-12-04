@@ -32,6 +32,7 @@ public class ModItemGroups {
                 entries.add(ModItems.RADIANT_LOTUS);
                 entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 entries.add(ModItems.VITALITY_PUMP);
+                entries.add(ModItems.PORTAL_RING);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
