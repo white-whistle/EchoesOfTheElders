@@ -33,7 +33,7 @@ public class VitalityPumpItem extends Item {
     }
 
     public void activate(World world, PlayerEntity user) {
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_WARDEN_HEARTBEAT, SoundCategory.NEUTRAL, 1f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+        world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_HONEY_BLOCK_PLACE, SoundCategory.PLAYERS, 5f, 0.2f);
 
         user.getItemCooldownManager().set(this, 60);
 
