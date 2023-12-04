@@ -22,6 +22,7 @@ public class ModItems {
     public static final Item EXPLORER_FRUIT = registerItem("explorers_fruit",new Item(new FabricItemSettings().food(ModFoodComponents.EXPLORERS_FRUIT).maxCount(16)));
     public static final Item ANCIENT_STONE_SWORD = registerItem("ancient_stone_sword",new AncientStoneSwordItem(10, -1.5f, 5, 0, +0.50f, -0.25f));
     public static final Item SHINY_ANCIENT_STONE_SWORD = registerItem("shiny_ancient_stone_sword",new AncientStoneSwordItem(15, -1.5f, 5, 2, +1f, -0.25f));
+    //hammer
     public static final Item MIDAS_HAMMER = registerItem("midas_hammer",new MidasHammerItem(ARTIFACT_BASE_MATERIAL, 10, -2f, new FabricItemSettings().maxCount(1).maxDamage(120)));
     public static final Item VITALITY_PUMP = registerItem("vitality_pump",new VitalityPumpItem(2));
     public static final Item PORTAL_RING = registerItem("portal_ring",new PortalRingItem());
