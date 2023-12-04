@@ -19,11 +19,13 @@ public class RadiantLotusItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.getItemCooldownManager().set(this,20*60*5);
-        Collection<StatusEffectInstance> effects = user.getStatusEffects();
-        for(StatusEffectInstance effect: effects){
-            if (!effect.getEffectType().isBeneficial()){
-                user.removeStatusEffect(effect.getEffectType());
+        if (!user.getItemCooldownManager().isCoolingDown(this)){
+            user.getItemCooldownManager().set(this,20*60*5);
+            Collection<StatusEffectInstance> effects = user.getStatusEffects();
+            for(StatusEffectInstance effect: effects){
+                if (!effect.getEffectType().isBeneficial()){
+                    user.removeStatusEffect(effect.getEffectType());
+                }
             }
         }
         return super.use(world, user, hand);
