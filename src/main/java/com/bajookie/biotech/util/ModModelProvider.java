@@ -29,6 +29,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.MIDAS_HAMMER,Models.HANDHELD);
         itemModelGenerator.register(ModItems.VITALITY_PUMP,Models.GENERATED);
         itemModelGenerator.register(ModItems.RADIANT_LOTUS,Models.GENERATED);
+        itemModelGenerator.register(ModItems.PORTAL_RING,Models.GENERATED);
 
     }
 }

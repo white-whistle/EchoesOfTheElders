@@ -2,7 +2,6 @@ package com.bajookie.biotech.item;
 
 import com.bajookie.biotech.BioTech;
 import com.bajookie.biotech.item.custom.AncientStoneSwordItem;
-import com.bajookie.biotech.item.custom.MidasHammerItem;
 import com.bajookie.biotech.item.custom.VitalityPumpItem;
 import com.bajookie.biotech.item.custom.RadiantLotusItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -24,6 +23,7 @@ public class ModItems {
     public static final Item SHINY_ANCIENT_STONE_SWORD = registerItem("shiny_ancient_stone_sword",new AncientStoneSwordItem(15, -1.5f, 5, 2, +1f, -0.25f));
     public static final Item MIDAS_HAMMER = registerItem("midas_hammer",new MidasHammerItem(ARTIFACT_BASE_MATERIAL, 10, -2f, new FabricItemSettings().maxCount(1).maxDamage(120)));
     public static final Item VITALITY_PUMP = registerItem("vitality_pump",new VitalityPumpItem(2));
+    public static final Item PORTAL_RING = registerItem("portal_ring",new PortalRingItem());
 
 
 
