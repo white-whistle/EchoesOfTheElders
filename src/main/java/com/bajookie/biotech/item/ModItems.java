@@ -3,6 +3,7 @@ package com.bajookie.biotech.item;
 import com.bajookie.biotech.BioTech;
 import com.bajookie.biotech.item.custom.*;
 import com.bajookie.biotech.item.custom.AncientStoneSwordItem;
+import com.bajookie.biotech.item.custom.PortalRingItem;
 import com.bajookie.biotech.item.custom.VitalityPumpItem;
 import com.bajookie.biotech.item.custom.RadiantLotusItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
