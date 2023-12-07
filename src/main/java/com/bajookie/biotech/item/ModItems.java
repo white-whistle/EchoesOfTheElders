@@ -28,6 +28,7 @@ public class ModItems {
     public static final Item MIDAS_HAMMER = registerItem("midas_hammer",new MidasHammerItem(ARTIFACT_BASE_MATERIAL, 10, -2f, new FabricItemSettings().maxCount(1).maxDamage(120)));
     public static final Item VITALITY_PUMP = registerItem("vitality_pump",new VitalityPumpItem(2));
     public static final Item PORTAL_RING = registerItem("portal_ring",new PortalRingItem());
+    public static final Item GALE_CORE = registerItem("gale_core",new GaleCoreItem());
 
 
 
