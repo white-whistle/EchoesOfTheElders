@@ -15,6 +15,8 @@ import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -41,6 +43,7 @@ public class MidasHammerItem extends PickaxeItem {
                 ItemEntity itemN = new ItemEntity(entity.getWorld(),entity.getX(),entity.getY(),entity.getZ(),new ItemStack(Items.GOLD_NUGGET,nugget));
                 entity.getWorld().spawnEntity(item);
                 entity.getWorld().spawnEntity(itemN);
+                user.getWorld().playSound(user,entity.getBlockPos(),SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.AMBIENT,1,1);
             }
             entity.damage(entity.getWorld().getDamageSources().magic(),50f);
         }

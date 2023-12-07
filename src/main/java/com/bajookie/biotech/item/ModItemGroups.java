@@ -33,6 +33,8 @@ public class ModItemGroups {
                 entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 entries.add(ModItems.VITALITY_PUMP);
                 entries.add(ModItems.PORTAL_RING);
+                entries.add(ModItems.MIDAS_HAMMER);
+                entries.add(ModItems.GALE_CORE);
             }).build());
     public static void registerGroups(){
         BioTech.LOGGER.info("Registering Item Groups for ---> "+MOD_ID);
