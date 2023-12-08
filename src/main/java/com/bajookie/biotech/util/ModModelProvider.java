@@ -7,6 +7,9 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.BlockStateModelGenerator;
 import net.minecraft.data.client.ItemModelGenerator;
 import net.minecraft.data.client.Models;
+import net.minecraft.item.Item;
+
+import java.util.List;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -22,15 +25,25 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.RELIC_CONTAINER_BLOCK);
     }
 
+    static class ItemModelConfig {
+        protected static final List<Item> HANDHELD = List.of(
+                ModItems.ANCIENT_STONE_SWORD,
+                ModItems.SHINY_ANCIENT_STONE_SWORD,
+                ModItems.MIDAS_HAMMER
+        );
+    }
+
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.MIDAS_HAMMER, Models.HANDHELD);
-        itemModelGenerator.register(ModItems.VITALITY_PUMP, Models.GENERATED);
-        itemModelGenerator.register(ModItems.RADIANT_LOTUS, Models.GENERATED);
-        itemModelGenerator.register(ModItems.PORTAL_RING, Models.GENERATED);
-        itemModelGenerator.register(ModItems.GALE_CORE,Models.GENERATED);
-        itemModelGenerator.register(ModItems.SILENT_FIRE, Models.GENERATED);
+        ModItems.registeredModItems.forEach(item -> {
+            // handheld models
+            if (ItemModelConfig.HANDHELD.contains(item)) {
+                itemModelGenerator.register(item, Models.HANDHELD);
+                return;
+            }
+
+            // by default register as generated
+            itemModelGenerator.register(item, Models.GENERATED);
+        });
     }
 }
