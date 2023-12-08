@@ -29,7 +29,8 @@ public class ModModelProvider extends FabricModelProvider {
         protected static final List<Item> HANDHELD = List.of(
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
-                ModItems.MIDAS_HAMMER
+                ModItems.MIDAS_HAMMER,
+                ModItems.DAGON
         );
     }
 

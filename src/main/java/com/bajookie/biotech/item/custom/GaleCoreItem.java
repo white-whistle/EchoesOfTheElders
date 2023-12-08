@@ -43,17 +43,16 @@ public class GaleCoreItem extends Item {
 
             // update usage ticks
             if (nbt.getBoolean(relicActiveId)) {
+                if (user.isFallFlying()) { // in order to the effect to be continues it must be called each tick
+                    world.addParticle(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
+                    Vec3d rotationDir = user.getRotationVector();
+                    Vec3d velocity = user.getVelocity();
+                    user.setVelocity(velocity.add(rotationDir.x * 0.1 + (rotationDir.x * 1.5 - velocity.x) * 0.5, rotationDir.y * 0.1 + (rotationDir.y * 1.5 - velocity.y) * 0.5, rotationDir.z * 0.1 + (rotationDir.z * 1.5 - velocity.z) * 0.5));
+                }
                 int usage = nbt.getInt(usedTicksId);
                 if (usage > EFFECT_RATE) {
                     nbt.putInt(usedTicksId, 0);
                     stack.setDamage(stack.getDamage() + 2);
-
-                    if (user.isFallFlying()) {
-                        world.addParticle(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
-                        Vec3d rotationDir = user.getRotationVector();
-                        Vec3d velocity = user.getVelocity();
-                        user.setVelocity(velocity.add(rotationDir.x * 0.1 + (rotationDir.x * 1.5 - velocity.x) * 0.5, rotationDir.y * 0.1 + (rotationDir.y * 1.5 - velocity.y) * 0.5, rotationDir.z * 0.1 + (rotationDir.z * 1.5 - velocity.z) * 0.5));
-                    }
 
                 } else {
                     nbt.putInt(usedTicksId, usage + 1);

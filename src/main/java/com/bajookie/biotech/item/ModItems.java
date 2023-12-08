@@ -37,6 +37,7 @@ public class ModItems {
     public static final Item GALE_CORE = registerItem("gale_core", new GaleCoreItem());
     public static final Item SILENT_FIRE = registerItem("silent_fire", new AuraItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC), StatusEffects.GLOWING, 25, 0));
     public static final Item FIRE_SNAP = registerItem("fire_snap", new FireSnapItem());
+    public static final Item DAGON = registerItem("dagon_item", new DagonItem());
 
 
     // Register methods
