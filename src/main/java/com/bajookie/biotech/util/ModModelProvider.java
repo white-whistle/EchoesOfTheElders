@@ -16,21 +16,21 @@ public class ModModelProvider extends FabricModelProvider {
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerTintableCross(ModBlocks.NETHER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.EXPLORER_FRUIT_BLOCK,ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.MINERS_FRUIT_BLOCK,ModBlocks.POTTED_MINERS_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.EXPLORER_FRUIT_BLOCK, ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.MINERS_FRUIT_BLOCK, ModBlocks.POTTED_MINERS_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
         blockStateModelGenerator.registerSimpleState(ModBlocks.RELIC_CONTAINER_BLOCK);
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD,Models.HANDHELD);
-        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD,Models.HANDHELD);
-        itemModelGenerator.register(ModItems.MIDAS_HAMMER,Models.HANDHELD);
-        itemModelGenerator.register(ModItems.VITALITY_PUMP,Models.GENERATED);
-        itemModelGenerator.register(ModItems.RADIANT_LOTUS,Models.GENERATED);
-        itemModelGenerator.register(ModItems.PORTAL_RING,Models.GENERATED);
+        itemModelGenerator.register(ModItems.ANCIENT_STONE_SWORD, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.SHINY_ANCIENT_STONE_SWORD, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.MIDAS_HAMMER, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.VITALITY_PUMP, Models.GENERATED);
+        itemModelGenerator.register(ModItems.RADIANT_LOTUS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.PORTAL_RING, Models.GENERATED);
         itemModelGenerator.register(ModItems.GALE_CORE,Models.GENERATED);
-
+        itemModelGenerator.register(ModItems.SILENT_FIRE, Models.GENERATED);
     }
 }

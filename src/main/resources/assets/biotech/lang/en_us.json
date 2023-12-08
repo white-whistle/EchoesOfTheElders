@@ -4,14 +4,12 @@
   "item.biotech.explorers_fruit": "Explorer's Fruit",
   "item.biotech.vitality_pump": "Vitality Pump",
   "item.biotech.portal_ring": "Portal Ring",
-
+  "item.biotech.silent_fire": "Silent Fire",
   "block.biotech.bear_trap_block": "Bear Trap",
   "block.biotech.artifact_vault_block": "Artifact Vault",
   "block.biotech.explorers_fruit_block": "Explorer's Fruit Plant",
   "block.biotech.miners_fruit_block": "Miner's Shroom",
   "block.biotech.nether_fruit_block": "Nether Fruit",
-
-
   "itemgroup.bio": "BioTech Items",
   "artifact-group.bio": "BioTech Artifacts"
 }
