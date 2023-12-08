@@ -10,7 +10,8 @@
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
-    "WorldRendererMixin"
+    "WorldRendererMixin",
+    "PotionUseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

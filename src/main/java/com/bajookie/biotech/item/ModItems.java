@@ -38,6 +38,7 @@ public class ModItems {
     public static final Item SILENT_FIRE = registerItem("silent_fire", new AuraItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC), StatusEffects.GLOWING, 25, 0));
     public static final Item FIRE_SNAP = registerItem("fire_snap", new FireSnapItem());
     public static final Item DAGON = registerItem("dagon_item", new DagonItem());
+    public static final Item POTION_MIRAGE = registerItem("potion_mirage_item", new Item(new FabricItemSettings().maxCount(1)));
 
 
     // Register methods
