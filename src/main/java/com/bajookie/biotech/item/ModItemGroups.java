@@ -36,6 +36,7 @@ public class ModItemGroups {
                 entries.add(ModItems.MIDAS_HAMMER);
                 entries.add(ModItems.GALE_CORE);
                 entries.add(ModItems.FIRE_SNAP);
+                entries.add(ModItems.DAGON);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
