@@ -36,7 +36,7 @@ public class ModItems {
     public static final Item PORTAL_RING = registerItem("portal_ring", new PortalRingItem());
     public static final Item GALE_CORE = registerItem("gale_core", new GaleCoreItem());
     public static final Item SILENT_FIRE = registerItem("silent_fire", new AuraItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC), StatusEffects.GLOWING, 25, 0));
-    public static final Item FIRE_SNAP = registerItem("fire_snap", new FireSnapItem());
+    public static final Item FIRE_SNAP = registerItem("scorchers_mitts", new ScorchersMittsItem());
     public static final Item DAGON = registerItem("dagon_item", new DagonItem());
     public static final Item POTION_MIRAGE = registerItem("potion_mirage_item", new Item(new FabricItemSettings().maxCount(1)));
 

@@ -43,7 +43,7 @@ public class GaleCoreItem extends Item {
 
             // update usage ticks
             if (nbt.getBoolean(relicActiveId)) {
-                if (user.isFallFlying()) { // in order to the effect to be continues it must be called each tick
+                if (user.isFallFlying()) { // in order to the effect to be continuous it must be called each tick
                     world.addParticle(ParticleTypes.POOF, user.getX(), user.getY(), user.getZ(), 0, 0, 0);
                     Vec3d rotationDir = user.getRotationVector();
                     Vec3d velocity = user.getVelocity();
