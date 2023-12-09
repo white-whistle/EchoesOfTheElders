@@ -39,6 +39,7 @@ public class ModItems {
     public static final Item FIRE_SNAP = registerItem("scorchers_mitts", new ScorchersMittsItem());
     public static final Item DAGON = registerItem("dagon_item", new DagonItem());
     public static final Item POTION_MIRAGE = registerItem("potion_mirage_item", new Item(new FabricItemSettings().maxCount(1)));
+    public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
 
 
     // Register methods

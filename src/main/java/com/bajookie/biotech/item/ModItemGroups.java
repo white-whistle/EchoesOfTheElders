@@ -24,6 +24,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
+                entries.add(ModItems.OLD_KEY);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),
