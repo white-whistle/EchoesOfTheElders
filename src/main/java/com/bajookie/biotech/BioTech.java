@@ -5,6 +5,8 @@ import com.bajookie.biotech.entity.ModEntities;
 import com.bajookie.biotech.item.ModItemGroups;
 import com.bajookie.biotech.item.ModItems;
 import com.bajookie.biotech.util.ModLootTablesModifiers;
+import com.bajookie.biotech.util.ModWorldGenerator;
+import com.bajookie.biotech.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -21,6 +23,7 @@ public class BioTech implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModItemGroups.registerGroups();
 		ModLootTablesModifiers.modifyLootTables();
+		ModWorldGeneration.generateModWorldGen();
 
 		ModEntities.registerMobAttributes();
 	}
