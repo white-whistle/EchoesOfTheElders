@@ -6,19 +6,15 @@
   "item.biotech.portal_ring": "Portal Ring",
   "item.biotech.gale_core": "Gale Core",
   "item.biotech.midas_hammer": "Midas Hammer",
-
   "item.biotech.silent_fire": "Silent Fire",
-  "item.biotech.gale_core": "Gale Core",
-  "item.biotech.midas_hammer": "Midas Hammer",
-
-  "item.biotech.silent_fire": "Silent Fire",
+  "item.biotech.scorchers_mitts": "Scorcher's Mitts",
   "block.biotech.bear_trap_block": "Bear Trap",
   "block.biotech.artifact_vault_block": "Artifact Vault",
   "block.biotech.explorers_fruit_block": "Explorer's Fruit Plant",
   "block.biotech.miners_fruit_block": "Miner's Shroom",
   "block.biotech.nether_fruit_block": "Nether Fruit",
-
-
   "itemgroup.bio": "BioTech Items",
-  "artifact-group.bio": "BioTech Artifacts"
+  "artifact-group.bio": "BioTech Artifacts",
+  "tooltip.biotech.scorchers_mitts.attack": "⚔ Attacked enemies are set on §6🔥fire§r",
+  "tooltip.biotech.scorchers_mitts.effect": "⭐ Activate to deal §6🔥fire§r tick damage instantly and extinguish enemies"
 }
