@@ -58,10 +58,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.RUBY_FENCE_GATE);
         getOrCreateTagBuilder(BlockTags.WALLS)
                 .add(ModBlocks.RUBY_WALL);
-        * */
-        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.RELIC_CONTAINER_BLOCK);
-        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
-                .add(ModBlocks.RELIC_CONTAINER_BLOCK);
+
+         */
+
+//        getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
+//                .add(ModBlocks.RELIC_CONTAINER_BLOCK);
+//        getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL)
+//                .add(ModBlocks.RELIC_CONTAINER_BLOCK);
     }
 }

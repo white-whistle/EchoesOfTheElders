@@ -2,19 +2,25 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class VitalityPumpItem extends Item {
 
     protected float healAmt;
+
     public VitalityPumpItem(float healAmt) {
         super(new FabricItemSettings().maxCount(1));
 
@@ -42,5 +48,11 @@ public class VitalityPumpItem extends Item {
         } else {
             AnimationUtil.VITALITY_PUMP_HEARTBEAT_ANIMATION.start();
         }
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.vitality_pump.effect"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

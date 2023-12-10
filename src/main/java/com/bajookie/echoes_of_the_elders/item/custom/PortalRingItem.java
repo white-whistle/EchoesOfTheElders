@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -9,6 +11,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
@@ -16,7 +19,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.DimensionType;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 public class PortalRingItem extends Item {
@@ -47,7 +52,6 @@ public class PortalRingItem extends Item {
 
         return TypedActionResult.consume(itemStack);
     }
-
 
 
     @Override
@@ -94,6 +98,7 @@ public class PortalRingItem extends Item {
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
     }
+
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         super.usageTick(world, user, stack, remainingUseTicks);
@@ -104,5 +109,24 @@ public class PortalRingItem extends Item {
         if (random.nextInt(100) == 0) {
             world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f, false);
         }
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+
+        if (world != null) {
+
+            var worldKey = world.getRegistryKey();
+
+            if (worldKey == World.NETHER) {
+                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_overworld"));
+            } else if (worldKey == World.OVERWORLD) {
+                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_nether"));
+            } else {
+                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.other"));
+            }
+        }
+
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

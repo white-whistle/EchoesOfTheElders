@@ -30,7 +30,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
                 ModItems.MIDAS_HAMMER,
-                ModItems.DAGON
+                ModItems.DOOMSTICK_ITEM
         );
     }
 

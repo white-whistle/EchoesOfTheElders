@@ -15,10 +15,20 @@
   "block.echoes_of_the_elders.nether_fruit_block": "Nether Fruit",
   "item.echoes_of_the_elders.radiant_lotus_item": "Radiant Lotus",
   "item.echoes_of_the_elders.potion_mirage_item": "Potion Mirage",
-  "item.echoes_of_the_elders.dagon_item": "DoomStick",
+  "item.echoes_of_the_elders.doomstick_item": "DoomStick",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
   "tooltip.echoes_of_the_elders.scorchers_mitts.attack": "⚔ Attacked enemies are set on §6🔥fire§r",
-  "tooltip.echoes_of_the_elders.scorchers_mitts.effect": "⭐ Activate to deal §6🔥fire§r tick damage instantly and extinguish enemies"
+  "tooltip.echoes_of_the_elders.scorchers_mitts.effect": "⚡ Activate to deal §6🔥fire§r tick damage instantly and extinguish enemies",
+  "tooltip.echoes_of_the_elders.midas_hammer.attack": "⚔ Attacked enemies have a chance to drop §6🎇gold§r §don hit§r",
+  "tooltip.echoes_of_the_elders.midas_hammer.effect": "⚡ Activate to deal §5✨magic§r damage, slain enemies drop §6🎇gold§r",
+  "tooltip.echoes_of_the_elders.radiant_lotus.effect": "⚡ Activate to clear all §cnegative§r §d💫effects§r",
+  "tooltip.echoes_of_the_elders.doomstick.effect": "⚡ Activate to deal §5✨magic§r damage",
+  "tooltip.echoes_of_the_elders.vitality_pump.effect": "⚡ Activate to heal §a1§r §c♥heart§r",
+  "tooltip.echoes_of_the_elders.portal_ring.effect.to_nether": "⚡ Activate to teleport to the §cnether§r §d🌌dimension§r",
+  "tooltip.echoes_of_the_elders.portal_ring.effect.to_overworld": "⚡ Activate to teleport to the §aoverworld§r §d🌌dimension§r",
+  "tooltip.echoes_of_the_elders.portal_ring.effect.other": "⚡ Activate to toggle between the §aoverworld§r and the §mnether§r §d🌌dimensions§r",
+  "tooltip.echoes_of_the_elders.potion_mirage.effect": "⭐ Passive, When throwing or using a §d⚗potion§r the relic goes on cooldown instead of consuming the item",
+  "tooltip.echoes_of_the_elders.gale_core.effect": "⚡ When toggled, continuously §a💨boosts§r elytra flight"
 }

@@ -18,26 +18,26 @@ public class ModItemGroups {
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.echoes_of_the_elders")).icon(() -> new ItemStack(ModBlocks.MINERS_FRUIT_BLOCK)).entries((displayContext, entries) -> {
                 entries.add(ModItems.EXPLORER_FRUIT);
                 // blocks
-                entries.add(ModBlocks.BEAR_TRAP_BLOCK);
+                // entries.add(ModBlocks.BEAR_TRAP_BLOCK);
                 // flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
-                entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
-                entries.add(ModItems.OLD_KEY);
+                // entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
+                // entries.add(ModItems.OLD_KEY);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),
             FabricItemGroup.builder().displayName(Text.translatable("artifact-group.echoes_of_the_elders")).icon(() -> new ItemStack(ModItems.VITALITY_PUMP)).entries((displayContext, entries) -> {
-                entries.add(ModItems.ANCIENT_STONE_SWORD);
+                // entries.add(ModItems.ANCIENT_STONE_SWORD);
+                // entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 entries.add(ModItems.RADIANT_LOTUS);
-                entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 entries.add(ModItems.VITALITY_PUMP);
                 entries.add(ModItems.PORTAL_RING);
                 entries.add(ModItems.MIDAS_HAMMER);
                 entries.add(ModItems.GALE_CORE);
-                entries.add(ModItems.FIRE_SNAP);
-                entries.add(ModItems.DAGON);
+                entries.add(ModItems.SCORCHERS_MITTS);
+                entries.add(ModItems.DOOMSTICK_ITEM);
                 entries.add(ModItems.POTION_MIRAGE);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
