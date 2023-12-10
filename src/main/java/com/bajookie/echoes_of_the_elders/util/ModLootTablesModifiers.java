@@ -18,10 +18,10 @@ public class ModLootTablesModifiers {
 
     private static final Collection<LootPoolEntry> ITEMS_TO_DROP = List.of(
             ItemEntry.builder(ModItems.GALE_CORE).weight(1).build(),
-            ItemEntry.builder(ModItems.DAGON).weight(1).build(),
+            ItemEntry.builder(ModItems.DOOMSTICK_ITEM).weight(1).build(),
             ItemEntry.builder(ModItems.PORTAL_RING).weight(1).build(),
             ItemEntry.builder(ModItems.MIDAS_HAMMER).weight(1).build(),
-            ItemEntry.builder(ModItems.FIRE_SNAP).weight(1).build(),
+            ItemEntry.builder(ModItems.SCORCHERS_MITTS).weight(1).build(),
             ItemEntry.builder(ModItems.RADIANT_LOTUS).weight(1).build()
     );
 

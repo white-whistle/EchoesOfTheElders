@@ -23,49 +23,49 @@ public class OldKeyItem extends Item {
     public ActionResult useOnBlock(ItemUsageContext context) {
         Block block = context.getWorld().getBlockState(context.getBlockPos()).getBlock();
         PlayerEntity player = context.getPlayer();
-        if(block == ModBlocks.RELIC_CONTAINER_BLOCK){
-            if (!player.getAbilities().creativeMode){
+        if (block == ModBlocks.RELIC_CONTAINER_BLOCK) {
+            if (!player.getAbilities().creativeMode) {
                 context.getStack().decrement(1);
             }
-            context.getWorld().breakBlock(context.getBlockPos(),false);
+            context.getWorld().breakBlock(context.getBlockPos(), false);
             dropFromTable(context.getPlayer());
-            context.getWorld().playSound(context.getBlockPos().getX(),context.getBlockPos().getY(),context.getBlockPos().getZ(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT,4,4,true);
+            context.getWorld().playSound(context.getBlockPos().getX(), context.getBlockPos().getY(), context.getBlockPos().getZ(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 4, 4, true);
         }
         return ActionResult.success(context.getWorld().isClient);
     }
 
-    private void dropFromTable(PlayerEntity player){
+    private void dropFromTable(PlayerEntity player) {
         Random r = new Random();
         int num = r.nextInt(8);
-        if (num>=0 && num<=0){
-            player.giveItemStack(new ItemStack(ModItems.DAGON));
+        if (num >= 0 && num <= 0) {
+            player.giveItemStack(new ItemStack(ModItems.DOOMSTICK_ITEM));
             return;
         }
-        if (num>=1 && num<=1){
+        if (num >= 1 && num <= 1) {
             player.giveItemStack(new ItemStack(ModItems.GALE_CORE));
             return;
         }
-        if (num>=2 && num<=2){
+        if (num >= 2 && num <= 2) {
             player.giveItemStack(new ItemStack(ModItems.POTION_MIRAGE));
             return;
         }
-        if (num>=3 && num<=3){
+        if (num >= 3 && num <= 3) {
             player.giveItemStack(new ItemStack(ModItems.ANCIENT_STONE_SWORD));
             return;
         }
-        if (num>=4 && num<=4){
-            player.giveItemStack(new ItemStack(ModItems.FIRE_SNAP));
+        if (num >= 4 && num <= 4) {
+            player.giveItemStack(new ItemStack(ModItems.SCORCHERS_MITTS));
             return;
         }
-        if (num>=5 && num<=5){
+        if (num >= 5 && num <= 5) {
             player.giveItemStack(new ItemStack(ModItems.MIDAS_HAMMER));
             return;
         }
-        if (num>=6 && num<=6){
+        if (num >= 6 && num <= 6) {
             player.giveItemStack(new ItemStack(ModItems.PORTAL_RING));
             return;
         }
-        if (num>=7 && num<=7){
+        if (num >= 7 && num <= 7) {
             player.giveItemStack(new ItemStack(ModItems.RADIANT_LOTUS));
             return;
         }

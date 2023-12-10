@@ -1,23 +1,24 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.util.RayBox;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Random;
 
-public class DagonItem extends Item {
-    public DagonItem() {
+public class DoomstickItem extends Item {
+    public DoomstickItem() {
         super(new FabricItemSettings().maxCount(1));
     }
 
@@ -29,7 +30,7 @@ public class DagonItem extends Item {
             Vec3d diff = userPos.subtract(entityPos);
             Random r = new Random();
             for (double i = 1; i <= 20; i++) {
-                user.getWorld().addParticle(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 0.1*((float)r.nextInt(11)/10), 0.1*((float)r.nextInt(11)/10), 0.1*((float)r.nextInt(11)/10));
+                user.getWorld().addParticle(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10));
             }
             user.getItemCooldownManager().set(this, 20 * 20);
             entity.setOnFireFor(4);
@@ -40,7 +41,13 @@ public class DagonItem extends Item {
         return super.useOnEntity(stack, user, entity, hand);
     }
 
-//    @Override
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.doomstick.effect"));
+        super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    //    @Override
 //    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
 //        if (!user.getItemCooldownManager().isCoolingDown(this)) {
 //            Entity entity = RayBox.getCollidedLivingEntity(user,world,10);
