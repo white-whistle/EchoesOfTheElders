@@ -1,32 +1,32 @@
 {
 	"schemaVersion": 1,
-	"id": "biotech",
+	"id": "echoes_of_the_elders",
 	"version": "${version}",
-	"name": "BioTech",
-	"description": "Mod that focus on bio tech",
+	"name": "EchoesOfTheElders",
+	"description": "Explore and uncover lost civilizations, collecting mystical relics imbued with powerful abilities and hidden lore.",
 	"authors": [
-		"Me!"
+		"LiorBuch","2mer"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "MIT",
-	"icon": "assets/biotech/icon.png",
+	"icon": "assets/echoes_of_the_elders/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.bajookie.biotech.BioTech"
+          "com.bajookie.echoes_of_the_elders.EOTE"
 		],
 		"client": [
-			"com.bajookie.biotech.BioTechClient"
+			"com.bajookie.echoes_of_the_elders.EOTEClient"
 		],
 		"fabric-datagen": [
-			"com.bajookie.biotech.BioTechDataGenerator"
+			"com.bajookie.echoes_of_the_elders.EOTEDataGenerator"
 		]
 	},
 	"mixins": [
-		"biotech.mixins.json"
+		"echoes_of_the_elders.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.14.24",
