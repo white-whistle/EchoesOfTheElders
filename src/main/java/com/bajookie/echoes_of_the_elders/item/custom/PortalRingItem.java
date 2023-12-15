@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class PortalRingItem extends Item {
+public class PortalRingItem extends Item implements IArtifact {
     public PortalRingItem() {
         super(new FabricItemSettings().maxCount(1));
     }

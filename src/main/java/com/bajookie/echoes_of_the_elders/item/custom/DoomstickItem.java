@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class DoomstickItem extends Item {
+public class DoomstickItem extends Item implements IArtifact, IHasCooldown {
     public DoomstickItem() {
         super(new FabricItemSettings().maxCount(1));
     }
@@ -45,6 +46,11 @@ public class DoomstickItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.doomstick.effect"));
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public int getCooldown() {
+        return 0;
     }
 
     //    @Override

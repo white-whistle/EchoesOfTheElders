@@ -33,12 +33,13 @@ public class ModItems {
     public static final Item SILENT_FIRE = registerItem("silent_fire", new AuraItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC), StatusEffects.GLOWING, 25, 0));
     public static final Item SCORCHERS_MITTS = registerItem("scorchers_mitts", new ScorchersMittsItem());
     public static final Item DOOMSTICK_ITEM = registerItem("doomstick_item", new DoomstickItem());
-    public static final Item POTION_MIRAGE = registerItem("potion_mirage_item", new PotionMirageItem());
+    public static final PotionMirageItem POTION_MIRAGE = registerItem("potion_mirage_item", new PotionMirageItem());
+    public static final Item QUICKENING_BAND = registerItem("quickening_band", new QuickeningBand());
     public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
 
 
     // Register methods
-    public static Item registerItem(String name, Item item) {
+    public static <T extends Item> T registerItem(String name, T item) {
         registeredModItems.push(item);
         return Registry.register(Registries.ITEM, new Identifier(MOD_ID, name), item);
     }

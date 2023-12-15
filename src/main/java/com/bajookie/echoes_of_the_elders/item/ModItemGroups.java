@@ -39,6 +39,7 @@ public class ModItemGroups {
                 entries.add(ModItems.SCORCHERS_MITTS);
                 entries.add(ModItems.DOOMSTICK_ITEM);
                 entries.add(ModItems.POTION_MIRAGE);
+                entries.add(ModItems.QUICKENING_BAND);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

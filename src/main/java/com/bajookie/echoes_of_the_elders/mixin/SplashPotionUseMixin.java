@@ -14,15 +14,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ThrowablePotionItem.class)
 public class SplashPotionUseMixin {
-    @Inject(method = "use", at = @At(value = "INVOKE",target = "Lnet/minecraft/item/ItemStack;decrement(I)V",shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V", shift = At.Shift.BEFORE), cancellable = true)
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> info) {
-        if (user.getInventory().contains(ModItems.POTION_MIRAGE.getDefaultStack())){
-            int slot = user.getInventory().getSlotWithStack(ModItems.POTION_MIRAGE.getDefaultStack());
-            if (!user.getItemCooldownManager().isCoolingDown(user.getInventory().getStack(slot).getItem())){
-                user.getItemCooldownManager().set(user.getInventory().getStack(slot).getItem(),20*5);
-                info.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
-                info.cancel();
-            }
+        var inventory = user.getInventory();
+
+        var potionMirageStack = ModItems.POTION_MIRAGE.getDefaultStack();
+        if (!inventory.contains(potionMirageStack)) return;
+
+        var cdm = user.getItemCooldownManager();
+
+        if (cdm.isCoolingDown(ModItems.POTION_MIRAGE)) {
+            cdm.set(ModItems.POTION_MIRAGE, ModItems.POTION_MIRAGE.getCooldown());
+            info.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
+            info.cancel();
         }
     }
 }
