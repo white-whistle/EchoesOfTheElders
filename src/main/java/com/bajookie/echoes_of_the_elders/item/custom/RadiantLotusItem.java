@@ -1,5 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactOutlineColors;
+import com.bajookie.echoes_of_the_elders.item.IArtifactItem;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 
@@ -15,9 +18,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-public class RadiantLotusItem extends Item {
-    public RadiantLotusItem(Settings settings) {
-        super(settings);
+public class RadiantLotusItem extends Item implements IArtifactItem {
+    public RadiantLotusItem() {
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override
@@ -38,5 +41,10 @@ public class RadiantLotusItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.radiant_lotus.effect"));
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public int getOutlineColor() {
+        return ArtifactOutlineColors.SUPPORT;
     }
 }
