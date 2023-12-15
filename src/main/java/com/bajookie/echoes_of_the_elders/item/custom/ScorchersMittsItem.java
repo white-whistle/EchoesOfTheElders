@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.util.ParticleUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -22,10 +23,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ScorchersMittsItem extends Item {
+public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown {
 
     protected static final float EFFECT_RANGE = 16;
-    protected static final int EFFECT_COOLDOWN = 20 * 5;
 
     public ScorchersMittsItem() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
@@ -41,6 +41,9 @@ public class ScorchersMittsItem extends Item {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+
+        var stack = user.getStackInHand(hand);
+        if (user.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
 
         var pos = user.getPos();
         Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(EFFECT_RANGE);
@@ -79,9 +82,7 @@ public class ScorchersMittsItem extends Item {
         if (triggered) {
             world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 5f, 0.2f);
 
-            user.getItemCooldownManager().set(this, EFFECT_COOLDOWN);
-
-            var stack = user.getStackInHand(hand);
+            user.getItemCooldownManager().set(this, this.getCooldown());
 
             return TypedActionResult.success(stack, world.isClient());
         }
@@ -95,7 +96,12 @@ public class ScorchersMittsItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.attack"));
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect"));
-        
+
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public int getCooldown() {
+        return 20 * 5;
     }
 }

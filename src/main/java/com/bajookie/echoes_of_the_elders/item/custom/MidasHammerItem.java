@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -20,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class MidasHammerItem extends PickaxeItem {
+public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown {
     public MidasHammerItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
@@ -29,7 +30,7 @@ public class MidasHammerItem extends PickaxeItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (!user.getItemCooldownManager().isCoolingDown(this)) {
-            user.getItemCooldownManager().set(this, 20 * 6);
+            user.getItemCooldownManager().set(this, this.getCooldown());
             entity.getWorld().addParticle(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(), 0, 1, 0);
             if (entity.getHealth() <= 50) {
                 int hp = Math.round(entity.getHealth());
@@ -62,5 +63,10 @@ public class MidasHammerItem extends PickaxeItem {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect"));
 
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public int getCooldown() {
+        return 20 * 6;
     }
 }

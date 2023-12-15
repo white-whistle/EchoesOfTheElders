@@ -17,9 +17,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(WorldRenderer.class)
 public class WorldRendererMixin {
 
-    @Shadow
-    private EntityRenderDispatcher entityRenderDispatcher;
-
     @Inject(method = "renderEntity", at = @At(value = "RETURN"))
     private void renderEntity(Entity entity, double x, double y, double z, float g,
                               MatrixStack matrix, VertexConsumerProvider v, CallbackInfo info) {

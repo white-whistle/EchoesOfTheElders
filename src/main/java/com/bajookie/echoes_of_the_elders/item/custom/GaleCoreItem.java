@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -18,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GaleCoreItem extends Item {
+public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
     private final String usedTicksId = new Identifier(EOTE.MOD_ID, "use").toString();
     private final String regenTicksId = new Identifier(EOTE.MOD_ID, "regen").toString();
     private final String relicActiveId = new Identifier(EOTE.MOD_ID, "active").toString();
@@ -26,7 +27,6 @@ public class GaleCoreItem extends Item {
     protected static final int EFFECT_RATE = 10;
     protected static final int REGEN_RATE = 10;
     protected static final int MAX_USAGE = 256;
-    protected static final int DRAIN_COOLDOWN_TICKS = 20 * 30;
 
     public GaleCoreItem() {
         super(new FabricItemSettings().maxCount(1).maxDamage(MAX_USAGE));
@@ -76,7 +76,7 @@ public class GaleCoreItem extends Item {
             // if the item has consumed all of its
             if (stack.getDamage() >= MAX_USAGE) {
                 nbt.putBoolean(relicActiveId, false);
-                user.getItemCooldownManager().set(this, DRAIN_COOLDOWN_TICKS);
+                user.getItemCooldownManager().set(this, this.getCooldown());
             }
         }
     }
@@ -112,5 +112,10 @@ public class GaleCoreItem extends Item {
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.gale_core.effect"));
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public int getCooldown() {
+        return 20 * 30;
     }
 }

@@ -3,18 +3,21 @@
   "package": "com.bajookie.echoes_of_the_elders.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "ItemCooldownManagerMixin",
+    "ServerPlayerEntityMixin"
   ],
   "client": [
+    "ClientItemMixin",
     "ClientPlayerEntityMixin",
     "HeldItemRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
-    "WorldRendererMixin",
+    "PotionUseMixin",
     "SplashPotionUseMixin",
-    "PotionUseMixin"
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  }
 }
