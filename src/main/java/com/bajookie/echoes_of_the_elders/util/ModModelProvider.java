@@ -42,6 +42,9 @@ public class ModModelProvider extends FabricModelProvider {
                 itemModelGenerator.register(item, Models.HANDHELD);
                 return;
             }
+            if (item == ModItems.WITHER_SCALES_ITEM){
+                return;
+            }
 
             // by default register as generated
             itemModelGenerator.register(item, Models.GENERATED);

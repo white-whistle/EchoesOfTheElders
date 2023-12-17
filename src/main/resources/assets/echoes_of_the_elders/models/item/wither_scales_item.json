@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/wither_scales_closed"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "echoes_of_the_elders:on": 1
+      },
+      "model": "echoes_of_the_elders:item/wither_scales_open"
+    }
+  ]
+}

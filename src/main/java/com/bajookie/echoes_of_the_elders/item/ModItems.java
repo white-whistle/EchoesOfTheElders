@@ -36,6 +36,7 @@ public class ModItems {
     public static final PotionMirageItem POTION_MIRAGE = registerItem("potion_mirage_item", new PotionMirageItem());
     public static final Item QUICKENING_BAND = registerItem("quickening_band", new QuickeningBand());
     public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
+    public static final Item WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WitherScalesItem());
 
 
     // Register methods

@@ -73,6 +73,6 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
 
     @Override
     public int getCooldown(ItemStack stack) {
-        return 20 * 6;
+        return 20 * 60*5;
     }
 }
