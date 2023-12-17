@@ -24,6 +24,9 @@ public class ClientItemMixin {
 
     @Inject(method = "appendTooltip", at = @At("TAIL"))
     public void appendGenericTooltips(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
+        if (world == null){
+            return;
+        }
         var item = stack.getItem();
 
         if (item instanceof IArtifact) {

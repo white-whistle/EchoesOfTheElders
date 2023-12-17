@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.minecraft.client.item.TooltipContext;
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

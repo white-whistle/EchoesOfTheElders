@@ -27,13 +27,15 @@ public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!user.getItemCooldownManager().isCoolingDown(this)) {
-            var stack = user.getStackInHand(hand);
-            user.getItemCooldownManager().set(this, this.getCooldown(stack));
-            Collection<StatusEffectInstance> effects = user.getStatusEffects();
-            for (StatusEffectInstance effect : effects) {
-                if (!effect.getEffectType().isBeneficial()) {
-                    user.removeStatusEffect(effect.getEffectType());
+        if (world != null) {
+            if (!user.getItemCooldownManager().isCoolingDown(this)) {
+                var stack = user.getStackInHand(hand);
+                user.getItemCooldownManager().set(this, this.getCooldown(stack));
+                Collection<StatusEffectInstance> effects = user.getStatusEffects();
+                for (StatusEffectInstance effect : effects) {
+                    if (!effect.getEffectType().isBeneficial()) {
+                        user.removeStatusEffect(effect.getEffectType());
+                    }
                 }
             }
         }

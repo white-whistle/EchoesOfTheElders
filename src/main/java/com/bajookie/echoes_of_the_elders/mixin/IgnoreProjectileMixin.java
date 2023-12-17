@@ -27,13 +27,9 @@ public abstract class IgnoreProjectileMixin {
     @Inject(method = "damage",at = @At(value = "INVOKE_ASSIGN" ,target = "Lnet/minecraft/entity/player/PlayerEntity;getWorld()Lnet/minecraft/world/World;",shift = At.Shift.BEFORE,ordinal = 0), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> info){
         Entity entity = source.getSource();
-        EOTE.LOGGER.info("injected");
         if (entity instanceof PersistentProjectileEntity) {
-            EOTE.LOGGER.info("found entity");
             if(this.getInventory().contains(ModItems.WITHER_SCALES_ITEM.getDefaultStack())){
-                EOTE.LOGGER.info("found item in inventory");
                 if (!this.getItemCooldownManager().isCoolingDown(ModItems.WITHER_SCALES_ITEM.asItem())) {
-                    EOTE.LOGGER.info("not cool");
                     this.getItemCooldownManager().set(ModItems.WITHER_SCALES_ITEM.asItem(),20*20);
                     info.setReturnValue(false);
                     info.cancel();
