@@ -22,9 +22,11 @@ public class SplashPotionUseMixin {
         if (!inventory.contains(potionMirageStack)) return;
 
         var cdm = user.getItemCooldownManager();
+        var slotIndex = inventory.getSlotWithStack(potionMirageStack);
+        var stack = inventory.getStack(slotIndex);
 
-        if (cdm.isCoolingDown(ModItems.POTION_MIRAGE)) {
-            cdm.set(ModItems.POTION_MIRAGE, ModItems.POTION_MIRAGE.getCooldown());
+        if (!cdm.isCoolingDown(ModItems.POTION_MIRAGE)) {
+            cdm.set(ModItems.POTION_MIRAGE, ModItems.POTION_MIRAGE.getCooldown(stack));
             info.setReturnValue(TypedActionResult.success(user.getStackInHand(hand)));
             info.cancel();
         }

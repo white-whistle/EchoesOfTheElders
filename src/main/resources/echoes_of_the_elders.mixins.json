@@ -9,6 +9,7 @@
   "client": [
     "ClientItemMixin",
     "ClientPlayerEntityMixin",
+    "DrawContextMixin",
     "HeldItemRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",

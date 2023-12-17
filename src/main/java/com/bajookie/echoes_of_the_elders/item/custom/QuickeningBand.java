@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -21,9 +22,10 @@ import java.util.List;
 public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown {
 
     protected static final int EFFECT_DURATION = 20 * 15;
+    protected StackedItemStat.Int effectLevel = new StackedItemStat.Int(1, 8);
 
     public QuickeningBand() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -31,10 +33,11 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
         var stack = user.getStackInHand(hand);
         if (user.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
 
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, EFFECT_DURATION, 1));
-        user.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, EFFECT_DURATION, 1));
+        var eLevel = this.effectLevel.get(stack);
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, EFFECT_DURATION, eLevel));
+        user.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, EFFECT_DURATION, eLevel));
 
-        user.getItemCooldownManager().set(this, this.getCooldown());
+        user.getItemCooldownManager().set(this, this.getCooldown(stack));
 
         return TypedActionResult.success(stack, world.isClient());
     }
@@ -42,14 +45,16 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
 
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.quickening_band.effect"));
+        var eLevel = this.effectLevel.get(stack) + 1;
+
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.quickening_band.effect", eLevel, eLevel));
 
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
     public float getCooldownReductionPercentage(ItemStack stack) {
-        return 0.8f;
+        return 0.1f;
     }
 
     @Override
@@ -58,7 +63,7 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
     }
 
     @Override
-    public int getCooldown() {
+    public int getCooldown(ItemStack stack) {
         return 20 * 60;
     }
 }

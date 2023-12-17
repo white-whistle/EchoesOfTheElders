@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -22,6 +24,10 @@ import java.util.List;
 import java.util.Random;
 
 public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown {
+
+    protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 100f);
+    protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
+
     public MidasHammerItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
         super(material, attackDamage, attackSpeed, settings);
     }
@@ -30,7 +36,7 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (!user.getItemCooldownManager().isCoolingDown(this)) {
-            user.getItemCooldownManager().set(this, this.getCooldown());
+            user.getItemCooldownManager().set(this, this.getCooldown(stack));
             entity.getWorld().addParticle(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(), 0, 1, 0);
             if (entity.getHealth() <= 50) {
                 int hp = Math.round(entity.getHealth());
@@ -50,7 +56,7 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random r = new Random();
-        if (r.nextInt(10) == 5) {
+        if (r.nextFloat() < dropChancePercentage.get(stack)) {
             ItemEntity item = new ItemEntity(target.getWorld(), target.getX(), target.getY(), target.getZ(), new ItemStack(Items.GOLD_NUGGET, 1));
             target.getWorld().spawnEntity(item);
         }
@@ -59,14 +65,14 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.attack"));
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect"));
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.attack", (int) (dropChancePercentage.get(stack) * 100)));
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect", TextUtil.f1(this.effectDamage.get(stack))));
 
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
-    public int getCooldown() {
+    public int getCooldown(ItemStack stack) {
         return 20 * 6;
     }
 }

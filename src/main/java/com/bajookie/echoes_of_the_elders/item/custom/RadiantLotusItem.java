@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 
@@ -17,14 +19,17 @@ import java.util.Collection;
 import java.util.List;
 
 public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown {
-    public RadiantLotusItem(Settings settings) {
-        super(settings);
+    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 60 * 5, 60);
+
+    public RadiantLotusItem() {
+        super(new FabricItemSettings().maxCount(16));
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!user.getItemCooldownManager().isCoolingDown(this)) {
-            user.getItemCooldownManager().set(this, this.getCooldown());
+            var stack = user.getStackInHand(hand);
+            user.getItemCooldownManager().set(this, this.getCooldown(stack));
             Collection<StatusEffectInstance> effects = user.getStatusEffects();
             for (StatusEffectInstance effect : effects) {
                 if (!effect.getEffectType().isBeneficial()) {
@@ -42,7 +47,7 @@ public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown {
     }
 
     @Override
-    public int getCooldown() {
-        return 20 * 60 * 5;
+    public int getCooldown(ItemStack stack) {
+        return cooldown.get(stack);
     }
 }
