@@ -2,8 +2,9 @@
   <img src="https://i.imgur.com/nIRQcbE.png"></img>
 </p>
  
- 
-Motivation 🌠
+
+## Motivation 🌠
+
 Echoes of the Elders aim to be:
 
 ⭐ Unique - Relics have unique effects and interactions
@@ -24,7 +25,8 @@ Echoes of the Elders aim to be:
 
  
 
-Balance ⚖
+## Balance ⚖
+
 this mod favors feeling/interactions over balance, in contrast to vanilla or even other mods in the ecosystem, one of the reasons this was created was because lately playing modded felt like every addition had to walk on eggshells just to fit/"make sense" inside of minecraft.
 
 We were tired of thinking "whats the catch?" after reading an item description or just realising it had a 10 layer deep nested crafting recipe.
@@ -35,7 +37,8 @@ instead, this mod relies on-
 
  
 
-RNG 🎲
+## RNG 🎲
+
 while this can be annoying while going for a specific item, the intention was to create an experience similar to a roguelite game, where items come at random, and each run feels different because of the random order in which the items are received, for example:
 
 if you received an item that makes mining really easy, and you get that right at the start of the game, you can either skip the whole "getting a diamond pickaxe" game loop and divert resources to different areas instead, or when playing in multiplayer, causes "roles" to emerge, in this case you would be the miner in the party.
