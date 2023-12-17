@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.entity.client;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 
@@ -18,5 +19,6 @@ public class ModModelLayers {
     public static void registerModMobLayers(){
         EntityModelLayerRegistry.registerModelLayer(FLOWER_DEFENSE_LAYER,FlowerDefenseModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY,FlowerDefenseRenderer::new);
+        EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
     }
 }

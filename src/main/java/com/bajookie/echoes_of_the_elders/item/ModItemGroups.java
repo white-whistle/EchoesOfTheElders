@@ -41,6 +41,7 @@ public class ModItemGroups {
                 entries.add(ModItems.POTION_MIRAGE);
                 entries.add(ModItems.WITHER_SCALES_ITEM);
                 entries.add(ModItems.QUICKENING_BAND);
+                entries.add(ModItems.SECOND_SUN_ITEM);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
