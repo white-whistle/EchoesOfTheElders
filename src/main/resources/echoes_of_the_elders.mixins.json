@@ -14,11 +14,12 @@
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
-    "PotionUseMixin",
+    "WorldRendererMixin",
     "SplashPotionUseMixin",
-    "WorldRendererMixin"
+    "PotionUseMixin",
+    "IgnoreProjectileMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+	}
 }
