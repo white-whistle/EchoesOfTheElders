@@ -16,7 +16,15 @@ public class CooldownUtil {
             var i = stack.getItem();
 
             if (i instanceof ICooldownReduction iCooldownReduction) {
-                cooldowns.put(iCooldownReduction.cooldownInstanceId(stack), iCooldownReduction.getCooldownReductionPercentage(stack));
+                var key = iCooldownReduction.cooldownInstanceId(stack);
+                var v = iCooldownReduction.getCooldownReductionPercentage(stack);
+
+                if (cooldowns.containsKey(key)) {
+                    var oldV = cooldowns.get(key);
+                    cooldowns.put(key, Math.max(oldV, v));
+                } else {
+                    cooldowns.put(key, v);
+                }
             }
         });
 

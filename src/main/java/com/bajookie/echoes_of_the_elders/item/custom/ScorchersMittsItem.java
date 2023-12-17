@@ -1,7 +1,9 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.util.ParticleUtil;
+import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -25,10 +27,11 @@ import java.util.List;
 
 public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown {
 
-    protected static final float EFFECT_RANGE = 16;
+    protected StackedItemStat.Float effectRange = new StackedItemStat.Float(16f, 64f);
+    protected StackedItemStat.Float fireModifier = new StackedItemStat.Float(1f, 5f);
 
     public ScorchersMittsItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -46,7 +49,7 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown 
         if (user.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
 
         var pos = user.getPos();
-        Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(EFFECT_RANGE);
+        Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(effectRange.get(stack));
 
         // var yaw = user.getYaw();
         // var pitch = user.getPitch();
@@ -70,7 +73,7 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown 
 
             var fireInstances = Math.max(fireTicks / 20, 1);
 
-            entity.damage(entity.getDamageSources().onFire(), fireInstances);
+            entity.damage(entity.getDamageSources().onFire(), fireInstances * fireModifier.get(stack));
             entity.setOnFire(false);
             entity.setFireTicks(0);
 
@@ -82,7 +85,7 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown 
         if (triggered) {
             world.playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS, 5f, 0.2f);
 
-            user.getItemCooldownManager().set(this, this.getCooldown());
+            user.getItemCooldownManager().set(this, this.getCooldown(stack));
 
             return TypedActionResult.success(stack, world.isClient());
         }
@@ -95,13 +98,13 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.attack"));
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect"));
+        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect", TextUtil.f1(fireModifier.get(stack))));
 
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
-    public int getCooldown() {
+    public int getCooldown(ItemStack stack) {
         return 20 * 5;
     }
 }

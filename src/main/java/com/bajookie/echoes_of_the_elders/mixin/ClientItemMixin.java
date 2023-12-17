@@ -2,7 +2,9 @@ package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.util.CooldownUtil;
+import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -23,14 +25,25 @@ public class ClientItemMixin {
     @Inject(method = "appendTooltip", at = @At("TAIL"))
     public void appendGenericTooltips(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
         var item = stack.getItem();
+
+        if (item instanceof IArtifact) {
+            var count = stack.getCount();
+            var maxCount = stack.getMaxCount();
+            var isSingleton = maxCount == count && count == 1;
+
+            if (!isSingleton) {
+                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.artifact_stack", count, maxCount));
+            }
+        }
+
         if (item instanceof ICooldownReduction iCooldownReduction) {
             var p = iCooldownReduction.getCooldownReductionPercentage(stack);
             tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown_reduction", Math.round(p * 100)));
         }
 
         if (item instanceof IHasCooldown iHasCooldown) {
-            var cd = CooldownUtil.getReducedCooldown(MinecraftClient.getInstance().player, stack.getItem(), iHasCooldown.getCooldown()) / 20f;
-            var n = Math.floor(cd) == cd ? (int) cd : Text.translatable("number.echoes_of_the_elders.f1", cd);
+            var cd = CooldownUtil.getReducedCooldown(MinecraftClient.getInstance().player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
+            var n = TextUtil.f1(cd);
 
             if (iHasCooldown.canReduceCooldown()) {
                 tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown.reduceable", n));

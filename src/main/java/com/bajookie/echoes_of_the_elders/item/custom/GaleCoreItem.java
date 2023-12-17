@@ -76,7 +76,7 @@ public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
             // if the item has consumed all of its
             if (stack.getDamage() >= MAX_USAGE) {
                 nbt.putBoolean(relicActiveId, false);
-                user.getItemCooldownManager().set(this, this.getCooldown());
+                user.getItemCooldownManager().set(this, this.getCooldown(stack));
             }
         }
     }
@@ -115,7 +115,12 @@ public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
     }
 
     @Override
-    public int getCooldown() {
+    public int getCooldown(ItemStack stack) {
         return 20 * 30;
+    }
+
+    @Override
+    public int getItemBarColor(ItemStack stack) {
+        return 0x03a5fc;
     }
 }

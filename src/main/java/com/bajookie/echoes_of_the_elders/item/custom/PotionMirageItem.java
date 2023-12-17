@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -12,8 +13,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class PotionMirageItem extends Item implements IArtifact, IHasCooldown {
+    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20, 0);
+
     public PotionMirageItem() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(16));
     }
 
     @Override
@@ -23,7 +26,7 @@ public class PotionMirageItem extends Item implements IArtifact, IHasCooldown {
     }
 
     @Override
-    public int getCooldown() {
-        return 0;
+    public int getCooldown(ItemStack itemStack) {
+        return this.cooldown.get(itemStack);
     }
 }

@@ -12,13 +12,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PotionItem.class)
 public class PotionUseMixin {
-    @Inject(method = "finishUsing", at = @At(value = "INVOKE",target = "Lnet/minecraft/item/ItemStack;decrement(I)V",shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(method = "finishUsing", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;decrement(I)V", shift = At.Shift.BEFORE), cancellable = true)
     public void finishUsing(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> info) {
-        if (user instanceof PlayerEntity player){
-            if (player.getInventory().contains(ModItems.POTION_MIRAGE.getDefaultStack())){
-                int slot = player.getInventory().getSlotWithStack(ModItems.POTION_MIRAGE.getDefaultStack());
-                if (!player.getItemCooldownManager().isCoolingDown(player.getInventory().getStack(slot).getItem())){
-                    player.getItemCooldownManager().set(player.getInventory().getStack(slot).getItem(),20*5);
+        if (user instanceof PlayerEntity player) {
+            var inventory = player.getInventory();
+            var mirageDefaultStack = ModItems.POTION_MIRAGE.getDefaultStack();
+            if (inventory.contains(mirageDefaultStack)) {
+                int slot = inventory.getSlotWithStack(mirageDefaultStack);
+                var mirageStack = inventory.getStack(slot);
+                var cdm = player.getItemCooldownManager();
+                if (!cdm.isCoolingDown(ModItems.POTION_MIRAGE)) {
+                    cdm.set(ModItems.POTION_MIRAGE, ModItems.POTION_MIRAGE.getCooldown(mirageStack));
                     info.setReturnValue(stack);
                     info.cancel();
                 }
