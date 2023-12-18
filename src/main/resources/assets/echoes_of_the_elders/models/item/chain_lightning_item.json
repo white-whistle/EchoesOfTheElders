@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/chain_lightning_item"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "echoes_of_the_elders:ready": 1
+      },
+      "model": "echoes_of_the_elders:item/chain_lightning_active"
+    }
+  ]
+}

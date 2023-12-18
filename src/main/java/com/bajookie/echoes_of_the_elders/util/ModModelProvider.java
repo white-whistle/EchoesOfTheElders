@@ -45,6 +45,9 @@ public class ModModelProvider extends FabricModelProvider {
             if (item == ModItems.WITHER_SCALES_ITEM){
                 return;
             }
+            if (item == ModItems.CHAIN_LIGHTNING_ITEM){
+                return;
+            }
 
             // by default register as generated
             itemModelGenerator.register(item, Models.GENERATED);
