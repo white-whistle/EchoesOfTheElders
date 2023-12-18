@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity;
 
+import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.FlowerDefenseEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.SecondSunProjectileEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -22,6 +23,11 @@ public class ModEntities {
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID,"second_sun_entity"),
             FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE,SecondSunProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
+
+    public static final EntityType<ChainLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID,"chain_lightning_entity"),
+            FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE,ChainLightningProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
 
     /**

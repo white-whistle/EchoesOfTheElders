@@ -42,6 +42,7 @@ public class ModItemGroups {
                 entries.add(ModItems.WITHER_SCALES_ITEM);
                 entries.add(ModItems.QUICKENING_BAND);
                 entries.add(ModItems.SECOND_SUN_ITEM);
+                entries.add(ModItems.CHAIN_LIGHTNING_ITEM);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
