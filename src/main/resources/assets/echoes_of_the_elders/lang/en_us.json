@@ -19,6 +19,7 @@
   "item.echoes_of_the_elders.potion_mirage_item": "Potion Mirage",
   "item.echoes_of_the_elders.doomstick_item": "Doomstick",
   "item.echoes_of_the_elders.quickening_band": "Quickening Band",
+  "item.echoes_of_the_elders.reality_pick": "Reality Pick",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
@@ -38,5 +39,7 @@
   "tooltip.echoes_of_the_elders.portal_ring.effect.other": "⚡ Activate to toggle between the §aoverworld§r and the §mnether§r §d🌌dimensions§r",
   "tooltip.echoes_of_the_elders.potion_mirage.effect": "⭐ Passive, When throwing or using a §d⚗potion§r the relic goes on cooldown instead of consuming the item",
   "tooltip.echoes_of_the_elders.gale_core.effect": "⚡ When toggled, continuously §a💨boosts§r elytra flight",
-  "tooltip.echoes_of_the_elders.quickening_band.effect": "⚡ Activate to gain §a⛏haste §b%d§r and §a👢speed §b%d§r"
+  "tooltip.echoes_of_the_elders.quickening_band.effect": "⚡ Activate to gain §a⛏haste §b%d§r and §a👢speed §b%d§r",
+  "tooltip.echoes_of_the_elders.reality_pick.effect": "Can break %s!",
+  "tooltip.echoes_of_the_elders.reality_pick.everything": "✨everything"
 }

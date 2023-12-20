@@ -1,12 +1,18 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 
+import com.bajookie.echoes_of_the_elders.client.CustomOutlineColor;
 import com.bajookie.echoes_of_the_elders.client.EntityEffectRenderer;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.client.render.*;
-import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.shape.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,7 +21,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(WorldRenderer.class)
-public class WorldRendererMixin {
+public abstract class WorldRendererMixin {
+
+    @Shadow
+    private static void drawCuboidShapeOutline(MatrixStack matrices, VertexConsumer vertexConsumer, VoxelShape shape, double offsetX, double offsetY, double offsetZ, float red, float green, float blue, float alpha) {
+    }
+
+    @Shadow
+    private @Nullable ClientWorld world;
 
     @Inject(method = "renderEntity", at = @At(value = "RETURN"))
     private void renderEntity(Entity entity, double x, double y, double z, float g,
@@ -32,4 +45,13 @@ public class WorldRendererMixin {
         EntityEffectRenderer.renderInWorld(matrices, camera);
     }
 
+    @Inject(method = "drawBlockOutline", at = @At("HEAD"), cancellable = true)
+    private void drawBlockOutline(MatrixStack matrices, VertexConsumer vertexConsumer, Entity entity, double cameraX, double cameraY, double cameraZ, BlockPos pos, BlockState state, CallbackInfo ci) {
+        var customColor = CustomOutlineColor.getOutlineColor();
+
+        if (customColor != null) {
+            drawCuboidShapeOutline(matrices, vertexConsumer, state.getOutlineShape(this.world, pos, ShapeContext.of(entity)), (double) pos.getX() - cameraX, (double) pos.getY() - cameraY, (double) pos.getZ() - cameraZ, customColor.getRedF(), customColor.getGreenF(), customColor.getBlueF(), 0.4f);
+            ci.cancel();
+        }
+    }
 }

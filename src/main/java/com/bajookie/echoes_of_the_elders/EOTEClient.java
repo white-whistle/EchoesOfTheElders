@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
@@ -17,6 +18,8 @@ public class EOTEClient implements ClientModInitializer {
         ModModelPredicateProvider.registerModModels();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SECOND_SUN_PARTICLE, SecondSunParticle.Factory::new);
+
+        CustomItemColors.init();
 
     }
 }
