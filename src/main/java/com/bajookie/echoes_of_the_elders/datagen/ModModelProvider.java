@@ -1,12 +1,10 @@
-package com.bajookie.echoes_of_the_elders.util;
+package com.bajookie.echoes_of_the_elders.datagen;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
+import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 
 import java.util.List;
@@ -32,20 +30,26 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.MIDAS_HAMMER,
                 ModItems.DOOMSTICK_ITEM
         );
+        protected static final List<Item> SKIP = List.of(
+                ModItems.WITHER_SCALES_ITEM,
+                ModItems.CHAIN_LIGHTNING_ITEM,
+                ModItems.REALITY_PICK
+        );
     }
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         ModItems.registeredModItems.forEach(item -> {
+
+            // skip model gen (items with hand-made jsons)
+            if (ItemModelConfig.SKIP.contains(item)) {
+                return;
+            }
+
             // handheld models
             if (ItemModelConfig.HANDHELD.contains(item)) {
                 itemModelGenerator.register(item, Models.HANDHELD);
-                return;
-            }
-            if (item == ModItems.WITHER_SCALES_ITEM){
-                return;
-            }
-            if (item == ModItems.CHAIN_LIGHTNING_ITEM){
+
                 return;
             }
 
