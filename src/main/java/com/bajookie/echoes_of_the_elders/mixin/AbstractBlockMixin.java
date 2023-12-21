@@ -21,7 +21,7 @@ public class AbstractBlockMixin {
             var stack = player.getMainHandStack();
             if (stack.isOf(ModItems.REALITY_PICK)) return 3f;
 
-            return 0.0f;
+            return -1.0f;
         }
 
         return f;
