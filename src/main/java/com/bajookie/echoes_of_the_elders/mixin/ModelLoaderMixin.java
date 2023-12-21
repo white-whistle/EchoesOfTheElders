@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.render.model.json.JsonUnbakedModel;
@@ -25,5 +27,11 @@ public abstract class ModelLoaderMixin {
     public void addCustomModels(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "ancient_stone_sword_3d", "inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "shiny_ancient_stone_sword_3d", "inventory"));
+
+        ModItems.registeredModItems.forEach(item -> {
+            if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
+                this.addModel(new ModelIdentifier(EOTE.MOD_ID, iHasUpscaledModel.getUpscaledModel(), "inventory"));
+            }
+        });
     }
 }

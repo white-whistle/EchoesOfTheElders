@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -25,16 +26,24 @@ public abstract class ItemRendererMixin {
             ModelTransformationMode.THIRD_PERSON_LEFT_HAND,
             ModelTransformationMode.THIRD_PERSON_RIGHT_HAND
     );
+
     @ModifyVariable(method = "renderItem", at = @At(value = "HEAD"), argsOnly = true)
     public BakedModel useCustomModels(BakedModel value, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 
         boolean isHeld = HELD_RENDER_MODES.contains(renderMode);
 
-        if (stack.isOf(ModItems.ANCIENT_STONE_SWORD) && isHeld) {
-            return getCustomItemModel("ancient_stone_sword_3d");
-        }
-        if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD) && isHeld) {
-            return getCustomItemModel("shiny_ancient_stone_sword_3d");
+        if (isHeld) {
+            var item = stack.getItem();
+            if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
+                return getCustomItemModel(iHasUpscaledModel.getUpscaledModel());
+            }
+
+            if (stack.isOf(ModItems.ANCIENT_STONE_SWORD)) {
+                return getCustomItemModel("ancient_stone_sword_3d");
+            }
+            if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD)) {
+                return getCustomItemModel("shiny_ancient_stone_sword_3d");
+            }
         }
 
         return value;
@@ -42,6 +51,6 @@ public abstract class ItemRendererMixin {
 
     @Unique
     private BakedModel getCustomItemModel(String name) {
-        return  ((ItemRendererAccessor) this).getModels().getModelManager().getModel(new ModelIdentifier(EOTE.MOD_ID, name, "inventory"));
+        return ((ItemRendererAccessor) this).getModels().getModelManager().getModel(new ModelIdentifier(EOTE.MOD_ID, name, "inventory"));
     }
 }

@@ -42,6 +42,7 @@ public class ModItems {
     public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(16)));
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
     public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new ChainLightningItem(new FabricItemSettings().maxCount(16)));
+    public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
 
 
     // Register methods
