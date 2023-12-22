@@ -44,6 +44,7 @@ public class ModItemGroups {
                 entries.add(ModItems.SECOND_SUN_ITEM);
                 entries.add(ModItems.CHAIN_LIGHTNING_ITEM);
                 entries.add(ModItems.REALITY_PICK);
+                entries.add(ModItems.GODSLAYER);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

@@ -20,6 +20,7 @@
   "item.echoes_of_the_elders.doomstick_item": "Doomstick",
   "item.echoes_of_the_elders.quickening_band": "Quickening Band",
   "item.echoes_of_the_elders.reality_pick": "Reality Pick",
+  "item.echoes_of_the_elders.godslayer": "Godslayer",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
@@ -41,5 +42,7 @@
   "tooltip.echoes_of_the_elders.gale_core.effect": "⚡ When toggled, continuously §a💨boosts§r elytra flight",
   "tooltip.echoes_of_the_elders.quickening_band.effect": "⚡ Activate to gain §a⛏haste §b%d§r and §a👢speed §b%d§r",
   "tooltip.echoes_of_the_elders.reality_pick.effect": "Can break %s!",
-  "tooltip.echoes_of_the_elders.reality_pick.everything": "✨everything"
+  "tooltip.echoes_of_the_elders.reality_pick.everything": "✨everything",
+  "tooltip.echoes_of_the_elders.godslayer.effect": "Can damage %s beings",
+  "tooltip.echoes_of_the_elders.godslayer.invincible": "✨invincible"
 }
