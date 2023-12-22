@@ -16,7 +16,12 @@ public abstract class StackedItemStat<T> {
         return (stack.getCount() - 1) / (float) (stack.getMaxCount() - 1);
     }
 
-    public abstract T get(ItemStack stack);
+    public abstract T get(float progress);
+
+    public T get(ItemStack stack) {
+        float progress = this.getStackProgress(stack);
+        return this.get(progress);
+    }
 
     public static class Float extends StackedItemStat<java.lang.Float> {
         public Float(java.lang.Float min, java.lang.Float max) {
@@ -24,8 +29,7 @@ public abstract class StackedItemStat<T> {
         }
 
         @Override
-        public java.lang.Float get(ItemStack stack) {
-            float progress = this.getStackProgress(stack);
+        public java.lang.Float get(float progress) {
             return this.min + ((this.max - this.min) * progress);
         }
     }
@@ -36,8 +40,7 @@ public abstract class StackedItemStat<T> {
         }
 
         @Override
-        public java.lang.Integer get(ItemStack stack) {
-            float progress = this.getStackProgress(stack);
+        public java.lang.Integer get(float progress) {
             return (int) (this.min + ((this.max - this.min) * progress));
         }
     }
