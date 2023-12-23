@@ -3,13 +3,13 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.util.Color;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -39,15 +39,8 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
         return builder.build();
     });
 
-    private static final FabricItemSettings settings = (new FabricItemSettings() {
-        @Override
-        public FabricItemSettings maxDamageIfAbsent(int maxDamage) {
-            return this;
-        }
-    }).rarity(Rarity.EPIC).maxCount(MAX_COUNT);
-
     public GodslayerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, settings);
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(MAX_COUNT));
     }
 
     @Override
