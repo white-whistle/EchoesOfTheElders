@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.minecraft.client.item.TooltipContext;
@@ -10,7 +12,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -28,8 +29,8 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 100f);
     protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
 
-    public MidasHammerItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+    public MidasHammerItem() {
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(16));
     }
 
 
@@ -73,6 +74,6 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
 
     @Override
     public int getCooldown(ItemStack stack) {
-        return 20 * 60*5;
+        return 20 * 60 * 5;
     }
 }

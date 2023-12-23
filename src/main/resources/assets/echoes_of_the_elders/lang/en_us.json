@@ -21,6 +21,7 @@
   "item.echoes_of_the_elders.quickening_band": "Quickening Band",
   "item.echoes_of_the_elders.reality_pick": "Reality Pick",
   "item.echoes_of_the_elders.godslayer": "Godslayer",
+  "item.echoes_of_the_elders.gunheels": "Gunheels",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
@@ -30,8 +31,8 @@
   "tooltip.echoes_of_the_elders.cooldown.static": "§8Cooldown 🕑%ss🔒§r",
   "tooltip.echoes_of_the_elders.scorchers_mitts.attack": "⚔ Attacked enemies are set on §6🔥fire§r",
   "tooltip.echoes_of_the_elders.scorchers_mitts.effect": "⚡ Activate to deal %dx§6🔥fire§r tick damage instantly and extinguish enemies",
-  "tooltip.echoes_of_the_elders.midas_hammer.attack": "⚔ Attacked enemies have a %d%% chance to drop §6🎇gold§r §don hit§r",
-  "tooltip.echoes_of_the_elders.midas_hammer.effect": "⚡ Activate to deal %d§5✨magic§r damage, slain enemies drop §6🎇gold§r",
+  "tooltip.echoes_of_the_elders.midas_hammer.attack": "⚔ Attacked enemies have a %s%% chance to drop §6🎇gold§r §don hit§r",
+  "tooltip.echoes_of_the_elders.midas_hammer.effect": "⚡ Activate to deal %s§5✨magic§r damage, slain enemies drop §6🎇gold§r",
   "tooltip.echoes_of_the_elders.radiant_lotus.effect": "⚡ Activate to clear all §cnegative§r §d💫effects§r",
   "tooltip.echoes_of_the_elders.doomstick.effect": "⚡ Activate to deal %d§5✨magic§r damage",
   "tooltip.echoes_of_the_elders.vitality_pump.effect": "⚡ Activate to heal §a%d§r §c♥heart§r",
@@ -44,5 +45,6 @@
   "tooltip.echoes_of_the_elders.reality_pick.effect": "Can break %s!",
   "tooltip.echoes_of_the_elders.reality_pick.everything": "✨everything",
   "tooltip.echoes_of_the_elders.godslayer.effect": "Can damage %s beings",
-  "tooltip.echoes_of_the_elders.godslayer.invincible": "✨invincible"
+  "tooltip.echoes_of_the_elders.godslayer.invincible": "✨invincible",
+  "tooltip.echoes_of_the_elders.gunheels.effect": "@ Wearer can §abullet-jump§r"
 }
