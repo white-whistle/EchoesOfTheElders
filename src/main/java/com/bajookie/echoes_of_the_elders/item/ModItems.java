@@ -44,6 +44,7 @@ public class ModItems {
     public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
+    public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
 
 
     // Register methods

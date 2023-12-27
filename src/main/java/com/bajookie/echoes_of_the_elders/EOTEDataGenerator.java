@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
+import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.util.*;
 import com.bajookie.echoes_of_the_elders.world.ModConfiguredFeatures;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
