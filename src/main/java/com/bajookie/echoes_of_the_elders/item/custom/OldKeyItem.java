@@ -21,63 +21,30 @@ public class OldKeyItem extends Item {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        Block block = context.getWorld().getBlockState(context.getBlockPos()).getBlock();
+        var pos = context.getBlockPos();
+        var world = context.getWorld();
+
+        Block block = context.getWorld().getBlockState(pos).getBlock();
         PlayerEntity player = context.getPlayer();
+
         if (block == ModBlocks.RELIC_CONTAINER_BLOCK) {
-            if (!player.getAbilities().creativeMode) {
+            if (player != null && !player.getAbilities().creativeMode) {
                 context.getStack().decrement(1);
             }
             context.getWorld().breakBlock(context.getBlockPos(), false);
-            dropFromTable(context.getPlayer());
+
+            Block.dropStack(world, pos, this.getRandomRelicDropStack());
             context.getWorld().playSound(context.getBlockPos().getX(), context.getBlockPos().getY(), context.getBlockPos().getZ(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 4, 4, true);
         }
         return ActionResult.success(context.getWorld().isClient);
     }
 
-    private void dropFromTable(PlayerEntity player) {
+    private ItemStack getRandomRelicDropStack() {
         Random r = new Random();
-        int num = r.nextInt(8);
-        if (num >= 0 && num <= 0) {
-            player.giveItemStack(new ItemStack(ModItems.DOOMSTICK_ITEM));
-            return;
-        }
-        if (num >= 1 && num <= 1) {
-            player.giveItemStack(new ItemStack(ModItems.GALE_CORE));
-            return;
-        }
-        if (num >= 2 && num <= 2) {
-            player.giveItemStack(new ItemStack(ModItems.POTION_MIRAGE));
-            return;
-        }
-        if (num >= 3 && num <= 3) {
-            player.giveItemStack(new ItemStack(ModItems.ANCIENT_STONE_SWORD));
-            return;
-        }
-        if (num >= 4 && num <= 4) {
-            player.giveItemStack(new ItemStack(ModItems.SCORCHERS_MITTS));
-            return;
-        }
-        if (num >= 5 && num <= 5) {
-            player.giveItemStack(new ItemStack(ModItems.MIDAS_HAMMER));
-            return;
-        }
-        if (num >= 6 && num <= 6) {
-            player.giveItemStack(new ItemStack(ModItems.PORTAL_RING));
-            return;
-        }
-        if (num >= 7 && num <= 7) {
-            player.giveItemStack(new ItemStack(ModItems.RADIANT_LOTUS));
-            return;
-        }
-        //LootPool.Builder builder = LootPool.builder().rolls(ConstantLootNumberProvider.create(1))
-        //                .with(Arrays.asList(ItemEntry.builder(ModItems.DAGON).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.GALE_CORE).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.POTION_MIRAGE).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.ANCIENT_STONE_SWORD).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.FIRE_SNAP).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.MIDAS_HAMMER).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.PORTAL_RING).weight(1).build(),
-        //                        ItemEntry.builder(ModItems.RADIANT_LOTUS).weight(1).build()
-        //                        ));
+        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact).toList();
+
+        var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
+
+        return new ItemStack(randomArtifactItem, 1);
     }
 }
