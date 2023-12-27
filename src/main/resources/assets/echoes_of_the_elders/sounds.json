@@ -1,0 +1,21 @@
+{
+  "spirit_entity_ambient": {
+    "subtitle": "sounds.echos_of_the_elders.spirit_entity_ambient",
+    "sounds": [
+      "echoes_of_the_elders:spirit_entity_ambient"
+    ]
+  },
+  "spirit_entity_death": {
+    "subtitle": "sounds.echos_of_the_elders.spirit_entity_death",
+    "sounds": [
+      "echoes_of_the_elders:spirit_entity_death"
+    ]
+  },
+  "spirit_entity_hurt": {
+    "subtitle": "sounds.echos_of_the_elders.spirit_entity_hurt",
+    "sounds": [
+      "echoes_of_the_elders:spirit_entity_hurt"
+    ]
+  }
+
+}
