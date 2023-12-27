@@ -42,13 +42,17 @@ public class ClientItemMixin {
         }
 
         if (item instanceof IHasCooldown iHasCooldown) {
-            var cd = CooldownUtil.getReducedCooldown(MinecraftClient.getInstance().player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
-            var n = TextUtil.f1(cd);
+            var mc = MinecraftClient.getInstance();
+            if (mc.world != null) {
+                var player = mc.player;
+                var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
+                var n = TextUtil.f1(cd);
 
-            if (iHasCooldown.canReduceCooldown()) {
-                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown.reduceable", n));
-            } else {
-                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown.static", n));
+                if (iHasCooldown.canReduceCooldown()) {
+                    tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown.reduceable", n));
+                } else {
+                    tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.cooldown.static", n));
+                }
             }
         }
     }
