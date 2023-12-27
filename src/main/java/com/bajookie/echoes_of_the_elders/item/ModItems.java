@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.custom.*;
 import com.bajookie.echoes_of_the_elders.item.entites.ChainLightningItem;
 import com.bajookie.echoes_of_the_elders.item.entites.SecondSunItem;
+import com.bajookie.echoes_of_the_elders.item.entites.TeleportEyeItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -46,6 +47,7 @@ public class ModItems {
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
+    public static final Item TELEPORT_EYE_ITEM = registerItem("teleport_eye", new TeleportEyeItem());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY, 0xb4d4e1, new FabricItemSettings()));
