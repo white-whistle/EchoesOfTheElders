@@ -7,6 +7,7 @@ import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.network.listener.ClientPlayPacketListener;
@@ -61,6 +62,7 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
 
             var entities = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity entity : entities) {
+                if (entity instanceof PlayerEntity) continue;
                 ServerWorld worlder = (ServerWorld) this.getWorld();
                 EntityType.LIGHTNING_BOLT.spawn(worlder,entity.getBlockPos(), SpawnReason.TRIGGERED);
             }
