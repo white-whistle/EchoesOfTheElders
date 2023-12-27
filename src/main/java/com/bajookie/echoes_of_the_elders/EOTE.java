@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.ModItemGroups;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
+import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.util.ModLootTablesModifiers;
 import com.bajookie.echoes_of_the_elders.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
@@ -27,6 +28,7 @@ public class EOTE implements ModInitializer {
 
 		ModEntities.registerMobAttributes();
 		ModParticles.registerParticles();
+		ModSounds.registerSounds();
 	}
 
 

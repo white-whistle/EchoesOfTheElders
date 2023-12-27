@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.entity;
 import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.FlowerDefenseEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.SecondSunProjectileEntity;
+import com.bajookie.echoes_of_the_elders.entity.custom.SpiritEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -20,6 +21,11 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,FlowerDefenseEntity::new)
                     .dimensions(EntityDimensions.fixed(1f,1f)).build());
 
+    public static final EntityType<SpiritEntity> SPIRIT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID,"spirit_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,SpiritEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID,"second_sun_entity"),
             FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE,SecondSunProjectileEntity::new)
@@ -35,5 +41,6 @@ public class ModEntities {
      */
     public static void registerMobAttributes(){
         FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY,FlowerDefenseEntity.createFlowerDefenseAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY,SpiritEntity.createSpiritEntityAttributes());
     }
 }
