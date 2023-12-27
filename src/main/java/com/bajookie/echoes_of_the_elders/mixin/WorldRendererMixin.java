@@ -49,7 +49,7 @@ public abstract class WorldRendererMixin {
     private void drawBlockOutline(MatrixStack matrices, VertexConsumer vertexConsumer, Entity entity, double cameraX, double cameraY, double cameraZ, BlockPos pos, BlockState state, CallbackInfo ci) {
         var customColor = CustomOutlineColor.getOutlineColor();
 
-        if (customColor != null) {
+        if (customColor != null && this.world != null) {
             drawCuboidShapeOutline(matrices, vertexConsumer, state.getOutlineShape(this.world, pos, ShapeContext.of(entity)), (double) pos.getX() - cameraX, (double) pos.getY() - cameraY, (double) pos.getZ() - cameraZ, customColor.getRedF(), customColor.getGreenF(), customColor.getBlueF(), 0.4f);
             ci.cancel();
         }
