@@ -40,7 +40,12 @@ public class SpiritEntity extends AnimalEntity implements FlyingItemEntity, Flut
 
     @Override
     protected EntityNavigation createNavigation(World world) {
-        BirdNavigation birdNavigation = new BirdNavigation(this, world);
+        BirdNavigation birdNavigation = new BirdNavigation(this,world) {
+            @Override
+            public boolean isValidPosition(BlockPos pos) {
+                return !this.world.getBlockState(pos.down()).isAir();
+            }
+        };
         birdNavigation.setCanPathThroughDoors(false);
         birdNavigation.setCanSwim(true);
         birdNavigation.setCanEnterOpenDoors(true);
