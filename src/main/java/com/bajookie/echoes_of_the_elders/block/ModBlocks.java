@@ -19,7 +19,7 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
     public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block", new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).nonOpaque().notSolid()));
-    public static final Block RELIC_CONTAINER_BLOCK = registerBlock("artifact_vault_block", new RelicContainerBlock(FabricBlockSettings.copyOf(Blocks.STONE).requiresTool().strength(3).hardness(-1).nonOpaque()));
+    public static final Block RELIC_CONTAINER_BLOCK = registerBlock("artifact_vault_block", new RelicContainerBlock(FabricBlockSettings.copyOf(Blocks.STONE).requiresTool().strength(100000).hardness(-1).nonOpaque()));
     public static final Block EXPLORER_FRUIT_BLOCK = registerBlock("explorers_fruit_block", new FlowerBlock(StatusEffects.GLOWING, 1, FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision()));
     public static final Block MINERS_FRUIT_BLOCK = registerBlock("miners_fruit_block", new MinersFruitBlock(), new FabricItemSettings().food(ModFoodComponents.MINERS_FRUIT));
     public static final Block NETHER_FRUIT_BLOCK = registerBlock("nether_fruit_block", new NetherFruitBlock(), new FabricItemSettings().food(ModFoodComponents.NETHER_FRUIT));
