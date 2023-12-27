@@ -9,7 +9,7 @@ public class CustomOutlineColor {
 
         var mc = MinecraftClient.getInstance();
 
-        if (mc.player == null) return null;
+        if (mc == null || mc.player == null) return null;
 
         var stack = mc.player.getMainHandStack();
         var item = stack.getItem();
