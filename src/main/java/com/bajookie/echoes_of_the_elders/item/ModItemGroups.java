@@ -23,6 +23,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
+                entries.add(ModItems.SPIRIT_SPAWN_EGG);
                 // entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 // entries.add(ModItems.OLD_KEY);
             }).build());
