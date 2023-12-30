@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -50,6 +51,11 @@ public class ModModelProvider extends FabricModelProvider {
 
             // skip model gen (items with hand-made jsons)
             if (ItemModelConfig.SKIP.contains(item)) {
+                return;
+            }
+
+            if (item instanceof SpawnEggItem) {
+                itemModelGenerator.register(item, new Model(Optional.of(new Identifier("item/template_spawn_egg")), Optional.empty()));
                 return;
             }
 

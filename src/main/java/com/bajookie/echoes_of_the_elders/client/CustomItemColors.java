@@ -3,9 +3,12 @@ package com.bajookie.echoes_of_the_elders.client;
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.util.Color;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.client.MinecraftClient;
 
+@Environment(EnvType.CLIENT)
 public class CustomItemColors {
 
     public static Color rainbow(float l, float s) {
