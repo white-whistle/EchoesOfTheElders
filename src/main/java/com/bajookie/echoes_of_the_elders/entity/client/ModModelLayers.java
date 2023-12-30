@@ -11,16 +11,19 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModModelLayers {
     public static final EntityModelLayer FLOWER_DEFENSE_LAYER =
-            new EntityModelLayer(new Identifier(MOD_ID,"flower_defense_entity"),"main");
+            new EntityModelLayer(new Identifier(MOD_ID, "flower_defense_entity"), "main");
+    public static final EntityModelLayer SPIRIT_ENTITY_LAYER =
+            new EntityModelLayer(new Identifier(MOD_ID, "spirit_entity"), "main");
 
     /**
      * Register Model Layers here:
      */
-    public static void registerModMobLayers(){
-        EntityModelLayerRegistry.registerModelLayer(FLOWER_DEFENSE_LAYER,FlowerDefenseModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY,FlowerDefenseRenderer::new);
+    public static void registerModMobLayers() {
+        EntityModelLayerRegistry.registerModelLayer(FLOWER_DEFENSE_LAYER, FlowerDefenseModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(SPIRIT_ENTITY_LAYER, SpiritItemEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.SPIRIT_ENTITY, SpiritItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SPIRIT_ENTITY,FlyingItemEntityRenderer::new);
     }
 }

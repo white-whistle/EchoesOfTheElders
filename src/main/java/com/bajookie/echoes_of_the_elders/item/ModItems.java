@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.custom.*;
 import com.bajookie.echoes_of_the_elders.item.entites.ChainLightningItem;
 import com.bajookie.echoes_of_the_elders.item.entites.SecondSunItem;
@@ -45,6 +46,9 @@ public class ModItems {
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
+
+    // spawn eggs
+    public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY, 0xb4d4e1, new FabricItemSettings()));
 
 
     // Register methods
