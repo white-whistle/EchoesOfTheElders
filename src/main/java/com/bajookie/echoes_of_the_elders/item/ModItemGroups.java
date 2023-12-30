@@ -47,6 +47,7 @@ public class ModItemGroups {
                 entries.add(ModItems.REALITY_PICK);
                 entries.add(ModItems.GODSLAYER);
                 entries.add(ModItems.GUNHEELS);
+                entries.add(ModItems.TELEPORT_EYE_ITEM);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

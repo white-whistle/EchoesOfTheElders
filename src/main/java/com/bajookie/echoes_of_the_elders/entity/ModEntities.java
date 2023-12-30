@@ -1,9 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity;
 
-import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
-import com.bajookie.echoes_of_the_elders.entity.custom.FlowerDefenseEntity;
-import com.bajookie.echoes_of_the_elders.entity.custom.SecondSunProjectileEntity;
-import com.bajookie.echoes_of_the_elders.entity.custom.SpiritEntity;
+import com.bajookie.echoes_of_the_elders.entity.custom.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -34,6 +31,10 @@ public class ModEntities {
     public static final EntityType<ChainLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID,"chain_lightning_entity"),
             FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE,ChainLightningProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
+    public static final EntityType<TeleportEyeProjectileEntity> TELEPORT_EYE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID,"teleport_eye_entity"),
+            FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE,TeleportEyeProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
 
     /**
