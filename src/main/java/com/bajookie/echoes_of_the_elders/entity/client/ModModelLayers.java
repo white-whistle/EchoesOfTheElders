@@ -26,6 +26,5 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.SPIRIT_ENTITY,FlyingItemEntityRenderer::new);
     }
 }
