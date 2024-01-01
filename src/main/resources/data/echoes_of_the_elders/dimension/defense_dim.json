@@ -7,7 +7,7 @@
       "type": "minecraft:multi_noise",
       "biomes": [
         {
-          "biome": "minecraft:sunflower_plains",
+          "biome": "echoes_of_the_elders:lost_biome",
           "parameters": {
             "temperature": 0,
             "humidity": 0,

@@ -1,9 +1,11 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
+import com.bajookie.echoes_of_the_elders.datagen.ModWorldGenerator;
 import com.bajookie.echoes_of_the_elders.util.*;
 import com.bajookie.echoes_of_the_elders.world.ModConfiguredFeatures;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
+import com.bajookie.echoes_of_the_elders.world.biome.ModBiomes;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -28,5 +30,6 @@ public class EOTEDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
 		registryBuilder.addRegistry(RegistryKeys.DIMENSION_TYPE, ModDimensions::bootstrapType);
+        registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootstrap);
 	}
 }
