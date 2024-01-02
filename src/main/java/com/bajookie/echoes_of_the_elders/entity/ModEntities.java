@@ -23,6 +23,11 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,SpiritEntity::new)
                     .dimensions(EntityDimensions.fixed(1f,1f)).build());
 
+    public static final EntityType<EldermanEntity> ELDERMAN_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID,"elderman_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EldermanEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID,"second_sun_entity"),
             FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE,SecondSunProjectileEntity::new)
@@ -43,5 +48,6 @@ public class ModEntities {
     public static void registerMobAttributes(){
         FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY,FlowerDefenseEntity.createFlowerDefenseAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY,SpiritEntity.createSpiritEntityAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY,EldermanEntity.createEndermanAttributes());
     }
 }

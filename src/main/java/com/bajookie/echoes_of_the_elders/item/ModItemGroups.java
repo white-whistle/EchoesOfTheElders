@@ -24,6 +24,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
+                entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 entries.add(ModBlocks.SUN_RUNE_BLOCK);
                 entries.add(ModBlocks.CHISELED_MOSSY_STONE);
