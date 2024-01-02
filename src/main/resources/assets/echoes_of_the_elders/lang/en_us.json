@@ -24,6 +24,7 @@
   "item.echoes_of_the_elders.gunheels": "Gunheels",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "item.echoes_of_the_elders.spirit_spawn_egg": "Spirit Spawn Egg",
+  "item.echoes_of_the_elders.wither_scales_item": "Wither's Bulwark",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
   "tooltip.echoes_of_the_elders.artifact_stack": "✧%d\\%d",
@@ -47,5 +48,7 @@
   "tooltip.echoes_of_the_elders.reality_pick.everything": "✨everything",
   "tooltip.echoes_of_the_elders.godslayer.effect": "Can damage %s beings",
   "tooltip.echoes_of_the_elders.godslayer.invincible": "✨invincible",
-  "tooltip.echoes_of_the_elders.gunheels.effect": "@ Wearer can §abullet-jump§r"
+  "tooltip.echoes_of_the_elders.passive": "@ %s",
+  "tooltip.echoes_of_the_elders.gunheels.effect": "Wearer can §abullet-jump§r",
+  "tooltip.echoes_of_the_elders.wither_scales_item.effect": "§aDeflects§r incoming arrows"
 }

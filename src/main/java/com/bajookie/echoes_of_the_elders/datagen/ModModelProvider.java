@@ -4,6 +4,9 @@ import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.data.client.*;
@@ -32,20 +35,20 @@ public class ModModelProvider extends FabricModelProvider {
         protected static final List<Item> HANDHELD = List.of(
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
-                ModItems.MIDAS_HAMMER,
-                ModItems.DOOMSTICK_ITEM,
-                ModItems.GODSLAYER
+                ModItems.MIDAS_HAMMER
         );
         protected static final List<Item> SKIP = List.of(
                 ModItems.WITHER_SCALES_ITEM,
                 ModItems.CHAIN_LIGHTNING_ITEM,
-                ModItems.REALITY_PICK
+                ModItems.REALITY_PICK,
+                ModItems.SCORCHERS_MITTS
         );
     }
 
+    public final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);
+
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        var HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);
 
         ModItems.registeredModItems.forEach(item -> {
 
@@ -63,10 +66,20 @@ public class ModModelProvider extends FabricModelProvider {
             if (ItemModelConfig.HANDHELD.contains(item)) {
                 itemModelGenerator.register(item, Models.HANDHELD);
 
-                if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
-                    var upscaledIdentifier = new Identifier(EOTE.MOD_ID, "item/" + iHasUpscaledModel.getUpscaledModel());
+                return;
+            }
 
-                    HANDHELD_X32.upload(upscaledIdentifier, TextureMap.layer0(upscaledIdentifier), itemModelGenerator.writer);
+            if (item instanceof IStackPredicate iStackPredicate) {
+                var levels = iStackPredicate.getTextureIndex(item.getMaxCount()) + 1;
+                var modelId = ModelIds.getItemModelId(item);
+                var baseModel = iStackPredicate.getBaseModel();
+
+                addStackedVariants(itemModelGenerator, modelId, levels, baseModel);
+
+                if (item instanceof IHasUpscaledModel) {
+                    if (baseModel == Models.HANDHELD) {
+                        addStackedVariants(itemModelGenerator, modelId.withSuffixedPath("_x32"), levels, HANDHELD_X32);
+                    }
                 }
 
                 return;
@@ -75,5 +88,38 @@ public class ModModelProvider extends FabricModelProvider {
             // by default register as generated
             itemModelGenerator.register(item, Models.GENERATED);
         });
+    }
+
+    public static void addStackedVariants(ItemModelGenerator itemModelGenerator, Identifier modelId, int levels, Model baseModel) {
+        baseModel.upload(modelId, TextureMap.layer0(modelId), itemModelGenerator.writer, (id, textures) -> {
+            var json = baseModel.createJson(id, textures);
+
+            JsonArray jsonArray = new JsonArray();
+
+            for (int i = 1; i < levels; i++) {
+                var entry = new JsonObject();
+                var predicate = new JsonObject();
+
+                var pModelId = modelId.withSuffixedPath(String.format("_%02d", i));
+
+                predicate.addProperty(new Identifier(EOTE.MOD_ID, "stack_level").toString(), i / (float) (levels - 1));
+
+                entry.add("predicate", predicate);
+                entry.addProperty("model", pModelId.toString());
+
+                jsonArray.add(entry);
+
+            }
+
+            json.add("overrides", jsonArray);
+
+            return json;
+        });
+
+        for (int i = 1; i < levels; i++) {
+            var pModelId = modelId.withSuffixedPath(String.format("_%02d", i));
+
+            baseModel.upload(pModelId, TextureMap.layer0(pModelId), itemModelGenerator.writer);
+        }
     }
 }

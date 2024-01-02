@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown {
+public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
 
     protected StackedItemStat.Int healAmt = new StackedItemStat.Int(2, 4);
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(60, 10);

@@ -5,6 +5,8 @@ import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -22,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class DoomstickItem extends Item implements IArtifact, IHasCooldown {
+public class DoomstickItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
 
     protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 250f);
 
@@ -59,6 +61,11 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown {
     @Override
     public int getCooldown(ItemStack itemStack) {
         return 20 * 20;
+    }
+
+    @Override
+    public Model getBaseModel() {
+        return Models.HANDHELD;
     }
 
     //    @Override

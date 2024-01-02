@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown {
+public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown, IStackPredicate {
 
     protected static final int EFFECT_DURATION = 20 * 15;
     protected StackedItemStat.Int effectLevel = new StackedItemStat.Int(1, 8);
