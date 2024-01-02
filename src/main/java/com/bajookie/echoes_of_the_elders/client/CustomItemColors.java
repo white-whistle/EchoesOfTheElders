@@ -23,11 +23,25 @@ public class CustomItemColors {
         return rainbow(0.5f, 0.7f);
     }
 
+    public static Color flaming() {
+        var mc = MinecraftClient.getInstance();
+
+        var progress = AnimationUtil.HUE_SHIFT_ANIMATION.getProgress(mc.getTickDelta());
+
+        return Color.fromHSL(35, AnimationUtil.tween(0.9f, 1f, progress), AnimationUtil.tween(0.6f, 0.56f, progress));
+    }
+
     public static void init() {
         ColorProviderRegistry.ITEM.register((stack, index) -> {
             if (index == 0) return 0xFFFFFF;
 
             return rainbow().getRGB();
         }, ModItems.REALITY_PICK);
+
+        ColorProviderRegistry.ITEM.register((stack, index) -> {
+            if (index == 0) return 0xFFFFFF;
+
+            return flaming().getRGB();
+        }, ModItems.SCORCHERS_MITTS);
     }
 }

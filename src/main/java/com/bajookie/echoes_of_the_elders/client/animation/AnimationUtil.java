@@ -31,4 +31,7 @@ public class AnimationUtil {
         return (MathHelper.sin((n) * 2 * (float) Math.PI) + 1) / 2f;
     }
 
+    public static float tween(float min, float max, float progress) {
+        return min + ((max - min) * progress);
+    }
 }

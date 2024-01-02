@@ -11,6 +11,8 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -24,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem {
+public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate {
     private static final int MAX_COUNT = 16;
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(10f, 64f);
 
@@ -41,11 +43,6 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
 
     public GodslayerItem() {
         super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(MAX_COUNT));
-    }
-
-    @Override
-    public String getUpscaledModel() {
-        return "godslayer_32";
     }
 
     @Override
@@ -70,5 +67,10 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
     @Override
     public boolean isDamageable() {
         return false;
+    }
+
+    @Override
+    public Model getBaseModel() {
+        return Models.HANDHELD;
     }
 }

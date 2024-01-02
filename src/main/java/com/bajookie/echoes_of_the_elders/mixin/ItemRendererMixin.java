@@ -10,6 +10,7 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,8 +35,12 @@ public abstract class ItemRendererMixin {
 
         if (isHeld) {
             var item = stack.getItem();
-            if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
-                return getCustomItemModel(iHasUpscaledModel.getUpscaledModel());
+            if (item instanceof IHasUpscaledModel) {
+                var id = Registries.ITEM.getId(item);
+
+                var baseUpscaledModel = getCustomItemModel(id.withSuffixedPath("_x32").getPath());
+
+                return baseUpscaledModel.getOverrides().apply(baseUpscaledModel, stack, null, null, 0);
             }
 
             if (stack.isOf(ModItems.ANCIENT_STONE_SWORD)) {

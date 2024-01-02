@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -35,7 +36,8 @@ public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         super.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.gunheels.effect").styled(s -> s.withFont(new Identifier(EOTE.MOD_ID, "glyph_font"))));
+
+        tooltip.add(TextUtil.passive(Text.translatable("tooltip.echoes_of_the_elders.gunheels.effect")));
     }
 
     @Override

@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/scorchers_mitts"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "echoes_of_the_elders:stack_level": 1
+      },
+      "model": "echoes_of_the_elders:item/scorchers_mitts_01"
+    }
+  ]
+}

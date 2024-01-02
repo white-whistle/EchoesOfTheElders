@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown {
+public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
 
     protected StackedItemStat.Float effectRange = new StackedItemStat.Float(16f, 64f);
     protected StackedItemStat.Float fireModifier = new StackedItemStat.Float(1f, 5f);

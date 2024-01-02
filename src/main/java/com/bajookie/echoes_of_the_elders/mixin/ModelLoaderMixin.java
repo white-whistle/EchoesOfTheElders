@@ -7,6 +7,7 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.render.model.json.JsonUnbakedModel;
 import net.minecraft.client.util.ModelIdentifier;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,8 +30,10 @@ public abstract class ModelLoaderMixin {
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "shiny_ancient_stone_sword_3d", "inventory"));
 
         ModItems.registeredModItems.forEach(item -> {
-            if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
-                this.addModel(new ModelIdentifier(EOTE.MOD_ID, iHasUpscaledModel.getUpscaledModel(), "inventory"));
+            if (item instanceof IHasUpscaledModel) {
+                Identifier identifier = Registries.ITEM.getId(item);
+
+                this.addModel(new ModelIdentifier(EOTE.MOD_ID, identifier.withSuffixedPath("_x32").getPath(), "inventory"));
             }
         });
     }
