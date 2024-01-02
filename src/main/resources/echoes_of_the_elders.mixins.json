@@ -21,7 +21,8 @@
     "ModelLoaderMixin",
     "PotionUseMixin",
     "SplashPotionUseMixin",
-    "WorldRendererMixin"
+    "WorldRendererMixin",
+    "EndermanTickMixin"
   ],
   "injectors": {
     "defaultRequire": 1
