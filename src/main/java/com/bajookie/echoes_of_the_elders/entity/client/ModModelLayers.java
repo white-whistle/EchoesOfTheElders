@@ -18,6 +18,8 @@ public class ModModelLayers {
     public static final EntityModelLayer SPIRIT_ENTITY_LAYER =
             new EntityModelLayer(new Identifier(MOD_ID, "spirit_entity"), "main");
 
+    public static final EntityModelLayer ELDERMAN_ENTITY_LAYER = new EntityModelLayer(new Identifier(MOD_ID,"elderman_entity"),"main");
+
 
     /**
      * Register Model Layers here:
@@ -30,7 +32,7 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(EntityModelLayers.ENDERMAN,EndermanEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EndermanEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER,EldermanModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
     }
 }

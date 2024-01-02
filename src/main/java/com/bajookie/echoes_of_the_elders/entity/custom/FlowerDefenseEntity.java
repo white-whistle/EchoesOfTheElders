@@ -42,7 +42,6 @@ public class FlowerDefenseEntity extends AnimalEntity {
     @Override
     public void onDeath(DamageSource damageSource) {
         EOTE.LOGGER.info("dead");
-        //ModRaid modRaid = new ModRaid(2,this,getWorld());
     }
 
     @Nullable

@@ -1,19 +1,26 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,8 +33,19 @@ import java.util.EnumSet;
 import java.util.function.Predicate;
 
 public class EldermanEntity extends EndermanEntity {
+    private int lastAngrySoundAge = Integer.MIN_VALUE;
     public EldermanEntity(EntityType<? extends EndermanEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Override
+    protected void dropLoot(DamageSource damageSource, boolean causedByPlayer) {
+        EOTE.LOGGER.info("loot");
+        ItemEntity entity = new ItemEntity(getEntityWorld(),this.getX(),this.getY(),this.getZ(),ModItems.TELEPORT_EYE_ITEM.getDefaultStack());
+        if (!getEntityWorld().isClient){
+            getEntityWorld().spawnEntity(entity);
+        }
+        super.dropLoot(damageSource, causedByPlayer);
     }
 
     @Override
@@ -43,6 +61,7 @@ public class EldermanEntity extends EndermanEntity {
         this.targetSelector.add(3, new ActiveTargetGoal<EndermiteEntity>((MobEntity)this, EndermiteEntity.class, true, false));
         this.targetSelector.add(4, new UniversalAngerGoal<EndermanEntity>(this, false));
     }
+
 
     static class ChasePlayerGoal
             extends Goal {
@@ -205,5 +224,15 @@ public class EldermanEntity extends EndermanEntity {
             }
         }
         return bl3;
+    }
+
+    @Override
+    public void playAngrySound() {
+        if (this.age >= this.lastAngrySoundAge + 400) {
+            this.lastAngrySoundAge = this.age;
+            if (!this.isSilent()) {
+                this.getWorld().playSound(this.getX(), this.getEyeY(), this.getZ(), SoundEvents.ENTITY_ENDERMAN_STARE, this.getSoundCategory(), 2.5f, 1.0f, false);
+            }
+        }
     }
 }

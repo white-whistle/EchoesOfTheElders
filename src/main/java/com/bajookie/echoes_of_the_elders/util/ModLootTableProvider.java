@@ -21,6 +21,7 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.RELIC_CONTAINER_BLOCK);
     }
 
+
 //    public LootTable.Builder copperLikeOreDrops(Block drop, Item item, float minLoot, float maxLoot) {
 //        var setLootCountFn = SetCountLootFunction.builder(UniformLootNumberProvider.create(2.0f, 5.0f));
 //        var enableOreFortuneFn = ApplyBonusLootFunction.oreDrops(Enchantments.FORTUNE);
