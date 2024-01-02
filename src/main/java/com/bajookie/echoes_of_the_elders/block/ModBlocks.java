@@ -1,10 +1,7 @@
 package com.bajookie.echoes_of_the_elders.block;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
-import com.bajookie.echoes_of_the_elders.block.custom.BearTrapBlock;
-import com.bajookie.echoes_of_the_elders.block.custom.MinersFruitBlock;
-import com.bajookie.echoes_of_the_elders.block.custom.NetherFruitBlock;
-import com.bajookie.echoes_of_the_elders.block.custom.RelicContainerBlock;
+import com.bajookie.echoes_of_the_elders.block.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModFoodComponents;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -25,6 +22,11 @@ public class ModBlocks {
     public static final Block NETHER_FRUIT_BLOCK = registerBlock("nether_fruit_block", new NetherFruitBlock(), new FabricItemSettings().food(ModFoodComponents.NETHER_FRUIT));
     public static final Block POTTED_EXPLORER_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_explorers_fruit_block"), new FlowerPotBlock(EXPLORER_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
     public static final Block POTTED_MINERS_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_miners_fruit_block"), new FlowerPotBlock(MINERS_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
+
+
+    //Decorative blocks
+    public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block",new SunRuneBlock());
+    public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone",new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
 
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
