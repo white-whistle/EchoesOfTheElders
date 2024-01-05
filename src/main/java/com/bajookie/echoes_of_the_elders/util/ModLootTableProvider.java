@@ -19,6 +19,11 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK, ModBlocks.EXPLORER_FRUIT_BLOCK);
         addDrop(ModBlocks.POTTED_MINERS_FRUIT_BLOCK, ModBlocks.MINERS_FRUIT_BLOCK);
         addDrop(ModBlocks.RELIC_CONTAINER_BLOCK);
+        addDrop(ModBlocks.ANCIENT_TREE_LOG);
+        addDrop(ModBlocks.ANCIENT_TREE_WOOD);
+        addDrop(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
+        addDrop(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        addDrop(ModBlocks.ANCIENT_TREE_PLANKS);
     }
 
 

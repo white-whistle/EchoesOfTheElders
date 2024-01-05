@@ -13,6 +13,7 @@ public class ModWorldGeneration{
         ModOreGeneration.generateOres();
         ModFlowerGeneration.generateFlowers();
         ModMobSpawns.addSpawns();
+        ModTreeGeneration.generateTrees(); // empty!
     }
 
 

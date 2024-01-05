@@ -28,6 +28,14 @@ public class ModItemGroups {
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 entries.add(ModBlocks.SUN_RUNE_BLOCK);
                 entries.add(ModBlocks.CHISELED_MOSSY_STONE);
+                //trees
+                entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
+                entries.add(ModBlocks.ANCIENT_TREE_LOG);
+                entries.add(ModBlocks.ANCIENT_TREE_WOOD);
+                entries.add(ModBlocks.ANCIENT_TREE_PLANKS);
+                entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
+                entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+                entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
                 // entries.add(ModItems.OLD_KEY);
             }).build());
 
