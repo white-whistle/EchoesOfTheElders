@@ -1,6 +1,5 @@
 package com.bajookie.echoes_of_the_elders.item.entites;
 
-import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.TeleportEyeProjectileEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,15 +12,15 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class TeleportEyeItem extends Item {
-    public TeleportEyeItem() {
+public class ElderPrismItem extends Item {
+    public ElderPrismItem() {
         super(new FabricItemSettings().maxCount(16));
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (!user.getItemCooldownManager().isCoolingDown(this)){
-            user.getItemCooldownManager().set(this,20*5);
+        if (!user.getItemCooldownManager().isCoolingDown(this)) {
+            user.getItemCooldownManager().set(this, 20 * 5);
             ItemStack itemStack = user.getStackInHand(hand);
             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
             if (!world.isClient) {

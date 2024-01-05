@@ -1,6 +1,5 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -16,11 +15,8 @@ import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -34,14 +30,15 @@ import java.util.function.Predicate;
 
 public class EldermanEntity extends EndermanEntity {
     private int lastAngrySoundAge = Integer.MIN_VALUE;
+
     public EldermanEntity(EntityType<? extends EndermanEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
     protected void dropLoot(DamageSource damageSource, boolean causedByPlayer) {
-        ItemEntity entity = new ItemEntity(getEntityWorld(),this.getX(),this.getY(),this.getZ(),ModItems.TELEPORT_EYE_ITEM.getDefaultStack());
-        if (!getEntityWorld().isClient){
+        ItemEntity entity = new ItemEntity(getEntityWorld(), this.getX(), this.getY(), this.getZ(), ModItems.ELDER_PRISM.getDefaultStack());
+        if (!getEntityWorld().isClient) {
             getEntityWorld().spawnEntity(entity);
         }
         super.dropLoot(damageSource, causedByPlayer);
@@ -52,12 +49,12 @@ public class EldermanEntity extends EndermanEntity {
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(1, new ChasePlayerGoal(this));
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
-        this.goalSelector.add(7, new WanderAroundFarGoal((PathAwareEntity)this, 1.0, 0.0f));
+        this.goalSelector.add(7, new WanderAroundFarGoal((PathAwareEntity) this, 1.0, 0.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
         this.targetSelector.add(1, new TeleportTowardsPlayerGoal(this, this::shouldAngerAt));
         this.targetSelector.add(2, new RevengeGoal(this, new Class[0]));
-        this.targetSelector.add(3, new ActiveTargetGoal<EndermiteEntity>((MobEntity)this, EndermiteEntity.class, true, false));
+        this.targetSelector.add(3, new ActiveTargetGoal<EndermiteEntity>((MobEntity) this, EndermiteEntity.class, true, false));
         this.targetSelector.add(4, new UniversalAngerGoal<EndermanEntity>(this, false));
     }
 
@@ -83,7 +80,7 @@ public class EldermanEntity extends EndermanEntity {
             if (d > 256.0) {
                 return false;
             }
-            return this.elderman.isPlayerStaring((PlayerEntity)this.target);
+            return this.elderman.isPlayerStaring((PlayerEntity) this.target);
         }
 
         @Override
@@ -96,6 +93,7 @@ public class EldermanEntity extends EndermanEntity {
             this.elderman.getLookControl().lookAt(this.target.getX(), this.target.getEyeY(), this.target.getZ());
         }
     }
+
     static class TeleportTowardsPlayerGoal
             extends ActiveTargetGoal<PlayerEntity> {
         private final EldermanEntity elderman;
@@ -110,7 +108,7 @@ public class EldermanEntity extends EndermanEntity {
         public TeleportTowardsPlayerGoal(EldermanEntity elderman, @Nullable Predicate<LivingEntity> targetPredicate) {
             super(elderman, PlayerEntity.class, 10, false, false, targetPredicate);
             this.elderman = elderman;
-            this.angerPredicate = playerEntity -> (elderman.isPlayerStaring((PlayerEntity)playerEntity) || elderman.shouldAngerAt((LivingEntity)playerEntity)) && !elderman.hasPassengerDeep((Entity)playerEntity);
+            this.angerPredicate = playerEntity -> (elderman.isPlayerStaring((PlayerEntity) playerEntity) || elderman.shouldAngerAt((LivingEntity) playerEntity)) && !elderman.hasPassengerDeep((Entity) playerEntity);
             this.staringPlayerPredicate = TargetPredicate.createAttackable().setBaseMaxDistance(this.getFollowRange()).setPredicate(this.angerPredicate);
         }
 
@@ -166,7 +164,7 @@ public class EldermanEntity extends EndermanEntity {
                 }
             } else {
                 if (this.targetEntity != null && !this.elderman.hasVehicle()) {
-                    if (this.elderman.isPlayerStaring((PlayerEntity)this.targetEntity)) {
+                    if (this.elderman.isPlayerStaring((PlayerEntity) this.targetEntity)) {
                         if (this.targetEntity.squaredDistanceTo(this.elderman) < 16.0) {
                             this.elderman.teleportRandomly();
                         }
@@ -179,6 +177,7 @@ public class EldermanEntity extends EndermanEntity {
             }
         }
     }
+
     boolean isPlayerStaring(PlayerEntity player) {
         ItemStack itemStack = player.getInventory().armor.get(3);
         if (itemStack.isOf(Blocks.CARVED_PUMPKIN.asItem())) {
@@ -193,15 +192,17 @@ public class EldermanEntity extends EndermanEntity {
         }
         return false;
     }
+
     boolean teleportTo(Entity entity) {
         Vec3d vec3d = new Vec3d(this.getX() - entity.getX(), this.getBodyY(0.5) - entity.getEyeY(), this.getZ() - entity.getZ());
         vec3d = vec3d.normalize();
         double d = 16.0;
         double e = this.getX() + (this.random.nextDouble() - 0.5) * 8.0 - vec3d.x * 16.0;
-        double f = this.getY() + (double)(this.random.nextInt(16) - 8) - vec3d.y * 16.0;
+        double f = this.getY() + (double) (this.random.nextInt(16) - 8) - vec3d.y * 16.0;
         double g = this.getZ() + (this.random.nextDouble() - 0.5) * 8.0 - vec3d.z * 16.0;
         return this.teleportTo(e, f, g);
     }
+
     private boolean teleportTo(double x, double y, double z) {
         BlockPos.Mutable mutable = new BlockPos.Mutable(x, y, z);
         while (mutable.getY() > this.getWorld().getBottomY() && !this.getWorld().getBlockState(mutable).blocksMovement()) {

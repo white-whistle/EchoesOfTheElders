@@ -1,7 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "echoes_of_the_elders:item/scorchers_mitts_01",
-    "layer1": "echoes_of_the_elders:item/scorchers_mitts_01_outline"
+    "layer0": "echoes_of_the_elders:item/scorchers_mitts_01"
   }
 }

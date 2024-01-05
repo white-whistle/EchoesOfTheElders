@@ -37,11 +37,5 @@ public class CustomItemColors {
 
             return rainbow().getRGB();
         }, ModItems.REALITY_PICK);
-
-        ColorProviderRegistry.ITEM.register((stack, index) -> {
-            if (index == 0) return 0xFFFFFF;
-
-            return flaming().getRGB();
-        }, ModItems.SCORCHERS_MITTS);
     }
 }
