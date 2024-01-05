@@ -23,7 +23,8 @@
     "PotionUseMixin",
     "SplashPotionUseMixin",
     "WorldRendererMixin",
-    "EndermanTickMixin"
+    "EndermanTickMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

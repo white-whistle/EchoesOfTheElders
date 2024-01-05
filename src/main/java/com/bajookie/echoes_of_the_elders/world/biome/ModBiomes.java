@@ -38,18 +38,17 @@ public class ModBiomes {
     public static Biome lostBiome(Registerable<Biome> ctx){
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
         spawnBuilder.spawn(SpawnGroup.CREATURE,new SpawnSettings.SpawnEntry(EntityType.MOOSHROOM,4,6,10));
-        DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
         GenerationSettings.LookupBackedBuilder biomeBuilder = new GenerationSettings.LookupBackedBuilder(
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE),ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );
         globalOverworldGeneration(biomeBuilder);
-        DefaultBiomeFeatures.addMossyRocks(biomeBuilder);
         DefaultBiomeFeatures.addDefaultOres(biomeBuilder);
         DefaultBiomeFeatures.addEmeraldOre(biomeBuilder);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.TREES_CHERRY);
         DefaultBiomeFeatures.addForestFlowers(biomeBuilder);
         DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
         DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
+        DefaultBiomeFeatures.addJungleGrass(biomeBuilder);
 
         //Generation steps must follow  GenerationStep!!!!
 
@@ -59,11 +58,11 @@ public class ModBiomes {
                 .generationSettings(biomeBuilder.build())
                 .spawnSettings(spawnBuilder.build())
                 .effects(new BiomeEffects.Builder()
-                        .waterColor(0x1219e0)
+                        .waterColor(0x61c2ff)
                         .waterFogColor(0x3280d9)
-                        .skyColor(0xe257f7)
-                        .grassColor(0x5ce070)
-                        .foliageColor(0x399146)
+                        .skyColor(0xbdd1f2)
+                        .grassColor(0xf2f2f2)
+                        .foliageColor(0xf2f2f2)
                         .fogColor(0x8e948f).build())
                 .build();
     }
