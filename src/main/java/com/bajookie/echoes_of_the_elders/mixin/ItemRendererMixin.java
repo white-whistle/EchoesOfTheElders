@@ -16,7 +16,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
@@ -35,12 +36,14 @@ public abstract class ItemRendererMixin {
 
         if (isHeld) {
             var item = stack.getItem();
-            if (item instanceof IHasUpscaledModel) {
-                var id = Registries.ITEM.getId(item);
+            if (item instanceof IHasUpscaledModel iHasUpscaledModel) {
+                if (iHasUpscaledModel.shouldUseUpscaledModel(stack)) {
+                    var id = Registries.ITEM.getId(item);
 
-                var baseUpscaledModel = getCustomItemModel(id.withSuffixedPath("_x32").getPath());
+                    var baseUpscaledModel = getCustomItemModel(id.withSuffixedPath("_x32").getPath());
 
-                return baseUpscaledModel.getOverrides().apply(baseUpscaledModel, stack, null, null, 0);
+                    return baseUpscaledModel.getOverrides().apply(baseUpscaledModel, stack, null, null, 0);
+                }
             }
 
             if (stack.isOf(ModItems.ANCIENT_STONE_SWORD)) {

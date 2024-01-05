@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/reality_pick_01",
+    "layer1": "echoes_of_the_elders:item/reality_pick_overlay_01"
+  }
+}
