@@ -1,10 +1,12 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.mixin.ThrownItemEntityAccessor;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -69,10 +71,12 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
             Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(20);
 
             var entities = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+            int delay = 0;
+            int amp = this.getItem().getCount()/16;
             for (LivingEntity entity : entities) {
-                if (entity instanceof PlayerEntity) continue;
-                ServerWorld worlder = (ServerWorld) this.getWorld();
-                EntityType.LIGHTNING_BOLT.spawn(worlder, entity.getBlockPos(), SpawnReason.TRIGGERED);
+                if(entity instanceof PlayerEntity) continue;
+                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT,delay,amp));
+                delay +=5;
             }
             this.discard();
         }
