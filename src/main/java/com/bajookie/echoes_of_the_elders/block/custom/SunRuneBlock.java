@@ -33,7 +33,6 @@ public class SunRuneBlock extends Block {
         int y = random.nextBetween(-3,3);
         int z = random.nextBetween(-3,3);
         world.spawnParticles(ParticleTypes.GLOW,pos.getX()+x,pos.getY()+y,pos.getZ()+z,1,0,0.1,0,0.1);
-        EOTE.LOGGER.info("Tick");
         super.randomTick(state, world, pos, random);
     }
 }
