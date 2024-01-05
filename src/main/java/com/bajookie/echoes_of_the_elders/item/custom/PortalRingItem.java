@@ -1,11 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Set;
 
 public class PortalRingItem extends Item implements IArtifact {
+
+    public static final int MIN_USE_TICKS = 20 * 2;
+
     public PortalRingItem() {
         super(new FabricItemSettings().maxCount(1));
     }
@@ -72,7 +75,12 @@ public class PortalRingItem extends Item implements IArtifact {
             MinecraftServer minecraftServer = serverWorld.getServer();
             var registryKey = playerEntity.getWorld().getRegistryKey();
 
-            if (registryKey != World.NETHER && registryKey != World.OVERWORLD) {
+            var currentTicks = this.getMaxUseTime(stack) - remainingUseTicks;
+
+            var dimensionValid = registryKey == World.NETHER || registryKey == World.OVERWORLD;
+            var enoughUseTicks = currentTicks >= MIN_USE_TICKS;
+
+            if (!dimensionValid || !enoughUseTicks) {
                 world.playSound(playerEntity, playerEntity.getBlockPos(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS);
                 return;
             }

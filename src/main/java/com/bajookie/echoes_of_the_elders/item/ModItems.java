@@ -42,7 +42,7 @@ public class ModItems {
     public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
     public static final WitherScalesItem WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WitherScalesItem());
     public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(16)));
-    public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new ChainLightningItem(new FabricItemSettings().maxCount(16)));
+    public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new ChainLightningItem());
     public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
