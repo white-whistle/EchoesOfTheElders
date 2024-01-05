@@ -45,7 +45,7 @@ public class ModItemGroups {
                 entries.add(ModItems.POTION_MIRAGE);
                 entries.add(ModItems.WITHER_SCALES_ITEM);
                 entries.add(ModItems.QUICKENING_BAND);
-                entries.add(ModItems.SECOND_SUN_ITEM);
+                //entries.add(ModItems.SECOND_SUN_ITEM);
                 entries.add(ModItems.CHAIN_LIGHTNING_ITEM);
                 entries.add(ModItems.REALITY_PICK);
                 entries.add(ModItems.GODSLAYER);
