@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.block;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModFoodComponents;
+import com.bajookie.echoes_of_the_elders.world.tree.AncientTreeSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -27,6 +28,14 @@ public class ModBlocks {
     //Decorative blocks
     public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block",new SunRuneBlock());
     public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone",new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
+    //Logs and Wood
+    public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
+    public static final Block ANCIENT_TREE_WOOD = registerBlock("ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
+    public static final Block STRIPPED_ANCIENT_TREE_LOG = registerBlock("stripped_ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_LOG)));
+    public static final Block STRIPPED_ANCIENT_TREE_WOOD = registerBlock("stripped_ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD)));
+    public static final Block ANCIENT_TREE_PLANKS = registerBlock("ancient_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
+    public static final Block ANCIENT_TREE_LEAVES = registerBlock("ancient_tree_leaves", new AncientTreeLeaves(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).nonOpaque()));
+    public static final Block ANCIENT_TREE_SAPLING = registerBlock("ancient_tree_sapling", new SaplingBlock(new AncientTreeSaplingGenerator(),FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
 
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
@@ -50,5 +59,7 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(POTTED_EXPLORER_FRUIT_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(POTTED_MINERS_FRUIT_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(RELIC_CONTAINER_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_TREE_LEAVES, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_TREE_SAPLING, RenderLayer.getCutout());
     }
 }

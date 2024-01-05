@@ -17,18 +17,6 @@
             "depth": 0,
             "offset": 0
           }
-        },
-        {
-          "biome": "minecraft:forest",
-          "parameters": {
-            "temperature": 1,
-            "humidity": 0.5,
-            "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
-            "depth": 0,
-            "offset": 0
-          }
         }
       ]
     }

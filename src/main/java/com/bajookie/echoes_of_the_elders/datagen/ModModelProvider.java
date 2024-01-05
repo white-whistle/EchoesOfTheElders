@@ -31,6 +31,12 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleState(ModBlocks.RELIC_CONTAINER_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SUN_RUNE_BLOCK);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHISELED_MOSSY_STONE);
+        //Wood
+        blockStateModelGenerator.registerTintableCross(ModBlocks.ANCIENT_TREE_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_PLANKS);
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_LEAVES);
+        blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
+        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
     }
 
     static class ItemModelConfig {
