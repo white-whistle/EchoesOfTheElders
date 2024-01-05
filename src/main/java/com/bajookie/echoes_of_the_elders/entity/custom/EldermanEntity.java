@@ -40,7 +40,6 @@ public class EldermanEntity extends EndermanEntity {
 
     @Override
     protected void dropLoot(DamageSource damageSource, boolean causedByPlayer) {
-        EOTE.LOGGER.info("loot");
         ItemEntity entity = new ItemEntity(getEntityWorld(),this.getX(),this.getY(),this.getZ(),ModItems.TELEPORT_EYE_ITEM.getDefaultStack());
         if (!getEntityWorld().isClient){
             getEntityWorld().spawnEntity(entity);
