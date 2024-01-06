@@ -49,6 +49,7 @@ public class ModBiomes {
         DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
         DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
         DefaultBiomeFeatures.addJungleGrass(biomeBuilder);
+        DefaultBiomeFeatures.addKelp(biomeBuilder);
 
         //Generation steps must follow  GenerationStep!!!!
 
