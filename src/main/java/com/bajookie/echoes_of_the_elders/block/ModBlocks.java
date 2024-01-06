@@ -26,8 +26,10 @@ public class ModBlocks {
 
 
     //Decorative blocks
-    public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block",new SunRuneBlock());
-    public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone",new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
+    public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block", new SunRuneBlock());
+    public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
+    public static final Block ELDER_LILY_FLOWER = registerBlock("elder_lily_flower", new FlowerBlock(StatusEffects.GLOWING, 1, FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision().breakInstantly()));
+    public static final Block POTTED_ELDER_LILY_FLOWER = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_elder_lily_flower"), new FlowerPotBlock(ELDER_LILY_FLOWER, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
     //Logs and Wood
     public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block ANCIENT_TREE_WOOD = registerBlock("ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
@@ -35,7 +37,7 @@ public class ModBlocks {
     public static final Block STRIPPED_ANCIENT_TREE_WOOD = registerBlock("stripped_ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.STRIPPED_OAK_WOOD)));
     public static final Block ANCIENT_TREE_PLANKS = registerBlock("ancient_tree_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
     public static final Block ANCIENT_TREE_LEAVES = registerBlock("ancient_tree_leaves", new AncientTreeLeaves(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).nonOpaque()));
-    public static final Block ANCIENT_TREE_SAPLING = registerBlock("ancient_tree_sapling", new SaplingBlock(new AncientTreeSaplingGenerator(),FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
+    public static final Block ANCIENT_TREE_SAPLING = registerBlock("ancient_tree_sapling", new SaplingBlock(new AncientTreeSaplingGenerator(), FabricBlockSettings.copyOf(Blocks.OAK_SAPLING)));
 
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
@@ -61,5 +63,7 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(RELIC_CONTAINER_BLOCK, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_TREE_LEAVES, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_TREE_SAPLING, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ELDER_LILY_FLOWER, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(POTTED_ELDER_LILY_FLOWER, RenderLayer.getCutout());
     }
 }

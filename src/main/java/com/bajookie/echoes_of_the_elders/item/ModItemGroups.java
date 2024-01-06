@@ -28,6 +28,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
                 entries.add(ModBlocks.SUN_RUNE_BLOCK);
                 entries.add(ModBlocks.CHISELED_MOSSY_STONE);
+                entries.add(ModBlocks.ELDER_LILY_FLOWER);
                 //trees
                 entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
                 entries.add(ModBlocks.ANCIENT_TREE_LOG);
