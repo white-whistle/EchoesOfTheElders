@@ -5,22 +5,30 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class ChainLightningItem extends Item implements IArtifact, IStackPredicate, IHasCooldown {
+import java.util.List;
+
+public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
-    public ChainLightningItem() {
-        super(new FabricItemSettings().maxCount(16));
+    public OrbOfLightning() {
+        super(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE));
     }
 
     @Override
@@ -44,6 +52,15 @@ public class ChainLightningItem extends Item implements IArtifact, IStackPredica
         }
 
         return super.use(world, user, hand);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        var args = new TextArgs().put("numLightning", Text.literal("5"));
+        
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.chain_lightning_item.effect", args));
+
+        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override

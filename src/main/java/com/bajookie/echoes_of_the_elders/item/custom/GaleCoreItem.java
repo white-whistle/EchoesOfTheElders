@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -12,6 +13,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -29,7 +31,7 @@ public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
     protected static final int MAX_USAGE = 256;
 
     public GaleCoreItem() {
-        super(new FabricItemSettings().maxCount(1).maxDamage(MAX_USAGE));
+        super(new FabricItemSettings().maxCount(1).maxDamage(MAX_USAGE).rarity(Rarity.RARE));
     }
 
     @Override
@@ -110,7 +112,7 @@ public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.gale_core.effect"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.gale_core.effect"));
         super.appendTooltip(stack, world, tooltip, context);
     }
 

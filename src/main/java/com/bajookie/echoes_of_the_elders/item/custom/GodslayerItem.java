@@ -1,12 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.util.Color;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
@@ -55,13 +54,9 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.godslayer.effect"));
+
         super.appendTooltip(stack, world, tooltip, context);
-
-        var progress = AnimationUtil.HUE_SHIFT_ANIMATION.getProgress(0);
-
-        var c = Color.fromHSL(360 * progress, 0.5f, 0.7f).getRGB();
-
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.godslayer.effect", Text.translatable("tooltip.echoes_of_the_elders.godslayer.invincible").styled(s -> s.withColor(c))));
     }
 
     @Override
