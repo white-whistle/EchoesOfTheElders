@@ -1,6 +1,4 @@
 {
-  // What structures to pick to try and spawn if a spot passes the placement check.
-  // If two or more structures in this list can spawn in a biome at a spot, a random one based on weight is chosen to spawn
   "structures": [
     {
       "structure": "echoes_of_the_elders:relic_shrine",

@@ -9,11 +9,11 @@
         {
           "biome": "echoes_of_the_elders:lost_biome",
           "parameters": {
-            "temperature": 0,
-            "humidity": 0,
+            "temperature": 0.7,
+            "humidity": 0.6,
             "continentalness": 0,
-            "erosion": 0,
-            "weirdness": 0,
+            "erosion": -1,
+            "weirdness": 1,
             "depth": 0,
             "offset": 0
           }

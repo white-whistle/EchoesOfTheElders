@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "echoes_of_the_elders:relic_struct",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 564608320,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}
