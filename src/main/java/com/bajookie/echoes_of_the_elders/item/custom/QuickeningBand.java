@@ -3,6 +3,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -47,7 +49,7 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
 
         var eLevel = this.effectLevel.get(stack) + 1;
 
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.quickening_band.effect", eLevel, eLevel));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect", new TextArgs().putI("level", eLevel)));
 
         super.appendTooltip(stack, world, tooltip, context);
     }

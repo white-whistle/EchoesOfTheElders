@@ -3,7 +3,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.util.TextUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,6 +15,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +28,7 @@ public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, I
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(60, 10);
 
     public VitalityPumpItem() {
-        super(new FabricItemSettings().maxCount(16));
+        super(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE));
     }
 
     @Override
@@ -52,7 +54,8 @@ public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, I
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.vitality_pump.effect", TextUtil.f1(healAmt.get(stack) / 2f)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vitality_pump.effect", new TextArgs().putF("heal", healAmt.get(stack) / 2f)));
+
         super.appendTooltip(stack, world, tooltip, context);
     }
 

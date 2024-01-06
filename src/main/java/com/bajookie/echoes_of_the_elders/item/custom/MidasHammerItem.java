@@ -4,7 +4,8 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.util.TextUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -18,6 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +32,7 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
 
     public MidasHammerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(16));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(16).rarity(Rarity.RARE));
     }
 
 
@@ -66,8 +68,9 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.attack", (int) (dropChancePercentage.get(stack) * 100)));
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect", TextUtil.f1(this.effectDamage.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.attack", new TextArgs().putI("percent", (int) (dropChancePercentage.get(stack) * 100))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect1", new TextArgs().putF("damage", this.effectDamage.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect2"));
 
         super.appendTooltip(stack, world, tooltip, context);
     }

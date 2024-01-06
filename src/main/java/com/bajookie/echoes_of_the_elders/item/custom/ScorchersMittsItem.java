@@ -2,8 +2,9 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.ParticleUtil;
-import com.bajookie.echoes_of_the_elders.util.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -51,18 +52,6 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown,
         var pos = user.getPos();
         Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(effectRange.get(stack));
 
-        // var yaw = user.getYaw();
-        // var pitch = user.getPitch();
-        //
-        // float yawRad = (float) Math.toRadians(yaw);
-        // float pitchRad = (float) Math.toRadians(pitch);
-        //
-        // float xLook = (float) (Math.cos(yawRad) * Math.cos(pitchRad));
-        // float yLook = (float) Math.sin(pitchRad);
-        // float zLook = (float) (Math.sin(yawRad) * Math.cos(pitchRad));
-        //
-        // var lookDir = new Vector3f(xLook, yLook, zLook);
-
         var entities = world.getOtherEntities(user, box);
         var triggered = false;
 
@@ -97,8 +86,9 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown,
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.attack"));
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect", TextUtil.f1(fireModifier.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.on_hit"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect1", new TextArgs().putF("multiplier", fireModifier.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.scorchers_mitts.effect2"));
 
         super.appendTooltip(stack, world, tooltip, context);
     }

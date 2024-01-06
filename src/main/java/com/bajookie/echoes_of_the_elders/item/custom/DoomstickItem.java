@@ -2,7 +2,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.util.TextUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
@@ -17,6 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +31,7 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 250f);
 
     public DoomstickItem() {
-        super(new FabricItemSettings().maxCount(32));
+        super(new FabricItemSettings().maxCount(32).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -54,7 +56,7 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.doomstick.effect", TextUtil.f1(effectDamage.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.doomstick.effect", new TextArgs().putF("damage", effectDamage.get(stack))));
         super.appendTooltip(stack, world, tooltip, context);
     }
 
@@ -69,21 +71,21 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     }
 
     //    @Override
-//    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-//        if (!user.getItemCooldownManager().isCoolingDown(this)) {
-//            Entity entity = RayBox.getCollidedLivingEntity(user,world,10);
-//            if(entity != null){
-//                Vec3d userPos = user.getPos();
-//                Vec3d entityPos = entity.getPos();
-//                Vec3d diff = userPos.subtract(entityPos);
-//                for (double i = 1; i <= 40; i++) {
-//                    user.getWorld().addParticle(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 40)), userPos.y - (diff.y * (i / 40)) + 1, userPos.z - (diff.z * (i / 40)), 0, 0.1, 0);
-//                }
-//                user.getItemCooldownManager().set(this, 20 * 20);
-//                entity.setOnFireFor(4);
-//                entity.damage(entity.getWorld().getDamageSources().magic(), 30f);
-//            }
-//        }
-//        return super.use(world, user, hand);
-//    }
+    //    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    //        if (!user.getItemCooldownManager().isCoolingDown(this)) {
+    //            Entity entity = RayBox.getCollidedLivingEntity(user,world,10);
+    //            if(entity != null){
+    //                Vec3d userPos = user.getPos();
+    //                Vec3d entityPos = entity.getPos();
+    //                Vec3d diff = userPos.subtract(entityPos);
+    //                for (double i = 1; i <= 40; i++) {
+    //                    user.getWorld().addParticle(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 40)), userPos.y - (diff.y * (i / 40)) + 1, userPos.z - (diff.z * (i / 40)), 0, 0.1, 0);
+    //                }
+    //                user.getItemCooldownManager().set(this, 20 * 20);
+    //                entity.setOnFireFor(4);
+    //                entity.damage(entity.getWorld().getDamageSources().magic(), 30f);
+    //            }
+    //        }
+    //        return super.use(world, user, hand);
+    //    }
 }

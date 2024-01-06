@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.BlockPos;
@@ -29,7 +31,7 @@ public class PortalRingItem extends Item implements IArtifact {
     public static final int MIN_USE_TICKS = 20 * 2;
 
     public PortalRingItem() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override
@@ -127,11 +129,11 @@ public class PortalRingItem extends Item implements IArtifact {
             var worldKey = world.getRegistryKey();
 
             if (worldKey == World.NETHER) {
-                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_overworld"));
+                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_overworld"));
             } else if (worldKey == World.OVERWORLD) {
-                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_nether"));
+                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.to_nether"));
             } else {
-                tooltip.add(Text.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.other"));
+                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.portal_ring.effect.other"));
             }
         }
 
