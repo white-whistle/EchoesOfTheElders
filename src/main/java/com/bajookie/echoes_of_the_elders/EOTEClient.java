@@ -7,9 +7,12 @@ import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
+import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
+import com.bajookie.echoes_of_the_elders.world.dimension.ModSkyRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.impl.client.rendering.DimensionRenderingRegistryImpl;
 
 public class EOTEClient implements ClientModInitializer {
     @Override
@@ -21,6 +24,7 @@ public class EOTEClient implements ClientModInitializer {
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SECOND_SUN_PARTICLE, SecondSunParticle.Factory::new);
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
+        //DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
 
         CustomItemColors.init();
 
