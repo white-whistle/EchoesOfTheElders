@@ -49,6 +49,7 @@ public class ModItems {
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
     public static final Item ELDER_PRISM = registerItem("elder_prism", new ElderPrismItem());
+    public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch",new StasisStopwatch());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY, 0xb4d4e1, new FabricItemSettings()));
