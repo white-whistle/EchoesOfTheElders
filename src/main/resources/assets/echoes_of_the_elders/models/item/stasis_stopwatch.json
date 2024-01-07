@@ -1,0 +1,50 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/stasis_stopwatch"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.125
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_01"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.25
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_02"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.375
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_03"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.5
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_04"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.625
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_05"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.75
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_06"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:tok": 0.875
+      },
+      "model": "echoes_of_the_elders:item/stasis_stopwatch_07"
+    }
+  ]
+}

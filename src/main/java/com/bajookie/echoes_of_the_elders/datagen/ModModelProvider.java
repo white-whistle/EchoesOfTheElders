@@ -51,7 +51,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.WITHER_SCALES_ITEM,
                 ModItems.CHAIN_LIGHTNING_ITEM,
                 ModItems.REALITY_PICK,
-                ModItems.SCORCHERS_MITTS
+                ModItems.SCORCHERS_MITTS,
+                ModItems.STASIS_STOPWATCH
         );
     }
 

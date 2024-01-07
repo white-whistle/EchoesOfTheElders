@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/stasis_stopwatch_06"
+  }
+}
