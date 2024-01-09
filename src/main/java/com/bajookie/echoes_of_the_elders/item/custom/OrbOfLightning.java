@@ -1,9 +1,7 @@
-package com.bajookie.echoes_of_the_elders.item.entites;
+package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
-import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
-import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -57,7 +55,7 @@ public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         var args = new TextArgs().put("numLightning", Text.literal("5"));
-        
+
         tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.chain_lightning_item.effect", args));
 
         super.appendTooltip(stack, world, tooltip, context);

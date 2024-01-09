@@ -41,7 +41,7 @@ public class OldKeyItem extends Item {
 
     private ItemStack getRandomRelicDropStack() {
         Random r = new Random();
-        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact).toList();
+        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact iArtifact && iArtifact.shouldDrop()).toList();
 
         var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
 

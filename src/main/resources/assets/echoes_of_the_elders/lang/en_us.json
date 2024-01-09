@@ -64,6 +64,8 @@
   "tooltip.echoes_of_the_elders.join": "%s%s",
   "tooltip.echoes_of_the_elders.gunheels.effect": "<star/> Sneak while sprinting to <dash>bulletjump</dash>",
   "tooltip.echoes_of_the_elders.chain_lightning_item.effect": "<right_click/> Summon <lightning>lightning strikes</lightning>",
-  "tooltip.echoes_of_the_elders.elder_prism.effect": "<right_click/> transport nearby players <dimension>elsewhere</dimension>",
+  "tooltip.echoes_of_the_elders.elder_prism.effect.to_elsewhere": "<right_click/> teleport to the <dimension>elsewhere dimension</dimension>",
+  "tooltip.echoes_of_the_elders.elder_prism.effect.to_overworld": "<right_click/> teleport to the <dimension>overworld dimension</dimension>",
+  "tooltip.echoes_of_the_elders.elder_prism.effect.other": "<right_click/> teleport to the <dimension>overworld/elsewhere dimension</dimension>",
   "tooltip.echoes_of_the_elders.wither_scales_item.effect": "<passive/> Deflects incoming arrows"
 }
