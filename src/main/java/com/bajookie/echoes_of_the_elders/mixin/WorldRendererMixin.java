@@ -14,6 +14,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.*;
+import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -101,6 +102,7 @@ public abstract class WorldRendererMixin {
         }
     }
 
+    //render sky controls only the sky top but not the sides and sunrise sunset color
     @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;getDimensionEffects()Lnet/minecraft/client/render/DimensionEffects;", ordinal = 1), cancellable = true)
     public void renderSky(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean thickFog, Runnable fogCallback, CallbackInfo info) {
         if (this.client.world.getDimensionKey() == ModDimensions.DEFENSE_DIM_TYPE) {
@@ -110,18 +112,14 @@ public abstract class WorldRendererMixin {
             int m;
             float k;
             float i;
-            //Vec3d vec3d = this.world.getSkyColor(this.client.gameRenderer.getCamera().getPos(), tickDelta);
-            double skyR =237;
-            double skyG=83;
-            double skyB=17;
-            Vec3d vec3d = new Vec3d(skyR/255,skyG/255,skyB/255);
+            Vec3d vec3d = this.world.getSkyColor(this.client.gameRenderer.getCamera().getPos(), tickDelta);
             float f = (float) vec3d.x;
             float g = (float) vec3d.y;
             float h = (float) vec3d.z;
             BackgroundRenderer.applyFogColor();
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             RenderSystem.depthMask(false);
-            RenderSystem.setShaderColor(f, g, h, 1.0f);
+            RenderSystem.setShaderColor(f, g, h, 1.0f); // this colors the sky top
             ShaderProgram shaderProgram = RenderSystem.getShader();
             this.lightSkyBuffer.bind();
             this.lightSkyBuffer.draw(matrices.peek().getPositionMatrix(), projectionMatrix, shaderProgram);
@@ -129,7 +127,7 @@ public abstract class WorldRendererMixin {
             RenderSystem.enableBlend();
             float[] fs = this.world.getDimensionEffects().getFogColorOverride(this.world.getSkyAngle(tickDelta), tickDelta);
             if (fs == null){
-                fs = new float[]{207f/255f, 10f/255f, 10f/255f,130f/255f};//R,G,B,A
+                fs = new float[]{207f/255f, 10f/255f, 10f/255f,130f/255f};//R,G,B,A controls triangle color
             }
             if (fs != null) {
                 RenderSystem.setShader(GameRenderer::getPositionColorProgram);
@@ -144,13 +142,13 @@ public abstract class WorldRendererMixin {
                 float l = fs[2];
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
-                bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(j, k, l, fs[3]).next(); // this colors the sky top
+                bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(j, k, l, fs[3]).next();
                 m = 16;
                 for (int n = 0; n <= 16; ++n) {
                     o = (float) n * ((float) Math.PI * 2) / 16.0f;
                     p = MathHelper.sin(o);
                     q = MathHelper.cos(o);
-                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0], fs[1], fs[2], 0.0f).next();//looks like sky top glare
+                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0], fs[1], fs[2], 0.0f).next();//sky color
                 }
                 BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
                 matrices.pop();
@@ -215,6 +213,8 @@ public abstract class WorldRendererMixin {
         }
     }
 
+
+    //render the weather at the dimension
     @Inject(method = "renderWeather", at = @At("HEAD"),cancellable = true)
     private void renderWeather(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
         if (this.client.player.getWorld().getBiome(this.client.player.getBlockPos()).getKey().get() == ModBiomes.LOST_BIOME){
@@ -328,6 +328,4 @@ public abstract class WorldRendererMixin {
             info.cancel();
         }
     }
-
-
 }
