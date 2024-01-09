@@ -29,6 +29,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> RELIC_CONTAINER_KEY = registerKey("relic_container");
     public static final RegistryKey<ConfiguredFeature<?,?>> EXPLORERS_FRUIT_KEY = registerKey("explorer_fruit");
     public static final RegistryKey<ConfiguredFeature<?,?>> MINERS_SHROOM_KEY = registerKey("miners_shroom");
+    public static final RegistryKey<ConfiguredFeature<?,?>> NETHER_FRUIT_KEY = registerKey("nether_fruit");
     public static final RegistryKey<ConfiguredFeature<?,?>> ANCIENT_TREE_KEY = registerKey("ancient_tree");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?,?>> context){
@@ -41,6 +42,8 @@ public class ModConfiguredFeatures {
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.EXPLORER_FRUIT_BLOCK)))));
         register(context,MINERS_SHROOM_KEY,Feature.FLOWER,new RandomPatchFeatureConfig(1,1,1,PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.MINERS_FRUIT_BLOCK)))));
+        register(context,NETHER_FRUIT_KEY,Feature.FLOWER,new RandomPatchFeatureConfig(1,1,1,PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
+                new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.NETHER_FRUIT_BLOCK)))));
         register(context,ANCIENT_TREE_KEY,Feature.TREE,new TreeFeatureConfig.Builder(
                 BlockStateProvider.of(ModBlocks.ANCIENT_TREE_LOG),
                 new CherryTrunkPlacer(7,
