@@ -23,13 +23,14 @@ public class ModEffects {
         var level = instance.getAmplifier();
 
         if (entity instanceof PlayerEntity) return;
-        ServerWorld worldServer = (ServerWorld) world;
-        EntityType.LIGHTNING_BOLT.spawn(worldServer, entity.getBlockPos(), SpawnReason.TRIGGERED);
+        if (!world.isClient()){
+            ServerWorld worldServer = (ServerWorld) world;
+            EntityType.LIGHTNING_BOLT.spawn(worldServer, entity.getBlockPos(), SpawnReason.TRIGGERED);
 
-        if (level > 1) {
-            entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, secondaryDelay, level - 1));
+            if (level > 1) {
+                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, secondaryDelay, level - 1));
+            }
         }
-
 //        spawn lightning at entity
     }));
 

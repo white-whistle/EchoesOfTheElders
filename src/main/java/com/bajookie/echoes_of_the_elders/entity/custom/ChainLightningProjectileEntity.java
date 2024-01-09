@@ -69,7 +69,6 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
     private void hit(Vec3d pos) {
         if (this.getWorld() != null && !this.getWorld().isClient) {
             Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(20);
-
             var entities = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             int delay = 0;
             int amp = this.getItem().getCount()/16;
