@@ -15,16 +15,17 @@
     "ClientItemMixin",
     "ClientPlayerEntityMixin",
     "DrawContextMixin",
+    "EndermanTickMixin",
+    "EyesFeatureRendererMixin",
     "HeldItemRendererMixin",
     "IgnoreProjectileMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
+    "LivingEntityMixin",
     "ModelLoaderMixin",
     "PotionUseMixin",
     "SplashPotionUseMixin",
-    "WorldRendererMixin",
-    "EndermanTickMixin",
-    "LivingEntityMixin"
+    "WorldRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -3,9 +3,9 @@ package com.bajookie.echoes_of_the_elders.item;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.custom.*;
-import com.bajookie.echoes_of_the_elders.item.entites.OrbOfLightning;
-import com.bajookie.echoes_of_the_elders.item.entites.SecondSunItem;
-import com.bajookie.echoes_of_the_elders.item.entites.ElderPrismItem;
+import com.bajookie.echoes_of_the_elders.item.custom.OrbOfLightning;
+import com.bajookie.echoes_of_the_elders.item.custom.SecondSunItem;
+import com.bajookie.echoes_of_the_elders.item.custom.ElderPrismItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
@@ -49,7 +49,7 @@ public class ModItems {
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
     public static final Item ELDER_PRISM = registerItem("elder_prism", new ElderPrismItem());
-    public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch",new StasisStopwatch());
+    public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY, 0xb4d4e1, new FabricItemSettings()));

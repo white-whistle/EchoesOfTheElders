@@ -14,40 +14,40 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModEntities {
     public static final EntityType<FlowerDefenseEntity> FLOWER_DEFENSE_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"flower_defense_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,FlowerDefenseEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+            new Identifier(MOD_ID, "flower_defense_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, FlowerDefenseEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f, 1f)).build());
 
     public static final EntityType<SpiritEntity> SPIRIT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"spirit_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE,SpiritEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+            new Identifier(MOD_ID, "spirit_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SpiritEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     public static final EntityType<EldermanEntity> ELDERMAN_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"elderman_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER,EldermanEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+            new Identifier(MOD_ID, "elderman_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EldermanEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeChunks(8).build());
 
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"second_sun_entity"),
-            FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE,SecondSunProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
+            new Identifier(MOD_ID, "second_sun_entity"),
+            FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE, SecondSunProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     public static final EntityType<ChainLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"chain_lightning_entity"),
-            FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE,ChainLightningProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
+            new Identifier(MOD_ID, "chain_lightning_entity"),
+            FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE, ChainLightningProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<TeleportEyeProjectileEntity> TELEPORT_EYE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID,"teleport_eye_entity"),
-            FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE,TeleportEyeProjectileEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f,0.5f)).build());
+            new Identifier(MOD_ID, "teleport_eye_entity"),
+            FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE, TeleportEyeProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     /**
      * Register Mob Attributes here:
      */
-    public static void registerMobAttributes(){
-        FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY,FlowerDefenseEntity.createFlowerDefenseAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY,SpiritEntity.createSpiritEntityAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY,EldermanEntity.createEndermanAttributes());
+    public static void registerMobAttributes() {
+        FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseEntity.createFlowerDefenseAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY, SpiritEntity.createSpiritEntityAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanEntity.createEndermanAttributes());
     }
 }
