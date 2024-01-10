@@ -17,6 +17,30 @@
             "depth": 0,
             "offset": 0
           }
+        },
+        {
+          "biome": "minecraft:warm_ocean",
+          "parameters": {
+            "temperature": 0.5,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": -1,
+            "weirdness": 1,
+            "depth": 0,
+            "offset": 0
+          }
+        },
+        {
+          "biome": "minecraft:river",
+          "parameters": {
+            "temperature": 0.5,
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": -1,
+            "weirdness": 1,
+            "depth": 0,
+            "offset": 0
+          }
         }
       ]
     }

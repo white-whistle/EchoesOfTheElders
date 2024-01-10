@@ -47,7 +47,6 @@ public class ModBiomes {
         DefaultBiomeFeatures.addEmeraldOre(biomeBuilder);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.SAKURA_TREE_PLACED_KEY);
         DefaultBiomeFeatures.addDefaultMushrooms(biomeBuilder);
-        DefaultBiomeFeatures.addDefaultVegetation(biomeBuilder);
         DefaultBiomeFeatures.addJungleGrass(biomeBuilder);
         DefaultBiomeFeatures.addKelp(biomeBuilder);
 
