@@ -60,6 +60,7 @@ public class ModItemGroups {
                 entries.add(ModItems.GODSLAYER);
                 entries.add(ModItems.GUNHEELS);
                 entries.add(ModItems.ELDER_PRISM);
+                entries.add(ModItems.STAT_FRUIT_HP);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

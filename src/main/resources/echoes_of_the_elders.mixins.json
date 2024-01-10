@@ -9,7 +9,8 @@
     "ItemCooldownManagerMixin",
     "PlayerEntityMixin",
     "ServerPlayerEntityMixin",
-    "ThrownItemEntityAccessor"
+    "ThrownItemEntityAccessor",
+    "PlayerManagerMixin"
   ],
   "client": [
     "ClientItemMixin",
