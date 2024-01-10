@@ -21,7 +21,6 @@ public class ModEffects {
         final int secondaryDelay = 20 * 5;
         var world = entity.getWorld();
         var level = instance.getAmplifier();
-
         if (entity instanceof PlayerEntity) return;
         if (!world.isClient()){
             ServerWorld worldServer = (ServerWorld) world;

@@ -9,7 +9,11 @@
     "ItemCooldownManagerMixin",
     "PlayerEntityMixin",
     "ServerPlayerEntityMixin",
-    "ThrownItemEntityAccessor"
+    "ThrownItemEntityAccessor",
+    "LivingEntityMixin",
+    "PotionUseMixin",
+    "IgnoreProjectileMixin",
+    "SplashPotionUseMixin"
   ],
   "client": [
     "ClientItemMixin",
@@ -18,13 +22,9 @@
     "EndermanTickMixin",
     "EyesFeatureRendererMixin",
     "HeldItemRendererMixin",
-    "IgnoreProjectileMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
-    "LivingEntityMixin",
     "ModelLoaderMixin",
-    "PotionUseMixin",
-    "SplashPotionUseMixin",
     "WorldRendererMixin"
   ],
   "injectors": {
