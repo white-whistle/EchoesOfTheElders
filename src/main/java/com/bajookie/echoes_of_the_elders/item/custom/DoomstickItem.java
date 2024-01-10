@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -41,13 +42,16 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
             Vec3d entityPos = entity.getPos();
             Vec3d diff = userPos.subtract(entityPos);
             Random r = new Random();
-            for (double i = 1; i <= 20; i++) {
-                user.getWorld().addParticle(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10));
+            if (!user.getWorld().isClient()) {
+                ServerWorld world = (ServerWorld) user.getWorld();
+                for (double i = 1; i <= 20; i++) {
+                    world.spawnParticles(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 1,0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10),1);
+                }
+                user.getItemCooldownManager().set(this, this.getCooldown(stack));
+                entity.damage(entity.getWorld().getDamageSources().magic(), this.effectDamage.get(stack));
+                world.playSound(user.getX(),user.getY(),user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f,true);
             }
-            user.getItemCooldownManager().set(this, this.getCooldown(stack));
-
-            entity.damage(entity.getWorld().getDamageSources().magic(), this.effectDamage.get(stack));
-            entity.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
+            //user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
 
         }
 

@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.DelayedEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;

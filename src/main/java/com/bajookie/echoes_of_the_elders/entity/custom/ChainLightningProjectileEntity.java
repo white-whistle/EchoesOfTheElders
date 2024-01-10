@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.mixin.ThrownItemEntityAccessor;

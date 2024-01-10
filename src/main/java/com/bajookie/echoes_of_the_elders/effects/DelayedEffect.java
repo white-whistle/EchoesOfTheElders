@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.effects;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;

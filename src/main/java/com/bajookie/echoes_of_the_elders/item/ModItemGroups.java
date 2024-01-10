@@ -37,7 +37,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
                 entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
                 entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
-                // entries.add(ModItems.OLD_KEY);
+                entries.add(ModItems.OLD_KEY);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),

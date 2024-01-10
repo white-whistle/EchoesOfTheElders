@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -40,18 +42,21 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (!user.getItemCooldownManager().isCoolingDown(this)) {
             user.getItemCooldownManager().set(this, this.getCooldown(stack));
-            entity.getWorld().addParticle(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(), 0, 1, 0);
-            if (entity.getHealth() <= 50) {
+            user.getWorld().playSound(user, entity.getBlockPos(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.AMBIENT, 1, 1);
+            if (!user.getWorld().isClient()){
+                ServerWorld world = (ServerWorld) user.getWorld();
+                world.spawnParticles(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(),1, 0, 1, 0,1);
                 int hp = Math.round(entity.getHealth());
-                int nugget = hp % 9;
-                int ingot = (hp - nugget) / 9;
-                ItemEntity item = new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GOLD_INGOT, ingot));
-                ItemEntity itemN = new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GOLD_NUGGET, nugget));
-                entity.getWorld().spawnEntity(item);
-                entity.getWorld().spawnEntity(itemN);
-                user.getWorld().playSound(user, entity.getBlockPos(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.AMBIENT, 1, 1);
+                entity.damage(entity.getWorld().getDamageSources().magic(), 50f);
+                if (entity.isDead()) {
+                    int nugget = hp % 9;
+                    int ingot = (hp - nugget) / 9;
+                    ItemEntity item = new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GOLD_INGOT, ingot));
+                    ItemEntity itemN = new ItemEntity(entity.getWorld(), entity.getX(), entity.getY(), entity.getZ(), new ItemStack(Items.GOLD_NUGGET, nugget));
+                    world.spawnEntity(item);
+                    world.spawnEntity(itemN);
+                }
             }
-            entity.damage(entity.getWorld().getDamageSources().magic(), 50f);
         }
         return super.useOnEntity(stack, user, entity, hand);
     }
