@@ -60,6 +60,8 @@ public class ModItemGroups {
                 entries.add(ModItems.GODSLAYER);
                 entries.add(ModItems.GUNHEELS);
                 entries.add(ModItems.ELDER_PRISM);
+                entries.add(ModItems.REFRESHER_RELIC);
+                entries.add(ModItems.WTF_RELIC);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
