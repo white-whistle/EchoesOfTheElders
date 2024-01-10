@@ -22,21 +22,22 @@ public class ModDimensions {
             new Identifier(MOD_ID, "defense_dim_type"));
 
     public static void bootstrapType(Registerable<DimensionType> context) {
-        context.register(DEFENSE_DIM_TYPE, new DimensionType(
-                OptionalLong.of(20000), // fixedTime
+        DimensionType dim = new DimensionType(
+                OptionalLong.empty(), // was fixedTime 20000
                 true, // hasSkylight
                 false, // hasCeiling
                 false, // ultraWarm
                 true, // natural
                 1.0, // coordinateScale
                 true, // bedWorks
-                false, // respawnAnchorWorks
+                true, // respawnAnchorWorks
                 -64, // minY
                 256, // height
                 256, // logicalHeight
                 BlockTags.INFINIBURN_OVERWORLD, // infiniburn
                 DimensionTypes.OVERWORLD_ID, // effectsLocation
-                7.5f, // ambientLight
-                new DimensionType.MonsterSettings(false, false, UniformIntProvider.create(0, 0), 0)));
+                5.5f, // ambientLight
+                new DimensionType.MonsterSettings(false, false, UniformIntProvider.create(0, 0), 0));
+        context.register(DEFENSE_DIM_TYPE,dim);
     }
 }
