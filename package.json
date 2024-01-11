@@ -1,0 +1,10 @@
+{
+	"scripts": {
+		"gen:dim": "ts-node ./scripts/genMirrorDim.ts"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.0",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.3.3"
+	}
+}
