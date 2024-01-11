@@ -32,6 +32,7 @@ bin/
 
 run/
 src/main/generated/
+node_modules/
 
 # java
 
