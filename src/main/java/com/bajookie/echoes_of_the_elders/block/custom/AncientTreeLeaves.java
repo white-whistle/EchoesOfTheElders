@@ -16,17 +16,19 @@ public class AncientTreeLeaves extends LeavesBlock {
         super(settings);
     }
 
-    @Override
-    public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
-        super.randomDisplayTick(state, world, pos, random);
-        if (random.nextInt(10) != 0) {
-            return;
-        }
-        BlockPos blockPos = pos.down();
-        BlockState blockState = world.getBlockState(blockPos);
-        if (AncientTreeLeaves.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
-            return;
-        }
-        ParticleUtil.spawnParticle(world, pos, random, ParticleTypes.CHERRY_LEAVES);
-    }
+/*
+ *     @Override
+ *     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random) {
+ *         super.randomDisplayTick(state, world, pos, random);
+ *         if (random.nextInt(10) != 0) {
+ *             return;
+ *         }
+ *         BlockPos blockPos = pos.down();
+ *         BlockState blockState = world.getBlockState(blockPos);
+ *         if (AncientTreeLeaves.isFaceFullSquare(blockState.getCollisionShape(world, blockPos), Direction.UP)) {
+ *             return;
+ *         }
+ *         ParticleUtil.spawnParticle(world, pos, random, ParticleTypes.CHERRY_LEAVES);
+ *     }
+ */
 }

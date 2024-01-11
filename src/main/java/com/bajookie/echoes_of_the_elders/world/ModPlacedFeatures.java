@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModPlacedFeatures {
@@ -24,6 +25,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> MINERS_SHROOM_PLACED_KEY = registerKey("miners_shroom");
     public static final RegistryKey<PlacedFeature> ANCIENT_TREE_PLACED_KEY = registerKey("ancient_tree_place");
     public static final RegistryKey<PlacedFeature> SAKURA_TREE_PLACED_KEY = registerKey("sakura_tree_place");
+    public static final RegistryKey<PlacedFeature> SPIRITAL_GRASS_PLACED_KEY = registerKey("spirital_grass_place");
     public static final RegistryKey<PlacedFeature> NETHER_FRUIT_PLACED_KEY = registerKey("nether_fruit_place");
 
     public static void bootstrap(Registerable<PlacedFeature> context){
@@ -39,11 +41,13 @@ public class ModPlacedFeatures {
         register(context,MINERS_SHROOM_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MINERS_SHROOM_KEY),
                 List.of(CountPlacementModifier.of(UniformIntProvider.create(10, 15)), PlacedFeatures.BOTTOM_TO_120_RANGE, SquarePlacementModifier.of(), SurfaceThresholdFilterPlacementModifier.of(Heightmap.Type.OCEAN_FLOOR_WG, Integer.MIN_VALUE, -13), BiomePlacementModifier.of()));
         register(context,ANCIENT_TREE_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.ANCIENT_TREE_KEY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2,0.1f,2),
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(0,0.01f,1),
                         ModBlocks.ANCIENT_TREE_SAPLING));
         register(context,SAKURA_TREE_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(TreeConfiguredFeatures.CHERRY),
-                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(2,0.1f,2),
+                VegetationPlacedFeatures.treeModifiersWithWouldSurvive(PlacedFeatures.createCountExtraModifier(1,0.1f,2),
                         Blocks.CHERRY_SAPLING));
+        register(context,SPIRITAL_GRASS_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPIRITAL_GRASS_KEY),
+                List.of(NoiseThresholdCountPlacementModifier.of(-0.8, 5, 10), SquarePlacementModifier.of(), PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP, BiomePlacementModifier.of()));
     }
     public static RegistryKey<PlacedFeature> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(EOTE.MOD_ID, name));
