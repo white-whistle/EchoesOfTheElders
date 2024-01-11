@@ -59,7 +59,7 @@
   "tooltip.echoes_of_the_elders.portal_ring.effect.to_overworld": "<right_click/> teleport to the <dimension>overworld dimension</dimension>",
   "tooltip.echoes_of_the_elders.portal_ring.effect.other": "<right_click/> teleport to the <dimension>overworld/nether dimension</dimension>",
   "tooltip.echoes_of_the_elders.refresher_relic.info": "<right_click/> resets<cooldown_reduction> cooldowns</cooldown_reduction> for all items",
-  "tooltip.echoes_of_the_elders.wtf_relic.info": "<right_click/>creative item, resets<cooldown_reduction> cooldowns </cooldown_reduction> for all items no cooldown",
+  "tooltip.echoes_of_the_elders.wtf_relic.info": "<passive/> items have <unique>no cooldown</unique>",
   "tooltip.echoes_of_the_elders.potion_mirage.effect": "<passive/> Refunds used <potion>potions</potion>",
   "tooltip.echoes_of_the_elders.gale_core.effect": "<right_click/> <boost>continuously boosts</boost> elytra flight",
   "tooltip.echoes_of_the_elders.quickening_band.effect": "<right_click/> gain <positive_effect>haste {level}</positive_effect> and <positive_effect>speed {level}</positive_effect>",
