@@ -21,5 +21,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.ANCIENT_TREE_WOOD)
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).add(ModBlocks.ANCIENT_TREE_LOG)
+                .add(ModBlocks.ANCIENT_TREE_WOOD)
+                .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
+                .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        getOrCreateTagBuilder(BlockTags.LEAVES).add(ModBlocks.ANCIENT_TREE_LEAVES);
     }
 }
