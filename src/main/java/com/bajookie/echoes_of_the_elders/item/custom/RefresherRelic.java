@@ -17,11 +17,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RefresherRelic extends Item {
-    private final Type type;
-    public RefresherRelic(Type type) {
+public class RefresherRelic extends Item implements IArtifact{
+    public RefresherRelic() {
         super(new FabricItemSettings().maxCount(16));
-        this.type=type;
     }
 
     @Override
@@ -35,25 +33,14 @@ public class RefresherRelic extends Item {
                     }
                 }
             }
-            if (this.type == Type.Relic){
-                user.getItemCooldownManager().set(this,20*60*5);
-            }
         }
         return super.use(world, user, hand);
-    }
-    public enum Type{
-        Relic,
-        WTF
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         var args = new TextArgs().put("cooldown", Text.literal("600"));
-        if (this.type == Type.Relic){
-            tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.refresher_relic.info"));
-        } else {
-            tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.wtf_relic.info"));
-        }
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.refresher_relic.info"));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }
