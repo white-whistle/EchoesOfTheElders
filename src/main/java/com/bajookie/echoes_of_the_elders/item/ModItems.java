@@ -49,8 +49,8 @@ public class ModItems {
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
     public static final Item ELDER_PRISM = registerItem("elder_prism", new ElderPrismItem());
-    public static final Item REFRESHER_RELIC = registerItem("refresher_relic", new RefresherRelic(RefresherRelic.Type.Relic));
-    public static final Item WTF_RELIC = registerItem("wtf_relic", new RefresherRelic(RefresherRelic.Type.WTF));
+    public static final Item REFRESHER_RELIC = registerItem("refresher_relic", new RefresherRelic());
+    public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
 
     // spawn eggs
