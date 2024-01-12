@@ -36,7 +36,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                         Text.literal("The Great Prism"),
                         Text.literal("use the Elder Prism to enter the Lost dimension"),
                         new Identifier(MOD_ID, "textures/block/ancient_tree_log.png"),
-                        AdvancementFrame.CHALLENGE,
+                        AdvancementFrame.TASK,
                         true,
                         true,
                         false))
