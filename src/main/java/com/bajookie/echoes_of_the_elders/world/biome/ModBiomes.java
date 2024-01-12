@@ -1,16 +1,11 @@
 package com.bajookie.echoes_of_the_elders.world.biome;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
-import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
@@ -19,8 +14,6 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.VegetationConfiguredFeatures;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
@@ -45,7 +38,7 @@ public class ModBiomes {
 
     public static Biome lostBiome(Registerable<Biome> ctx) {
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
-        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.SPIRIT_ENTITY, 6, 2, 3));
+        spawnBuilder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(ModEntities.SPIRIT_ENTITY_KEY, 1, 1, 1));
         GenerationSettings.LookupBackedBuilder biomeBuilder = new GenerationSettings.LookupBackedBuilder(
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE), ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );

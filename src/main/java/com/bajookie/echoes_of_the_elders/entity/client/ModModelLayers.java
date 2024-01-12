@@ -3,11 +3,8 @@ package com.bajookie.echoes_of_the_elders.entity.client;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.EndermanEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
-import net.minecraft.client.render.entity.model.EndermanEntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.util.Identifier;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
@@ -28,7 +25,7 @@ public class ModModelLayers {
         EntityModelLayerRegistry.registerModelLayer(FLOWER_DEFENSE_LAYER, FlowerDefenseModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(SPIRIT_ENTITY_LAYER, SpiritItemEntityModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.SPIRIT_ENTITY, SpiritItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.SPIRIT_ENTITY_KEY, SpiritItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
