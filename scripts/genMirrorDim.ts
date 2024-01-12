@@ -7,9 +7,8 @@ const MC_VERSION = "1.20.2"
 const settings = {
     output: `./src/main/resources/data/${MOD_ID}/dimension/defense_dim.json`,
 
-    ignoreBiomes: ["echoes_of_the_elders:lost_biome","minecraft:river","minecraft:cold_ocean","minecraft:deep_cold_ocean",
-        "minecraft:deep_lukewarm_ocean","minecraft:deep_ocean","minecraft:lukewarm_ocean",
-        "minecraft:ocean","minecraft:warm_ocean"],
+    ignoreBiomes: ["echoes_of_the_elders:lost_biome","echoes_of_the_elders:lost_river_biome","echoes_of_the_elders:lost_ocean_biome","echoes_of_the_elders:deep_lost_ocean_biome","echoes_of_the_elders:lost_beach_biome"
+        ],
 
     mapPresetBiomeToDimBiome(presetBiome: string) {
         if (settings.ignoreBiomes.includes((presetBiome))) return presetBiome;
@@ -17,12 +16,23 @@ const settings = {
         switch (presetBiome) {
             // replace
             case 'minecraft:deep_frozen_ocean':
-                return 'minecraft:deep_ocean';
+            case "minecraft:deep_ocean":
+            case "minecraft:deep_lukewarm_ocean":
+            case "minecraft:deep_cold_ocean":
+                return `${MOD_ID}:deep_lost_ocean_biome`;
             case 'minecraft:frozen_ocean':
-                return 'minecraft:ocean';
+            case "minecraft:lukewarm_ocean":
+            case "minecraft:warm_ocean":
+            case "minecraft:ocean":
+            case "minecraft:cold_ocean":
+                return `${MOD_ID}:lost_ocean_biome`;
 
             case 'minecraft:frozen_river':
-                return 'minecraft:river'
+            case 'minecraft:river':
+                return `${MOD_ID}:lost_river_biome`
+            case 'minecraft:beach':
+            case 'minecraft:snowy_beach':
+                return `${MOD_ID}:lost_beach_biome`
 
             // default
             default:

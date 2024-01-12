@@ -39,6 +39,7 @@ public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, 
             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
             if (!world.isClient) {
                 ChainLightningProjectileEntity chainLightningProjectileEntity = new ChainLightningProjectileEntity(world, user);
+                chainLightningProjectileEntity.setOwner(user);
                 chainLightningProjectileEntity.setItem(itemStack);
                 chainLightningProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
                 world.spawnEntity(chainLightningProjectileEntity);

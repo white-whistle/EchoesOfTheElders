@@ -219,7 +219,7 @@ public abstract class WorldRendererMixin {
     //render the weather at the dimension
     @Inject(method = "renderWeather", at = @At("HEAD"),cancellable = true)
     private void renderWeather(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
-        if (this.client.player.getWorld().getBiome(this.client.player.getBlockPos()).getKey().get() == ModBiomes.LOST_BIOME){
+        if (this.client.player.getWorld().getDimensionKey() == ModDimensions.DEFENSE_DIM_TYPE){
             float f = this.client.world.getRainGradient(tickDelta);
             if (f <= 0.0f) {
                 return;

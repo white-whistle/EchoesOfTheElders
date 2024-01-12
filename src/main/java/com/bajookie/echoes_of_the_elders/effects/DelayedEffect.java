@@ -6,6 +6,8 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import org.apache.logging.log4j.util.TriConsumer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 

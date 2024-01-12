@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
+import com.bajookie.echoes_of_the_elders.datagen.ModAdvancementProvider;
 import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.datagen.ModWorldGenerator;
 import com.bajookie.echoes_of_the_elders.util.*;
@@ -23,6 +24,7 @@ public class EOTEDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModModelProvider::new);
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModWorldGenerator::new);
+        pack.addProvider(ModAdvancementProvider::new);
     }
 
 	@Override

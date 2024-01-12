@@ -3,7 +3,9 @@ package com.bajookie.echoes_of_the_elders.world;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.world.tree.trunks.AncientTreeTrunkPlacer;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerbedBlock;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -12,6 +14,7 @@ import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
@@ -22,6 +25,7 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.CherryFoliagePlacer;
 import net.minecraft.world.gen.foliage.JungleFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.CherryTrunkPlacer;
 
 import java.util.List;
@@ -35,6 +39,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> NETHER_FRUIT_KEY = registerKey("nether_fruit");
     public static final RegistryKey<ConfiguredFeature<?,?>> ANCIENT_TREE_KEY = registerKey("ancient_tree");
     public static final RegistryKey<ConfiguredFeature<?,?>> SPIRITAL_GRASS_KEY = registerKey("spirital_grass");
+    public static final RegistryKey<ConfiguredFeature<?,?>> LESS_CHERRY_KEY = registerKey("less_cherry");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest deepslateReplaceAble = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -55,6 +60,7 @@ public class ModConfiguredFeatures {
                 new JungleFoliagePlacer(ConstantIntProvider.create(3),ConstantIntProvider.create(2),1),
                 new TwoLayersFeatureSize(1,0,2)).build());
         register(context,SPIRITAL_GRASS_KEY,Feature.RANDOM_PATCH,createRandomPatchFeatureConfig(BlockStateProvider.of(ModBlocks.SPIRITAL_GRASS), 32));
+        register(context,LESS_CHERRY_KEY,Feature.FLOWER,createRandomCherryPatchFeatureConfig(18));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {
@@ -67,5 +73,14 @@ public class ModConfiguredFeatures {
     }
     private static RandomPatchFeatureConfig createRandomPatchFeatureConfig(BlockStateProvider block, int tries) {
         return ConfiguredFeatures.createRandomPatchFeatureConfig(tries, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(block)));
+    }
+    private static RandomPatchFeatureConfig createRandomCherryPatchFeatureConfig(int tries) {
+        DataPool.Builder<BlockState> builder = DataPool.builder();
+        for (int i = 1; i <= 4; ++i) {
+            for (Direction direction : Direction.Type.HORIZONTAL) {
+                builder.add((BlockState)((BlockState)Blocks.PINK_PETALS.getDefaultState().with(FlowerbedBlock.FLOWER_AMOUNT, i)).with(FlowerbedBlock.FACING, direction), 1);
+            }
+        }
+        return new RandomPatchFeatureConfig(tries, 6, 2, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(new WeightedBlockStateProvider(builder))));
     }
 }
