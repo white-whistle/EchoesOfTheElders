@@ -119,16 +119,18 @@ public abstract class WorldRendererMixin {
             BackgroundRenderer.applyFogColor();
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             RenderSystem.depthMask(false);
-            RenderSystem.setShaderColor(f, g, h, 1.0f); // this colors the sky top
+            RenderSystem.setShaderColor(79f/255, 67f/255, 80f/255, 0.5f); // this colors the sky top
             ShaderProgram shaderProgram = RenderSystem.getShader();
             this.lightSkyBuffer.bind();
             this.lightSkyBuffer.draw(matrices.peek().getPositionMatrix(), projectionMatrix, shaderProgram);
             VertexBuffer.unbind();
             RenderSystem.enableBlend();
             float[] fs = this.world.getDimensionEffects().getFogColorOverride(this.world.getSkyAngle(tickDelta), tickDelta);
-            if (fs == null){
-                fs = new float[]{207f/255f, 10f/255f, 10f/255f,130f/255f};//R,G,B,A controls triangle color
+            /*
+                        if (fs == null){
+                fs = new float[]{34f/255f, 0f/255f, 128f/255f,130f/255f};//R,G,B,A controls triangle color
             }
+             */
             if (fs != null) {
                 RenderSystem.setShader(GameRenderer::getPositionColorProgram);
                 RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
