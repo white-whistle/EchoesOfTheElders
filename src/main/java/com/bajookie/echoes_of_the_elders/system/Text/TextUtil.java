@@ -1,7 +1,9 @@
 package com.bajookie.echoes_of_the_elders.system.Text;
 
+import com.bajookie.echoes_of_the_elders.client.tooltip.TooltipComponentSlot;
 import com.bajookie.echoes_of_the_elders.system.Text.components.ModTextComponent;
 import com.bajookie.echoes_of_the_elders.system.Text.components.ModTranslatableTextComponent;
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
@@ -31,6 +33,10 @@ public class TextUtil {
 
     public static MutableText plain(String content, TextArgs args) {
         return MutableText.of(new ModTextComponent(content, args));
+    }
+
+    public static TooltipComponentSlot component(TooltipData data) {
+        return new TooltipComponentSlot(data);
     }
 
 }

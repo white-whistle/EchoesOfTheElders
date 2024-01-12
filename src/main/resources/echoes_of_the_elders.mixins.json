@@ -6,16 +6,15 @@
     "AbstractBlockMixin",
     "DamageTypesMixin",
     "EntityMixin",
-    "ItemCooldownManagerMixin",
-    "PlayerEntityMixin",
-    "ServerPlayerEntityMixin",
-    "ThrownItemEntityAccessor",
-    "PlayerManagerMixin",
-    "ThrownItemEntityAccessor",
-    "LivingEntityMixin",
-    "PotionUseMixin",
     "IgnoreProjectileMixin",
-    "SplashPotionUseMixin"
+    "ItemCooldownManagerMixin",
+    "LivingEntityMixin",
+    "PlayerEntityMixin",
+    "PlayerManagerMixin",
+    "PotionUseMixin",
+    "ServerPlayerEntityMixin",
+    "SplashPotionUseMixin",
+    "ThrownItemEntityAccessor"
   ],
   "client": [
     "ClientItemMixin",
@@ -27,6 +26,7 @@
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",
+    "TooltipComponentMixin",
     "WorldRendererMixin"
   ],
   "injectors": {
