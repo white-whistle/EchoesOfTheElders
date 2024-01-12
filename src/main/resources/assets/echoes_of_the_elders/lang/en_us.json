@@ -65,6 +65,7 @@
   "tooltip.echoes_of_the_elders.quickening_band.effect": "<right_click/> gain <positive_effect>haste {level}</positive_effect> and <positive_effect>speed {level}</positive_effect>",
   "tooltip.echoes_of_the_elders.reality_pick.effect": "<left_click/> Can break <unique>everything</unique>!",
   "tooltip.echoes_of_the_elders.godslayer.effect": "<left_click/> Can damage <unique>invincible</unique> beings",
+  "tooltip.echoes_of_the_elders.old_key_item.effect": "<right_click/> can open:",
   "tooltip.echoes_of_the_elders.join": "%s%s",
   "tooltip.echoes_of_the_elders.gunheels.effect": "<star/> Sneak while sprinting to <dash>bulletjump</dash>",
   "tooltip.echoes_of_the_elders.chain_lightning_item.effect": "<right_click/> Summon <lightning>lightning strikes</lightning>",

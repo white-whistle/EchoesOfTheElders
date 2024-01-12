@@ -25,11 +25,11 @@ public class ModItemGroups {
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
-                entries.add(ModBlocks.RELIC_CONTAINER_BLOCK);
+                entries.add(ModBlocks.ARTIFACT_VAULT);
                 entries.add(ModBlocks.SUN_RUNE_BLOCK);
                 entries.add(ModBlocks.CHISELED_MOSSY_STONE);
                 entries.add(ModBlocks.ELDER_LILY_FLOWER);
-                //trees
+                // trees
                 entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
                 entries.add(ModBlocks.ANCIENT_TREE_LOG);
                 entries.add(ModBlocks.ANCIENT_TREE_WOOD);
@@ -60,7 +60,7 @@ public class ModItemGroups {
                 entries.add(ModItems.GODSLAYER);
                 entries.add(ModItems.GUNHEELS);
                 entries.add(ModItems.ELDER_PRISM);
-                //entries.add(ModItems.STAT_FRUIT_HP);
+                // entries.add(ModItems.STAT_FRUIT_HP);
                 entries.add(ModItems.REFRESHER_RELIC);
                 entries.add(ModItems.WTF_RELIC);
                 // disabled until we think this one out
