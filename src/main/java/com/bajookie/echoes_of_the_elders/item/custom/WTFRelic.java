@@ -1,7 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
-import com.bajookie.echoes_of_the_elders.mixin.ItemCooldownManagerAccessor;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -27,11 +26,7 @@ public class WTFRelic extends Item implements IArtifact, ICooldownReduction {
         var stack = user.getStackInHand(hand);
         var cdm = user.getItemCooldownManager();
 
-        var entries = ((ItemCooldownManagerAccessor) cdm).getEntries();
-
-        for (var key : entries.keySet()) {
-            cdm.remove(key);
-        }
+        TimeTokenItem.clearCooldowns(cdm);
 
         return TypedActionResult.success(stack);
     }
