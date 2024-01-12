@@ -10,6 +10,7 @@ import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -47,7 +48,7 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
                 ServerWorld world = (ServerWorld) user.getWorld();
                 world.spawnParticles(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(),1, 0, 1, 0,1);
                 int hp = Math.round(entity.getHealth());
-                entity.damage(entity.getWorld().getDamageSources().magic(), 50f);
+                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC,user), 50f);
                 if (entity.isDead()) {
                     int nugget = hp % 9;
                     int ingot = (hp - nugget) / 9;

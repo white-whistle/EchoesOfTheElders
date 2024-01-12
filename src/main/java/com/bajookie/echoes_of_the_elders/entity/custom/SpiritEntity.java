@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.entity.variant.SpiritVariant;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;

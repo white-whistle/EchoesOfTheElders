@@ -75,6 +75,9 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
             int amp = this.getItem().getCount()/16;
             for (LivingEntity entity : entities) {
                 if(entity instanceof PlayerEntity) continue;
+                if (this.getOwner() instanceof LivingEntity living){
+                    entity.setAttacker(living);
+                }
                 entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT,delay,amp));
                 delay +=5;
             }

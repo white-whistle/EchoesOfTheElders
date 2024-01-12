@@ -27,6 +27,7 @@ public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> SAKURA_TREE_PLACED_KEY = registerKey("sakura_tree_place");
     public static final RegistryKey<PlacedFeature> SPIRITAL_GRASS_PLACED_KEY = registerKey("spirital_grass_place");
     public static final RegistryKey<PlacedFeature> NETHER_FRUIT_PLACED_KEY = registerKey("nether_fruit_place");
+    public static final RegistryKey<PlacedFeature> LESS_CHERRY_FLOWER_PLACED_KEY = registerKey("less_cherry_place");
 
     public static void bootstrap(Registerable<PlacedFeature> context){
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
@@ -48,6 +49,8 @@ public class ModPlacedFeatures {
                         Blocks.CHERRY_SAPLING));
         register(context,SPIRITAL_GRASS_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.SPIRITAL_GRASS_KEY),
                 List.of(NoiseThresholdCountPlacementModifier.of(-0.8, 5, 10), SquarePlacementModifier.of(), PlacedFeatures.WORLD_SURFACE_WG_HEIGHTMAP, BiomePlacementModifier.of()));
+        register(context,LESS_CHERRY_FLOWER_PLACED_KEY,configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.LESS_CHERRY_KEY),
+                List.of(NoiseThresholdCountPlacementModifier.of(-0.8, 5, 10), SquarePlacementModifier.of(), PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP, BiomePlacementModifier.of()));
     }
     public static RegistryKey<PlacedFeature> registerKey(String name) {
         return RegistryKey.of(RegistryKeys.PLACED_FEATURE, new Identifier(EOTE.MOD_ID, name));
