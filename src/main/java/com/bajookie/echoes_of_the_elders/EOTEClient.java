@@ -44,18 +44,6 @@ public class EOTEClient implements ClientModInitializer {
         });
 
         // DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
-        //DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
-            if (view == null || pos == null) {
-                return GrassColors.getDefaultColor();
-            }
-            return BiomeColors.getGrassColor(view, pos);
-        }, ModBlocks.SPIRITAL_GRASS);
-        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-            BlockState blockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
-            return MinecraftClient.getInstance().getBlockColors().getColor(blockState, null, null, tintIndex);
-        }, ModBlocks.SPIRITAL_GRASS);
-
 
 
         CustomItemColors.init();

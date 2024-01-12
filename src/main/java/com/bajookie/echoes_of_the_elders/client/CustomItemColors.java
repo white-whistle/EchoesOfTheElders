@@ -1,12 +1,17 @@
 package com.bajookie.echoes_of_the_elders.client;
 
+import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.util.Color;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.client.color.world.GrassColors;
+import net.minecraft.item.BlockItem;
 
 @Environment(EnvType.CLIENT)
 public class CustomItemColors {
@@ -32,6 +37,16 @@ public class CustomItemColors {
     }
 
     public static void init() {
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
+            if (view == null || pos == null) {
+                return GrassColors.getDefaultColor();
+            }
+            return BiomeColors.getGrassColor(view, pos);
+        }, ModBlocks.SPIRITAL_GRASS);
+        ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+            BlockState blockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
+            return MinecraftClient.getInstance().getBlockColors().getColor(blockState, null, null, tintIndex);
+        }, ModBlocks.SPIRITAL_GRASS);
         ColorProviderRegistry.ITEM.register((stack, index) -> {
             if (index == 0) return 0xFFFFFF;
 

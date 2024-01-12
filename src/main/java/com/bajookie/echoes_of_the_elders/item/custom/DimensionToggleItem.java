@@ -60,10 +60,6 @@ public abstract class DimensionToggleItem extends Item {
         if (!(user instanceof PlayerEntity)) {
             return;
         }
-
-        var pos = user.getPos();
-        var random = user.getRandom();
-        world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f, false);
         
         if (!world.isClient()) {
             ServerWorld serverWorld = (ServerWorld) world;
@@ -89,11 +85,13 @@ public abstract class DimensionToggleItem extends Item {
                 if (playerEntity.isRemoved()) {
                     return;
                 }
-
                 double d = DimensionType.getCoordinateScaleFactor(playerEntity.getWorld().getDimension(), destinationWorld.getDimension());
                 WorldBorder worldBorder = destinationWorld.getWorldBorder();
                 BlockPos destinationPos = worldBorder.clamp(playerEntity.getX() * d, playerEntity.getY(), playerEntity.getZ() * d);
                 playerEntity.teleport(destinationWorld, destinationPos.getX(), destinationPos.getY(), destinationPos.getZ(), Set.of(), playerEntity.getYaw(), playerEntity.getPitch());
+                var pos = user.getPos();
+                var random = user.getRandom();
+                world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f, false);
 
             }
 

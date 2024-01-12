@@ -139,9 +139,9 @@ public abstract class WorldRendererMixin {
                 i = MathHelper.sin(this.world.getSkyAngleRadians(tickDelta)) < 0.0f ? 180.0f : 0.0f;
                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(i));
                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0f));
-                float j = fs[0];
-                k = fs[1];
-                float l = fs[2];
+                float j = fs[0] *0.8f;
+                k = fs[1]*0.73f;
+                float l = fs[2]*0.63f;
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
                 bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(j, k, l, fs[3]).next();
@@ -150,7 +150,7 @@ public abstract class WorldRendererMixin {
                     o = (float) n * ((float) Math.PI * 2) / 16.0f;
                     p = MathHelper.sin(o);
                     q = MathHelper.cos(o);
-                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0], fs[1], fs[2], 0.0f).next();//sky color
+                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0]*0.8f, fs[1]*0.73f, fs[2]*0.63f, 0.0f).next();//sky color
                 }
                 BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
                 matrices.pop();
