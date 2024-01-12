@@ -6,6 +6,7 @@ import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.player.ItemCooldownManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -30,20 +31,20 @@ public class TimeTokenItem extends Item implements IArtifact, IHasCooldown {
         var cdm = user.getItemCooldownManager();
 
         if (!cdm.isCoolingDown(this)) {
-            var entries = ((ItemCooldownManagerAccessor) cdm).getEntries();
+            clearCooldowns(cdm);
 
-            if (entries != null) {
-                entries.forEach((key, value) -> cdm.remove(key));
-
-                cdm.set(this, this.getCooldown(stack));
-
-                return TypedActionResult.success(stack);
-
-            }
-
+            cdm.set(this, this.getCooldown(stack));
         }
 
         return TypedActionResult.pass(stack);
+    }
+
+    public static void clearCooldowns(ItemCooldownManager itemCooldownManager) {
+        var entries = ((ItemCooldownManagerAccessor) itemCooldownManager).getEntries();
+
+        for (var key : entries.keySet()) {
+            itemCooldownManager.remove(key);
+        }
     }
 
     @Override
