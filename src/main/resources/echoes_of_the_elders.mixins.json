@@ -6,17 +6,16 @@
     "AbstractBlockMixin",
     "DamageTypesMixin",
     "EntityMixin",
+    "ItemCooldownManagerAccessor",
     "ItemCooldownManagerMixin",
+    "LivingEntityMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
-    "ServerPlayerEntityMixin",
-    "ThrownItemEntityAccessor",
-    "TrunkPlacerTypeInvoker",
-    "LivingEntityMixin",
     "PotionUseMixin",
     "ServerPlayerEntityMixin",
     "SplashPotionUseMixin",
-    "ThrownItemEntityAccessor"
+    "ThrownItemEntityAccessor",
+    "TrunkPlacerTypeInvoker"
   ],
   "client": [
     "ClientItemMixin",

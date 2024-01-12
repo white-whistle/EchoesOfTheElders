@@ -52,5 +52,21 @@ public class CustomItemColors {
 
             return rainbow().getRGB();
         }, ModItems.REALITY_PICK);
+
+        ColorProviderRegistry.ITEM.register((stack, index) -> {
+            if (index == 0) return 0xFFFFFF;
+
+            if (stack.getCount() == stack.getMaxCount()) {
+                return 0x23D370;
+            }
+
+            return 0x6DD307;
+        }, ModItems.TIME_TOKEN);
+
+        ColorProviderRegistry.ITEM.register((stack, index) -> {
+            if (index == 0) return 0xFFFFFF;
+            
+            return rainbow().getRGB();
+        }, ModItems.WTF_RELIC);
     }
 }

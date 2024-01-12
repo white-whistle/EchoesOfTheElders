@@ -28,7 +28,14 @@ public class ClientItemMixin {
 
     @Inject(method = "appendTooltip", at = @At("TAIL"))
     public void appendGenericTooltips(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
+        var mc = MinecraftClient.getInstance();
+        if (mc.world == null) return;
+
+        var player = mc.player;
+        if (player == null) return;
+
         var item = stack.getItem();
+
         AtomicBoolean padded = new AtomicBoolean(false);
         Runnable tryPad = () -> {
             if (!padded.get()) {
@@ -59,19 +66,21 @@ public class ClientItemMixin {
         }
 
         if (item instanceof IHasCooldown iHasCooldown) {
-            var mc = MinecraftClient.getInstance();
-            if (mc.world != null) {
-                var player = mc.player;
-                var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().putF("seconds", cd, Formatting.BLUE));
-                tryPad.run();
+            var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
+            var cdm = player.getItemCooldownManager();
 
-                if (iHasCooldown.canReduceCooldown()) {
-                    tooltip.add(ModText.COOLDOWN.apply(msg));
-                } else {
-                    tooltip.add(ModText.COOLDOWN.apply(msg));
-                }
+            tryPad.run();
+
+            if (cdm.isCoolingDown(item)) {
+                var remainingTime = cdm.getCooldownProgress(item, mc.getTickDelta()) * cd;
+
+                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().putF("seconds", cd, Formatting.BLUE).putF("remaining", remainingTime));
+                tooltip.add(msg);
+            } else {
+                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().putF("seconds", cd, Formatting.BLUE));
+                tooltip.add(msg);
             }
+
         }
     }
 }

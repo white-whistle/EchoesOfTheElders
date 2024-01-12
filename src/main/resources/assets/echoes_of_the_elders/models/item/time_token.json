@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/time_token",
+    "layer1": "echoes_of_the_elders:item/time_token_overlay"
+  }
+}

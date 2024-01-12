@@ -44,6 +44,12 @@ public class ModText {
     public static final Function<MutableText, Text> PAD = registerIconTag("pad");
     public static final Function<MutableText, Text> RAINBOW = registerTag("rainbow", ModText::rainbowText);
 
+    static {
+        for (Formatting value : Formatting.values()) {
+            registeredTags.put(value.name(), t -> t.styled(s -> s.withColor(value)));
+        }
+    }
+
     public static MutableText join(Text t1, Text t2) {
         return Text.translatable("tooltip.echoes_of_the_elders.join", t1, t2);
     }
@@ -71,7 +77,6 @@ public class ModText {
         registeredTags.put(name, fn);
 
         return fn;
-
     }
 
     public static Text rainbowText(MutableText text) {

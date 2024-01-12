@@ -29,7 +29,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.MINERS_FRUIT_BLOCK, ModBlocks.POTTED_MINERS_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.ELDER_LILY_FLOWER, ModBlocks.POTTED_ELDER_LILY_FLOWER, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerTintableCross(ModBlocks.SPIRITAL_GRASS, BlockStateModelGenerator.TintType.TINTED);
-        //blockStateModelGenerator.registerPlantPart();
+        // blockStateModelGenerator.registerPlantPart();
         blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARTIFACT_VAULT);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SUN_RUNE_BLOCK);
@@ -53,7 +53,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.CHAIN_LIGHTNING_ITEM,
                 ModItems.REALITY_PICK,
                 ModItems.SCORCHERS_MITTS,
-                ModItems.STASIS_STOPWATCH
+                ModItems.STASIS_STOPWATCH,
+                ModItems.TIME_TOKEN,
+                ModItems.WTF_RELIC
         );
     }
 
