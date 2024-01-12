@@ -14,6 +14,7 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
@@ -49,6 +50,7 @@ public class ModBiomes {
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.ANCIENT_TREE_PLACED_KEY);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.SPIRITAL_GRASS_PLACED_KEY);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ModPlacedFeatures.EXPLORER_FRUIT_PLACED_KEY);
+        biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.FLOWER_CHERRY);
 
         //Generation steps must follow  GenerationStep!!!!
 

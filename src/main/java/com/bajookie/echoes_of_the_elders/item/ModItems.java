@@ -44,7 +44,7 @@ public class ModItems {
     public static final WithersBulwark WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WithersBulwark());
     public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(16)));
     public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new OrbOfLightning());
-    public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
+    //public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
