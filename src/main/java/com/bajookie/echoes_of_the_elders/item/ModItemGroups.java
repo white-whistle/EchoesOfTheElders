@@ -39,6 +39,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
                 entries.add(ModItems.OLD_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
+                entries.add(ModBlocks.SPIRIT_PETALS);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),

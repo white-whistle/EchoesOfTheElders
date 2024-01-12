@@ -25,6 +25,7 @@ public class ModBlocks {
     public static final Block NETHER_FRUIT_BLOCK = registerBlock("nether_fruit_block", new NetherFruitBlock(), new FabricItemSettings().food(ModFoodComponents.NETHER_FRUIT));
     public static final Block POTTED_EXPLORER_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_explorers_fruit_block"), new FlowerPotBlock(EXPLORER_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
     public static final Block POTTED_MINERS_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_miners_fruit_block"), new FlowerPotBlock(MINERS_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
+    public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
 
     //Decorative blocks
@@ -43,6 +44,7 @@ public class ModBlocks {
     public static final Block ELDER_LILY_FLOWER = registerBlock("elder_lily_flower", new FlowerBlock(StatusEffects.GLOWING, 1, FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision().breakInstantly()));
     public static final Block POTTED_ELDER_LILY_FLOWER = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_elder_lily_flower"), new FlowerPotBlock(ELDER_LILY_FLOWER, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
     public static final Block SPIRITAL_GRASS = registerBlock("spirital_grass",new SpiritalGrass(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY)));
+    //public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
@@ -71,5 +73,6 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(ELDER_LILY_FLOWER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(POTTED_ELDER_LILY_FLOWER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS,RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS,RenderLayer.getCutout());
     }
 }
