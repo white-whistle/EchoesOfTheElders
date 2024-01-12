@@ -49,9 +49,9 @@ public class ModConfiguredFeatures {
         register(context, NETHER_FRUIT_KEY, Feature.FLOWER, new RandomPatchFeatureConfig(1, 1, 1, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK,
                 new SimpleBlockFeatureConfig(BlockStateProvider.of(ModBlocks.NETHER_FRUIT_BLOCK)))));
         register(context, ANCIENT_TREE_KEY, Feature.TREE, new TreeFeatureConfig.Builder(
-                BlockStateProvider.of(ModBlocks.ANCIENT_TREE_LOG),
+                BlockStateProvider.of(Blocks.CHERRY_LOG),
                 new AncientTreeTrunkPlacer(20,5,6),
-                BlockStateProvider.of(ModBlocks.ANCIENT_TREE_LEAVES),
+                BlockStateProvider.of(Blocks.CHERRY_LEAVES),
                 new JungleFoliagePlacer(ConstantIntProvider.create(3),ConstantIntProvider.create(2),1),
                 new TwoLayersFeatureSize(1,0,2)).build());
         register(context,SPIRITAL_GRASS_KEY,Feature.RANDOM_PATCH,createRandomPatchFeatureConfig(BlockStateProvider.of(ModBlocks.SPIRITAL_GRASS), 32));
