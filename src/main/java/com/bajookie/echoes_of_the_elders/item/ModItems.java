@@ -55,7 +55,7 @@ public class ModItems {
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp",new StatFruit(StatFruit.Type.HP));
 
     // spawn eggs
-    public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY, 0xb4d4e1, new FabricItemSettings()));
+    public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
     public static final Item ELDERMAN_SPAWN_EGG = registerItem("elderman_spawn_egg", new SpawnEggItem(ModEntities.ELDERMAN_ENTITY, 0x341061, 0x3c3940, new FabricItemSettings()));
 
 

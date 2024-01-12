@@ -1,14 +1,19 @@
 package com.bajookie.echoes_of_the_elders.entity;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.*;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
@@ -18,10 +23,8 @@ public class ModEntities {
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, FlowerDefenseEntity::new)
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
 
-    public static final EntityType<SpiritEntity> SPIRIT_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID, "spirit_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, SpiritEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<SpiritEntity> SPIRIT_ENTITY_KEY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "spirit_entity"), SpiritEntity.createEntityType(List.of(Items.CAKE,Items.BREAD,ModItems.OLD_KEY)));
 
     public static final EntityType<EldermanEntity> ELDERMAN_ENTITY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "elderman_entity"),
@@ -47,7 +50,7 @@ public class ModEntities {
      */
     public static void registerMobAttributes() {
         FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseEntity.createFlowerDefenseAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY, SpiritEntity.createSpiritEntityAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY_KEY, SpiritEntity.createSpiritEntityAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanEntity.createEndermanAttributes());
     }
 }
