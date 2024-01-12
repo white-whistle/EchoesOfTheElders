@@ -1,7 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.mixin.ItemCooldownManagerAccessor;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
@@ -10,16 +11,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WTFRelic extends Item implements IArtifact, ICooldownReduction {
-    public WTFRelic() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+public class TimeTokenItem extends Item implements IArtifact, IHasCooldown {
+    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(1200 * 20, 60 * 20);
+
+    public TimeTokenItem() {
+        super(new FabricItemSettings().maxCount(16));
     }
 
     @Override
@@ -27,13 +29,21 @@ public class WTFRelic extends Item implements IArtifact, ICooldownReduction {
         var stack = user.getStackInHand(hand);
         var cdm = user.getItemCooldownManager();
 
-        var entries = ((ItemCooldownManagerAccessor) cdm).getEntries();
+        if (!cdm.isCoolingDown(this)) {
+            var entries = ((ItemCooldownManagerAccessor) cdm).getEntries();
 
-        for (var key : entries.keySet()) {
-            cdm.remove(key);
+            if (entries != null) {
+                entries.forEach((key, value) -> cdm.remove(key));
+
+                cdm.set(this, this.getCooldown(stack));
+
+                return TypedActionResult.success(stack);
+
+            }
+
         }
 
-        return TypedActionResult.success(stack);
+        return TypedActionResult.pass(stack);
     }
 
     @Override
@@ -44,17 +54,7 @@ public class WTFRelic extends Item implements IArtifact, ICooldownReduction {
     }
 
     @Override
-    public boolean shouldDrop() {
-        return false;
-    }
-
-    @Override
-    public float getCooldownReductionPercentage(ItemStack stack) {
-        return 1;
-    }
-
-    @Override
-    public String cooldownInstanceId(ItemStack stack) {
-        return "WTF?";
+    public int getCooldown(ItemStack itemStack) {
+        return this.cooldown.get(itemStack);
     }
 }
