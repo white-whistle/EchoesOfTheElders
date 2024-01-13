@@ -40,6 +40,7 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?,?>> ANCIENT_TREE_KEY = registerKey("ancient_tree");
     public static final RegistryKey<ConfiguredFeature<?,?>> SPIRITAL_GRASS_KEY = registerKey("spirital_grass");
     public static final RegistryKey<ConfiguredFeature<?,?>> LESS_CHERRY_KEY = registerKey("less_cherry");
+    public static final RegistryKey<ConfiguredFeature<?,?>> BIG_SAND_KEY = registerKey("big_sand");
 
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest deepslateReplaceAble = new TagMatchRuleTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);

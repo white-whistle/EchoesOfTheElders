@@ -2,6 +2,9 @@ package com.bajookie.echoes_of_the_elders.world.biome;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
+import net.fabricmc.fabric.api.biome.v1.BiomeModification;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.mixin.biome.NoiseConfigMixin;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
@@ -16,7 +19,10 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
+import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
+import net.minecraft.world.gen.noise.NoiseConfig;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.VanillaSurfaceRules;
 
 import java.util.ArrayList;
@@ -98,7 +104,6 @@ public class ModBiomes {
         globalOverworldGeneration(biomeBuilder);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.KELP_WARM);
-
         //Generation steps must follow  GenerationStep!!!!
 
         return new Biome.Builder()
