@@ -33,21 +33,15 @@ public final class ModSurfaceRulesGenerator{
         json.add("default_block", configuredDefaultBlock());
         json.add("default_fluid", configuredDefaultFluid());
         json.add("noise", configuredNoise());
-        boolean readWorked = readNoiseRouterFromTemplate(json);
+        boolean readWorked = readNoiseRouterFromTemplate(json,element);
         if (readWorked) {
-            JsonObject surfaceRuleJson = new JsonObject();
-            //surfaceRuleJson.addProperty("type", "minecraft:sequence");
-            //surfaceRuleJson.add("sequence", element.getAsJsonObject().get("sequence").getAsJsonArray());
-            // json.add("surface_rule", surfaceRuleJson);
-            JsonArray arr = element.getAsJsonObject().get("sequence").getAsJsonArray();
-            json.get("surface_rule").getAsJsonObject().get("sequence").getAsJsonArray().addAll(arr);
             if (writeFile(json)) {
-                EOTE.LOGGER.info("Surface Rules were Created Successfully!");
+                EOTE.LOGGER.info("Surface Rules were Created Successfully! ✔");
             } else {
-                EOTE.LOGGER.info("Surface Rules were Failed to be Written!");
+                EOTE.LOGGER.info("Surface Rules were Failed to be Written! ❌");
             }
         } else {
-            EOTE.LOGGER.info("Surface Rules data from Template was Failed!!!");
+            EOTE.LOGGER.info("Surface Rules data from Template was Failed!!! ❌");
         }
 
     }
@@ -76,13 +70,17 @@ public final class ModSurfaceRulesGenerator{
         return noiseJson;
     }
 
-    public static boolean readNoiseRouterFromTemplate(JsonObject json) {
+    public static boolean readNoiseRouterFromTemplate(JsonObject json,JsonElement element) {
         try (FileReader reader = new FileReader(getProjectDirectory(true))) {
             Object jsonData = JsonParser.parseReader(reader);
             if (jsonData instanceof JsonObject jsonObject) { //template file
                 json.add("noise_router", jsonObject.get("noise_router"));
                 json.add("spawn_target", jsonObject.get("spawn_target"));
-                json.add("surface_rule",jsonObject.get("surface_rule"));
+                JsonObject surfaceRuleJson = new JsonObject();
+                surfaceRuleJson.addProperty("type", "minecraft:sequence");
+                surfaceRuleJson.add("sequence", element.getAsJsonObject().get("sequence").getAsJsonArray());
+                json.add("surface_rule", surfaceRuleJson);
+                json.get("surface_rule").getAsJsonObject().get("sequence").getAsJsonArray().addAll(jsonObject.get("surface_rule").getAsJsonObject().get("sequence").getAsJsonArray());
                 return true;
             } else {
                 EOTE.LOGGER.info(jsonData.getClass()+"");

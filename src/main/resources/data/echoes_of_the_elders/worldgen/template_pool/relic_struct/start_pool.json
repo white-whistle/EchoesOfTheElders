@@ -6,7 +6,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_a",
+        "location": "echoes_of_the_elders:artifact_medium_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -15,7 +15,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_c",
+        "location": "echoes_of_the_elders:artifact_small_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -24,7 +24,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_d",
+        "location": "echoes_of_the_elders:artifact_well",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -33,7 +33,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_e",
+        "location": "echoes_of_the_elders:dripleaf_1",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -42,7 +42,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_f",
+        "location": "echoes_of_the_elders:floating_chain_island",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -51,7 +51,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_g",
+        "location": "echoes_of_the_elders:lamp_pole",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -60,7 +60,61 @@
     {
       "weight": 1,
       "element": {
-        "location": "echoes_of_the_elders:relic_small_h",
+        "location": "echoes_of_the_elders:maze_cube",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:pole",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:poles",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:sculk_chain",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:skull_ring_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:snow_artifact",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:water_garden",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
