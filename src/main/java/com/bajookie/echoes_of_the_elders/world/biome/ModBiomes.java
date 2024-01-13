@@ -16,11 +16,6 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
-import net.minecraft.world.gen.surfacebuilder.VanillaSurfaceRules;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
@@ -96,6 +91,7 @@ public class ModBiomes {
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE), ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );
         globalOverworldGeneration(biomeBuilder);
+        biomeBuilder.feature(GenerationStep.Feature.RAW_GENERATION,ModPlacedFeatures.OCEAN_SAND_PLACED_KEY);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.KELP_WARM);
 
@@ -152,7 +148,10 @@ public class ModBiomes {
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE), ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );
         globalOverworldGeneration(biomeBuilder);
+        biomeBuilder.feature(GenerationStep.Feature.UNDERGROUND_ORES,ModPlacedFeatures.CLAY_DISK_PLACED_KEY);
+        biomeBuilder.feature(GenerationStep.Feature.UNDERGROUND_ORES,ModPlacedFeatures.SAND_DISK_PLACED_KEY);
         biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_RIVER);
+        biomeBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,ModPlacedFeatures.LILY_PAD_PLACED_KEY);
 
         //Generation steps must follow  GenerationStep!!!!
         return new Biome.Builder()
