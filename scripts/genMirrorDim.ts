@@ -65,7 +65,7 @@ async function run() {
     console.log(`[✅] Preset found for mc - ${MC_VERSION}`)
 
     overworldPreset.type = `${MOD_ID}:defense_dim_type`
-
+    overworldPreset.generator.settings = `${MOD_ID}:defense_dim_settings`
     const stats = { replaced: 0 };
     overworldPreset.generator.biome_source.biomes.forEach(biomeDefinition => {
         const newBiome = settings.mapPresetBiomeToDimBiome(biomeDefinition.biome);
