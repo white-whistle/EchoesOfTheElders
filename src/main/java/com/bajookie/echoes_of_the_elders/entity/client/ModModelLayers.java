@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.entity.client;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.entity.custom.VampireProjectileEntity;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -29,6 +30,7 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.VAMPIRE_PROJECTILE_ENTITY_TYPE,VampireProjectileRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER,EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
     }

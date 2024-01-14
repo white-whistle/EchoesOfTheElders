@@ -45,7 +45,6 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
     @Override
     public void setItem(ItemStack item) {
         var ITEM = ((ThrownItemEntityAccessor) this).getITEM();
-
         this.getDataTracker().set(ITEM, item.copy());
     }
 
