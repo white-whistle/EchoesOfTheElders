@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class EOTE implements ModInitializer {
-    public static final String MOD_ID = "echoes_of_the_elders";
+	public static final String MOD_ID = "echoes_of_the_elders";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
     @Override
@@ -29,6 +29,12 @@ public class EOTE implements ModInitializer {
         ModWorldGeneration.generateModWorldGen();
         ModEffects.registerEffects();
 
+		ModEntities.registerMobAttributes();
+		ModParticles.registerParticles();
+		ModSounds.registerSounds();
+		ModTrunkPlacerTypes.register();
+		ModBlockEntities.registerBlockEntities();
+	}
         ModEntities.registerMobAttributes();
         ModParticles.registerParticles();
         ModSounds.registerSounds();
