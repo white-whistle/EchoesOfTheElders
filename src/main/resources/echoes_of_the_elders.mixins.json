@@ -12,6 +12,7 @@
     "PlayerEntityMixin",
     "PlayerManagerMixin",
     "PotionUseMixin",
+    "IgnoreProjectileMixin",
     "ServerPlayerEntityMixin",
     "SplashPotionUseMixin",
     "ThrownItemEntityAccessor",
