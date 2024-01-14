@@ -27,7 +27,7 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact {
             if (worldKey == ModDimensions.DEFENSE_DIM_LEVEL_KEY) {
                 tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.to_overworld"));
             } else if (worldKey == World.OVERWORLD) {
-                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.to_elsewhere"));
+                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.to_spirit_realm"));
             } else {
                 tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.other"));
             }
