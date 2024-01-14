@@ -47,11 +47,10 @@ if you received an item that makes mining really easy, and you get that right at
 
 this mod wants you to feel smart, and wants to be abused or minmaxed by you.
 
- 
-
- 
-
 Planned 💭
 we plan on adding more relics, more relic combinations and synergies, and even a new mechanic that will let you test your newfound powers to the limits that minecraft sometimes even modded minecraft isnt able to provide.
 
- 
+# License
+This mod is opensource, feel free to be inspired.
+You can use this mod in your modpack.
+All textures in this mod are protected under all rights reserved
