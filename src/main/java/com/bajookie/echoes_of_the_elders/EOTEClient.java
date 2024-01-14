@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.block.custom.SpiritalGrass;
+import com.bajookie.echoes_of_the_elders.block.custom.entity.ModBlockEntities;
+import com.bajookie.echoes_of_the_elders.block.custom.entity.SleepingBagEntityRenderer;
 import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
@@ -20,6 +22,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.GrassColors;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
@@ -44,8 +48,6 @@ public class EOTEClient implements ClientModInitializer {
         });
 
         // DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
-
-
         CustomItemColors.init();
 
     }

@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.block.custom.entity.ModBlockEntities;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.ModItemGroups;
@@ -33,6 +34,7 @@ public class EOTE implements ModInitializer {
 		ModParticles.registerParticles();
 		ModSounds.registerSounds();
 		ModTrunkPlacerTypes.register();
+		ModBlockEntities.registerBlockEntities();
 	}
 
 

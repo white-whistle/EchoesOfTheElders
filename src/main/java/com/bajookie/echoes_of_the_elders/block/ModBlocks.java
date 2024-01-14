@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.block;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.custom.*;
+import com.bajookie.echoes_of_the_elders.block.custom.entity.ModBlockEntities;
+import com.bajookie.echoes_of_the_elders.block.custom.entity.SleepingBagEntityRenderer;
 import com.bajookie.echoes_of_the_elders.item.ModFoodComponents;
 import com.bajookie.echoes_of_the_elders.world.tree.AncientTreeSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -10,12 +12,17 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+
+import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModBlocks {
     public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block", new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).nonOpaque().notSolid()));
@@ -25,13 +32,14 @@ public class ModBlocks {
     public static final Block NETHER_FRUIT_BLOCK = registerBlock("nether_fruit_block", new NetherFruitBlock(), new FabricItemSettings().food(ModFoodComponents.NETHER_FRUIT));
     public static final Block POTTED_EXPLORER_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_explorers_fruit_block"), new FlowerPotBlock(EXPLORER_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
     public static final Block POTTED_MINERS_FRUIT_BLOCK = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_miners_fruit_block"), new FlowerPotBlock(MINERS_FRUIT_BLOCK, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
-    public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SPIRIT_PETALS = registerBlock("spirit_petals", new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
 
     //Decorative blocks
     public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block", new SunRuneBlock());
     public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
-    public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door",new TentWoolDoor());
+    public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door", new TentWoolDoor());
+    public static final Block SLEEPING_BAG_BLOCK = registerBlock("sleeping_bag_block", new SleepingBag());
     //Logs and Wood
     public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block ANCIENT_TREE_WOOD = registerBlock("ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
@@ -44,7 +52,7 @@ public class ModBlocks {
     //Foliage
     public static final Block ELDER_LILY_FLOWER = registerBlock("elder_lily_flower", new FlowerBlock(StatusEffects.GLOWING, 1, FabricBlockSettings.copyOf(Blocks.ALLIUM).nonOpaque().noCollision().breakInstantly()));
     public static final Block POTTED_ELDER_LILY_FLOWER = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "potted_elder_lily_flower"), new FlowerPotBlock(ELDER_LILY_FLOWER, FabricBlockSettings.copyOf(Blocks.POTTED_ALLIUM).nonOpaque()));
-    public static final Block SPIRITAL_GRASS = registerBlock("spirital_grass",new SpiritalGrass(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY)));
+    public static final Block SPIRITAL_GRASS = registerBlock("spirital_grass", new SpiritalGrass(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY)));
     //public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
     private static Block registerBlock(String name, Block block) {
@@ -73,8 +81,8 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_TREE_SAPLING, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(ELDER_LILY_FLOWER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(POTTED_ELDER_LILY_FLOWER, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS,RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS,RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(WOOL_TENT_DOOR,RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(WOOL_TENT_DOOR, RenderLayer.getCutout());
     }
 }
