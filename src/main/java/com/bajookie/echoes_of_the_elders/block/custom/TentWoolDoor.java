@@ -1,6 +1,5 @@
 package com.bajookie.echoes_of_the_elders.block.custom;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoorHinge;

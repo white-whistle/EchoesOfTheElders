@@ -39,8 +39,8 @@ public class ModItemGroups {
                 entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
                 entries.add(ModItems.OLD_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
+                entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
-                //entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.SLEEPING_BAG_BLOCK);
                 //entries.add(ModBlocks.SPIRIT_PETALS);
             }).build());
