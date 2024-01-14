@@ -26,24 +26,24 @@ public class ModItemGroups {
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModBlocks.ARTIFACT_VAULT);
-                // entries.add(ModBlocks.SUN_RUNE_BLOCK);
-                // entries.add(ModBlocks.CHISELED_MOSSY_STONE);
-                // entries.add(ModBlocks.ELDER_LILY_FLOWER);
+                //entries.add(ModBlocks.SUN_RUNE_BLOCK);
+                //entries.add(ModBlocks.CHISELED_MOSSY_STONE);
+                //entries.add(ModBlocks.ELDER_LILY_FLOWER);
                 // trees
-                // entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
-                // entries.add(ModBlocks.ANCIENT_TREE_LOG);
-                // entries.add(ModBlocks.ANCIENT_TREE_WOOD);
-                // entries.add(ModBlocks.ANCIENT_TREE_PLANKS);
-                // entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
-                // entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+                //entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
+                //entries.add(ModBlocks.ANCIENT_TREE_LOG);
+                //entries.add(ModBlocks.ANCIENT_TREE_WOOD);
+                //entries.add(ModBlocks.ANCIENT_TREE_PLANKS);
+                //entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
+                //entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
                 entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
                 entries.add(ModItems.OLD_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
                 entries.add(ModItems.RAID_DEBUG_ITEM);
                 // entries.add(ModBlocks.SPIRIT_PETALS);
+                entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
                 //entries.add(ModBlocks.SPIRIT_PETALS);
-                entries.add(ModBlocks.SLEEPING_BAG_BLOCK);
                 //entries.add(ModBlocks.SPIRIT_PETALS);
             }).build());
 
