@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.block.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.DoorHinge;
@@ -25,7 +26,7 @@ public class TentWoolDoor extends DoorBlock {
     protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0, 0.0, 0.0, 3.0, 16.0, 16.0);
 
     public TentWoolDoor() {
-        super(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).noCollision().sounds(BlockSoundGroup.WOOL), WOOL_DOOR);
+        super(FabricBlockSettings.copyOf(Blocks.OAK_DOOR).nonOpaque().sounds(BlockSoundGroup.WOOL).blockVision(Blocks::never).solidBlock(Blocks::never), WOOL_DOOR);
     }
 
     @Override
@@ -46,6 +47,19 @@ public class TentWoolDoor extends DoorBlock {
         }
         return EAST_SHAPE;
     }
+
+    /*
+        @Override
+    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+        EOTE.LOGGER.info("trans");
+        return isOpen(state);
+    }
+
+    @Override
+    public int getOpacity(BlockState state, BlockView world, BlockPos pos) {
+        return world.getMaxLightLevel();
+    }
+     */
 
     public void setOpen(@Nullable Entity entity, World world, BlockState state, BlockPos pos, boolean open) {
         if (!state.isOf(this) || state.get(OPEN) == open) {
