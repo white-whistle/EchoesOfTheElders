@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "echoes_of_the_elders:block/tent_wool_door_bottom",
+    "top": "echoes_of_the_elders:block/tent_wool_door_top"
+  }
+}

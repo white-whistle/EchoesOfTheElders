@@ -41,6 +41,8 @@ public class ModItemGroups {
                 entries.add(ModBlocks.SPIRITAL_GRASS);
                 entries.add(ModItems.RAID_DEBUG_ITEM);
                 // entries.add(ModBlocks.SPIRIT_PETALS);
+                entries.add(ModBlocks.WOOL_TENT_DOOR);
+                //entries.add(ModBlocks.SPIRIT_PETALS);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),
