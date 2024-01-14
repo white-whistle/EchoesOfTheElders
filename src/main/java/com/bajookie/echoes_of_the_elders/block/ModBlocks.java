@@ -31,6 +31,7 @@ public class ModBlocks {
     //Decorative blocks
     public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block", new SunRuneBlock());
     public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
+    public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door",new TentWoolDoor());
     //Logs and Wood
     public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block ANCIENT_TREE_WOOD = registerBlock("ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
@@ -74,5 +75,6 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(POTTED_ELDER_LILY_FLOWER, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS,RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS,RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(WOOL_TENT_DOOR,RenderLayer.getCutout());
     }
 }
