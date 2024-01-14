@@ -7,6 +7,7 @@ import com.google.common.collect.ImmutableSet;
 import net.fabricmc.fabric.api.object.builder.v1.trade.TradeOfferHelper;
 import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -24,8 +25,14 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModVillagers {
     public static final RegistryKey<PointOfInterestType> RELIC_POI_KEY = registerPoiKey("relicpoi");
+    public static final RegistryKey<PointOfInterestType> REWARD_POI_KEY = registerPoiKey("reward_bag_poi");
+
     public static final PointOfInterestType RELIC_POI = registerPoi("relicpoi", ModBlocks.ARTIFACT_VAULT);
+    public static final PointOfInterestType REWARD_POI = registerPoi("reward_bag_poi", Blocks.DIAMOND_BLOCK); // needed to be replaced
+
     public static final VillagerProfession RELIC_MASTER = registerProfession("relic_master", RELIC_POI_KEY);
+    public static final VillagerProfession REWARD_MASTER = registerProfession("reward_bag_trader", REWARD_POI_KEY);
+
 
     public static void registerVillagers() {
         EOTE.LOGGER.info("registering villagers");
@@ -33,7 +40,7 @@ public class ModVillagers {
 
     public static VillagerProfession registerProfession(String name, RegistryKey<PointOfInterestType> type) {
         return Registry.register(Registries.VILLAGER_PROFESSION, new Identifier(MOD_ID, name),
-                new VillagerProfession(name, (entry) -> true, (entry) -> entry.matchesKey(type),
+                new VillagerProfession(name, (entry) -> entry.matchesKey(type), (entry) -> entry.matchesKey(type),
                         ImmutableSet.of(), ImmutableSet.of(), SoundEvents.ENTITY_VILLAGER_WORK_ARMORER));
     }
 
@@ -46,6 +53,14 @@ public class ModVillagers {
     }
 
     public static void registerCustomTrades() {
+        TradeOfferHelper.registerVillagerOffers(REWARD_MASTER, 1,
+                factories -> {
+                    factories.add(((entity, random) -> new TradeOffer(
+                            new ItemStack(ModItems.ELDER_PRISM,8),
+                            new ItemStack(ModItems.OLD_KEY,1),2,6,0.08f
+                    )));
+                }
+        );
         TradeOfferHelper.registerVillagerOffers(RELIC_MASTER, 1,
                 factories -> {
             factories.add(((entity, random) -> new TradeOffer(

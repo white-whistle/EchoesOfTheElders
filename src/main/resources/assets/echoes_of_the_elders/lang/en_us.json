@@ -74,5 +74,7 @@
   "tooltip.echoes_of_the_elders.elder_prism.effect.to_spirit_realm": "<right_click/> teleport to the <dimension>spirit realm</dimension>",
   "tooltip.echoes_of_the_elders.elder_prism.effect.to_overworld": "<right_click/> teleport to the <dimension>overworld dimension</dimension>",
   "tooltip.echoes_of_the_elders.elder_prism.effect.other": "<right_click/> teleport to the <dimension>overworld/spirit realm</dimension>",
-  "tooltip.echoes_of_the_elders.wither_scales_item.effect": "<passive/> Deflects incoming arrows"
+  "tooltip.echoes_of_the_elders.wither_scales_item.effect": "<passive/> Deflects incoming arrows",
+  "entity.minecraft.villager.relic_master": "Relic Trader",
+  "entity.minecraft.villager.reward_bag_trader": "Reward Trader"
 }

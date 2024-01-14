@@ -1,9 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
-import com.bajookie.echoes_of_the_elders.datagen.ModAdvancementProvider;
-import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
-import com.bajookie.echoes_of_the_elders.datagen.ModSurfaceRulesGenerator;
-import com.bajookie.echoes_of_the_elders.datagen.ModWorldGenerator;
+import com.bajookie.echoes_of_the_elders.datagen.*;
 import com.bajookie.echoes_of_the_elders.util.*;
 import com.bajookie.echoes_of_the_elders.world.ModConfiguredFeatures;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
@@ -27,6 +24,7 @@ public class EOTEDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModRecipeProvider::new);
         pack.addProvider(ModWorldGenerator::new);
         pack.addProvider(ModAdvancementProvider::new);
+        pack.addProvider(ModPOITagProvider::new);
         ModSurfaceRulesGenerator.generateSurfaceRules();
     }
 
