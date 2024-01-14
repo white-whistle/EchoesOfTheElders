@@ -10,6 +10,7 @@ import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
+import com.bajookie.echoes_of_the_elders.villager.ModVillagers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -47,6 +48,9 @@ public class EOTEClient implements ClientModInitializer {
 
 
         CustomItemColors.init();
+        ModVillagers.registerVillagers();
+        ModVillagers.registerCustomTrades();
+
 
     }
 }
