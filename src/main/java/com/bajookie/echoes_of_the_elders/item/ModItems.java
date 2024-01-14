@@ -53,6 +53,7 @@ public class ModItems {
     public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
+    public static final Item VAMPIRE_RELIC = registerItem("vampire_relic", new VampireRelic());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
