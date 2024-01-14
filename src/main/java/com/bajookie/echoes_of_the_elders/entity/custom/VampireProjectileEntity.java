@@ -1,12 +1,10 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
-import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -15,8 +13,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -24,12 +20,12 @@ import org.jetbrains.annotations.Nullable;
 public class VampireProjectileEntity extends ThrownItemEntity {
     public VampireProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
-        EOTE.LOGGER.info("log from here");
+        EOTE.LOGGER.info("called for 1");
     }
 
     public VampireProjectileEntity(World world, LivingEntity livingEntity) {
         super(ModEntities.VAMPIRE_PROJECTILE_ENTITY_TYPE, livingEntity, world);
-
+        EOTE.LOGGER.info("called for 1");
     }
 
     public Packet<ClientPlayPacketListener> createSpawnPacket() {
