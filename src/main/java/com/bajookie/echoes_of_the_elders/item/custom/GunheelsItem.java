@@ -16,10 +16,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -53,15 +51,6 @@ public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown {
                 cdm.remove(item);
             }
         }
-    }
-
-    @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        var stack = user.getStackInHand(hand);
-
-        this.doBulletjump(user, stack);
-
-        return TypedActionResult.success(stack, world.isClient());
     }
 
     public void doBulletjump(PlayerEntity player, ItemStack stack) {
