@@ -38,7 +38,7 @@ public class ModBlocks {
     //Decorative blocks
     public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block", new SunRuneBlock());
     public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
-    public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door", new TentWoolDoor());
+    public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door",new TentWoolDoor());
     public static final Block SLEEPING_BAG_BLOCK = registerBlock("sleeping_bag_block", new SleepingBag());
     //Logs and Wood
     public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
