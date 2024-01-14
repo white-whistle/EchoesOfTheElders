@@ -22,5 +22,10 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModBlocks.ANCIENT_TREE_WOOD.asItem())
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG.asItem())
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD.asItem());
+        getOrCreateTagBuilder(ItemTags.LOGS_THAT_BURN).add(ModBlocks.ANCIENT_TREE_LOG.asItem())
+                .add(ModBlocks.ANCIENT_TREE_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG.asItem())
+                .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD.asItem());
+        getOrCreateTagBuilder(ItemTags.WOODEN_DOORS).add(ModBlocks.WOOL_TENT_DOOR.asItem());
     }
 }
