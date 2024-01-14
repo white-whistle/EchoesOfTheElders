@@ -26,5 +26,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
                 .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
         getOrCreateTagBuilder(BlockTags.LEAVES).add(ModBlocks.ANCIENT_TREE_LEAVES);
+        getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(ModBlocks.WOOL_TENT_DOOR);
     }
 }
