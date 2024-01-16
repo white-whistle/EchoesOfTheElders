@@ -17,6 +17,8 @@ public abstract class LivingEntityMixin {
 
     @Shadow public abstract boolean hasStatusEffect(StatusEffect effect);
 
+    @Shadow public abstract float getHealth();
+
     @Inject(method="onStatusEffectRemoved", at = @At("TAIL"))
     public void onEffectRemoved(StatusEffectInstance effect, CallbackInfo ci) {
         var entity = (LivingEntity)(Object)this;
@@ -31,7 +33,8 @@ public abstract class LivingEntityMixin {
     @Inject(method = "setHealth",at = @At("HEAD"),cancellable = true)
     public void setHealth(float health,CallbackInfo info){
         if (this.hasStatusEffect(ModEffects.SHATTER_EFFECT)){
-            if (health>0){
+            if (this.getHealth() < health){
+                EOTE.LOGGER.info("HP");
                 info.cancel();
             }
         }
