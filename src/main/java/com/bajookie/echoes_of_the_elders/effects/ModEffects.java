@@ -32,6 +32,7 @@ public class ModEffects {
         }
 //        spawn lightning at entity
     }));
+    public static final StatusEffect SHATTER_EFFECT = registerStatusEffect("shatter_effect", new ShatterEffect());
 
     private static StatusEffect registerStatusEffect(String name,StatusEffect effect){
         return Registry.register(Registries.STATUS_EFFECT,new Identifier(MOD_ID,name),effect);
@@ -39,4 +40,5 @@ public class ModEffects {
     public static void registerEffects(){
         EOTE.LOGGER.info("Registering status effects");
     }
+
 }
