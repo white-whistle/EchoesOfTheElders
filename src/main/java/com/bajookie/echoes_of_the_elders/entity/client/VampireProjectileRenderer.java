@@ -8,6 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.FishingBobberEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -16,23 +17,27 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Arm;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
+
 @Environment(value= EnvType.CLIENT)
-public class VampireProjectileRenderer extends FlyingItemEntityRenderer<VampireProjectileEntity> {
+public class VampireProjectileRenderer extends EntityRenderer<VampireProjectileEntity> {
+    public static final Identifier TEXTURE = new Identifier(MOD_ID,"textures/entity/needler_projectile.png");
+    protected VampireProjectileModel model;
     public VampireProjectileRenderer(EntityRendererFactory.Context context) {
         super(context);
+        model = new VampireProjectileModel(context.getPart(ModModelLayers.VAMPIRE_LAYER));
     }
 
     @Override
     public void render(VampireProjectileEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
         PlayerEntity playerEntity = entity.getPlayerOwner();
         if (playerEntity == null) {
             return;
         }
-        EOTE.LOGGER.info(playerEntity.getClass()+"");
         double s;
         float r;
         double q;
@@ -74,8 +79,14 @@ public class VampireProjectileRenderer extends FlyingItemEntityRenderer<VampireP
             EOTE.LOGGER.info("renderLine");
             renderLine(v, w, x, vertexConsumer2, entry2, percentage(z, 16),percentage(z + 1, 16));
         }
-
+        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
     }
+
+    @Override
+    public Identifier getTexture(VampireProjectileEntity entity) {
+        return TEXTURE;
+    }
+
     private static float percentage(int value, int max) {
         return (float)value / (float)max;
     }

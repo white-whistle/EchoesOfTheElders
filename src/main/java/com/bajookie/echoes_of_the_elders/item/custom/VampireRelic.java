@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.VampireProjectileEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -28,7 +29,6 @@ public class VampireRelic extends Item {
             world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
             if (!world.isClient) {
                 VampireProjectileEntity vampireProjectileEntity = new VampireProjectileEntity(world, user);
-                vampireProjectileEntity.setItem(itemStack);
                 vampireProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
                 world.spawnEntity(vampireProjectileEntity);
             }

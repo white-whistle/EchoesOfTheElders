@@ -13,6 +13,8 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 public class ModModelLayers {
     public static final EntityModelLayer FLOWER_DEFENSE_LAYER =
             new EntityModelLayer(new Identifier(MOD_ID, "flower_defense_entity"), "main");
+    public static final EntityModelLayer VAMPIRE_LAYER =
+            new EntityModelLayer(new Identifier(MOD_ID, "vampire_layer"), "main");
     public static final EntityModelLayer SPIRIT_ENTITY_LAYER =
             new EntityModelLayer(new Identifier(MOD_ID, "spirit_entity"), "main");
 
@@ -30,8 +32,9 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.SECOND_SUN_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.VAMPIRE_PROJECTILE_ENTITY_TYPE,VampireProjectileRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER,EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(VAMPIRE_LAYER,VampireProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.VAMPIRE_PROJECTILE_ENTITY_TYPE,VampireProjectileRenderer::new);
     }
 }
