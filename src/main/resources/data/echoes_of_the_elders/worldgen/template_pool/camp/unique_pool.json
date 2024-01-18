@@ -1,0 +1,16 @@
+{
+  "name": "echoes_of_the_elders:camp/unique_pool",
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/unique/camp_mine_hatch",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

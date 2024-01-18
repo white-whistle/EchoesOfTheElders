@@ -1,0 +1,16 @@
+{
+  "name": "echoes_of_the_elders:camp/short_path_pool",
+  "fallback": "echoes_of_the_elders:camp/path_end_pool",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/short_path/camp_short_path_01",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

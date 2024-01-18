@@ -1,0 +1,34 @@
+{
+  "name": "echoes_of_the_elders:camp/path_end_pool",
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 3,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path_end/path_end_01",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 2,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path_end/watch_tower_01",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path_end/camp_well_01",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
