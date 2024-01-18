@@ -35,6 +35,6 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(HOOK_PROJECTILE_LAYER,HookProjectileModel::getTexturedModelData);
-        EntityRendererRegistry.register(ModEntities.HOOK_PROJECTILE_ENTITY_ENTITY_TYPE,HookProjectileRenderer::new);
+        EntityRendererRegistry.register(ModEntities.HOOK_PROJECTILE_ENTITY_ENTITY_TYPE,ctx -> new HookProjectileRenderer(ctx,1,false));
     }
 }
