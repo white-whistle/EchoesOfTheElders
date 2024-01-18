@@ -1,0 +1,25 @@
+{
+  "name": "echoes_of_the_elders:camp/medium_tent_pool",
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/medium_tent/camp_food_tent",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/medium_tent/medium_tent_farm_01",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

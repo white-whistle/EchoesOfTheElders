@@ -1,0 +1,43 @@
+{
+  "name": "echoes_of_the_elders:camp/path_pool",
+  "fallback": "echoes_of_the_elders:camp/path_end_pool",
+
+  "elements": [
+    {
+      "weight": 4,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path/camp_path_02",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path/camp_path_03",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 4,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path/path_t_01",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/path/camp_path_cross_01",
+        "processors": "minecraft:empty",
+        "projection": "terrain_matching",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

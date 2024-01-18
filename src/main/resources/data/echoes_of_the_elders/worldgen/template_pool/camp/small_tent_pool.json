@@ -1,0 +1,25 @@
+{
+  "name": "echoes_of_the_elders:camp/small_tent_pool",
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+      "weight": 2,
+      "element": {
+        "location": "echoes_of_the_elders:camp/small_tent/camp_tent_small_01",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    },
+    {
+      "weight": 1,
+      "element": {
+        "location": "echoes_of_the_elders:camp/small_tent/camp_tent_small_02",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}
