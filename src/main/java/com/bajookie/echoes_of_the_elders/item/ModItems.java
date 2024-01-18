@@ -44,7 +44,7 @@ public class ModItems {
     public static final WithersBulwark WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WithersBulwark());
     public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(16)));
     public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new OrbOfLightning());
-    //public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
+    // public static final Item ECHOING_SWORD = registerItem("echoing_sword_item", new EchoingSword());
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
     public static final GunheelsItem GUNHEELS = registerItem("gunheels", new GunheelsItem());
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
@@ -53,6 +53,7 @@ public class ModItems {
     public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
+    public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
