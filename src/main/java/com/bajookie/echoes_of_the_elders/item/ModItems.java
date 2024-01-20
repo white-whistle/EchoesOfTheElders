@@ -51,6 +51,7 @@ public class ModItems {
     public static final Item ELDER_PRISM = registerItem("elder_prism", new ElderPrismItem());
     public static final Item TIME_TOKEN = registerItem("time_token", new TimeTokenItem());
     public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
+    public static final Item MORTAR_RELIC = registerItem("mortar_relic", new MortarRelic());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
 
