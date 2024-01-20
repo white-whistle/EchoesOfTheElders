@@ -2,9 +2,15 @@ package com.bajookie.echoes_of_the_elders.system.Capability;
 
 import net.minecraft.nbt.NbtCompound;
 
-public interface Capability {
+public abstract class Capability<T> {
 
-    void writeToNbt(NbtCompound nbt);
+    public T self;
 
-    void readFromNbt(NbtCompound nbt);
+    public Capability(T self) {
+        this.self = self;
+    }
+
+    public abstract void writeToNbt(NbtCompound nbt);
+
+    public abstract void readFromNbt(NbtCompound nbt);
 }

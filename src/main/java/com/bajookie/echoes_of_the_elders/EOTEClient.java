@@ -1,7 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
-import com.bajookie.echoes_of_the_elders.block.custom.SpiritalGrass;
 import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
@@ -12,16 +11,7 @@ import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.impl.client.rendering.DimensionRenderingRegistryImpl;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.item.BlockItem;
-import net.minecraft.registry.Registries;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 
 public class EOTEClient implements ClientModInitializer {
@@ -47,6 +37,7 @@ public class EOTEClient implements ClientModInitializer {
 
 
         CustomItemColors.init();
+        ClientNetworking.init();
 
     }
 }
