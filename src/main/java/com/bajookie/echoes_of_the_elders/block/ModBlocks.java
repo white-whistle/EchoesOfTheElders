@@ -2,8 +2,6 @@ package com.bajookie.echoes_of_the_elders.block;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.custom.*;
-import com.bajookie.echoes_of_the_elders.block.custom.entity.ModBlockEntities;
-import com.bajookie.echoes_of_the_elders.block.custom.entity.SleepingBagEntityRenderer;
 import com.bajookie.echoes_of_the_elders.item.ModFoodComponents;
 import com.bajookie.echoes_of_the_elders.world.tree.AncientTreeSaplingGenerator;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -12,17 +10,12 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
-
-import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModBlocks {
     public static final Block BEAR_TRAP_BLOCK = registerBlock("bear_trap_block", new BearTrapBlock(FabricBlockSettings.copyOf(Blocks.ANVIL).nonOpaque().notSolid()));
@@ -39,7 +32,6 @@ public class ModBlocks {
     public static final Block SUN_RUNE_BLOCK = registerBlock("sun_rune_block", new SunRuneBlock());
     public static final Block CHISELED_MOSSY_STONE = registerBlock("chiseled_mossy_stone", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS)));
     public static final Block WOOL_TENT_DOOR = registerBlock("tent_wool_door",new TentWoolDoor());
-    public static final Block SLEEPING_BAG_BLOCK = registerBlock("sleeping_bag_block", new SleepingBag());
     //Logs and Wood
     public static final Block ANCIENT_TREE_LOG = registerBlock("ancient_tree_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG)));
     public static final Block ANCIENT_TREE_WOOD = registerBlock("ancient_tree_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_WOOD)));
