@@ -5,8 +5,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
-public class Capabilities {
-    public static void writeCapabilities(@Nullable HashMap<String, Capability> capabilities, NbtCompound compound) {
+public class Capabilities extends HashMap<String, Capability<?>> {
+
+    public static void writeCapabilities(@Nullable Capabilities capabilities, NbtCompound compound) {
         if (capabilities == null) return;
 
         var capabilitiesNbt = new NbtCompound();
@@ -20,14 +21,12 @@ public class Capabilities {
         });
 
         compound.put(IHasCapability.CAPABILITIES_KEY, capabilitiesNbt);
-
-        System.out.println(compound);
     }
 
-    public static HashMap<String, Capability> readCapabilities(NbtCompound compound) {
+    public static Capabilities readCapabilities(NbtCompound compound, @Nullable Object capabilityHolder) {
         if (!compound.contains(IHasCapability.CAPABILITIES_KEY)) return null;
 
-        var map = new HashMap<String, Capability>();
+        var map = new Capabilities();
 
         var capabilitiesNbt = (NbtCompound) compound.get(IHasCapability.CAPABILITIES_KEY);
         if (capabilitiesNbt == null) return null;
@@ -36,7 +35,7 @@ public class Capabilities {
             var capabilityNbt = (NbtCompound) capabilitiesNbt.get(k);
 
             var capabilityFactory = ModCapabilities.lookup.get(k);
-            var capability = capabilityFactory.get();
+            var capability = capabilityFactory.apply(capabilityHolder);
 
             capability.readFromNbt(capabilityNbt);
 

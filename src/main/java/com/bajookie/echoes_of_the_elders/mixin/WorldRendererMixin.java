@@ -1,10 +1,8 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.client.CustomOutlineColor;
-import com.bajookie.echoes_of_the_elders.client.EntityEffectRenderer;
-import com.bajookie.echoes_of_the_elders.world.biome.ModBiomes;
+import com.bajookie.echoes_of_the_elders.system.Raid.client.RaidEntityOverlayRenderer;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -14,7 +12,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.*;
-import net.minecraft.client.util.Window;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -67,10 +64,10 @@ public abstract class WorldRendererMixin {
     @Shadow
     private @Nullable VertexBuffer darkSkyBuffer;
     @Unique
-    private static final Identifier MOD_RAIN = new Identifier(MOD_ID,"textures/overlay/sky/light_rain.png");
+    private static final Identifier MOD_RAIN = new Identifier(MOD_ID, "textures/overlay/sky/light_rain.png");
 
     @Unique
-    private static final Identifier MOD_SNOW = new Identifier(MOD_ID,"textures/overlay/sky/snow.png");
+    private static final Identifier MOD_SNOW = new Identifier(MOD_ID, "textures/overlay/sky/snow.png");
     @Unique
     private static final Identifier MOD_SUN = new Identifier(MOD_ID, "textures/overlay/sky/sun.png");
     @Unique
@@ -81,7 +78,8 @@ public abstract class WorldRendererMixin {
     private void renderEntity(Entity entity, double x, double y, double z, float g,
                               MatrixStack matrix, VertexConsumerProvider v, CallbackInfo info) {
         if (entity instanceof LivingEntity) {
-            EntityEffectRenderer.prepareRenderInWorld((LivingEntity) entity);
+            // EntityEffectRenderer.prepareRenderInWorld((LivingEntity) entity);
+            RaidEntityOverlayRenderer.prepareRenderInWorld((LivingEntity) entity);
         }
     }
 
@@ -89,7 +87,8 @@ public abstract class WorldRendererMixin {
     private void render(MatrixStack matrices, float tickDelta, long limitTime,
                         boolean renderBlockOutline, Camera camera, GameRenderer gameRenderer,
                         LightmapTextureManager lightmapTextureManager, Matrix4f matrix, CallbackInfo info) {
-        EntityEffectRenderer.renderInWorld(matrices, camera);
+        // EntityEffectRenderer.renderInWorld(matrices, camera);
+        RaidEntityOverlayRenderer.renderInWorld(matrices, camera);
     }
 
     @Inject(method = "drawBlockOutline", at = @At("HEAD"), cancellable = true)
@@ -102,7 +101,7 @@ public abstract class WorldRendererMixin {
         }
     }
 
-    //render sky controls only the sky top but not the sides and sunrise sunset color
+    // render sky controls only the sky top but not the sides and sunrise sunset color
     @Inject(method = "renderSky(Lnet/minecraft/client/util/math/MatrixStack;Lorg/joml/Matrix4f;FLnet/minecraft/client/render/Camera;ZLjava/lang/Runnable;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/world/ClientWorld;getDimensionEffects()Lnet/minecraft/client/render/DimensionEffects;", ordinal = 1), cancellable = true)
     public void renderSky(MatrixStack matrices, Matrix4f projectionMatrix, float tickDelta, Camera camera, boolean thickFog, Runnable fogCallback, CallbackInfo info) {
         if (this.client.world.getDimensionKey() == ModDimensions.DEFENSE_DIM_TYPE) {
@@ -119,7 +118,7 @@ public abstract class WorldRendererMixin {
             BackgroundRenderer.applyFogColor();
             BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
             RenderSystem.depthMask(false);
-            RenderSystem.setShaderColor(79f/255, 67f/255, 80f/255, 0.5f); // this colors the sky top
+            RenderSystem.setShaderColor(79f / 255, 67f / 255, 80f / 255, 0.5f); // this colors the sky top
             ShaderProgram shaderProgram = RenderSystem.getShader();
             this.lightSkyBuffer.bind();
             this.lightSkyBuffer.draw(matrices.peek().getPositionMatrix(), projectionMatrix, shaderProgram);
@@ -139,9 +138,9 @@ public abstract class WorldRendererMixin {
                 i = MathHelper.sin(this.world.getSkyAngleRadians(tickDelta)) < 0.0f ? 180.0f : 0.0f;
                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(i));
                 matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(90.0f));
-                float j = fs[0] *0.8f;
-                k = fs[1]*0.73f;
-                float l = fs[2]*0.63f;
+                float j = fs[0] * 0.8f;
+                k = fs[1] * 0.73f;
+                float l = fs[2] * 0.63f;
                 Matrix4f matrix4f = matrices.peek().getPositionMatrix();
                 bufferBuilder.begin(VertexFormat.DrawMode.TRIANGLE_FAN, VertexFormats.POSITION_COLOR);
                 bufferBuilder.vertex(matrix4f, 0.0f, 100.0f, 0.0f).color(j, k, l, fs[3]).next();
@@ -150,7 +149,7 @@ public abstract class WorldRendererMixin {
                     o = (float) n * ((float) Math.PI * 2) / 16.0f;
                     p = MathHelper.sin(o);
                     q = MathHelper.cos(o);
-                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0]*0.8f, fs[1]*0.73f, fs[2]*0.63f, 0.0f).next();//sky color
+                    bufferBuilder.vertex(matrix4f, p * 120.0f, q * 120.0f, -q * 40.0f * fs[3]).color(fs[0] * 0.8f, fs[1] * 0.73f, fs[2] * 0.63f, 0.0f).next();// sky color
                 }
                 BufferRenderer.drawWithGlobalProgram(bufferBuilder.end());
                 matrices.pop();
@@ -216,10 +215,10 @@ public abstract class WorldRendererMixin {
     }
 
 
-    //render the weather at the dimension
-    @Inject(method = "renderWeather", at = @At("HEAD"),cancellable = true)
+    // render the weather at the dimension
+    @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
     private void renderWeather(LightmapTextureManager manager, float tickDelta, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
-        if (this.client.player.getWorld().getDimensionKey() == ModDimensions.DEFENSE_DIM_TYPE){
+        if (this.client.player.getWorld().getDimensionKey() == ModDimensions.DEFENSE_DIM_TYPE) {
             float f = this.client.world.getRainGradient(tickDelta);
             if (f <= 0.0f) {
                 return;
