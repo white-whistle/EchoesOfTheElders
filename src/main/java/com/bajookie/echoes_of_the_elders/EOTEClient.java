@@ -14,16 +14,6 @@ import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.impl.client.rendering.DimensionRenderingRegistryImpl;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.color.world.GrassColors;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
-import net.minecraft.client.render.entity.model.EntityModelLayers;
-import net.minecraft.item.BlockItem;
-import net.minecraft.registry.Registries;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 
 public class EOTEClient implements ClientModInitializer {
