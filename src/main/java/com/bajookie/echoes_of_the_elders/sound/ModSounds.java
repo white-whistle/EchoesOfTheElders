@@ -13,6 +13,7 @@ public class ModSounds {
     public static final SoundEvent SPIRIT_AMBIENT = registerSoundEvent("spirit_entity_ambient");
     public static final SoundEvent SPIRIT_HURT = registerSoundEvent("spirit_entity_hurt");
     public static final SoundEvent SPIRIT_DEATH = registerSoundEvent("spirit_entity_death");
+    public static final SoundEvent ELECTRIC_STRIKE = registerSoundEvent("electric_sound");
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = new Identifier(MOD_ID,name);

@@ -16,6 +16,12 @@
     "sounds": [
       "echoes_of_the_elders:spirit_entity_hurt"
     ]
+  },
+  "electric_sound": {
+    "subtitle": "sounds.echos_of_the_elders.electric_sound",
+    "sounds": [
+      "echoes_of_the_elders:electric_sound"
+    ]
   }
 
 }

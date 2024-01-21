@@ -8,6 +8,8 @@ import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
+import com.bajookie.echoes_of_the_elders.particles.ElectricShockParticle;
+import com.bajookie.echoes_of_the_elders.particles.LightningParticle;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
@@ -25,6 +27,8 @@ public class EOTEClient implements ClientModInitializer {
         ModModelPredicateProvider.registerModModels();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SECOND_SUN_PARTICLE, SecondSunParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.ELECTRIC_SHOCK, ElectricShockParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.LIGHTNING_PARTICLE, LightningParticle.Factory::new);
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
 
         TooltipComponentCallback.EVENT.register((data) -> {
