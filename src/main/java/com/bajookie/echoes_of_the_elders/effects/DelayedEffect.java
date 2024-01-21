@@ -10,6 +10,7 @@ import org.apache.logging.log4j.util.TriConsumer;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public abstract class DelayedEffect extends StatusEffect {
     public DelayedEffect(StatusEffectCategory category) {
@@ -33,6 +34,20 @@ public abstract class DelayedEffect extends StatusEffect {
             @Override
             public void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity) {
                 biConsumer.accept(effectInstance, entity);
+            }
+        };
+    }
+    public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> biConsumer, BiConsumer<LivingEntity,Integer> onApplyConsumer){
+        return new DelayedEffect(category) {
+            @Override
+            public void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity) {
+                biConsumer.accept(effectInstance, entity);
+            }
+
+            @Override
+            public void onApplied(LivingEntity entity, int amplifier) {
+                onApplyConsumer.accept(entity,amplifier);
+                super.onApplied(entity, amplifier);
             }
         };
     }
