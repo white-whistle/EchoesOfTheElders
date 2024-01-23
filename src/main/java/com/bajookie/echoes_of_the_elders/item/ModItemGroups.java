@@ -68,10 +68,12 @@ public class ModItemGroups {
                 entries.add(ModItems.GODSLAYER);
                 entries.add(ModItems.GUNHEELS);
                 entries.add(ModItems.ELDER_PRISM);
-                // entries.add(ModItems.STAT_FRUIT_HP);
+                entries.add(ModItems.STAT_FRUIT_HP);
                 entries.add(ModItems.TIME_TOKEN);
                 entries.add(ModItems.WTF_RELIC);
                 entries.add(ModItems.ARC_LIGHTNING);
+                entries.add(ModItems.AIR_SWEEPER);
+                entries.add(ModItems.VACUUM_RELIC);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
