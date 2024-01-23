@@ -56,6 +56,7 @@ public class ModItems {
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
     public static final Item ARC_LIGHTNING = registerItem("arc_lightning",new ArcLightning());
     public static final Item AIR_SWEEPER = registerItem("air_sweeper",new AirSweeper());
+    public static final Item VACUUM_RELIC = registerItem("vacuum_relic",new VacuumRelic());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
 
     // spawn eggs
