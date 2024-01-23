@@ -1,0 +1,58 @@
+package com.bajookie.echoes_of_the_elders.item.custom;
+
+import com.bajookie.echoes_of_the_elders.effects.ModEffects;
+import com.bajookie.echoes_of_the_elders.entity.custom.AirSweeperProjectileEntity;
+import com.bajookie.echoes_of_the_elders.entity.custom.SecondSunProjectileEntity;
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Box;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+public class AirSweeper extends Item implements IArtifact, IStackPredicate, IHasCooldown {
+    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40,10 * 20);
+    public AirSweeper() {
+        super(new FabricItemSettings().maxCount(16));
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+
+        return super.use(world, user, hand);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        if (entity instanceof PlayerEntity user) {
+            if (!user.getItemCooldownManager().isCoolingDown(this)) {
+                if (!world.isClient) {
+                    Box box = new Box(user.getX() - 60, user.getY() - 60, user.getZ() - 60, user.getX() + 60, user.getY() + 60, user.getZ() + 60);
+                    List<Entity> list = world.getOtherEntities(user, box, entityer -> entityer instanceof LivingEntity);
+                    if (!list.isEmpty()) {
+                        AirSweeperProjectileEntity sweeper = new AirSweeperProjectileEntity(world, user.getX(), user.getY(), user.getZ(), list.get(0).getId());
+                        world.spawnEntity(sweeper);
+                        user.getItemCooldownManager().set(this, this.getCooldown(stack));
+                    }else {
+                        user.getItemCooldownManager().set(this, 20);
+                    }
+                }
+            }
+        }
+        super.inventoryTick(stack, world, entity, slot, selected);
+    }
+
+    @Override
+    public int getCooldown(ItemStack itemStack) {
+        return cooldown.get(itemStack);
+    }
+}

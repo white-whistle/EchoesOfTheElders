@@ -8,7 +8,7 @@ public class LightningParticle extends SpriteBillboardParticle {
     public LightningParticle(ClientWorld clientWorld, double xCoord, double yCoord, double zCoord,
                              SpriteProvider spriteProvider, double xd, double yd, double zd) {
         super(clientWorld, xCoord, yCoord, zCoord, xd, yd, zd);
-        this.maxAge = 60;
+        this.maxAge = 20;
         this.scale(3);
         this.setSpriteForAge(spriteProvider);
 

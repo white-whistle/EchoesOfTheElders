@@ -19,7 +19,8 @@
     "ServerWorldAccessor",
     "SplashPotionUseMixin",
     "ThrownItemEntityAccessor",
-    "TrunkPlacerTypeInvoker"
+    "TrunkPlacerTypeInvoker",
+    "LivingEntityRendererMixin"
   ],
   "client": [
     "ClientItemMixin",

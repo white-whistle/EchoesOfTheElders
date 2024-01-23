@@ -56,7 +56,6 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
                 }
                 user.getItemCooldownManager().set(this, this.getCooldown(stack));
                 entity.damage(world.getDamageSources().create(DamageTypes.MAGIC,user), this.effectDamage.get(stack));
-                //world.playSound(user.getX(),user.getY(),user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f,true);
             }
             user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
 
