@@ -31,7 +31,7 @@ public class ElectricStunEffect extends StatusEffect {
         Vec3d entityPos = entity.getPos();
         Random r = new Random();
         if (!world.isClient){
-            ((ServerWorld)world).spawnParticles(ModParticles.LIGHTNING_PARTICLE, entityPos.x,entityPos.y+0.75,entityPos.z,1,r.nextInt(-5,5)*0.5,r.nextInt(3,7)*0.5, r.nextInt(-5,5)*0.5,0.5);
+            ((ServerWorld)world).spawnParticles(ModParticles.LIGHTNING_PARTICLE, entityPos.x,entityPos.y+0.75,entityPos.z,1,r.nextInt(-5,5)*0.1,r.nextInt(3,5)*0.1, r.nextInt(-5,5)*0.1,0.5);
 
         }
     }

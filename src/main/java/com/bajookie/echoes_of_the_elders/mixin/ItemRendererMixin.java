@@ -19,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
+
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
     @Unique
@@ -52,6 +54,10 @@ public abstract class ItemRendererMixin {
             if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD)) {
                 return getCustomItemModel("shiny_ancient_stone_sword_3d");
             }
+            if (item == ModItems.ARC_LIGHTNING){
+                return getCustomItemModel("arc_lightning_3d");
+            }
+
         }
 
         return value;
@@ -59,6 +65,6 @@ public abstract class ItemRendererMixin {
 
     @Unique
     private BakedModel getCustomItemModel(String name) {
-        return ((ItemRendererAccessor) this).getModels().getModelManager().getModel(new ModelIdentifier(EOTE.MOD_ID, name, "inventory"));
+        return ((ItemRendererAccessor) this).getModels().getModelManager().getModel(new ModelIdentifier(MOD_ID, name, "inventory"));
     }
 }

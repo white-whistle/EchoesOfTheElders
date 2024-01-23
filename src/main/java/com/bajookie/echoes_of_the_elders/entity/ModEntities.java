@@ -44,6 +44,10 @@ public class ModEntities {
             new Identifier(MOD_ID, "teleport_eye_entity"),
             FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE, TeleportEyeProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<AirSweeperProjectileEntity> AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "air_sweeper_entity"),
+            FabricEntityTypeBuilder.<AirSweeperProjectileEntity>create(SpawnGroup.CREATURE, AirSweeperProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     /**
      * Register Mob Attributes here:

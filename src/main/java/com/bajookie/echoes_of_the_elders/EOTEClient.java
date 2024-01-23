@@ -42,6 +42,5 @@ public class EOTEClient implements ClientModInitializer {
         // DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
         CustomItemColors.init();
         ClientNetworking.init();
-
     }
 }

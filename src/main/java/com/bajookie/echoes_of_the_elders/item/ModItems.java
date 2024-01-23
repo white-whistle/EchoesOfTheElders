@@ -55,6 +55,7 @@ public class ModItems {
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
     public static final Item ARC_LIGHTNING = registerItem("arc_lightning",new ArcLightning());
+    public static final Item AIR_SWEEPER = registerItem("air_sweeper",new AirSweeper());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
 
     // spawn eggs
