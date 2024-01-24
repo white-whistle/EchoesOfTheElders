@@ -17,6 +17,8 @@ public class ModParticles {
             "electric_shock_particle",FabricParticleTypes.simple());
     public static final DefaultParticleType LIGHTNING_PARTICLE = registerParticle(
             "lightning_particle",FabricParticleTypes.simple());
+    public static final DefaultParticleType MAGMA_BULLET_SPEED = registerParticle(
+            "magma_bullet_particle",FabricParticleTypes.simple());
 
     private static DefaultParticleType registerParticle(String name,DefaultParticleType particleType){
         return Registry.register(Registries.PARTICLE_TYPE,new Identifier(MOD_ID,name),particleType);
