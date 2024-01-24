@@ -18,6 +18,7 @@ public class ModModelLayers {
             new EntityModelLayer(new Identifier(MOD_ID, "spirit_entity"), "main");
 
     public static final EntityModelLayer ELDERMAN_ENTITY_LAYER = new EntityModelLayer(new Identifier(MOD_ID,"elderman_entity"),"main");
+    public static final EntityModelLayer MAGMA_BULLET_LAYER = new EntityModelLayer(new Identifier(MOD_ID,"magma_bullet_entity"),"main");
 
     /**
      * Register Model Layers here:
@@ -31,7 +32,8 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.MAGMA_BULLET_ENTITY_TYPE, FlyingItemEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MAGMA_BULLET_LAYER,MagmaBulletModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MAGMA_BULLET_ENTITY_TYPE, MagmaBulletEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER,EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
     }

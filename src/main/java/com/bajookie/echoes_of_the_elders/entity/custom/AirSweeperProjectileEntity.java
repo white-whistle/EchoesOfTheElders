@@ -42,6 +42,7 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
         this.currentCount = currentStacks;
         this.dataTracker.set(TARGET_ID,target);
         this.setVelocity(0, 0.5, 0);
+        this.refreshPositionAndAngles(x,y,z,this.getYaw(),this.getPitch());
     }
 
     @Override
@@ -82,7 +83,7 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
                     this.discard();
                 }
             } else {
-                this.move(MovementType.SELF,this.getVelocity());
+                this.setPosition(this.getPos().add(this.getVelocity()));
             }
         }
     }
@@ -90,11 +91,10 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
         Vec3d currentPosition = this.getPos();
         Vec3d targetPosition = livingEntity.getPos();
         Vec3d currentVelocity = this.getVelocity();
-
         Vec3d desiredDirection = targetPosition.subtract(currentPosition).normalize();
         Vec3d newDirection = currentVelocity.normalize().add(desiredDirection.multiply(maxPull)).normalize();
         this.setVelocity(newDirection.multiply(this.speed));
-        this.move(MovementType.SELF, this.getVelocity());
+        this.setPosition(this.getPos().add(this.getVelocity()));
     }
     private void predictHoming(LivingEntity livingEntity){
         Vec3d currentPosition = this.getPos();
@@ -106,7 +106,7 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
         Vec3d desiredDirection = predictedPosition.subtract(currentPosition).normalize();
         Vec3d newDirection = currentVelocity.normalize().add(desiredDirection.multiply(maxPull)).normalize();
         this.setVelocity(newDirection.multiply(this.speed));
-        this.move(MovementType.SELF, this.getVelocity());
+        this.setPosition(this.getPos().add(this.getVelocity()));
     }
 
     @Override
