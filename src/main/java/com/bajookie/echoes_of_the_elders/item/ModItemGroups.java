@@ -74,6 +74,7 @@ public class ModItemGroups {
                 entries.add(ModItems.ARC_LIGHTNING);
                 entries.add(ModItems.AIR_SWEEPER);
                 entries.add(ModItems.VACUUM_RELIC);
+                entries.add(ModItems.MOLTEN_CHAMBER);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

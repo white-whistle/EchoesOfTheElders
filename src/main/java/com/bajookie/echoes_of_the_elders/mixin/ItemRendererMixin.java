@@ -57,6 +57,9 @@ public abstract class ItemRendererMixin {
             if (item == ModItems.ARC_LIGHTNING){
                 return getCustomItemModel("arc_lightning_3d");
             }
+            if (item == ModItems.SCORCHERS_MITTS){
+                return getCustomItemModel("scorchers_mitts_3d");
+            }
 
         }
 

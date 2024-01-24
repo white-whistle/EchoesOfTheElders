@@ -58,6 +58,7 @@ public class ModItems {
     public static final Item AIR_SWEEPER = registerItem("air_sweeper",new AirSweeper());
     public static final Item VACUUM_RELIC = registerItem("vacuum_relic",new VacuumRelic());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
+    public static final Item MOLTEN_CHAMBER = registerItem("molten_chamber",new MoltenChamber());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
