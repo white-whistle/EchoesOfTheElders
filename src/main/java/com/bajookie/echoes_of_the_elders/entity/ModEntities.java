@@ -48,6 +48,10 @@ public class ModEntities {
             new Identifier(MOD_ID, "air_sweeper_entity"),
             FabricEntityTypeBuilder.<AirSweeperProjectileEntity>create(SpawnGroup.CREATURE, AirSweeperProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<MagmaBullet> MAGMA_BULLET_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "magma_bullet_entity"),
+            FabricEntityTypeBuilder.<MagmaBullet>create(SpawnGroup.CREATURE, MagmaBullet::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     /**
      * Register Mob Attributes here:
