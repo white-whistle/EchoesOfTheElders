@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/vacuum_relic"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "echoes_of_the_elders:active": 1
+      },
+      "model": "echoes_of_the_elders:item/vacuum_relic_01"
+    }
+  ]
+}

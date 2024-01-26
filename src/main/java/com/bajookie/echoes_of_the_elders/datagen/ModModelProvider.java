@@ -48,7 +48,8 @@ public class ModModelProvider extends FabricModelProvider {
         protected static final List<Item> HANDHELD = List.of(
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
-                ModItems.MIDAS_HAMMER
+                ModItems.MIDAS_HAMMER,
+                ModItems.MOLTEN_CHAMBER
         );
         protected static final List<Item> SKIP = List.of(
                 ModItems.WITHER_SCALES_ITEM,
@@ -57,7 +58,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.SCORCHERS_MITTS,
                 ModItems.STASIS_STOPWATCH,
                 ModItems.TIME_TOKEN,
-                ModItems.WTF_RELIC
+                ModItems.WTF_RELIC,
+                ModItems.VACUUM_RELIC
         );
     }
 

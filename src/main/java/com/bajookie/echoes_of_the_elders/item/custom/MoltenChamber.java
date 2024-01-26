@@ -68,7 +68,7 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
         int damage = (6 - remainingUseTicks / 10);
         if (damage == 0) damage =1;
         MagmaBullet bullet = new MagmaBullet(world,player.getEyePos().x,player.getEyePos().y,player.getEyePos().z,damage*this.shotDamage.get(stack),player,player.getPitch(),player.getYaw());
-        bullet.setVelocity(player,player.getPitch(),player.getYaw(),player.getRoll(),4f,0);
+        bullet.setVelocity(player,player.getPitch(),player.getYaw(),player.getRoll(),5f,0);
         world.spawnEntity(bullet);
         player.getItemCooldownManager().set(this, this.reloadSpeed.get(stack));
     }

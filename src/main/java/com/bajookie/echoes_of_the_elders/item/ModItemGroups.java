@@ -75,6 +75,8 @@ public class ModItemGroups {
                 entries.add(ModItems.AIR_SWEEPER);
                 entries.add(ModItems.VACUUM_RELIC);
                 entries.add(ModItems.MOLTEN_CHAMBER);
+                entries.add(ModItems.ECHOING_SWORD);
+                entries.add(ModItems.TV_ARROW);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

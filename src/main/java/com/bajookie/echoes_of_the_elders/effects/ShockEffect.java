@@ -5,7 +5,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 
 public class ShockEffect extends StatusEffect {
     public ShockEffect() {
-        super(StatusEffectCategory.NEUTRAL,0x70b4db);
+        super(StatusEffectCategory.NEUTRAL,0x000000);
     }
 
     @Override

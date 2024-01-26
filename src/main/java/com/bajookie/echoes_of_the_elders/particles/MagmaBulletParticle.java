@@ -12,7 +12,7 @@ public class MagmaBulletParticle extends SpriteBillboardParticle {
     public MagmaBulletParticle(ClientWorld clientWorld, double xCoord, double yCoord, double zCoord,
                              SpriteProvider spriteProvider, double xd, double yd, double zd) {
         super(clientWorld, xCoord, yCoord, zCoord, xd, yd, zd);
-        this.maxAge = 10;
+        this.maxAge = 5;
         this.spriteProvider = spriteProvider;
         this.scale(2);
         this.setVelocity(0,0,0);

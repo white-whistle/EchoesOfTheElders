@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public abstract class DelayedEffect extends StatusEffect {
+public abstract class DelayedEffect extends StatusEffect implements IRemoveEffect {
     public DelayedEffect(StatusEffectCategory category) {
         super(category, 0x000000);
     }
@@ -26,8 +26,6 @@ public abstract class DelayedEffect extends StatusEffect {
     public void onRemoved(AttributeContainer attributeContainer) {
         super.onRemoved(attributeContainer);
     }
-
-    public abstract void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity);
 
     public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> biConsumer) {
         return new DelayedEffect(category) {
