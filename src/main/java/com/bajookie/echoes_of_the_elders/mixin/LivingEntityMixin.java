@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.DelayedEffect;
+import com.bajookie.echoes_of_the_elders.effects.IRemoveEffect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,8 +19,8 @@ public class LivingEntityMixin {
         var world = entity.getWorld();
 
         if (!world.isClient()) {
-            if (effect.getEffectType() instanceof DelayedEffect delayedEffect) {
-                delayedEffect.onRemoved(effect, entity);
+            if (effect.getEffectType() instanceof IRemoveEffect iRemoveEffect) {
+                iRemoveEffect.onRemoved(effect, entity);
             }
         }
     }

@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class ElectricStunEffect extends StatusEffect {
     public ElectricStunEffect() {
-        super(StatusEffectCategory.HARMFUL, 0x971fcf);
+        super(StatusEffectCategory.HARMFUL, 0x000000);
     }
 
     @Override

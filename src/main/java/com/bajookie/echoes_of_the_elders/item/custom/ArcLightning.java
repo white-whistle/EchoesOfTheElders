@@ -45,7 +45,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
                 return false;
             });
             for (Entity entity : list) {
-                ((LivingEntity)entity).addStatusEffect(new StatusEffectInstance(ModEffects.ELECTRIC_STUN_EFFECT,20*2,1),user);
+                ((LivingEntity)entity).addStatusEffect(new StatusEffectInstance(ModEffects.ELECTRIC_STUN_EFFECT,20*2,1,true,false),user);
             }
         }
         return super.use(world, user, hand);
@@ -59,7 +59,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!target.getWorld().isClient()) {
-            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, attacks.get(stack)));
+            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, attacks.get(stack),true,false));
         }
         return false;
     }

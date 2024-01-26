@@ -41,8 +41,11 @@ public class TimeTokenItem extends Item implements IArtifact, IHasCooldown {
 
     public static void clearCooldowns(ItemCooldownManager itemCooldownManager) {
         var entries = ((ItemCooldownManagerAccessor) itemCooldownManager).getEntries();
+        if (entries == null) return;
 
-        for (var key : entries.keySet()) {
+        Item[] keys = entries.keySet().toArray(new Item[]{});
+
+        for (var key : keys) {
             itemCooldownManager.remove(key);
         }
     }

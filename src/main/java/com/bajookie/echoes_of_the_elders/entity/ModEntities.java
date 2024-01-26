@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.entity;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.TvArrow;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -40,6 +41,10 @@ public class ModEntities {
             new Identifier(MOD_ID, "chain_lightning_entity"),
             FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE, ChainLightningProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<VacuumProjectileEntity> VACUUM_PROJECTILE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "vacuum_projectile_entity"),
+            FabricEntityTypeBuilder.<VacuumProjectileEntity>create(SpawnGroup.CREATURE, VacuumProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<TeleportEyeProjectileEntity> TELEPORT_EYE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "teleport_eye_entity"),
             FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE, TeleportEyeProjectileEntity::new)
@@ -51,6 +56,10 @@ public class ModEntities {
     public static final EntityType<MagmaBullet> MAGMA_BULLET_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "magma_bullet_entity"),
             FabricEntityTypeBuilder.<MagmaBullet>create(SpawnGroup.CREATURE, MagmaBullet::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<TvArrowEntity> TV_ARROW_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "tv_arrow_entity"),
+            FabricEntityTypeBuilder.<TvArrowEntity>create(SpawnGroup.CREATURE, TvArrowEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     /**
