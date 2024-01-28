@@ -12,6 +12,7 @@
     "LivingEntityCapabilityMixin",
     "LivingEntityMixin",
     "LivingEntityRaidMixin",
+    "LivingEntityRendererMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
     "PotionUseMixin",
@@ -19,8 +20,7 @@
     "ServerWorldAccessor",
     "SplashPotionUseMixin",
     "ThrownItemEntityAccessor",
-    "TrunkPlacerTypeInvoker",
-    "LivingEntityRendererMixin"
+    "TrunkPlacerTypeInvoker"
   ],
   "client": [
     "ClientItemMixin",
@@ -29,6 +29,7 @@
     "DrawContextMixin",
     "EndermanTickMixin",
     "EyesFeatureRendererMixin",
+    "GameRendererMixin",
     "HeldItemRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
