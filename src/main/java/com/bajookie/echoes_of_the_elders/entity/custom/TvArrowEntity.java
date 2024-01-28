@@ -1,162 +1,135 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
-import com.bajookie.echoes_of_the_elders.util.ModCamera;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
+import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.*;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity, Mount {
-    private static final TrackedData<Integer> TARGET_ID = DataTracker.registerData(TvArrowEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private final Vec3d userPos;
-    private ModCamera camera = new ModCamera();
-
+public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity {
     public TvArrowEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.speed = 0.5f;
-        this.userPos = new Vec3d(0, 0, 0);
     }
 
     @Override
     protected void initDataTracker() {
-        this.dataTracker.startTracking(TARGET_ID, -1);
     }
 
+    @Override
+    public Packet<ClientPlayPacketListener> createSpawnPacket() {
+        Entity entity = this.getOwner();
+        return new EntitySpawnS2CPacket(this, entity == null ? 0 : entity.getId());
+    }
 
-    public TvArrowEntity(World world, double x, double y, double z, int target, float speed, Vec3d userPos) {
+    public TvArrowEntity(World world, double x, double y, double z, float speed, LivingEntity owner) {
         super((EntityType<? extends ProjectileEntity>) ModEntities.TV_ARROW_ENTITY_ENTITY_TYPE, world);
+        this.setOwner(owner);
         this.setPosition(x, y, z);
+        this.prevPitch= owner.getPitch();
+        this.prevYaw = owner.getYaw();
+        this.setRotation(owner.getYaw(),owner.getPitch());
         this.speed = speed;
-        this.userPos = userPos;
-        this.dataTracker.set(TARGET_ID, target);
-        this.setVelocity(0, 0.1, 0);
-        this.refreshPositionAndAngles(x, y, z, this.getYaw(), this.getPitch());
+        this.refreshPositionAndAngles(x, y, z, owner.getYaw(), owner.getPitch());
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.getOwner() != null && this.getOwner() instanceof PlayerEntity player){
-            camera.update(this.getWorld(), player,this,false,false,1);
-        }
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         if (!this.noClip) {
             this.onCollision(hitResult);
             this.velocityDirty = true;
         }
         if (this.age < 300) {
-            if (this.getControllingPassenger() != null) {
-                var pass = this.getControllingPassenger();
+            var pass =(LivingEntity) this.getOwner();
+            if (pass != null) {
                 Vec3d desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
-                Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.1)).normalize();
+                this.updateRotation();
+                Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.13)).normalize();
                 this.setVelocity(newDirection.multiply(1.3));
                 this.setPosition(this.getPos().add(this.getVelocity()));
             } else {
-                detonate(true);
+                this.discard();
             }
         } else {
-            if (this.getControllingPassenger() != null) {
-                this.getControllingPassenger().dismountVehicle();
-                returnUserToPos();
-            }
-            this.setPosition(this.getPos().add(this.getVelocity()));
+            this.discard();
         }
-        if (this.age > 400) {
-            this.detonate(false);
+        if (!this.getWorld().isClient){
+            ((ServerWorld)this.getWorld()).spawnParticles(ParticleTypes.POOF,this.prevX,this.prevY,this.prevZ,1,0,0,0,0);
+            this.refreshPositionAndAngles(this.getX(),this.getY(),this.getZ(),this.getYaw(),this.getPitch());
         }
     }
 
-    private void returnUserToPos() {
-        if (this.getOwner() != null) {
-            this.getOwner().teleport(this.userPos.x,this.userPos.y,this.userPos.z);
-        }
-    }
-
-    private void detonate(boolean returnUser) {
-        if (returnUser) {
-            returnUserToPos();
-        }
+    private void detonate() {
         if (!this.getWorld().isClient) {
-            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), 9, false, World.ExplosionSourceType.MOB);
+            var user = (PlayerEntity) this.getOwner();
+            if (user != null) {
+                ModCapabilities.SCREEN_SWITCH_OBJECTIVE.attach(user, (screenSwitchCapability -> {
+                    screenSwitchCapability.setTargetScreen(null);
+                }));
+                CapabilitySync.send((ServerPlayerEntity) user, user);
+            }
+            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), 16, true, World.ExplosionSourceType.MOB);
         }
         this.discard();
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult entityHitResult) {
-        super.onEntityHit(entityHitResult);
-
+    protected void updateRotation() {
+        Vec3d vec3d = this.getVelocity();
+        this.setPitch(this.updateRotationMod(this.prevPitch,(float) Math.toDegrees(MathHelper.atan2(vec3d.y*-1,MathHelper.sqrt((float) (vec3d.x*vec3d.x+vec3d.z*vec3d.z))))));
+        this.setYaw(this.updateRotationMod(this.prevYaw, (float) Math.toDegrees(MathHelper.atan2(vec3d.z,vec3d.x)-MathHelper.HALF_PI)));
+    }
+    private float updateRotationMod(float prevRot, float newRot) {
+        while (newRot - prevRot < -180.0f) {
+            newRot += 360.0f;
+        }
+        while (newRot - prevRot >= 180.0f) {
+            newRot -= 360.0f;
+        }
+        return MathHelper.lerp(0.25f, prevRot, newRot);
     }
 
-    @Override
-    protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
-    }
+
+    /*
+            Vec3d vec3d = this.getVelocity();
+        double d = vec3d.horizontalLength();
+        this.setPitch(MathHelper.lerp(0.2f, this.prevPitch, (float) Math.toDegrees(MathHelper.atan2(vec3d.y*-1,MathHelper.sqrt((float) (vec3d.x*vec3d.x+vec3d.z*vec3d.z))))));
+        this.setYaw(MathHelper.lerp(0.2f, this.prevYaw, (float) Math.toDegrees(MathHelper.atan2(vec3d.z,vec3d.x)-MathHelper.HALF_PI)));
+        System.out.println(this.getYaw());
+     */
+
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         super.onBlockHit(blockHitResult);
-        this.detonate(this.getFirstPassenger() != null);
+        this.detonate();
     }
 
     @Override
     public ItemStack getStack() {
         return Items.FIREWORK_ROCKET.getDefaultStack();
-    }
-
-    /*
-    RIDING
-     */
-
-    @Nullable
-    @Override
-    public LivingEntity getControllingPassenger() {
-        return (LivingEntity) this.getFirstPassenger();
-    }
-
-    @Override
-    public Vec3d updatePassengerForDismount(LivingEntity passenger) {
-        passenger.setPosition(this.userPos);
-        return super.updatePassengerForDismount(passenger);
-    }
-
-    @Override
-    protected boolean canAddPassenger(Entity passenger) {
-        return true;
-    }
-
-    @Override
-    protected boolean canStartRiding(Entity entity) {
-        return false;
-    }
-
-    @Override
-    public boolean shouldDismountUnderwater() {
-        return false;
-    }
-
-    @Override
-    public void dismountVehicle() {
-        super.dismountVehicle();
     }
 }

@@ -41,7 +41,6 @@ public class RaidDebugItem extends Item {
 
         if (!world.isClient) {
             var raidObjective = EntityType.PIG.create(world);
-
             assert raidObjective != null;
             raidObjective.refreshPositionAndAngles((double) pos.getX() + 0.5, (double) pos.getY(), (double) pos.getZ() + 0.5, MathHelper.wrapDegrees(world.random.nextFloat() * 360.0f), 0.0f);
 
