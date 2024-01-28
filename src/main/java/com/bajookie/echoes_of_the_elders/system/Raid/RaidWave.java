@@ -3,14 +3,18 @@ package com.bajookie.echoes_of_the_elders.system.Raid;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.text.Text;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 
-public record RaidWave(int level, int count, RaidSpawner spawner, RaidPositioner positioner) {
+public record RaidWave(Text name, int level, int count, RaidSpawner spawner, RaidPositioner positioner) {
     static Random r = new Random();
 
-    public int spawnEntities(LivingEntity objective) {
+    public ArrayList<UUID> spawnEntities(LivingEntity objective) {
         var world = objective.getWorld();
+        var entities = new ArrayList<UUID>();
 
         for (int i = 0; i < count; i++) {
             var entity = spawner.getRaider(world);
@@ -29,9 +33,9 @@ public record RaidWave(int level, int count, RaidSpawner spawner, RaidPositioner
                 e.setRaidTarget(objective);
             });
 
-            // entity.refreshPositionAndAngles(pos, 0 ,0);
+            entities.add(entity.getUuid());
         }
 
-        return count;
+        return entities;
     }
 }

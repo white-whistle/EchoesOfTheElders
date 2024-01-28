@@ -44,6 +44,9 @@
   "item.echoes_of_the_elders.wtf_relic": "WTF",
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
+  "tooltip.echoes_of_the_elders.soulbound": "<soulbound> Soulbound - {player}</soulbound>",
+  "message.echoes_of_the_elders.soulbound.wrong_user": "<soulbound/> <RED>Cannot use this item, it belongs to {player}</RED>",
+  "tooltip.echoes_of_the_elders.tier": "<tier>{tier}</tier>",
   "tooltip.echoes_of_the_elders.artifact_stack": "{count}§8\\{maxCount}§r",
   "tooltip.echoes_of_the_elders.artifact_stack.max": "<rainbow>{count}</rainbow>§8\\{maxCount}§r",
   "tooltip.echoes_of_the_elders.cooldown_reduction": "+§9{percent}% <cooldown_reduction>Cooldown reduction</cooldown_reduction>",
@@ -75,5 +78,12 @@
   "tooltip.echoes_of_the_elders.elder_prism.effect.to_spirit_realm": "<right_click/> teleport to the <dimension>spirit realm</dimension>",
   "tooltip.echoes_of_the_elders.elder_prism.effect.to_overworld": "<right_click/> teleport to the <dimension>overworld dimension</dimension>",
   "tooltip.echoes_of_the_elders.elder_prism.effect.other": "<right_click/> teleport to the <dimension>overworld/spirit realm</dimension>",
-  "tooltip.echoes_of_the_elders.wither_scales_item.effect": "<passive/> Deflects incoming arrows"
+  "tooltip.echoes_of_the_elders.wither_scales_item.effect": "<passive/> Deflects incoming arrows",
+  "message.echoes_of_the_elders.raid.defeat": "<RED>You have failed to defend the raid objective</RED>",
+  "message.echoes_of_the_elders.raid.victory": "<GREEN>You have completed the raid</GREEN>",
+  "message.echoes_of_the_elders.raid.incoming_wave": "<RED>Incoming Wave! - {wave}</RED>",
+  "message.echoes_of_the_elders.raid.wave_complete": "<GREEN>Wave complete!</GREEN>",
+  "message.echoes_of_the_elders.raid.charging": "<BLUE>A raid will begin shortly...</BLUE>",
+  "message.echoes_of_the_elders.raid.wave.zombies": "ZOMBIES!",
+  "message.echoes_of_the_elders.raid.wave.skeletons": "SKELETONS!"
 }

@@ -47,21 +47,7 @@ public class RaidDebugItem extends Item {
 
             world.spawnEntity(raidObjective);
 
-            ModCapabilities.RAID_OBJECTIVE.attach(raidObjective, c -> {
-                c.level = 0;
-                c.remainingWaves = 2;
-
-                Random r = new Random();
-                var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact iArtifact && iArtifact.shouldDrop()).toList();
-
-                for (int i = 0; i < 1 + r.nextInt(5); i++) {
-                    var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
-                    c.items.add(new ItemStack(randomArtifactItem));
-                }
-
-                c.begin();
-            });
-
+            ModCapabilities.RAID_OBJECTIVE.attach(raidObjective);
         }
 
         return ActionResult.SUCCESS;

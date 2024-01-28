@@ -3,23 +3,30 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class OldKeyItem extends Item {
@@ -45,6 +52,33 @@ public class OldKeyItem extends Item {
             context.getWorld().playSound(context.getBlockPos().getX(), context.getBlockPos().getY(), context.getBlockPos().getZ(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 4, 4, true);
         }
         return ActionResult.success(context.getWorld().isClient);
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+        var sb = Soulbound.getUuid(stack);
+        if (sb != null && !sb.equals(user.getUuid())) {
+            if (user.getWorld().isClient) {
+                user.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.soulbound.wrong_user", new TextArgs().put("player", Soulbound.getName(stack))));
+            }
+            return ActionResult.FAIL;
+        }
+
+        var isRaidObjective = ModCapabilities.RAID_OBJECTIVE.use(entity, o -> {
+            var wasAdded = o.tryAddKey(stack.copyWithCount(1), user);
+            if (!wasAdded) return Optional.of(false);
+
+            user.incrementStat(Stats.USED.getOrCreateStat(this));
+            if (!user.getAbilities().creativeMode) {
+                stack.decrement(1);
+            }
+
+            return Optional.of(true);
+        });
+
+        if (isRaidObjective.isPresent() && isRaidObjective.get()) return ActionResult.SUCCESS;
+
+        return super.useOnEntity(stack, user, entity, hand);
     }
 
     private ItemStack getRandomRelicDropStack() {

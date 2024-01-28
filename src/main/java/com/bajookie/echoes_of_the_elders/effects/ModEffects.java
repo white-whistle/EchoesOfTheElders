@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.effects;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
+import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffect;
@@ -22,7 +24,7 @@ public class ModEffects {
         var world = entity.getWorld();
         var level = instance.getAmplifier();
         if (entity instanceof PlayerEntity) return;
-        if (!world.isClient()){
+        if (!world.isClient()) {
             ServerWorld worldServer = (ServerWorld) world;
             EntityType.LIGHTNING_BOLT.spawn(worldServer, entity.getBlockPos(), SpawnReason.TRIGGERED);
 
@@ -30,13 +32,18 @@ public class ModEffects {
                 entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, secondaryDelay, level - 1));
             }
         }
-//        spawn lightning at entity
+        //        spawn lightning at entity
     }));
 
-    private static StatusEffect registerStatusEffect(String name,StatusEffect effect){
-        return Registry.register(Registries.STATUS_EFFECT,new Identifier(MOD_ID,name),effect);
+    public static final StatusEffect RAID_OBJECTIVE_START_COOLDOWN = registerStatusEffect("raid_objective_start_cooldown", DelayedEffect.create(StatusEffectCategory.NEUTRAL, (instance, entity) -> {
+        ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::begin);
+    }));
+
+    private static StatusEffect registerStatusEffect(String name, StatusEffect effect) {
+        return Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, name), effect);
     }
-    public static void registerEffects(){
+
+    public static void registerEffects() {
         EOTE.LOGGER.info("Registering status effects");
     }
 }
