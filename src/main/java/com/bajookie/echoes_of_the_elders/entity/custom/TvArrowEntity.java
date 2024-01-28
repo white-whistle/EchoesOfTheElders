@@ -1,7 +1,10 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.util.ModCamera;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.Camera;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -26,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity, Mount {
     private static final TrackedData<Integer> TARGET_ID = DataTracker.registerData(TvArrowEntity.class, TrackedDataHandlerRegistry.INTEGER);
     private final Vec3d userPos;
+    private ModCamera camera = new ModCamera();
 
     public TvArrowEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -52,6 +56,9 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
     @Override
     public void tick() {
         super.tick();
+        if (this.getOwner() != null && this.getOwner() instanceof PlayerEntity player){
+            camera.update(this.getWorld(), player,this,false,false,1);
+        }
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         if (!this.noClip) {
             this.onCollision(hitResult);
@@ -90,7 +97,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             returnUserToPos();
         }
         if (!this.getWorld().isClient) {
-            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), 6, false, World.ExplosionSourceType.MOB);
+            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), 9, false, World.ExplosionSourceType.MOB);
         }
         this.discard();
     }
