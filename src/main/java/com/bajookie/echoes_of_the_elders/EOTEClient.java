@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
+import com.bajookie.echoes_of_the_elders.client.TvArrowOverlay;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
@@ -26,6 +27,7 @@ public class EOTEClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.LIGHTNING_PARTICLE, LightningParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.MAGMA_BULLET_SPEED, MagmaBulletParticle.Factory::new);
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
+        //HudRenderCallback.EVENT.register(new TvArrowOverlay());
 
         TooltipComponentCallback.EVENT.register((data) -> {
             if (data instanceof ItemTooltipData itemTooltipData) {
