@@ -8,6 +8,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -34,17 +35,38 @@ public class ModCapabilities {
             this.name = name;
         }
 
-        public void use(H o, Consumer<T> fn) {
+        /**
+         * @param o  potential capability holder
+         * @param fn capability consumer
+         * @return true if the object has this capability
+         */
+        public boolean use(H o, Consumer<T> fn) {
             if (o instanceof IHasCapability iHasCapability) {
                 var capabilities = iHasCapability.echoesOfTheElders$getCapabilities();
-                if (capabilities == null) return;
+                if (capabilities == null) return false;
 
                 var capability = capabilities.get(this.name);
-                if (capability == null) return;
+                if (capability == null) return false;
 
                 // noinspection unchecked
                 fn.accept((T) capability);
+                return true;
             }
+            return false;
+        }
+
+        public <TRet> Optional<TRet> use(H o, Function<T, Optional<TRet>> fn) {
+            if (o instanceof IHasCapability iHasCapability) {
+                var capabilities = iHasCapability.echoesOfTheElders$getCapabilities();
+                if (capabilities == null) return Optional.empty();
+
+                var capability = capabilities.get(this.name);
+                if (capability == null) return Optional.empty();
+
+                // noinspection unchecked
+                return fn.apply((T) capability);
+            }
+            return Optional.empty();
         }
 
         public void attach(H o, @Nullable Consumer<T> init) {

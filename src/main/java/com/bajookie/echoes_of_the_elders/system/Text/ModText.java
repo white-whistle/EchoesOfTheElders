@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.Text;
 
+import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.util.Color;
 import net.minecraft.text.MutableText;
@@ -9,30 +10,33 @@ import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 @SuppressWarnings("unused")
 public class ModText {
     private static final HashMap<String, Function<MutableText, Text>> registeredTags = new HashMap<>();
-    public static final Function<MutableText, Text> FIRE = registerIconTag("fire", (t) -> t.styled(s -> s.withColor(0xFFB12F)));
-    public static final Function<MutableText, Text> LIGHTNING = registerIconTag("lightning", (t) -> t.styled(s -> s.withColor(0xF8FF6F)));
-    public static final Function<MutableText, Text> MAGIC = registerIconTag("magic", (t) -> t.styled(s -> s.withColor(0xD874FF)));
-    public static final Function<MutableText, Text> BOOST = registerIconTag("boost", (t) -> t.styled(s -> s.withColor(0x74CF5B)));
-    public static final Function<MutableText, Text> DASH = registerIconTag("dash", (t) -> t.styled(s -> s.withColor(0x2DD875)));
-    public static final Function<MutableText, Text> GOLD = registerIconTag("gold", (t) -> t.styled(s -> s.withColor(0xE9B115)));
-    public static final Function<MutableText, Text> HEART = registerIconTag("heart", (t) -> t.styled(s -> s.withColor(0xD32A2A)));
-    public static final Function<MutableText, Text> POTION = registerIconTag("potion", (t) -> t.styled(s -> s.withColor(0xC9AEFF)));
-    public static final Function<MutableText, Text> DIMENSION = registerIconTag("dimension", (t) -> t.styled(s -> s.withColor(0xA960C2)));
+    public static final Function<MutableText, Text> FIRE = registerIconTag("fire", colored(0xFFB12F));
+    public static final Function<MutableText, Text> LIGHTNING = registerIconTag("lightning", colored(0xF8FF6F));
+    public static final Function<MutableText, Text> MAGIC = registerIconTag("magic", colored(0xD874FF));
+    public static final Function<MutableText, Text> BOOST = registerIconTag("boost", colored(0x74CF5B));
+    public static final Function<MutableText, Text> DASH = registerIconTag("dash", colored(0x2DD875));
+    public static final Function<MutableText, Text> GOLD = registerIconTag("gold", colored(0xE9B115));
+    public static final Function<MutableText, Text> HEART = registerIconTag("heart", colored(0xD32A2A));
+    public static final Function<MutableText, Text> POTION = registerIconTag("potion", colored(0xC9AEFF));
+    public static final Function<MutableText, Text> DIMENSION = registerIconTag("dimension", colored(0xA960C2));
     public static final Function<MutableText, Text> ON_HIT = registerIconTag("on_hit");
     public static final Function<MutableText, Text> UNIQUE = registerIconTag("unique", ModText::rainbowText);
-    public static final Function<MutableText, Text> NEGATIVE_EFFECT = registerIconTag("negative_effect", (t) -> t.styled(s -> s.withColor(0xC73835)), "effect", 0xC73835);
-    public static final Function<MutableText, Text> POSITIVE_EFFECT = registerIconTag("positive_effect", (t) -> t.styled(s -> s.withColor(0x55C743)), "effect", 0x55C743);
+    public static final Function<MutableText, Text> NEGATIVE_EFFECT = registerIconTag("negative_effect", colored(0xC73835), "effect", 0xC73835);
+    public static final Function<MutableText, Text> POSITIVE_EFFECT = registerIconTag("positive_effect", colored(0x55C743), "effect", 0x55C743);
 
-    public static final Function<MutableText, Text> COOLDOWN = registerIconTag("cooldown", (t) -> t.styled(s -> s.withColor(0x4A56C7)));
-    public static final Function<MutableText, Text> COOLDOWN_STATIC = registerIconTag("cooldown_static", (t) -> t.styled(s -> s.withColor(0x4A56C7)));
-    public static final Function<MutableText, Text> COOLDOWN_REDUCTION = registerIconTag("cooldown_reduction", (t) -> t.styled(s -> s.withColor(Formatting.BLUE)));
+    public static final Function<MutableText, Text> COOLDOWN = registerIconTag("cooldown", colored(0x4A56C7));
+    public static final Function<MutableText, Text> COOLDOWN_STATIC = registerIconTag("cooldown_static", colored(0x4A56C7));
+    public static final Function<MutableText, Text> COOLDOWN_REDUCTION = registerIconTag("cooldown_reduction", colored(Formatting.BLUE));
     public static final Function<MutableText, Text> STACK_LEVEL = registerIconTag("power_star");
+    public static final Function<MutableText, Text> TIER = registerIconTag("tier", ModText::rainbowText, "tier", () -> CustomItemColors.rainbow().getRGB());
+    public static final Function<MutableText, Text> SOULBOUND = registerIconTag("soulbound", colored(0xc789d8));
 
     public static final Function<MutableText, Text> ACTIVE_ABILITY = registerIconTag("active");
     public static final Function<MutableText, Text> PASSIVE_ABILITY = registerIconTag("passive");
@@ -65,6 +69,17 @@ public class ModText {
         return wrappedWithIcon;
     }
 
+    public static Function<MutableText, Text> registerIconTag(String name, Function<MutableText, Text> fn, String iconName, Supplier<Integer> iconColor) {
+        var fontId = new Identifier(MOD_ID, iconName);
+        Supplier<Text> getIcon = () -> Text.literal("@").styled(s -> s.withFont(fontId).withColor(iconColor.get()));
+
+        Function<MutableText, Text> wrappedWithIcon = (mt) -> join(getIcon.get(), fn.apply(mt));
+
+        registeredTags.put(name, wrappedWithIcon);
+
+        return wrappedWithIcon;
+    }
+
     public static Function<MutableText, Text> registerIconTag(String name, Function<MutableText, Text> fn) {
         return registerIconTag(name, fn, name, 0xffffff);
     }
@@ -85,6 +100,14 @@ public class ModText {
         var c = Color.fromHSL(360 * progress, 0.5f, 0.7f).getRGB();
 
         return text.styled(s -> s.withColor(c));
+    }
+
+    public static Function<MutableText, Text> colored(int color) {
+        return (MutableText text) -> text.styled(s -> s.withColor(color));
+    }
+
+    public static Function<MutableText, Text> colored(Formatting color) {
+        return (MutableText text) -> text.styled(s -> s.withColor(color));
     }
 
     public static void init(HashMap<String, Function<MutableText, Text>> tags) {

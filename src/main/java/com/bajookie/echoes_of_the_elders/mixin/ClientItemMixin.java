@@ -1,11 +1,11 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
-import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.ModText;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.util.CooldownUtil;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -65,22 +65,17 @@ public class ClientItemMixin {
             }
         }
 
-        if (item instanceof IHasCooldown iHasCooldown) {
-            var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
-            var cdm = player.getItemCooldownManager();
-
+        var tier = Tier.get(stack);
+        if (tier > 0) {
             tryPad.run();
+            tooltip.add((TextUtil.translatable("tooltip.echoes_of_the_elders.tier", new TextArgs().putI("tier", tier))));
+        }
 
-            if (cdm.isCoolingDown(item)) {
-                var remainingTime = cdm.getCooldownProgress(item, mc.getTickDelta()) * cd;
-
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().putF("seconds", cd, Formatting.BLUE).putF("remaining", remainingTime));
-                tooltip.add(msg);
-            } else {
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().putF("seconds", cd, Formatting.BLUE));
-                tooltip.add(msg);
-            }
-
+        var soulbound = Soulbound.is(stack);
+        if (soulbound) {
+            tryPad.run();
+            var name = Soulbound.getName(stack);
+            tooltip.add((TextUtil.translatable("tooltip.echoes_of_the_elders.soulbound", new TextArgs().put("player", name))));
         }
     }
 }

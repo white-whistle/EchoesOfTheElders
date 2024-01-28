@@ -54,6 +54,7 @@ public class ModItems {
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
+    public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));

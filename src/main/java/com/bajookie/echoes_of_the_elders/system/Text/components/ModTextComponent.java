@@ -144,7 +144,7 @@ public class ModTextComponent
         this.updateMessageParts();
         for (StringVisitable stringVisitable : this.messageParts) {
             Optional<T> optional = stringVisitable.visit(visitor, style);
-            if (!optional.isPresent()) continue;
+            if (optional.isEmpty()) continue;
             return optional;
         }
         return Optional.empty();
@@ -155,7 +155,7 @@ public class ModTextComponent
         this.updateMessageParts();
         for (StringVisitable stringVisitable : this.messageParts) {
             Optional<T> optional = stringVisitable.visit(visitor);
-            if (!optional.isPresent()) continue;
+            if (optional.isEmpty()) continue;
             return optional;
         }
         return Optional.empty();
