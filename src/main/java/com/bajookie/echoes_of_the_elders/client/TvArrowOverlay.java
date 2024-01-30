@@ -29,17 +29,6 @@ public class TvArrowOverlay implements HudRenderCallback {
                 if (ModCapabilities.SCREEN_SWITCH_OBJECTIVE.hasCapability(client.player)){
                     ModCapabilities.SCREEN_SWITCH_OBJECTIVE.use(client.player, (screenSwitchCapability -> {
                         if (screenSwitchCapability.getTargetScreen(client.world) != null) {
-                            RenderSystem.disableDepthTest();
-                            RenderSystem.depthMask(false);
-                            RenderSystem.enableBlend();
-                            RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ZERO, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
-                            drawContext.setShaderColor(42/255f, 9/255f, 227f, 0.01f);
-                            drawContext.drawTexture(VIGNETTE_TEXTURE, 0, 0, -90, 0.0f, 0.0f, client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight(), client.getWindow().getScaledWidth(), client.getWindow().getScaledHeight());
-                            RenderSystem.depthMask(true);
-                            RenderSystem.enableDepthTest();
-                            drawContext.setShaderColor(1.0f, 1.0f, 1.0f, 1f);
-                            RenderSystem.disableBlend();
-                            RenderSystem.defaultBlendFunc();
                         }
                     }));
                 }

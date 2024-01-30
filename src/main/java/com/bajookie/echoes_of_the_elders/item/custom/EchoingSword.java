@@ -7,11 +7,14 @@ import com.bajookie.echoes_of_the_elders.mixin.PlayerEntityMixin;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -29,17 +32,22 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
-public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate,IHasCooldown {
-    private final StackedItemStat.Int stackedAttackDamage = new StackedItemStat.Int(5, 20);
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 20 * 20);
+public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown {
+    private final StackedItemStat.Int stackedAttackDamage = new StackedItemStat.Int(5, 16);
+    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
+
     public EchoingSword() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 1.4f, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(16));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(16));
     }
 
     private final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers(index -> {
@@ -48,10 +56,11 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
 
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) stackedAttackDamage.get(progress), EntityAttributeModifier.Operation.ADDITION));
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", 1.4f, EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -1.4f, EntityAttributeModifier.Operation.ADDITION));
 
         return builder.build();
     });
+
     @Override
     public boolean canMine(BlockState state, World world, BlockPos pos, PlayerEntity miner) {
         return !miner.isCreative();
@@ -63,19 +72,6 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
             return 15.0f;
         }
         return state.isIn(BlockTags.SWORD_EFFICIENT) ? 1.5f : 1.0f;
-    }
-
-    @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
-        if (attacker instanceof PlayerEntity user){
-            if (!user.getItemCooldownManager().isCoolingDown(this)) {
-                target.addStatusEffect(new StatusEffectInstance(ModEffects.ECHO_HIT,10,this.stackedAttackDamage.get(stack),true,false,false));
-                user.getItemCooldownManager().set(this, this.getCooldown(stack));
-            }
-
-        }
-        return true;
     }
 
     @Override
@@ -96,18 +92,19 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
         if (slot == EquipmentSlot.MAINHAND) {
             return stackedAttributeModifiers.get(stack.getCount() - 1);
         }
-        return super.getAttributeModifiers(stack, slot);
-    }
-
-
-
-    @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        super.inventoryTick(stack, world, entity, slot, selected);
+        else {
+            return super.getAttributeModifiers(stack, slot);
+        }
     }
 
     @Override
     public int getCooldown(ItemStack itemStack) {
         return this.cooldown.get(itemStack);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.echoing_sword.effect"));
+        super.appendTooltip(stack, world, tooltip, context);
     }
 }

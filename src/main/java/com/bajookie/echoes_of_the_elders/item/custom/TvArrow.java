@@ -3,19 +3,21 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.entity.custom.TvArrowEntity;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
-import com.mojang.authlib.GameProfile;
-import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.client.recipebook.ClientRecipeBook;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.StatHandler;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-
-import java.util.UUID;
 
 public class TvArrow extends Item {
     public TvArrow() {
@@ -36,6 +38,8 @@ public class TvArrow extends Item {
     }
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+
+
         return super.postHit(stack, target, attacker);
     }
 }
