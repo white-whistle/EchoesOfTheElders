@@ -79,6 +79,9 @@ public class ModItemGroups {
                 entries.add(ModItems.MOLTEN_CHAMBER);
                 entries.add(ModItems.ECHOING_SWORD);
                 entries.add(ModItems.TV_ARROW);
+                entries.add(ModItems.STARFALL_BOW);
+                // disabled until we think this one out
+                // entries.add(ModItems.SILENT_FIRE);
             }).build());
 
     public static void registerGroups() {

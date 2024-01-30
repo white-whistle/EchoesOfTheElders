@@ -49,6 +49,10 @@ public class ModEntities {
             new Identifier(MOD_ID, "vacuum_projectile_entity"),
             FabricEntityTypeBuilder.<VacuumProjectileEntity>create(SpawnGroup.CREATURE, VacuumProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+    public static final EntityType<StarArrowProjectile> STAR_ARROW_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "star_arrow_entity"),
+            FabricEntityTypeBuilder.<StarArrowProjectile>create(SpawnGroup.CREATURE, StarArrowProjectile::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<TeleportEyeProjectileEntity> TELEPORT_EYE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "teleport_eye_entity"),
             FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE, TeleportEyeProjectileEntity::new)

@@ -3,6 +3,8 @@ package com.bajookie.echoes_of_the_elders.entity.client;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.ArrowEntityRenderer;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
@@ -37,6 +39,7 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.MAGMA_BULLET_ENTITY_TYPE, MagmaBulletEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER,EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
+        EntityRendererRegistry.register(ModEntities.STAR_ARROW_ENTITY, ArrowEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(ZOMBEE_ENTITY_LAYER,ZomBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeRenderer::new);

@@ -59,7 +59,9 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.STASIS_STOPWATCH,
                 ModItems.TIME_TOKEN,
                 ModItems.WTF_RELIC,
-                ModItems.VACUUM_RELIC
+                ModItems.VACUUM_RELIC,
+                ModItems.WTF_RELIC,
+                ModItems.STARFALL_BOW
         );
     }
 

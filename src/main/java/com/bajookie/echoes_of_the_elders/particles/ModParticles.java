@@ -12,7 +12,14 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 public class ModParticles {
 
     public static final DefaultParticleType SECOND_SUN_PARTICLE = registerParticle(
-            "second_sun_particle", FabricParticleTypes.simple());
+            "second_sun_particle", FabricParticleTypes.simple()
+    );
+    public static final DefaultParticleType STARFALL_TRAIL_PARTICLE = registerParticle(
+            "starfall_trail_particle", FabricParticleTypes.simple()
+    );
+    public static final DefaultParticleType STARFALL_STAR_PARTICLE = registerParticle(
+            "starfall_star_particle", FabricParticleTypes.simple()
+    );
     public static final DefaultParticleType ELECTRIC_SHOCK = registerParticle(
             "electric_shock_particle",FabricParticleTypes.simple());
     public static final DefaultParticleType LIGHTNING_PARTICLE = registerParticle(
