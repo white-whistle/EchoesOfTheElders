@@ -78,7 +78,11 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         if (level == -1) level = Tier.get(itemStack);
 
         if (Tier.get(itemStack) != level) return false;
-        if (items.stream().anyMatch(stack -> Soulbound.getUuid(stack) == owner)) return false;
+        if (items.stream().anyMatch(stack -> {
+            var soulbound = Soulbound.getUuid(stack);
+            if (soulbound == null) return false;
+            return soulbound.equals(owner);
+        })) return false;
 
         if (remainingWaves == -1) {
             remainingWaves = 5;
