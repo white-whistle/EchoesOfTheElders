@@ -41,6 +41,15 @@ public class OldKeyItem extends Item {
 
         Block block = context.getWorld().getBlockState(pos).getBlock();
         PlayerEntity player = context.getPlayer();
+        var stack = context.getStack();
+
+        var sb = Soulbound.getUuid(stack);
+        if (sb != null && player != null && !sb.equals(player.getUuid())) {
+            if (player.getWorld().isClient) {
+                player.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.soulbound.wrong_user", new TextArgs().put("player", Soulbound.getName(stack))), true);
+            }
+            return ActionResult.FAIL;
+        }
 
         if (block == ModBlocks.ARTIFACT_VAULT) {
             if (player != null && !player.getAbilities().creativeMode) {

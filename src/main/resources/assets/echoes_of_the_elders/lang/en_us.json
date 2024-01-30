@@ -51,7 +51,7 @@
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
   "tooltip.echoes_of_the_elders.soulbound": "<soulbound> Soulbound - {player}</soulbound>",
-  "message.echoes_of_the_elders.soulbound.wrong_user": "<soulbound/> <RED>Cannot use this item, it belongs to {player}</RED>",
+  "message.echoes_of_the_elders.soulbound.wrong_user": "<soulbound/> <RED>Cannot use this item, it belongs to {player}</RED> <soulbound/>",
   "tooltip.echoes_of_the_elders.tier": "<tier>{tier}</tier>",
   "tooltip.echoes_of_the_elders.artifact_stack": "{count}§8\\{maxCount}§r",
   "tooltip.echoes_of_the_elders.artifact_stack.max": "<rainbow>{count}</rainbow>§8\\{maxCount}§r",

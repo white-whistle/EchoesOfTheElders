@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.Map;
 
-import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 @Mixin(ModelLoader.class)
 public abstract class ModelLoaderMixin {
@@ -32,6 +31,7 @@ public abstract class ModelLoaderMixin {
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "shiny_ancient_stone_sword_3d", "inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID,"arc_lightning_3d","inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID,"scorchers_mitts_3d","inventory"));
+        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "soulbound", "inventory"));
 
         ModItems.registeredModItems.forEach(item -> {
             if (item instanceof IHasUpscaledModel) {
