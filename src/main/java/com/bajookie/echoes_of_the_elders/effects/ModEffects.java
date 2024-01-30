@@ -20,7 +20,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
@@ -78,7 +85,7 @@ public class ModEffects {
     },((entity, integer) -> {
         if (!entity.getWorld().isClient){
             World world = entity.getWorld();
-            world.playSound(null,entity.getBlockPos(),ModSounds.ELECTRIC_STRIKE,SoundCategory.AMBIENT,4f,4f);
+            world.playSound(null,entity.getBlockPos(),ModSounds.ELECTRIC_STRIKE, SoundCategory.AMBIENT,4f,4f);
             entity.damage(world.getDamageSources().create(DamageTypes.MAGIC,entity.getLastAttacker()),4);
             entity.addStatusEffect(new StatusEffectInstance(ModEffects.SHOCK_EFFECT,5*20),entity.getLastAttacker());
         }
