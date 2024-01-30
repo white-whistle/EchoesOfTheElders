@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 
@@ -23,6 +24,7 @@ public class ModModelPredicateProvider {
 
             }
         });
+        registerBow(ModItems.STARFALL_BOW);
 
         ModelPredicateProviderRegistry.register(ModItems.WITHER_SCALES_ITEM, new Identifier(MOD_ID, "on"),
                 ((stack, world, entity, seed) -> {
@@ -65,5 +67,19 @@ public class ModModelPredicateProvider {
                     }
                     return 0;
                 });
+    }
+    private static void registerBow(Item bow) {
+        ModelPredicateProviderRegistry.register(bow, new Identifier("pull"), (stack, world, entity, seed) -> {
+            if (entity == null) {
+                return 0.0f;
+            }
+            if (entity.getActiveItem() != stack) {
+                return 0.0f;
+            }
+            return (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f;
+        });
+        ModelPredicateProviderRegistry.register(bow, new Identifier("pulling"),
+                (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);
+
     }
 }

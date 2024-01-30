@@ -11,6 +11,8 @@ import com.bajookie.echoes_of_the_elders.events.PlayerAttackHandler;
 import com.bajookie.echoes_of_the_elders.particles.*;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
+import com.bajookie.echoes_of_the_elders.particles.StarParticle;
+import com.bajookie.echoes_of_the_elders.particles.StarfallTrailParticle;
 import com.bajookie.echoes_of_the_elders.screen.client.ModHandledScreens;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
@@ -28,6 +30,8 @@ public class EOTEClient implements ClientModInitializer {
         ModModelPredicateProvider.registerModModels();
 
         ParticleFactoryRegistry.getInstance().register(ModParticles.SECOND_SUN_PARTICLE, SecondSunParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.STARFALL_TRAIL_PARTICLE, StarfallTrailParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.STARFALL_STAR_PARTICLE, StarParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.ELECTRIC_SHOCK, ElectricShockParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.LIGHTNING_PARTICLE, LightningParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.MAGMA_BULLET_SPEED, MagmaBulletParticle.Factory::new);

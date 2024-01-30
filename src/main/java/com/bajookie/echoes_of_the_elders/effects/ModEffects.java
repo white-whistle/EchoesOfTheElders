@@ -49,6 +49,7 @@ public class ModEffects {
         }
         //        spawn lightning at entity
     }));
+    public static final StatusEffect STARFALL_EFFECT = registerStatusEffect("starfall_effect",new StarfallEffect(StatusEffectCategory.HARMFUL,0x000000));
 
     public static final StatusEffect RAID_OBJECTIVE_START_COOLDOWN = registerStatusEffect("raid_objective_start_cooldown", DelayedEffect.create(StatusEffectCategory.NEUTRAL, (instance, entity) -> {
         ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::begin);

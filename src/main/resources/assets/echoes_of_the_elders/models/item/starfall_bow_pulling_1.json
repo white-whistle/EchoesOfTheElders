@@ -1,0 +1,6 @@
+{
+  "parent": "echoes_of_the_elders:item/starfall_bow",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/starfall_bow_pulling_1"
+  }
+}
