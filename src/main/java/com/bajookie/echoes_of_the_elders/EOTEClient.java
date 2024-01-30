@@ -7,12 +7,14 @@ import com.bajookie.echoes_of_the_elders.client.TvArrowOverlay;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
+import com.bajookie.echoes_of_the_elders.events.PlayerAttackHandler;
 import com.bajookie.echoes_of_the_elders.particles.*;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 
 public class EOTEClient implements ClientModInitializer {
     @Override
@@ -40,5 +42,6 @@ public class EOTEClient implements ClientModInitializer {
         // DimensionRenderingRegistryImpl.registerSkyRenderer(ModDimensions.DEFENSE_DIM_LEVEL_KEY,new ModSkyRenderer());
         CustomItemColors.init();
         ClientNetworking.init();
+        AttackEntityCallback.EVENT.register(new PlayerAttackHandler());
     }
 }

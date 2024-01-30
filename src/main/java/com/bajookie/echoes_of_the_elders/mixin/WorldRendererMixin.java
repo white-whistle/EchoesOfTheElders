@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.mixin;
 
 
 import com.bajookie.echoes_of_the_elders.client.CustomOutlineColor;
+import com.bajookie.echoes_of_the_elders.entity.custom.TvArrowEntity;
 import com.bajookie.echoes_of_the_elders.system.Raid.client.RaidEntityOverlayRenderer;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import com.mojang.blaze3d.platform.GlStateManager;
@@ -12,6 +13,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderProgram;
 import net.minecraft.client.gl.VertexBuffer;
 import net.minecraft.client.render.*;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -33,7 +36,9 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 

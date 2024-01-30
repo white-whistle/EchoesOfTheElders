@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
+import net.fabricmc.fabric.api.entity.FakePlayer;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.GameRenderer;
@@ -18,21 +19,28 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ChunkTicketType;
+import net.minecraft.server.world.ServerChunkManager;
+import net.minecraft.server.world.ServerEntityManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.ChunkStatus;
 import org.jetbrains.annotations.Nullable;
 
-public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity {
+import java.util.function.Predicate;
+
+public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,Mount {
     public TvArrowEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.speed = 0.5f;
     }
-
     @Override
     protected void initDataTracker() {
     }
@@ -47,9 +55,9 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
         super((EntityType<? extends ProjectileEntity>) ModEntities.TV_ARROW_ENTITY_ENTITY_TYPE, world);
         this.setOwner(owner);
         this.setPosition(x, y, z);
-        this.prevPitch= owner.getPitch();
+        this.prevPitch = owner.getPitch();
         this.prevYaw = owner.getYaw();
-        this.setRotation(owner.getYaw(),owner.getPitch());
+        this.setRotation(owner.getYaw(), owner.getPitch());
         this.speed = speed;
         this.refreshPositionAndAngles(x, y, z, owner.getYaw(), owner.getPitch());
     }
@@ -57,13 +65,14 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
     @Override
     public void tick() {
         super.tick();
+
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
         if (!this.noClip) {
             this.onCollision(hitResult);
             this.velocityDirty = true;
         }
         if (this.age < 300) {
-            var pass =(LivingEntity) this.getOwner();
+            var pass = (LivingEntity) this.getOwner();
             if (pass != null) {
                 Vec3d desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
                 this.updateRotation();
@@ -76,12 +85,11 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
         } else {
             this.discard();
         }
-        if (!this.getWorld().isClient){
-            ((ServerWorld)this.getWorld()).spawnParticles(ParticleTypes.POOF,this.prevX,this.prevY,this.prevZ,1,0,0,0,0);
-            this.refreshPositionAndAngles(this.getX(),this.getY(),this.getZ(),this.getYaw(),this.getPitch());
+        if (!this.getWorld().isClient) {
+            ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.POOF, this.prevX, this.prevY, this.prevZ, 1, 0, 0, 0, 0);
+            this.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
         }
     }
-
     private void detonate() {
         if (!this.getWorld().isClient) {
             var user = (PlayerEntity) this.getOwner();
@@ -99,9 +107,10 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
     @Override
     protected void updateRotation() {
         Vec3d vec3d = this.getVelocity();
-        this.setPitch(this.updateRotationMod(this.prevPitch,(float) Math.toDegrees(MathHelper.atan2(vec3d.y*-1,MathHelper.sqrt((float) (vec3d.x*vec3d.x+vec3d.z*vec3d.z))))));
-        this.setYaw(this.updateRotationMod(this.prevYaw, (float) Math.toDegrees(MathHelper.atan2(vec3d.z,vec3d.x)-MathHelper.HALF_PI)));
+        this.setPitch(this.updateRotationMod(this.prevPitch, (float) Math.toDegrees(MathHelper.atan2(vec3d.y * -1, MathHelper.sqrt((float) (vec3d.x * vec3d.x + vec3d.z * vec3d.z))))));
+        this.setYaw(this.updateRotationMod(this.prevYaw, (float) Math.toDegrees(MathHelper.atan2(vec3d.z, vec3d.x) - MathHelper.HALF_PI)));
     }
+
     private float updateRotationMod(float prevRot, float newRot) {
         while (newRot - prevRot < -180.0f) {
             newRot += 360.0f;
@@ -109,12 +118,12 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
         while (newRot - prevRot >= 180.0f) {
             newRot -= 360.0f;
         }
-        return MathHelper.lerp(0.25f, prevRot, newRot);
+        return MathHelper.lerp(0.15f, prevRot, newRot);
     }
 
 
     /*
-            Vec3d vec3d = this.getVelocity();
+        Vec3d vec3d = this.getVelocity();
         double d = vec3d.horizontalLength();
         this.setPitch(MathHelper.lerp(0.2f, this.prevPitch, (float) Math.toDegrees(MathHelper.atan2(vec3d.y*-1,MathHelper.sqrt((float) (vec3d.x*vec3d.x+vec3d.z*vec3d.z))))));
         this.setYaw(MathHelper.lerp(0.2f, this.prevYaw, (float) Math.toDegrees(MathHelper.atan2(vec3d.z,vec3d.x)-MathHelper.HALF_PI)));
@@ -131,5 +140,10 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity 
     @Override
     public ItemStack getStack() {
         return Items.FIREWORK_ROCKET.getDefaultStack();
+    }
+
+    @Override
+    protected boolean canAddPassenger(Entity passenger) {
+        return true;
     }
 }
