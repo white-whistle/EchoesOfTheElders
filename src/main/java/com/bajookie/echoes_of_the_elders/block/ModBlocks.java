@@ -47,6 +47,14 @@ public class ModBlocks {
     public static final Block SPIRITAL_GRASS = registerBlock("spirital_grass", new SpiritalGrass(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY)));
     //public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
+    //Crystals
+    public static final Block COAL_CRYSTAL = registerBlock("coal_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.COAL));
+    public static final Block IRON_CRYSTAL = registerBlock("iron_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.IRON));
+    public static final Block GOLD_CRYSTAL = registerBlock("gold_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.GOLD));
+    public static final Block DIAMOND_CRYSTAL = registerBlock("diamond_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.DIAMOND));
+    public static final Block EMERALD_CRYSTAL = registerBlock("emerald_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.EMERALD));
+    public static final Block ORE_CREATOR_BLOCK = registerBlock("ore_creator_block",new OreCreatorRelic());
+
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
     }
@@ -76,5 +84,11 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(WOOL_TENT_DOOR, RenderLayer.getCutout());
+
+        BlockRenderLayerMap.INSTANCE.putBlock(COAL_CRYSTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(IRON_CRYSTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GOLD_CRYSTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(DIAMOND_CRYSTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(EMERALD_CRYSTAL, RenderLayer.getCutout());
     }
 }

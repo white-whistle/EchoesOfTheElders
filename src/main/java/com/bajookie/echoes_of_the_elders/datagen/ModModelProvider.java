@@ -42,6 +42,13 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_LEAVES);
         blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        //Crystals
+        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ORE_CREATOR_BLOCK);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.EMERALD_CRYSTAL);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.DIAMOND_CRYSTAL);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.GOLD_CRYSTAL);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.IRON_CRYSTAL);
+        blockStateModelGenerator.registerAmethyst(ModBlocks.COAL_CRYSTAL);
     }
 
     static class ItemModelConfig {

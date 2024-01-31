@@ -44,6 +44,12 @@ public class ModItemGroups {
                 // entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
+                entries.add(ModBlocks.COAL_CRYSTAL);
+                entries.add(ModBlocks.IRON_CRYSTAL);
+                entries.add(ModBlocks.GOLD_CRYSTAL);
+                entries.add(ModBlocks.DIAMOND_CRYSTAL);
+                entries.add(ModBlocks.EMERALD_CRYSTAL);
+                entries.add(ModBlocks.ORE_CREATOR_BLOCK);
                 // entries.add(ModBlocks.SPIRIT_PETALS);
                 // entries.add(ModBlocks.SPIRIT_PETALS);
             }).build());
