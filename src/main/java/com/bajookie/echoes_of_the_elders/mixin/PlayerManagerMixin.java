@@ -18,7 +18,13 @@ public class PlayerManagerMixin {
     @Inject(method = "respawnPlayer",at = @At("RETURN"))
     public void respawnPlayer(ServerPlayerEntity player, boolean alive, CallbackInfoReturnable<ServerPlayerEntity> info){
         ServerPlayerEntity serverPlayer = info.getReturnValue();
-        EntityAttributeInstance instance = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-        instance.setBaseValue(player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).getBaseValue());
+        EntityAttributeInstance instanceHp = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        EntityAttributeInstance instanceAttackSpeed = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED);
+        EntityAttributeInstance instanceSpeed = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        EntityAttributeInstance instanceAttack = serverPlayer.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        instanceHp.setBaseValue(player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).getBaseValue());
+        instanceAttackSpeed.setBaseValue(player.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_SPEED).getBaseValue());
+        instanceSpeed.setBaseValue(player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).getBaseValue());
+        instanceAttack.setBaseValue(player.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).getBaseValue());
     }
 }

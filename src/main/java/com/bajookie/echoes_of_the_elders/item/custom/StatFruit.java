@@ -20,16 +20,55 @@ public class StatFruit extends Item {
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (user instanceof PlayerEntity player){
             if (!world.isClient){
-                EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
-                instance.setBaseValue(instance.getBaseValue()+1);
+                switch (this.type){
+                    case HP -> hpFruit(player);
+                    case XP -> xpFruit(player);
+                    case ATTACK -> attackFruit(player);
+                    case SPEED -> speedFruit(player);
+                }
             }
         }
         return super.finishUsing(stack, world, user);
     }
+    private void xpFruit(PlayerEntity player){
+        if (player.experienceLevel >30){
+            for (int i = 0; i < 5; i++) {
+                int val = player.getNextLevelExperience();
+                player.addExperience(val);
+            }
+        } else {
+            player.addExperience(1000);
+        }
+
+    }
+    private void hpFruit(PlayerEntity player){
+        EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+        if (instance != null){
+            instance.setBaseValue(instance.getBaseValue()+1);
+        }
+    }
+    private void speedFruit(PlayerEntity player){
+        EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+        if (instance != null){
+            if (instance.getBaseValue() <=3){
+                instance.setBaseValue(instance.getBaseValue()+0.05d);
+            }
+        }
+    }
+    private void attackFruit(PlayerEntity player){
+        EntityAttributeInstance instance = player.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE);
+        if (instance != null){
+            instance.setBaseValue(instance.getBaseValue()+0.5d);
+        }
+    }
     public enum Type{
         HP,
         HUNGER,
-        ABSORB,
-        SPEED
+        RESISTANCE,
+        HASTE,
+        REACH,
+        SPEED,
+        ATTACK,
+        XP
     }
 }

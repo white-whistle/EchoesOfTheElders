@@ -11,4 +11,5 @@ public class ModFoodComponents {
             .statusEffect(new StatusEffectInstance(StatusEffects.HASTE,100*20,1),1).build();
     public static final FoodComponent NETHER_FRUIT = new FoodComponent.Builder().hunger(10).saturationModifier(10f).statusEffect(new StatusEffectInstance(StatusEffects.FIRE_RESISTANCE,100*20,1),1).alwaysEdible().build();
     public static final FoodComponent HEALTH_FOOD = new FoodComponent.Builder().hunger(1).saturationModifier(1f).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,2*20,2),1).alwaysEdible().build();
+    public static final FoodComponent GENERAL_FOOD = new FoodComponent.Builder().hunger(1).saturationModifier(1f).alwaysEdible().build();
 }

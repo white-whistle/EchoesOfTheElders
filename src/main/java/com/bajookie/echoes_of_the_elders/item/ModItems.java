@@ -53,6 +53,9 @@ public class ModItems {
     public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
+    public static final Item STAT_FRUIT_XP = registerItem("stat_fruit_xp", new StatFruit(StatFruit.Type.XP));
+    public static final Item STAT_FRUIT_SPEED = registerItem("stat_fruit_speed", new StatFruit(StatFruit.Type.SPEED));
+    public static final Item STAT_FRUIT_ATTACK = registerItem("stat_fruit_attack", new StatFruit(StatFruit.Type.ATTACK));
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
 
