@@ -18,7 +18,6 @@ public class StarfallTrailParticle extends AnimatedParticle {
     @Override
     public void tick() {
         super.tick();
-        this.velocityY =0.2;
     }
 
     @Override
@@ -38,13 +37,13 @@ public class StarfallTrailParticle extends AnimatedParticle {
         }
         public Particle createParticle(DefaultParticleType particleType,ClientWorld world,
                                        double x, double y,double z,double xd, double yd ,double zd,float upwards){
-            return new StarfallTrailParticle(world,x,y,z,this.spriteProvider,upwards,0,0,0);
+            return new StarfallTrailParticle(world,x,y,z,this.spriteProvider,0f,0,0,0);
         }
 
         @Nullable
         @Override
         public Particle createParticle(DefaultParticleType parameters, ClientWorld world, double x, double y, double z, double velocityX, double velocityY, double velocityZ) {
-            return new StarfallTrailParticle(world,x,y,z,this.spriteProvider,1.0f,velocityX,velocityY,velocityZ);
+            return new StarfallTrailParticle(world,x,y,z,this.spriteProvider,0f,velocityX,velocityY,velocityZ);
         }
     }
 }
