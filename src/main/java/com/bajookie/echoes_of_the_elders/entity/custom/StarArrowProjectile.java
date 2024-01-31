@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.particles.ModParticles;
+import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,10 +12,14 @@ import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -41,6 +47,23 @@ public class StarArrowProjectile extends ArrowEntity {
             this.discard();
         } else {
             super.onBlockHit(blockHitResult);
+        }
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.getWorld().isClient) {
+            Vec3d pos = this.getPos();
+            Vec3d pos2 = this.getPos();
+            Vec3d direction = this.getVelocity().normalize();
+            Pair<Vec3d, Vec3d> plane = VectorUtil.perpendicularPlaneFromVector(direction);
+            pos = pos.add(plane.getLeft().multiply(Math.cos(Math.toRadians(this.age * 20))));
+            pos2 = pos2.add(plane.getLeft().multiply(Math.cos(Math.PI + Math.toRadians(this.age * 20))).multiply(0.6));
+            pos = pos.add(plane.getRight().multiply(Math.sin(Math.toRadians(this.age * 20))));
+            pos2 = pos2.add(plane.getRight().multiply(Math.sin(Math.PI + Math.toRadians(this.age * 20))).multiply(0.6));
+            ((ServerWorld) this.getWorld()).spawnParticles(ModParticles.STARFALL_TRAIL_PARTICLE, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+            ((ServerWorld) this.getWorld()).spawnParticles(ModParticles.STARFALL_TRAIL_PARTICLE, pos2.x, pos2.y, pos2.z, 1, 0, 0, 0, 0);
         }
     }
 
