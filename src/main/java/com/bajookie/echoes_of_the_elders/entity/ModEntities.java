@@ -31,6 +31,10 @@ public class ModEntities {
             new Identifier(MOD_ID, "elderman_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EldermanEntity::new)
                     .dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeChunks(8).build());
+    public static final EntityType<ZomBeeEntity> ZOMBEE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "zombee_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZomBeeEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeChunks(8).build());
 
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "second_sun_entity"),
