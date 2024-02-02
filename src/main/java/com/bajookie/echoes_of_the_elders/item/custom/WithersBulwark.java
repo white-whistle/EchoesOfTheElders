@@ -18,7 +18,7 @@ public class WithersBulwark extends Item implements IArtifact, IHasCooldown {
     private final StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10);
 
     public WithersBulwark() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override
