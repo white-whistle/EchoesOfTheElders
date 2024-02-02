@@ -10,6 +10,7 @@
     "ItemCooldownManagerAccessor",
     "ItemCooldownManagerMixin",
     "ItemEntityMixin",
+    "ItemStackMixin",
     "LivingEntityCapabilityMixin",
     "LivingEntityMixin",
     "LivingEntityRaidMixin",

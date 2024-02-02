@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.mixin;
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.ModText;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -51,13 +52,13 @@ public class ClientItemMixin {
         }
 
         if (item instanceof IArtifact) {
-            var count = stack.getCount();
-            var maxCount = stack.getMaxCount();
+            var count = StackLevel.get(stack);
+            var maxCount = StackLevel.getMax(stack);
             var isSingleItem = maxCount == count && count == 1;
 
             if (!isSingleItem) {
                 tryPad.run();
-                if (count == maxCount) {
+                if (StackLevel.isMaxed(stack)) {
                     tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack.max", new TextArgs().putI("count", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));
                 } else {
                     tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack", new TextArgs().putI("count", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));

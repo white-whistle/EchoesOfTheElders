@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.StackedItem;
 
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import net.minecraft.item.ItemStack;
 
 public abstract class StackedItemStat<T> {
@@ -12,14 +13,10 @@ public abstract class StackedItemStat<T> {
         this.max = max;
     }
 
-    public float getStackProgress(ItemStack stack) {
-        return (stack.getCount() - 1) / (float) (stack.getMaxCount() - 1);
-    }
-
     public abstract T get(float progress);
 
     public T get(ItemStack stack) {
-        float progress = this.getStackProgress(stack);
+        float progress = StackLevel.getStackProgress(stack);
         return this.get(progress);
     }
 
