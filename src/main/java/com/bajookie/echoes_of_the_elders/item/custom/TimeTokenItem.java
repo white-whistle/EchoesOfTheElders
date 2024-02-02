@@ -22,7 +22,7 @@ public class TimeTokenItem extends Item implements IArtifact, IHasCooldown {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(1200 * 20, 60 * 20);
 
     public TimeTokenItem() {
-        super(new FabricItemSettings().maxCount(16));
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override

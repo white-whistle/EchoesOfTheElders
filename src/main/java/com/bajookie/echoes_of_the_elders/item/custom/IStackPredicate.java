@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,7 @@ public interface IStackPredicate {
     }
 
     default int getTextureIndex(ItemStack itemStack) {
-        return getTextureIndex(itemStack.getCount());
+        return getTextureIndex(StackLevel.get(itemStack));
     }
 
     default Model getBaseModel() {
@@ -18,6 +19,6 @@ public interface IStackPredicate {
     }
 
     default float getProgress(ItemStack stack) {
-        return getTextureIndex(stack) / (float) getTextureIndex(stack.getMaxCount());
+        return getTextureIndex(stack) / (float) getTextureIndex(StackLevel.getMax(stack));
     }
 }

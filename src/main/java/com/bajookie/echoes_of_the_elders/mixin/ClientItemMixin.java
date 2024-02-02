@@ -51,12 +51,12 @@ public class ClientItemMixin {
             tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown_reduction", new TextArgs().putI("percent", Math.round(p * 100))).styled(s -> s.withColor(Formatting.BLUE)));
         }
 
-        if (item instanceof IArtifact) {
+        if (item instanceof IArtifact iArtifact) {
             var count = StackLevel.get(stack);
             var maxCount = StackLevel.getMax(stack);
             var isSingleItem = maxCount == count && count == 1;
 
-            if (!isSingleItem) {
+            if (!isSingleItem && iArtifact.canArtifactMerge()) {
                 tryPad.run();
                 if (StackLevel.isMaxed(stack)) {
                     tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack.max", new TextArgs().putI("count", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));

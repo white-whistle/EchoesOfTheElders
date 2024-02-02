@@ -1,6 +1,5 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
@@ -35,7 +34,7 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
 
     public MidasHammerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(16).rarity(Rarity.RARE));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(1).rarity(Rarity.RARE));
     }
 
 
@@ -44,11 +43,11 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
         if (!user.getItemCooldownManager().isCoolingDown(this)) {
             user.getItemCooldownManager().set(this, this.getCooldown(stack));
             user.getWorld().playSound(user, entity.getBlockPos(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.AMBIENT, 1, 1);
-            if (!user.getWorld().isClient()){
+            if (!user.getWorld().isClient()) {
                 ServerWorld world = (ServerWorld) user.getWorld();
-                world.spawnParticles(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(),1, 0, 1, 0,1);
+                world.spawnParticles(ParticleTypes.SMOKE, entity.getX(), entity.getY(), entity.getZ(), 1, 0, 1, 0, 1);
                 int hp = Math.round(entity.getHealth());
-                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC,user), 50f);
+                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, user), 50f);
                 if (entity.isDead()) {
                     int nugget = hp % 9;
                     int ingot = (hp - nugget) / 9;

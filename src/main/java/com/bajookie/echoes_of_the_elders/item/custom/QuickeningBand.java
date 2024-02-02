@@ -27,7 +27,7 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
     protected StackedItemStat.Int effectLevel = new StackedItemStat.Int(1, 8);
 
     public QuickeningBand() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override

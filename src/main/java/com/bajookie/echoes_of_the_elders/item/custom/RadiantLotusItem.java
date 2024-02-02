@@ -24,7 +24,7 @@ public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown {
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 60 * 5, 60);
 
     public RadiantLotusItem() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override

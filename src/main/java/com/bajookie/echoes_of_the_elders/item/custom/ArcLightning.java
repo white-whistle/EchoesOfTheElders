@@ -2,7 +2,6 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
-import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -30,7 +29,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
     protected final StackedItemStat.Int attacks = new StackedItemStat.Int(4, 20);
 
     public ArcLightning() {
-        super(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(16));
+        super(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
                 return false;
             });
             for (Entity entity : list) {
-                ((LivingEntity)entity).addStatusEffect(new StatusEffectInstance(ModEffects.ELECTRIC_STUN_EFFECT,20*2,1,true,false),user);
+                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(ModEffects.ELECTRIC_STUN_EFFECT, 20 * 2, 1, true, false), user);
             }
         }
         return super.use(world, user, hand);
@@ -59,7 +58,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!target.getWorld().isClient()) {
-            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, attacks.get(stack),true,false));
+            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, attacks.get(stack), true, false));
         }
         return false;
     }
@@ -77,7 +76,7 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.hit", new TextArgs().putF("number_of_attacks", this.attacks.get(stack)).putF("damage",4)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.hit", new TextArgs().putF("number_of_attacks", this.attacks.get(stack)).putF("damage", 4)));
         tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.active"));
         super.appendTooltip(stack, world, tooltip, context);
     }

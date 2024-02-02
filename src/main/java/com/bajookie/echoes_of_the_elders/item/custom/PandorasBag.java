@@ -82,4 +82,9 @@ public class PandorasBag extends Item implements IArtifact {
     public boolean shouldDrop() {
         return false;
     }
+
+    @Override
+    public boolean canArtifactMerge() {
+        return false;
+    }
 }
