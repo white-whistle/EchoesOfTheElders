@@ -39,6 +39,7 @@
   "item.echoes_of_the_elders.godslayer": "Godslayer",
   "item.echoes_of_the_elders.gunheels": "Gunheels",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
+  "item.echoes_of_the_elders.pandoras_bag": "Pandora's Bag",
   "item.echoes_of_the_elders.chain_lightning_item": "Orb of Lightning",
   "item.echoes_of_the_elders.spirit_spawn_egg": "Spirit Spawn Egg",
   "item.echoes_of_the_elders.elderman_spawn_egg": "Elderman Spawn Egg",
@@ -102,5 +103,6 @@
   "message.echoes_of_the_elders.raid.wave_complete": "<GREEN>Wave complete!</GREEN>",
   "message.echoes_of_the_elders.raid.charging": "<BLUE>A raid will begin shortly...</BLUE>",
   "message.echoes_of_the_elders.raid.wave.zombies": "ZOMBIES!",
-  "message.echoes_of_the_elders.raid.wave.skeletons": "SKELETONS!"
+  "message.echoes_of_the_elders.raid.wave.skeletons": "SKELETONS!",
+  "screen.echoes_of_the_elders.pandoras_bag.title": "<tier/> <MAGENTA>Pandora's Bag</MAGENTA>"
 }

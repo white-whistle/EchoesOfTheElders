@@ -16,10 +16,12 @@ public class Tier {
         return nbt.getInt(Keys.TIER);
     }
 
-    public static void set(ItemStack itemStack, int tier) {
+    public static ItemStack set(ItemStack itemStack, int tier) {
         var nbt = itemStack.getOrCreateNbt();
 
         nbt.putInt(Keys.TIER, tier);
+
+        return itemStack;
     }
 
     public static void raise(ItemStack itemStack, int amt) {
