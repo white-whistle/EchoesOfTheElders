@@ -1,6 +1,5 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -9,17 +8,12 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
-import net.minecraft.entity.damage.DamageType;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -39,7 +33,12 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 250f);
 
     public DoomstickItem() {
-        super(new FabricItemSettings().maxCount(32).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+    }
+
+    @Override
+    public int getArtifactMaxStack() {
+        return 32;
     }
 
     @Override
@@ -52,10 +51,10 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
             if (!user.getWorld().isClient()) {
                 ServerWorld world = (ServerWorld) user.getWorld();
                 for (double i = 1; i <= 20; i++) {
-                    world.spawnParticles(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 1,0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10),1);
+                    world.spawnParticles(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 1, 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 1);
                 }
                 user.getItemCooldownManager().set(this, this.getCooldown(stack));
-                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC,user), this.effectDamage.get(stack));
+                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, user), this.effectDamage.get(stack));
             }
             user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
 

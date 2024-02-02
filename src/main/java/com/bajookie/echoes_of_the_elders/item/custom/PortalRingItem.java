@@ -15,7 +15,7 @@ import java.util.List;
 public class PortalRingItem extends BiDimensionToggleItem implements IArtifact {
 
     public PortalRingItem() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE), new Pair<>(World.OVERWORLD, World.NETHER));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE), new Pair<>(World.OVERWORLD, World.NETHER));
     }
 
     @Override

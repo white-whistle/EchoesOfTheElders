@@ -42,7 +42,7 @@ public class ModItems {
     public static final Item QUICKENING_BAND = registerItem("quickening_band", new QuickeningBand());
     public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
     public static final WithersBulwark WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WithersBulwark());
-    public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(16)));
+    public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(1)));
     public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new OrbOfLightning());
     public static final Item ECHOING_SWORD = registerItem("echoing_sword", new EchoingSword());
     public static final Item GODSLAYER = registerItem("godslayer", new GodslayerItem());
@@ -54,12 +54,12 @@ public class ModItems {
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
-    public static final Item ARC_LIGHTNING = registerItem("arc_lightning",new ArcLightning());
-    public static final Item AIR_SWEEPER = registerItem("air_sweeper",new AirSweeper());
-    public static final Item VACUUM_RELIC = registerItem("vacuum_relic",new VacuumRelic());
+    public static final Item ARC_LIGHTNING = registerItem("arc_lightning", new ArcLightning());
+    public static final Item AIR_SWEEPER = registerItem("air_sweeper", new AirSweeper());
+    public static final Item VACUUM_RELIC = registerItem("vacuum_relic", new VacuumRelic());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
-    public static final Item MOLTEN_CHAMBER = registerItem("molten_chamber",new MoltenChamber());
-    public static final Item TV_ARROW = registerItem("tv_arrow",new TvArrow());
+    public static final Item MOLTEN_CHAMBER = registerItem("molten_chamber", new MoltenChamber());
+    public static final Item TV_ARROW = registerItem("tv_arrow", new TvArrow());
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
 
     // spawn eggs

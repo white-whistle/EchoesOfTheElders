@@ -40,8 +40,13 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
         return builder.build();
     });
 
+    @Override
+    public int getArtifactMaxStack() {
+        return MAX_COUNT;
+    }
+
     public GodslayerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(MAX_COUNT));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
     }
 
     @Override

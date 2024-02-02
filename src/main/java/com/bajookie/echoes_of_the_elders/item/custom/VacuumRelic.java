@@ -1,8 +1,5 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.effects.ModEffects;
-import com.bajookie.echoes_of_the_elders.entity.custom.AirSweeperProjectileEntity;
-import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
 import com.bajookie.echoes_of_the_elders.entity.custom.VacuumProjectileEntity;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -14,35 +11,24 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.border.WorldBorder;
-import net.minecraft.world.dimension.DimensionType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Set;
 
 public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public VacuumRelic() {
-        super(new FabricItemSettings().maxCount(16));
+        super(new FabricItemSettings().maxCount(1));
     }
 
     @Override
@@ -60,7 +46,7 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
         if (user.isSneaking()) {
             if (!user.getItemCooldownManager().isCoolingDown(this)) {
                 if (!world.isClient) {
-                    VacuumProjectileEntity vacuumProjectileEntity = new VacuumProjectileEntity(world,user);
+                    VacuumProjectileEntity vacuumProjectileEntity = new VacuumProjectileEntity(world, user);
                     vacuumProjectileEntity.setOwner(user);
                     vacuumProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
                     world.spawnEntity(vacuumProjectileEntity);
@@ -72,7 +58,6 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
         }
         return TypedActionResult.consume(user.getStackInHand(hand));
     }
-
 
 
     @Override

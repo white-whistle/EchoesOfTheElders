@@ -20,7 +20,7 @@ public class StackLevel {
     public static int getMax(ItemStack itemStack) {
         var item = itemStack.getItem();
         if (item instanceof IArtifact artifact) {
-            return artifact.getMaxStack();
+            return artifact.getArtifactMaxStack();
         }
         return 1;
     }

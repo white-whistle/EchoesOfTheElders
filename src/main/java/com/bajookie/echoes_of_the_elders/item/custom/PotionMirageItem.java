@@ -18,7 +18,7 @@ public class PotionMirageItem extends Item implements IArtifact, IHasCooldown {
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20, 10);
 
     public PotionMirageItem() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override

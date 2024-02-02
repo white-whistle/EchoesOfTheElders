@@ -10,7 +10,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ClickType;
 
 public interface IArtifact {
-    default int getMaxStack() {
+    default int getArtifactMaxStack() {
         return 16;
     }
 
@@ -18,8 +18,13 @@ public interface IArtifact {
         return true;
     }
 
+    default boolean canArtifactMerge() {
+        return true;
+    }
+
     default boolean onArtifactClicked(ItemStack stack, ItemStack otherStack, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         if (clickType != ClickType.RIGHT) return false;
+        if (!canArtifactMerge()) return false;
 
 
         if (stack.isOf(otherStack.getItem())) {

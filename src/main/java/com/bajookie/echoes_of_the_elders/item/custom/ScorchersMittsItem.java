@@ -32,7 +32,7 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown,
     protected StackedItemStat.Float fireModifier = new StackedItemStat.Float(1f, 5f);
 
     public ScorchersMittsItem() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.EPIC));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override

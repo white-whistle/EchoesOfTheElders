@@ -26,7 +26,7 @@ public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, 
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public OrbOfLightning() {
-        super(new FabricItemSettings().maxCount(16).rarity(Rarity.RARE));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override

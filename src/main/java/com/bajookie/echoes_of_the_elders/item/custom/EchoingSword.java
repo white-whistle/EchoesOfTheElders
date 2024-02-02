@@ -1,53 +1,39 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.mixin.PlayerEntityMixin;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.StackReference;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.screen.slot.Slot;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.util.*;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
-
 public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown {
     private final StackedItemStat.Int stackedAttackDamage = new StackedItemStat.Int(5, 16);
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public EchoingSword() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(16));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
     }
 
     private final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers(index -> {
@@ -91,8 +77,7 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, EquipmentSlot slot) {
         if (slot == EquipmentSlot.MAINHAND) {
             return stackedAttributeModifiers.get(stack.getCount() - 1);
-        }
-        else {
+        } else {
             return super.getAttributeModifiers(stack, slot);
         }
     }

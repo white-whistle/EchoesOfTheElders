@@ -39,8 +39,13 @@ public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledM
         return builder.build();
     });
 
+    @Override
+    public int getArtifactMaxStack() {
+        return MAX_COUNT;
+    }
+
     public RealityPick() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().maxCount(MAX_COUNT).rarity(Rarity.EPIC));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override
