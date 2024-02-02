@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -25,16 +24,17 @@ public class ModEntities {
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
 
     public static final EntityType<SpiritEntity> SPIRIT_ENTITY_KEY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID, "spirit_entity"), SpiritEntity.createEntityType(List.of(Items.CAKE,Items.BREAD,ModItems.OLD_KEY)));
+            new Identifier(MOD_ID, "spirit_entity"), SpiritEntity.createEntityType(List.of(Items.CAKE, Items.BREAD, ModItems.OLD_KEY)));
 
     public static final EntityType<EldermanEntity> ELDERMAN_ENTITY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "elderman_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, EldermanEntity::new)
                     .dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeChunks(8).build());
-    public static final EntityType<ZomBeeEntity> ZOMBEE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+
+    public static final EntityType<ZomBeeEntity> ZOMBEE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "zombee_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZomBeeEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.6f, 2.9f)).trackRangeChunks(8).build());
+            FabricEntityTypeBuilder.<ZomBeeEntity>create(SpawnGroup.MONSTER, ZomBeeEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(8).build());
 
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "second_sun_entity"),
@@ -73,5 +73,6 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseEntity.createFlowerDefenseAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY_KEY, SpiritEntity.createSpiritEntityAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanEntity.createEndermanAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeEntity.createZombeeAttributes());
     }
 }
