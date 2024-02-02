@@ -5,13 +5,16 @@ import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
-import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -25,9 +28,11 @@ import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class OldKeyItem extends Item {
     public OldKeyItem() {
@@ -43,21 +48,25 @@ public class OldKeyItem extends Item {
         PlayerEntity player = context.getPlayer();
         var stack = context.getStack();
 
-        var sb = Soulbound.getUuid(stack);
-        if (sb != null && player != null && !sb.equals(player.getUuid())) {
-            if (player.getWorld().isClient) {
-                player.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.soulbound.wrong_user", new TextArgs().put("player", Soulbound.getName(stack))), true);
-            }
+        if (player == null) return ActionResult.FAIL;
+        if (Soulbound.notOwner(stack, player)) {
             return ActionResult.FAIL;
         }
 
         if (block == ModBlocks.ARTIFACT_VAULT) {
-            if (player != null && !player.getAbilities().creativeMode) {
+            var tier = Tier.get(stack);
+
+            if (!player.getAbilities().creativeMode) {
                 context.getStack().decrement(1);
             }
+
             context.getWorld().breakBlock(context.getBlockPos(), false);
 
-            Block.dropStack(world, pos, this.getRandomRelicDropStack());
+            var reward = this.getRewardStack(tier);
+            Soulbound.set(reward, player);
+
+            Block.dropStack(world, pos, reward);
+
             context.getWorld().playSound(context.getBlockPos().getX(), context.getBlockPos().getY(), context.getBlockPos().getZ(), SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 4, 4, true);
         }
         return ActionResult.success(context.getWorld().isClient);
@@ -65,11 +74,7 @@ public class OldKeyItem extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        var sb = Soulbound.getUuid(stack);
-        if (sb != null && !sb.equals(user.getUuid())) {
-            if (user.getWorld().isClient) {
-                user.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.soulbound.wrong_user", new TextArgs().put("player", Soulbound.getName(stack))));
-            }
+        if (Soulbound.notOwner(stack, user)) {
             return ActionResult.FAIL;
         }
 
@@ -88,6 +93,44 @@ public class OldKeyItem extends Item {
         if (isRaidObjective.isPresent() && isRaidObjective.get()) return ActionResult.SUCCESS;
 
         return super.useOnEntity(stack, user, entity, hand);
+    }
+
+    private ItemStack getRewardStack(int tier) {
+        var invSize = 3 * 9;
+        var items = Stream.generate(this::getRandomRelicDropStack).limit(tier + 1).toList();
+        var bagChunks = Lists.newArrayList(Iterables.partition(items, invSize - 1));
+        Collections.reverse(bagChunks);
+
+        // XXXc
+        // X X X c
+        // c X X X
+        // fill c
+        // set inv c
+        // prev: c
+        // fill X
+        // add prev c
+        // set inv X
+
+        ItemStack prev = null;
+
+        for (var bagChunk : bagChunks) {
+            var bag = new ItemStack(ModItems.PANDORAS_BAG);
+            var inv = new SimpleInventory(invSize);
+            var slot = 0;
+            for (var stack : bagChunk) {
+                inv.setStack(slot++, stack);
+            }
+
+            if (prev != null) {
+                inv.setStack(slot, prev);
+            }
+
+            PandorasBag.setBagInventory(bag, inv);
+
+            prev = bag;
+        }
+
+        return prev;
     }
 
     private ItemStack getRandomRelicDropStack() {

@@ -32,7 +32,6 @@
     "EyesFeatureRendererMixin",
     "GameRendererMixin",
     "HeldItemRendererMixin",
-    "ItemEntityRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
     "ModelLoaderMixin",

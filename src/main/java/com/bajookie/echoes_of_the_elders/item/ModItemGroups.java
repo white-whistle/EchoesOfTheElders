@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -41,17 +42,17 @@ public class ModItemGroups {
                 entries.add(ModItems.CORRUPTED_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
                 entries.add(ModItems.RAID_DEBUG_ITEM);
-                // entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
-                // entries.add(ModBlocks.SPIRIT_PETALS);
-                // entries.add(ModBlocks.SPIRIT_PETALS);
+                entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+                entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+                entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 10), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+                entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 28), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+                entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 100), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
             }).build());
 
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),
             FabricItemGroup.builder().displayName(Text.translatable("artifact-group.echoes_of_the_elders")).icon(() -> new ItemStack(ModItems.VITALITY_PUMP)).entries((displayContext, entries) -> {
-                // entries.add(ModItems.ANCIENT_STONE_SWORD);
-                // entries.add(ModItems.SHINY_ANCIENT_STONE_SWORD);
                 entries.add(ModItems.RADIANT_LOTUS);
                 entries.add(ModItems.VITALITY_PUMP);
                 entries.add(ModItems.PORTAL_RING);
@@ -77,8 +78,6 @@ public class ModItemGroups {
                 entries.add(ModItems.MOLTEN_CHAMBER);
                 entries.add(ModItems.ECHOING_SWORD);
                 entries.add(ModItems.TV_ARROW);
-                // disabled until we think this one out
-                // entries.add(ModItems.SILENT_FIRE);
             }).build());
 
     public static void registerGroups() {

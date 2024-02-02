@@ -1,5 +1,7 @@
 package com.bajookie.echoes_of_the_elders.system.ItemStack;
 
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
+import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.ModIdentifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -32,6 +34,17 @@ public class Soulbound {
         var nbt = itemStack.getOrCreateNbt();
 
         nbt.putUuid(Keys.SOULBOUND, owner);
+    }
+
+    public static boolean notOwner(ItemStack stack, PlayerEntity player) {
+        var sb = getUuid(stack);
+        if (sb != null && player != null && !sb.equals(player.getUuid())) {
+            if (player.getWorld().isClient) {
+                player.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.soulbound.wrong_user", new TextArgs().put("player", Soulbound.getName(stack))), true);
+            }
+            return true;
+        }
+        return false;
     }
 
     public static void setName(ItemStack itemStack, String name) {
