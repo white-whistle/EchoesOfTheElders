@@ -24,8 +24,6 @@ public class ModItemGroups {
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
-                entries.add(ModItems.SPIRIT_SPAWN_EGG);
-                entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModBlocks.ARTIFACT_VAULT);
                 // entries.add(ModBlocks.SUN_RUNE_BLOCK);
                 // entries.add(ModBlocks.CHISELED_MOSSY_STONE);
@@ -44,6 +42,9 @@ public class ModItemGroups {
                 entries.add(ModItems.RAID_DEBUG_ITEM);
                 entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
+                entries.add(ModItems.SPIRIT_SPAWN_EGG);
+                entries.add(ModItems.ELDERMAN_SPAWN_EGG);
+                entries.add(ModItems.ZOMBEE_SPAWN_EGG);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 10), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
