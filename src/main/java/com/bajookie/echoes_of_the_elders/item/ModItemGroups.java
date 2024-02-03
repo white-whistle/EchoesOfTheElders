@@ -81,6 +81,7 @@ public class ModItemGroups {
                 entries.add(ModItems.ECHOING_SWORD);
                 entries.add(ModItems.TV_ARROW);
                 entries.add(ModItems.STARFALL_BOW);
+                entries.add(ModItems.EARTH_SPIKE_RELIC);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());
