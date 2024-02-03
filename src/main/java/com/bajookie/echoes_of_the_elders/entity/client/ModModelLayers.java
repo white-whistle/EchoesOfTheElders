@@ -34,7 +34,8 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TV_ARROW_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityModelLayerRegistry.registerModelLayer(MAGMA_BULLET_LAYER, MagmaBulletModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ICICLE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(MAGMA_BULLET_LAYER,MagmaBulletModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MAGMA_BULLET_ENTITY_TYPE, MagmaBulletEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER, EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
