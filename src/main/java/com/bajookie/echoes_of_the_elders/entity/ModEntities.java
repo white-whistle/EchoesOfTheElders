@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.entity;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.IcicleStaff;
+import com.bajookie.echoes_of_the_elders.item.custom.TvArrow;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -43,6 +45,11 @@ public class ModEntities {
     public static final EntityType<ChainLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "chain_lightning_entity"),
             FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE, ChainLightningProjectileEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+
+    public static final EntityType<IcicleProjectile> ICICLE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "icicle_entity"),
+            FabricEntityTypeBuilder.<IcicleProjectile>create(SpawnGroup.CREATURE, IcicleProjectile::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<VacuumProjectileEntity> VACUUM_PROJECTILE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "vacuum_projectile_entity"),
