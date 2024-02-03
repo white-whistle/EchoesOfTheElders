@@ -49,6 +49,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.GOLD_CRYSTAL);
                 entries.add(ModBlocks.DIAMOND_CRYSTAL);
                 entries.add(ModBlocks.EMERALD_CRYSTAL);
+                entries.add(ModBlocks.ANCIENT_DEBRIS_CRYSTAL);
                 entries.add(ModBlocks.ORE_CREATOR_BLOCK);
                 // entries.add(ModBlocks.SPIRIT_PETALS);
                 // entries.add(ModBlocks.SPIRIT_PETALS);

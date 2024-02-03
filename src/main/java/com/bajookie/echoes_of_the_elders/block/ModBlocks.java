@@ -54,6 +54,7 @@ public class ModBlocks {
     public static final Block GOLD_CRYSTAL = registerBlock("gold_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.GOLD));
     public static final Block DIAMOND_CRYSTAL = registerBlock("diamond_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.DIAMOND));
     public static final Block EMERALD_CRYSTAL = registerBlock("emerald_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.EMERALD));
+    public static final Block ANCIENT_DEBRIS_CRYSTAL = registerBlock("ancient_debris_crystal_block",new ResourceCrystalBlock(ResourceCrystalBlock.Type.ANCIENT_DEBRIS));
     public static final Block ORE_CREATOR_BLOCK = registerBlock("ore_creator_block",new OreCreatorRelic());
 
     private static Block registerBlock(String name, Block block) {
@@ -91,5 +92,6 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(GOLD_CRYSTAL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(DIAMOND_CRYSTAL, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(EMERALD_CRYSTAL, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_DEBRIS_CRYSTAL, RenderLayer.getCutout());
     }
 }

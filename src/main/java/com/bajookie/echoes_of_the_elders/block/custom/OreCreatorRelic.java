@@ -62,7 +62,9 @@ public class OreCreatorRelic extends Block {
         return state.getBlock() == Blocks.AMETHYST_CLUSTER;
     }
     private Block randomResourceCrystal(int res){
-        if (res>=90){
+        if (res>=99){
+          return ModBlocks.ANCIENT_DEBRIS_CRYSTAL;
+        } else if (res>=90){
             return ModBlocks.EMERALD_CRYSTAL;
         } else if (res>=80){
             return ModBlocks.DIAMOND_CRYSTAL;

@@ -15,6 +15,7 @@
   "block.echoes_of_the_elders.iron_crystal_block": "Iron Crystal",
   "block.echoes_of_the_elders.gold_crystal_block": "Gold Crystal",
   "block.echoes_of_the_elders.diamond_crystal_block": "Diamond Crystal",
+  "block.echoes_of_the_elders.ancient_debris_crystal_block": "Ancient Debris Crystal",
   "block.echoes_of_the_elders.emerald_crystal_block": "Emerald Crystal",
   "block.echoes_of_the_elders.ore_creator_block": "Crystal Infuser",
   "tooltip.echoes_of_the_elders.ore_creator_block.effect": "Transforms Amethyst Clusters to a random resource Crystal",

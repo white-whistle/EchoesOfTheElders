@@ -36,6 +36,7 @@ public class ResourceCrystalBlock extends AmethystClusterBlock {
             case EMERALD -> stack = new ItemStack(Items.EMERALD);
             case DIAMOND -> stack = new ItemStack(Items.DIAMOND);
             case COAL -> stack = new ItemStack(Items.COAL);
+            case ANCIENT_DEBRIS -> stack = new ItemStack(Items.NETHERITE_SCRAP);
         }
         return stack;
     }
@@ -45,6 +46,7 @@ public class ResourceCrystalBlock extends AmethystClusterBlock {
         DIAMOND,
         EMERALD,
         IRON,
-        COAL
+        COAL,
+        ANCIENT_DEBRIS
     }
 }
