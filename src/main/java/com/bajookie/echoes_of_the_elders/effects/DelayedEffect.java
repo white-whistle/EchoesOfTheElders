@@ -27,19 +27,19 @@ public abstract class DelayedEffect extends StatusEffect implements IRemoveEffec
         super.onRemoved(attributeContainer);
     }
 
-    public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> biConsumer) {
+    public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> onRemoveConsumer) {
         return new DelayedEffect(category) {
             @Override
             public void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity) {
-                biConsumer.accept(effectInstance, entity);
+                onRemoveConsumer.accept(effectInstance, entity);
             }
         };
     }
-    public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> biConsumer, BiConsumer<LivingEntity,Integer> onApplyConsumer){
+    public static DelayedEffect create(StatusEffectCategory category, BiConsumer<StatusEffectInstance, LivingEntity> onRemoveConsumer, BiConsumer<LivingEntity,Integer> onApplyConsumer){
         return new DelayedEffect(category) {
             @Override
             public void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity) {
-                biConsumer.accept(effectInstance, entity);
+                onRemoveConsumer.accept(effectInstance, entity);
             }
 
             @Override

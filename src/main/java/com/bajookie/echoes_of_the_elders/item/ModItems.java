@@ -61,6 +61,7 @@ public class ModItems {
     public static final Item MOLTEN_CHAMBER = registerItem("molten_chamber", new MoltenChamber());
     public static final Item TV_ARROW = registerItem("tv_arrow", new TvArrow());
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
+    public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
