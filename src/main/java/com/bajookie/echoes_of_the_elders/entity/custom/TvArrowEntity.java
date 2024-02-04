@@ -59,6 +59,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
         this.prevYaw = owner.getYaw();
         this.setRotation(owner.getYaw(), owner.getPitch());
         this.speed = speed;
+        this.setVelocity(0,0.8,0);
         this.refreshPositionAndAngles(x, y, z, owner.getYaw(), owner.getPitch());
     }
 
@@ -75,19 +76,19 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             this.setPosition(this.getPos().add(this.getVelocity()));
         }
         else if (this.age < 300) {
-            var pass = (LivingEntity) this.getOwner();
+            var pass = this.getControllingPassenger();
             if (pass != null) {
-                Vec3d desiredDirection = new Vec3d(0,0,0);
-                if (this.getControllingPassenger() != null){
-                    System.out.println("pass");
-                    desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
-                }
+                Vec3d desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
                 this.updateRotation();
                 Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.13)).normalize();
                 this.setVelocity(newDirection.multiply(1.3));
                 this.setPosition(this.getPos().add(this.getVelocity()));
             } else {
-                this.discard();
+                Vec3d desiredDirection = new Vec3d(0,0,0);
+                this.updateRotation();
+                Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.13)).normalize();
+                this.setVelocity(newDirection.multiply(1.3));
+                this.setPosition(this.getPos().add(this.getVelocity()));
             }
         } else {
             this.discard();
@@ -152,5 +153,11 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
     @Override
     protected boolean canAddPassenger(Entity passenger) {
         return true;
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return this.getPassengerList().isEmpty()? null : (LivingEntity) this.getPassengerList().get(0);
     }
 }
