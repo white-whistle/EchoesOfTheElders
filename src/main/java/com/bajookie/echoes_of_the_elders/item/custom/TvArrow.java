@@ -28,7 +28,9 @@ public class TvArrow extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
             TvArrowEntity tvArrow = new TvArrowEntity(world, user.getX(), user.getY() + 3, user.getZ(), 0.7f,user);
+            tvArrow.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 0.5f, 0f);
             world.spawnEntity(tvArrow);
+            user.startRiding(tvArrow);
             ModCapabilities.SCREEN_SWITCH_OBJECTIVE.attach(user,(screenSwitchCapability -> {
                 screenSwitchCapability.setTargetScreen(tvArrow.getUuid());
             }));

@@ -42,7 +42,7 @@ public class StarArrowProjectile extends ArrowEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (this.getWorld() != null && !this.getWorld().isClient) {
+        if (this.getWorld() != null && !this.getWorld().isClient &&this.star) {
             dropStars(blockHitResult.getPos());
             this.discard();
         } else {
@@ -53,7 +53,7 @@ public class StarArrowProjectile extends ArrowEntity {
     @Override
     public void tick() {
         super.tick();
-        if (!this.getWorld().isClient) {
+        if (!this.getWorld().isClient && this.star) {
             Vec3d pos = this.getPos();
             Vec3d pos2 = this.getPos();
             Vec3d direction = this.getVelocity().normalize();

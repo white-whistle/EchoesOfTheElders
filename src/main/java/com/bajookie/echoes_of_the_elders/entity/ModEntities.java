@@ -74,7 +74,7 @@ public class ModEntities {
     public static final EntityType<TvArrowEntity> TV_ARROW_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "tv_arrow_entity"),
             FabricEntityTypeBuilder.<TvArrowEntity>create(SpawnGroup.CREATURE, TvArrowEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(20).build());
 
     /**
      * Register Mob Attributes here:

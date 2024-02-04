@@ -27,12 +27,18 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient){
-            EntityHitResult e = VectorUtil.raycastHit(10);
-            if (e == null){
-                System.out.println("null");
+            if (user.isSneaking()){
+                EntityHitResult e = VectorUtil.raycastHit(10);
+                if (e == null){
+                    return super.use(world, user, hand);
+                } else {
+                    Entity entity = e.getEntity();
+                    IcicleProjectile projectile = new IcicleProjectile(world,entity.getX(),entity.getY()+10,entity.getZ(),user,true);
+                    world.spawnEntity(projectile);
+                }
             } else {
-                Entity entity = e.getEntity();
-                IcicleProjectile projectile = new IcicleProjectile(world,entity.getX(),entity.getY()+10,entity.getZ(),user);
+                IcicleProjectile projectile = new IcicleProjectile(world,user.getX(),user.getY()+1.6,user.getZ(),user,false);
+                projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 0.5f, 0f);
                 world.spawnEntity(projectile);
             }
 
