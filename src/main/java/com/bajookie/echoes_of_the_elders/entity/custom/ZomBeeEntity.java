@@ -18,13 +18,11 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -49,19 +47,20 @@ public class ZomBeeEntity extends HostileEntity implements Flutterer {
         this.lookControl = new ZomBeeLookControl(this);
     }
 
-    public ZomBeeEntity(World world,boolean haveRaider){
-        this(ModEntities.ZOMBEE_ENTITY_TYPE,world);
-        if (haveRaider){
+    public ZomBeeEntity(World world, boolean haveRaider) {
+        this(ModEntities.ZOMBEE_ENTITY_TYPE, world);
+        if (haveRaider) {
             ZombieEntity zombie = new ZombieEntity(world);
             zombie.setBaby(true);
             zombie.startRiding(this);
         }
     }
-    public ZomBeeEntity(World world,Item raiderWeapon){
-        this(world,true);
+
+    public ZomBeeEntity(World world, Item raiderWeapon) {
+        this(world, true);
         ZombieEntity zombie = new ZombieEntity(world);
         zombie.setBaby(true);
-        zombie.setStackInHand(zombie.getActiveHand(),new ItemStack(raiderWeapon));
+        zombie.setStackInHand(zombie.getActiveHand(), new ItemStack(raiderWeapon));
         zombie.startRiding(this);
     }
 
@@ -71,10 +70,10 @@ public class ZomBeeEntity extends HostileEntity implements Flutterer {
         this.goalSelector.add(8, new ZomBeeWanderAroundGoal());
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(6, new LookAroundGoal(this));
-        //this.goalSelector.add(1, new MeleeAttackGoal(this, 1f, true));
+        // this.goalSelector.add(1, new MeleeAttackGoal(this, 1f, true));
         this.goalSelector.add(1, new ZomBeeAttack(this));
 
-        this.targetSelector.add(2, new ActiveTargetGoal<LivingEntity>(this, LivingEntity.class, 0, false, false, living -> ((living instanceof PlayerEntity player && !player.getAbilities().creativeMode) || living instanceof FlowerDefenseEntity ||
+        this.targetSelector.add(2, new ActiveTargetGoal<LivingEntity>(this, LivingEntity.class, 0, false, false, living -> ((living instanceof PlayerEntity player && !player.getAbilities().creativeMode) || living instanceof RaidTotemEntity ||
                 living instanceof IronGolemEntity || living instanceof SnowGolemEntity || living instanceof VillagerEntity) && living.isAlive()
         ));
 
@@ -146,7 +145,7 @@ public class ZomBeeEntity extends HostileEntity implements Flutterer {
 
         @Override
         public boolean shouldContinue() {
-            if (this.target == null){
+            if (this.target == null) {
                 this.stop();
                 return false;
             }

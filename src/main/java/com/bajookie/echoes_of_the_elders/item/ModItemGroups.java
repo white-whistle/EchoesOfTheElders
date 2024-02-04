@@ -43,6 +43,7 @@ public class ModItemGroups {
                 entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
+                entries.add(ModItems.RAID_TOTEM_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModItems.ZOMBEE_SPAWN_EGG);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);

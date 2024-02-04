@@ -2,7 +2,6 @@ package com.bajookie.echoes_of_the_elders.entity;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.item.custom.TvArrow;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -18,10 +17,10 @@ import java.util.List;
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class ModEntities {
-    public static final EntityType<FlowerDefenseEntity> FLOWER_DEFENSE_ENTITY = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID, "flower_defense_entity"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, FlowerDefenseEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f, 1f)).build());
+    public static final EntityType<RaidTotemEntity> RAID_TOTEM_ENTITY = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "raid_totem_entity"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, RaidTotemEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 4f)).build());
 
     public static final EntityType<SpiritEntity> SPIRIT_ENTITY_KEY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "spirit_entity"), SpiritEntity.createEntityType(List.of(Items.CAKE, Items.BREAD, ModItems.OLD_KEY)));
@@ -74,7 +73,7 @@ public class ModEntities {
      * Register Mob Attributes here:
      */
     public static void registerMobAttributes() {
-        FabricDefaultAttributeRegistry.register(ModEntities.FLOWER_DEFENSE_ENTITY, FlowerDefenseEntity.createFlowerDefenseAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.RAID_TOTEM_ENTITY, RaidTotemEntity.createFlowerDefenseAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY_KEY, SpiritEntity.createSpiritEntityAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanEntity.createEndermanAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeEntity.createZombeeAttributes());

@@ -104,6 +104,7 @@ public class RaidEntityOverlayRenderer {
         Matrix4f m4f = matrix.peek().getPositionMatrix();
 
         ModCapabilities.RAID_OBJECTIVE.use(entity, o -> {
+            if (!o.active) return;
             drawStatusEffect(m4f, x, y, FULL_SIZE, RAID_DEFEND);
         });
 

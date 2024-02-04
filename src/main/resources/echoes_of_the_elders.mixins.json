@@ -15,6 +15,7 @@
     "LivingEntityMixin",
     "LivingEntityRaidMixin",
     "LivingEntityRendererMixin",
+    "MobEntityAccessor",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
     "PotionUseMixin",

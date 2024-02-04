@@ -2,8 +2,10 @@ package com.bajookie.echoes_of_the_elders.system.Capability;
 
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidEnemyCapability;
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
+import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.SyncSingleCapability;
 import com.bajookie.echoes_of_the_elders.system.screen_switch.ScreenSwitchCapability;
 import com.bajookie.echoes_of_the_elders.util.ModIdentifier;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.LivingEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -104,6 +106,20 @@ public class ModCapabilities {
 
         public void attach(H o) {
             this.attach(o, null);
+        }
+
+        public void syncEntityCapability(H o) {
+            if (o instanceof IHasCapability iHasCapability && o instanceof LivingEntity livingEntity) {
+                if (livingEntity.getWorld().isClient) return;
+
+                var capabilities = iHasCapability.echoesOfTheElders$getCapabilities();
+                if (capabilities == null) return;
+
+                var capability = capabilities.get(this.name);
+                if (capability == null) return;
+
+                PlayerLookup.tracking(livingEntity).forEach(p -> SyncSingleCapability.send(p, livingEntity, this.name));
+            }
         }
     }
 }

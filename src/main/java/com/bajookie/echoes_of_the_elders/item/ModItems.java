@@ -66,7 +66,8 @@ public class ModItems {
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
     public static final Item ELDERMAN_SPAWN_EGG = registerItem("elderman_spawn_egg", new SpawnEggItem(ModEntities.ELDERMAN_ENTITY, 0x341061, 0x3c3940, new FabricItemSettings()));
     public static final Item ZOMBEE_SPAWN_EGG = registerItem("zombee_spawn_egg", new SpawnEggItem(ModEntities.ZOMBEE_ENTITY_TYPE, 0x4a854e, 0x3c3940, new FabricItemSettings()));
-    public static final Item STARFALL_BOW = registerItem("starfall_bow",new StarfallBow());
+    public static final Item RAID_TOTEM_EGG = registerItem("raid_totem_egg", new SpawnEggItem(ModEntities.RAID_TOTEM_ENTITY, 0x8b778c, 0x403341, new FabricItemSettings()));
+    public static final Item STARFALL_BOW = registerItem("starfall_bow", new StarfallBow());
 
 
     // Register methods
