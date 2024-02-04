@@ -68,6 +68,8 @@ public class StarfallBow extends BowItem implements IArtifact, IHasCooldown {
                 if (!player.getItemCooldownManager().isCoolingDown(this)) {
                     starArrow = new StarArrowProjectile(user.getWorld(), user, true);
                     player.getItemCooldownManager().set(this,this.cooldown.get(stack));
+                } else {
+                    starArrow = new StarArrowProjectile(user.getWorld(), user, false);
                 }
             }
             starArrow.initFromStack(itemStack);

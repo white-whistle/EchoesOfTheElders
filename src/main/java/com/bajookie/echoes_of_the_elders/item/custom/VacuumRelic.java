@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
@@ -28,7 +29,7 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public VacuumRelic() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -51,10 +52,12 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
                     vacuumProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
                     world.spawnEntity(vacuumProjectileEntity);
                     user.getItemCooldownManager().set(this, this.getCooldown(user.getStackInHand(hand)));
+                    return TypedActionResult.success(user.getStackInHand(hand));
                 }
             }
         } else {
             user.setCurrentHand(hand);
+            return TypedActionResult.consume(user.getStackInHand(hand));
         }
         return TypedActionResult.consume(user.getStackInHand(hand));
     }
@@ -63,13 +66,11 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (user instanceof PlayerEntity player) {
-            if (!player.getItemCooldownManager().isCoolingDown(this)) {
-                Box box = new Box(user.getX() - 20, user.getY() - 20, user.getZ() - 20, user.getX() + 20, user.getY() + 20, user.getZ() + 20);
-                List<Entity> list = world.getOtherEntities(user, box, entity -> entity instanceof ItemEntity || entity instanceof ExperienceOrbEntity);
-                if (!list.isEmpty()) {
-                    for (Entity itemEntity : list) {
-                        itemEntity.setVelocity(user.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize().multiply(1));
-                    }
+            Box box = new Box(user.getX() - 30, user.getY() - 20, user.getZ() - 30, user.getX() + 30, user.getY() + 20, user.getZ() + 30);
+            List<Entity> list = world.getOtherEntities(user, box, entity -> entity instanceof ItemEntity || entity instanceof ExperienceOrbEntity);
+            if (!list.isEmpty()) {
+                for (Entity itemEntity : list) {
+                    itemEntity.setVelocity(user.getPos().add(0, 1, 0).subtract(itemEntity.getPos()).normalize().multiply(1));
                 }
             }
         }

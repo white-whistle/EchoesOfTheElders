@@ -71,10 +71,17 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             this.onCollision(hitResult);
             this.velocityDirty = true;
         }
-        if (this.age < 300) {
+        if (this.age<20){
+            this.setPosition(this.getPos().add(this.getVelocity()));
+        }
+        else if (this.age < 300) {
             var pass = (LivingEntity) this.getOwner();
             if (pass != null) {
-                Vec3d desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
+                Vec3d desiredDirection = new Vec3d(0,0,0);
+                if (this.getControllingPassenger() != null){
+                    System.out.println("pass");
+                    desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
+                }
                 this.updateRotation();
                 Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.13)).normalize();
                 this.setVelocity(newDirection.multiply(1.3));

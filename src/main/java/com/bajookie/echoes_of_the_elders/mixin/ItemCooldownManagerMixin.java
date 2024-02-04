@@ -34,4 +34,5 @@ public class ItemCooldownManagerMixin implements IPlayerBoundItemCooldownManager
 
         return CooldownUtil.getReducedCooldown(playerEntity, item, duration);
     }
+
 }
