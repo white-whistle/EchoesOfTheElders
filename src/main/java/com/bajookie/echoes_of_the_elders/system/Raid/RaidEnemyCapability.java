@@ -1,9 +1,13 @@
 package com.bajookie.echoes_of_the_elders.system.Raid;
 
+import com.bajookie.echoes_of_the_elders.entity.custom.RaidTotemEntity;
+import com.bajookie.echoes_of_the_elders.mixin.MobEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.goal.ActiveTargetGoal;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -15,11 +19,17 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
 
     public RaidEnemyCapability(LivingEntity self) {
         super(self);
+
+        if (self instanceof MobEntity mobEntity && mobEntity instanceof MobEntityAccessor mobEntityAccessor) {
+            var targeting = mobEntityAccessor.getTargetSelector();
+
+            targeting.add(0, new ActiveTargetGoal<>(mobEntity, RaidTotemEntity.class, false));
+        }
     }
 
     public void onDeath() {
         if (this.self == null) return;
-        
+
         var objective = getRaidTarget(self.getWorld());
 
         ModCapabilities.RAID_OBJECTIVE.use(objective, o -> {

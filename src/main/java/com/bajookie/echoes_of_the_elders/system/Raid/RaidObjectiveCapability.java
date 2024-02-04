@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.system.Raid;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -27,12 +28,14 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         private static final String REMAINING_ENEMIES = "remainingEnemies";
         private static final String REMAINING_WAVES = "remainingWaves";
         private static final String LEVEL = "level";
+        private static final String ACTIVE = "active";
         private static final String ITEM_STACKS = "itemstacks";
     }
 
     public int remainingWaves = -1;
     public ArrayList<UUID> remainingEnemies = new ArrayList<>();
     public int level = -1;
+    public boolean active = false;
     public final ArrayList<ItemStack> items = new ArrayList<>();
 
     public RaidObjectiveCapability(LivingEntity self) {
@@ -87,11 +90,14 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         if (remainingWaves == -1) {
             remainingWaves = 5;
         }
+        this.active = true;
 
         Soulbound.set(itemStack, user);
         items.add(itemStack);
         self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_START_COOLDOWN, 20 * 10));
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.charging"));
+
+        ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
         return true;
     }
 
@@ -137,6 +143,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void writeToNbt(NbtCompound nbt) {
         nbt.putInt(Keys.REMAINING_WAVES, remainingWaves);
         nbt.putInt(Keys.LEVEL, level);
+        nbt.putBoolean(Keys.ACTIVE, active);
 
         NbtList nbtItemstackList = new NbtList();
         NbtList nbtUuidList = new NbtList();
@@ -159,6 +166,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void readFromNbt(NbtCompound nbt) {
         remainingWaves = nbt.getInt(Keys.REMAINING_WAVES);
         level = nbt.getInt(Keys.LEVEL);
+        active = nbt.getBoolean(Keys.ACTIVE);
 
         var nbtItemstackList = nbt.getList(Keys.ITEM_STACKS, NbtElement.COMPOUND_TYPE);
         var nbtUuidList = nbt.getList(Keys.REMAINING_ENEMIES, NbtElement.INT_ARRAY_TYPE);

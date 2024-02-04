@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -76,7 +77,7 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, EquipmentSlot slot) {
         if (slot == EquipmentSlot.MAINHAND) {
-            return stackedAttributeModifiers.get(stack.getCount() - 1);
+            return stackedAttributeModifiers.get(StackLevel.get(stack) - 1);
         } else {
             return super.getAttributeModifiers(stack, slot);
         }
