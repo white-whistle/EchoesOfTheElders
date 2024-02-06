@@ -39,7 +39,7 @@ public class ThickTrailParticle extends AnimatedParticle {
         }
         this.setSpriteForAge(this.spriteProvider);
         if (this.age > this.maxAge / 2) {
-            this.setAlpha(1.0f - ((float)this.age - (float)(this.maxAge / 2)) / (float)this.maxAge);
+            this.setAlpha(((float) this.maxAge/2-(float)this.age)/this.maxAge);
         }
     }
 
