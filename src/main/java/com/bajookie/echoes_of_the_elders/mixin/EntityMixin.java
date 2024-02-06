@@ -1,9 +1,12 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class EntityMixin {
 
     @Inject(method = "setSneaking", at = @At("HEAD"), cancellable = true)
-    public void handleSneakingStart(boolean sneaking, CallbackInfo ci) {
+    private void handleSneakingStart(boolean sneaking, CallbackInfo ci) {
         if (!sneaking) return;
 
         var entity = (Entity) (Object) this;
@@ -28,6 +31,30 @@ public class EntityMixin {
 
                 ci.cancel();
             }
+        }
+    }
+
+    @Inject(method = "onStartedTrackingBy", at = @At("HEAD"))
+    private void onStartedTrackingBy(ServerPlayerEntity player, CallbackInfo ci) {
+        var self = (Entity) (Object) this;
+        if (self instanceof LivingEntity livingEntity) {
+            ModCapabilities.RAID_OBJECTIVE.use(livingEntity, (o) -> {
+                if (o.active) {
+                    o.addRaidBars(player);
+                }
+            });
+        }
+    }
+
+    @Inject(method = "onStoppedTrackingBy", at = @At("HEAD"))
+    private void onStoppedTrackingBy(ServerPlayerEntity player, CallbackInfo ci) {
+        var self = (Entity) (Object) this;
+        if (self instanceof LivingEntity livingEntity) {
+            ModCapabilities.RAID_OBJECTIVE.use(livingEntity, (o) -> {
+                if (o.active) {
+                    o.removeRaidBars(player);
+                }
+            });
         }
     }
 

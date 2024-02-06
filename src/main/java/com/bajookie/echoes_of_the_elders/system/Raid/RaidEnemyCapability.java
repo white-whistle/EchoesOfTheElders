@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 public class RaidEnemyCapability extends Capability<LivingEntity> {
     private UUID raidTargetUUID;
+    private static final float ENEMY_SEARCH_MODIFIER = 10;
 
     public RaidEnemyCapability(LivingEntity self) {
         super(self);
@@ -23,7 +25,12 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
         if (self instanceof MobEntity mobEntity && mobEntity instanceof MobEntityAccessor mobEntityAccessor) {
             var targeting = mobEntityAccessor.getTargetSelector();
 
-            targeting.add(0, new ActiveTargetGoal<>(mobEntity, RaidTotemEntity.class, false));
+            targeting.add(0, new ActiveTargetGoal<>(mobEntity, RaidTotemEntity.class, false) {
+                @Override
+                protected Box getSearchBox(double distance) {
+                    return this.mob.getBoundingBox().expand(distance * ENEMY_SEARCH_MODIFIER, 30, distance * ENEMY_SEARCH_MODIFIER);
+                }
+            });
         }
     }
 

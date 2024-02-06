@@ -121,5 +121,19 @@ public class ModCapabilities {
                 PlayerLookup.tracking(livingEntity).forEach(p -> SyncSingleCapability.send(p, livingEntity, this.name));
             }
         }
+
+        @Nullable
+        public T tryGetCapability(@Nullable H o) {
+            if (!(o instanceof IHasCapability iHasCapability)) return null;
+
+            var capabilities = iHasCapability.echoesOfTheElders$getCapabilities();
+            if (capabilities == null) return null;
+
+            var capability = capabilities.get(this.name);
+            if (capability == null) return null;
+
+            // noinspection unchecked
+            return (T) capability;
+        }
     }
 }
