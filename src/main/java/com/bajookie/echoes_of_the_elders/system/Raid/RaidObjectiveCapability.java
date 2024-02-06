@@ -11,6 +11,8 @@ import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +20,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import java.util.ArrayList;
@@ -27,16 +30,22 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     private static class Keys {
         private static final String REMAINING_ENEMIES = "remainingEnemies";
         private static final String REMAINING_WAVES = "remainingWaves";
+        private static final String INITIAL_WAVES = "initialWaves";
         private static final String LEVEL = "level";
         private static final String ACTIVE = "active";
         private static final String ITEM_STACKS = "itemstacks";
     }
 
+    public int initialWaves = -1;
     public int remainingWaves = -1;
+    public int initialEnemyCount = -1;
     public ArrayList<UUID> remainingEnemies = new ArrayList<>();
     public int level = -1;
     public boolean active = false;
     public final ArrayList<ItemStack> items = new ArrayList<>();
+
+    public ServerBossBar raidWaveBar = (ServerBossBar) new ServerBossBar(Text.empty(), BossBar.Color.RED, BossBar.Style.PROGRESS).setDarkenSky(true);
+    public ServerBossBar raidHealthBar = new ServerBossBar(Text.empty(), BossBar.Color.PURPLE, BossBar.Style.NOTCHED_20);
 
     public RaidObjectiveCapability(LivingEntity self) {
         super(self);
@@ -67,37 +76,76 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void spawnWave() {
         var wave = RaidWaves.getWave(level);
         remainingEnemies = wave.spawnEntities(self);
+        initialEnemyCount = remainingEnemies.size();
+        raidWaveBar.setPercent(getWaveProgress());
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave", new TextArgs().put("wave", wave.name())));
     }
 
+    private Text getRaidName() {
+        return Text.literal("Artifact Extraction - " + level);
+    }
+
+    private Text getWaveName() {
+        var current = initialWaves - remainingWaves;
+        return Text.literal("Wave [" + current + "/" + initialWaves + "]");
+    }
+
+    private float getWaveProgress() {
+        return remainingEnemies.size() / (float) initialEnemyCount;
+    }
+
     public void begin() {
+        this.active = true;
+        ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
+
+        raidHealthBar.setName(getRaidName());
+        raidWaveBar.setName(getWaveName());
+        PlayerLookup.tracking(self).forEach(this::addRaidBars);
+
         spawnWave();
     }
 
-    public boolean tryAddKey(ItemStack itemStack, PlayerEntity user) {
-        var owner = user.getUuid();
+    public boolean canAcceptKeyFromPlayer(PlayerEntity player) {
+        if (active) return false;
 
+        var owner = player.getUuid();
+        return items.stream().noneMatch(stack -> {
+            var soulbound = Soulbound.getUuid(stack);
+            if (soulbound == null) return false;
+
+            return soulbound.equals(owner);
+        });
+    }
+
+    public void addKey(ItemStack itemStack, PlayerEntity user) {
+        // add item
+        Soulbound.set(itemStack, user);
+        items.add(itemStack);
+        self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_START_COOLDOWN, 20 * 10));
+
+        if (remainingWaves == -1) {
+            // init vars
+            remainingWaves = 5;
+            initialWaves = 5;
+
+            // announce
+            if (!self.getWorld().isClient) {
+                PlayerLookup.tracking(self).forEach(player -> player.sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.charging"), true));
+            }
+        }
+
+        ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
+    }
+
+    public boolean tryAddKey(ItemStack itemStack, PlayerEntity user) {
         if (self == null) return false;
         if (level == -1) level = Tier.get(itemStack);
 
         if (Tier.get(itemStack) != level) return false;
-        if (items.stream().anyMatch(stack -> {
-            var soulbound = Soulbound.getUuid(stack);
-            if (soulbound == null) return false;
-            return soulbound.equals(owner);
-        })) return false;
+        if (!canAcceptKeyFromPlayer(user)) return false;
 
-        if (remainingWaves == -1) {
-            remainingWaves = 5;
-        }
-        this.active = true;
+        addKey(itemStack, user);
 
-        Soulbound.set(itemStack, user);
-        items.add(itemStack);
-        self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_START_COOLDOWN, 20 * 10));
-        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.charging"));
-
-        ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
         return true;
     }
 
@@ -125,32 +173,35 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     private void sendMessage(Text text) {
         if (!self.getWorld().isClient) {
-            PlayerLookup.tracking(self).forEach(player -> {
-                player.sendMessage(text, true);
-            });
+            PlayerLookup.tracking(self).forEach(player -> player.sendMessage(text, true));
         }
     }
 
     public void onEnemyKilled(LivingEntity enemy) {
         remainingEnemies.removeIf(e -> e.equals(enemy.getUuid()));
+        raidWaveBar.setPercent(getWaveProgress());
 
         if (remainingEnemies.size() < 1) {
             onWaveVictory();
         }
     }
 
+    public void addEnemy(LivingEntity entity) {
+        remainingEnemies.add(entity.getUuid());
+        initialEnemyCount++;
+    }
+
     @Override
     public void writeToNbt(NbtCompound nbt) {
         nbt.putInt(Keys.REMAINING_WAVES, remainingWaves);
+        nbt.putInt(Keys.INITIAL_WAVES, initialWaves);
         nbt.putInt(Keys.LEVEL, level);
         nbt.putBoolean(Keys.ACTIVE, active);
 
         NbtList nbtItemstackList = new NbtList();
         NbtList nbtUuidList = new NbtList();
 
-        remainingEnemies.forEach(eUuid -> {
-            nbtUuidList.add(NbtHelper.fromUuid(eUuid));
-        });
+        remainingEnemies.forEach(eUuid -> nbtUuidList.add(NbtHelper.fromUuid(eUuid)));
 
         items.forEach(itemStack -> {
             var itemstackNbt = new NbtCompound();
@@ -165,6 +216,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     @Override
     public void readFromNbt(NbtCompound nbt) {
         remainingWaves = nbt.getInt(Keys.REMAINING_WAVES);
+        initialWaves = nbt.getInt(Keys.INITIAL_WAVES);
         level = nbt.getInt(Keys.LEVEL);
         active = nbt.getBoolean(Keys.ACTIVE);
 
@@ -180,5 +232,26 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
             var uuid = NbtHelper.toUuid(c);
             remainingEnemies.add(uuid);
         });
+
+        raidWaveBar.setName(getWaveName());
+        raidWaveBar.setPercent(getWaveProgress());
+    }
+
+    public void addRaidBars(ServerPlayerEntity player) {
+        raidHealthBar.addPlayer(player);
+        raidWaveBar.addPlayer(player);
+    }
+
+    public void removeRaidBars(ServerPlayerEntity player) {
+        raidHealthBar.removePlayer(player);
+        raidWaveBar.removePlayer(player);
+    }
+
+    public void tick() {
+        if (self == null) return;
+
+        if (!self.getWorld().isClient) {
+            raidHealthBar.setPercent(self.getHealth() / self.getMaxHealth());
+        }
     }
 }

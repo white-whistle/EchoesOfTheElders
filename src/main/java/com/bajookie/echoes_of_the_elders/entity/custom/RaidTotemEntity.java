@@ -36,6 +36,11 @@ public class RaidTotemEntity extends AnimalEntity {
     }
 
     @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+    @Override
     public ItemStack eatFood(World world, ItemStack stack) {
         return Items.APPLE.getDefaultStack();
     }
