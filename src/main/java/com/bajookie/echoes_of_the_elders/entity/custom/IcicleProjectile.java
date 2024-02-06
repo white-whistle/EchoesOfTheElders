@@ -35,7 +35,7 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
 
     @Override
     public Packet<ClientPlayPacketListener> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this);
+        return new EntitySpawnS2CPacket(this,this.getOwner() != null ? this.getOwner().getId() : 0);
     }
 
     public IcicleProjectile(World world, double x, double y, double z, Entity owner, boolean fall) {
@@ -55,13 +55,13 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
         if (this.age > 80){
             this.discard();
         }
-        HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
-        this.checkBlockCollision();
-        if (!this.noClip) {
-            this.onCollision(hitResult);
-            this.velocityDirty = true;
-        }
         if (!this.getWorld().isClient){
+            HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
+            this.checkBlockCollision();
+            if (!this.noClip) {
+                this.onCollision(hitResult);
+                this.velocityDirty = true;
+            }
             for(int i=0;i<3;i++){
                 ((ServerWorld)this.getWorld()).spawnParticles(ModParticles.SNOW_FLAKE_PARTICLE,this.getX(),this.getY(),this.getZ(),1,0,0,0,0);
             }
@@ -99,6 +99,7 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
     @Override
     protected void onBlockCollision(BlockState state) {
         super.onBlockCollision(state);
+        if (!state.isSolid()) return;
         if (state.getBlock() == Blocks.AIR) return;
         if (state.getBlock() == Blocks.WATER){
             this.discard();
@@ -108,7 +109,11 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
 
     @Override
     public void onRemoved() {
-        this.getWorld().playSound(this.getX(),this.getY(),this.getZ(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS,4f,4f,false);
+        if (this.dataTracker.get(FALL)){
+            this.getWorld().playSound(this.getX(),this.getY(),this.getZ(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS,4f,4f,false);
+        } else {
+            this.getWorld().playSound(this.getX(),this.getY(),this.getZ(), SoundEvents.BLOCK_SNOW_BREAK, SoundCategory.PLAYERS,4f,4f,false);
+        }
         super.onRemoved();
     }
 

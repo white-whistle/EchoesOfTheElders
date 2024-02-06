@@ -20,11 +20,11 @@
     "PlayerManagerMixin",
     "PotionUseMixin",
     "ServerPlayerEntityMixin",
+    "ServerPlayerInteractionManagerMixin",
     "ServerWorldAccessor",
     "SplashPotionUseMixin",
     "ThrownItemEntityAccessor",
-    "TrunkPlacerTypeInvoker",
-    "ServerPlayerInteractionManagerMixin"
+    "TrunkPlacerTypeInvoker"
   ],
   "client": [
     "ClientItemMixin",
@@ -37,6 +37,7 @@
     "HeldItemRendererMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
+    "MinecraftClientMixin",
     "ModelLoaderMixin",
     "TooltipComponentMixin",
     "WorldRendererMixin"
