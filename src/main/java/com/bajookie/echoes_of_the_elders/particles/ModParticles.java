@@ -30,6 +30,8 @@ public class ModParticles {
             "earth_spike_particle",FabricParticleTypes.simple());
     public static final DefaultParticleType SNOW_FLAKE_PARTICLE = registerParticle(
             "snow_flake_particle",FabricParticleTypes.simple());
+    public static final DefaultParticleType THICK_TRAIL_PARTICLE = registerParticle(
+            "thick_trail_particle",FabricParticleTypes.simple());
 
     private static DefaultParticleType registerParticle(String name,DefaultParticleType particleType){
         return Registry.register(Registries.PARTICLE_TYPE,new Identifier(MOD_ID,name),particleType);

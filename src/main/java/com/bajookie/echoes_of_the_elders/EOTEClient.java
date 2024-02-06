@@ -38,6 +38,7 @@ public class EOTEClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.MAGMA_BULLET_SPEED, MagmaBulletParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.EARTH_SPIKE_PARTICLE, EarthSpikeParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.SNOW_FLAKE_PARTICLE, SnowFlakeParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.THICK_TRAIL_PARTICLE, ThickTrailParticle.Factory::new);
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
         HudRenderCallback.EVENT.register(new RaidObjectiveHoverOverlay());
         HudRenderCallback.EVENT.register(new TvArrowOverlay());
