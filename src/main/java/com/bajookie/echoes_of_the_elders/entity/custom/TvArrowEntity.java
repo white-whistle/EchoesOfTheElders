@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
@@ -94,7 +95,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             this.discard();
         }
         if (!this.getWorld().isClient) {
-            ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.POOF, this.prevX, this.prevY, this.prevZ, 1, 0, 0, 0, 0);
+            ((ServerWorld) this.getWorld()).spawnParticles(ModParticles.THICK_TRAIL_PARTICLE, this.prevX, this.prevY, this.prevZ, 1, 0, 0, 0, 0);
             this.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
         }
     }
