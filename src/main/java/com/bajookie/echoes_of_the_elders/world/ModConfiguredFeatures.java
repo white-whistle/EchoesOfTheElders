@@ -10,6 +10,7 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
@@ -41,7 +42,6 @@ public class ModConfiguredFeatures {
     public static final RegistryKey<ConfiguredFeature<?, ?>> OCEAN_SAND_KEY = registerKey("ocean_sand_disk");
     public static final RegistryKey<ConfiguredFeature<?, ?>> GRAVEL_DISK_KEY = registerKey("river_gravel_disk");
     public static final RegistryKey<ConfiguredFeature<?, ?>> LILY_PAD_KEY = registerKey("river_lily");
-
     public static void bootstrap(Registerable<ConfiguredFeature<?, ?>> context) {
         makeWaterConfigFeatures(context);
         makeGroundConfigFeatures(context);

@@ -46,6 +46,12 @@ public class ModItemGroups {
                 entries.add(ModItems.RAID_TOTEM_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModItems.ZOMBEE_SPAWN_EGG);
+                entries.add(ModItems.S_TIER_REWARD_BAG);
+                entries.add(ModItems.A_TIER_REWARD_BAG);
+                entries.add(ModItems.B_TIER_REWARD_BAG);
+                entries.add(ModItems.C_TIER_REWARD_BAG);
+                entries.add(ModItems.D_TIER_REWARD_BAG);
+                entries.add(ModItems.FOOD_TIER_REWARD_BAG);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 10), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);

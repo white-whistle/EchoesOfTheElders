@@ -63,6 +63,12 @@ public class ModItems {
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
     public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic());
     public static final Item ICICLE_RELIC = registerItem("icicle_staff", new IcicleStaff());
+    public static final Item D_TIER_REWARD_BAG =registerItem("d_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.D_TIER));
+    public static final Item C_TIER_REWARD_BAG =registerItem("c_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.C_TIER));
+    public static final Item B_TIER_REWARD_BAG =registerItem("b_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.B_TIER));
+    public static final Item A_TIER_REWARD_BAG =registerItem("a_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.A_TIER));
+    public static final Item S_TIER_REWARD_BAG =registerItem("s_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.S_TIER));
+    public static final Item FOOD_TIER_REWARD_BAG =registerItem("food_reward_bag",new ResourceRewardBags(ResourceRewardBags.Type.FOOD_TIER));
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));

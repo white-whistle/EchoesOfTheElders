@@ -15,6 +15,7 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.EndPlacedFeatures;
 import net.minecraft.world.gen.feature.OceanPlacedFeatures;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
