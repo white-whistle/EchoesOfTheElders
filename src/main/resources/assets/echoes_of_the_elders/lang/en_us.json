@@ -1,6 +1,6 @@
 {
- "echoes_of_the_elders:advance.description.general":"Get the %s",
-"number.echoes_of_the_elders.f1": "%.1f",
+  "echoes_of_the_elders:advance.description.general": "Get the %s",
+  "number.echoes_of_the_elders.f1": "%.1f",
   "number.echoes_of_the_elders.int": "%d",
   "item.echoes_of_the_elders.shiny_ancient_stone_sword": "\u00A7a Shiny Ancient Stone Sword",
   "item.echoes_of_the_elders.ancient_stone_sword": "Ancient Stone Sword",
@@ -114,5 +114,7 @@
   "message.echoes_of_the_elders.raid.charging": "<BLUE>A raid will begin shortly...</BLUE>",
   "message.echoes_of_the_elders.raid.wave.zombies": "ZOMBIES!",
   "message.echoes_of_the_elders.raid.wave.skeletons": "SKELETONS!",
-  "screen.echoes_of_the_elders.pandoras_bag.title": "<tier/> <MAGENTA>Pandora's Bag</MAGENTA>"
+  "screen.echoes_of_the_elders.pandoras_bag.title": "<tier/> <MAGENTA>Pandora's Bag</MAGENTA>",
+  "screen.echoes_of_the_elders.raid_continue.title": "wave %s complete",
+  "screen.echoes_of_the_elders.raid_continue.continue": "continue?"
 }

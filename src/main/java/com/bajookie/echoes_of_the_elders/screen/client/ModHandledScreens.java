@@ -9,5 +9,6 @@ import net.minecraft.client.gui.screen.ingame.HandledScreens;
 public class ModHandledScreens {
     public static void init() {
         HandledScreens.register(ModScreenHandlerTypes.PANDORAS_BAG, PandorasBagScreen::new);
+        HandledScreens.register(ModScreenHandlerTypes.RAID_CONTINUE, RaidContinueScreen::new);
     }
 }

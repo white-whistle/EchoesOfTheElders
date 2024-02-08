@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.RaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -16,6 +17,7 @@ import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
@@ -54,6 +56,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void onVictory() {
         items.forEach((stack) -> {
             Tier.raise(stack, 1);
+            RaidReward.queueItem(stack, new ItemStack(Items.CAKE));
             self.dropStack(stack);
         });
 
