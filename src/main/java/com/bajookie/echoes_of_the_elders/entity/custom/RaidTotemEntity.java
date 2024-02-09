@@ -40,29 +40,29 @@ public class RaidTotemEntity extends AnimalEntity {
                 .add(EntityAttributes.GENERIC_ARMOR, 5f);
     }
 
-    @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        if (!player.getWorld().isClient) {
-            var inv = new SimpleInventory(2);
-            inv.setStack(0, new ItemStack(ModItems.GODSLAYER));
-            inv.setStack(1, new ItemStack(ModItems.PANDORAS_BAG));
-
-            player.openHandledScreen(new NamedScreenHandlerFactory() {
-                @Override
-                public Text getDisplayName() {
-                    return Text.empty();
-                }
-
-                @Nullable
-                @Override
-                public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-                    return new RaidContinueScreenHandler(syncId, playerInventory, inv);
-                }
-            });
-        }
-
-        return ActionResult.SUCCESS;
-    }
+    // @Override
+    // public ActionResult interactMob(PlayerEntity player, Hand hand) {
+    //     // if (!player.getWorld().isClient) {
+    //     //     var inv = new SimpleInventory(2);
+    //     //     inv.setStack(0, new ItemStack(ModItems.GODSLAYER));
+    //     //     inv.setStack(1, new ItemStack(ModItems.PANDORAS_BAG));
+    //     //
+    //     //     player.openHandledScreen(new NamedScreenHandlerFactory() {
+    //     //         @Override
+    //     //         public Text getDisplayName() {
+    //     //             return Text.empty();
+    //     //         }
+    //     //
+    //     //         @Nullable
+    //     //         @Override
+    //     //         public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+    //     //             return new RaidContinueScreenHandler(syncId, playerInventory, inv);
+    //     //         }
+    //     //     });
+    //     // }
+    //
+    //     return ActionResult.SUCCESS;
+    // }
 
     @Override
     public void takeKnockback(double strength, double x, double z) {

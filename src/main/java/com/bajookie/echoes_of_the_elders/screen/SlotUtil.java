@@ -34,4 +34,30 @@ public class SlotUtil {
         }
     }
 
+    public static class Data extends Slot {
+        public Data(Inventory inventory, int index, int x, int y) {
+            super(inventory, index, x, y);
+        }
+
+        @Override
+        public boolean canInsert(ItemStack stack) {
+            return false;
+        }
+
+        @Override
+        public boolean canTakeItems(PlayerEntity playerEntity) {
+            return false;
+        }
+
+        @Override
+        public boolean canBeHighlighted() {
+            return false;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return false;
+        }
+    }
+
 }

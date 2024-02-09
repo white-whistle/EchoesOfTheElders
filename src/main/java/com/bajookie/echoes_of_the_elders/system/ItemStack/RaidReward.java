@@ -54,11 +54,28 @@ public class RaidReward {
         newInv.setStack(0, item);
 
         for (int i = 1; i < size + 1; i++) {
-            newInv.setStack(i, inv.getStack(i));
+            newInv.setStack(i, inv.getStack(i - 1));
         }
         set(itemStack, newInv);
 
         return newInv;
+    }
+
+    public static ItemStack dequeueItem(ItemStack itemStack) {
+        var inv = get(itemStack);
+        var size = inv.size();
+        if (size == 0) return null;
+
+        var stack = inv.getStack(0);
+        var newInv = new SimpleInventory(size - 1);
+
+        for (int i = 0; i < size - 1; i++) {
+            newInv.setStack(i, inv.getStack(i + 1));
+        }
+
+        set(itemStack, newInv);
+
+        return stack;
     }
 
     public boolean hasInventory(ItemStack itemStack) {

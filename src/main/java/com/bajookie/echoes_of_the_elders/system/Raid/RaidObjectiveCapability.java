@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.system.Raid;
 
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.screen.RaidContinueScreenHandler;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.RaidReward;
@@ -16,17 +18,25 @@ import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Pair;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
+
+import static com.bajookie.echoes_of_the_elders.effects.ModEffects.RAID_OBJECTIVE_CONTINUE_PHASE;
 
 public class RaidObjectiveCapability extends Capability<LivingEntity> {
     private static class Keys {
@@ -36,6 +46,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         private static final String LEVEL = "level";
         private static final String ACTIVE = "active";
         private static final String ITEM_STACKS = "itemstacks";
+        private static final String RAID_ANSWERS = "raidAnswers";
     }
 
     public int initialWaves = -1;
@@ -49,27 +60,53 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public ServerBossBar raidWaveBar = (ServerBossBar) new ServerBossBar(Text.empty(), BossBar.Color.RED, BossBar.Style.PROGRESS).setDarkenSky(true);
     public ServerBossBar raidHealthBar = new ServerBossBar(Text.empty(), BossBar.Color.PURPLE, BossBar.Style.NOTCHED_20);
 
+    public ArrayList<Pair<UUID, RaidAnswer>> raidAnswers = new ArrayList<>();
+
     public RaidObjectiveCapability(LivingEntity self) {
         super(self);
     }
 
-    public void onVictory() {
-        items.forEach((stack) -> {
-            Tier.raise(stack, 1);
-            RaidReward.queueItem(stack, new ItemStack(Items.CAKE));
-            self.dropStack(stack);
-        });
-
-        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.victory"));
-        self.discard();
+    public int getWavesPerRaid() {
+        return 1;
     }
 
+    public boolean isInContinuePhase() {
+        if (self == null) return false;
+        return self.hasStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE);
+    }
+
+    private ItemStack getRandomRelicDropStack() {
+        Random r = new Random();
+        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact iArtifact && iArtifact.shouldDrop()).toList();
+
+        var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
+
+        return new ItemStack(randomArtifactItem, 1);
+    }
+
+    // called when a bundle of waves is won
+    public void onVictory() {
+
+        items.forEach((stack) -> {
+            Tier.raise(stack, 1);
+            for (int i = 0; i < 100; i++)
+                RaidReward.queueItem(stack, getRandomRelicDropStack());
+        });
+
+        self.addStatusEffect(new StatusEffectInstance(RAID_OBJECTIVE_CONTINUE_PHASE, 20 * 30));
+        setContinueBar();
+
+        PlayerLookup.tracking(self).forEach(this::tryOpenPickerScreen);
+    }
+
+    // called when a wave has been won
     public void onWaveVictory() {
         remainingWaves--;
         level++;
 
         if (remainingWaves < 1) {
-            onVictory();
+            sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.level_complete"));
+            self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_VICTORY_PHASE, 3 * 20));
         } else {
             sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.wave_complete"));
             spawnWave();
@@ -81,22 +118,26 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         remainingEnemies = wave.spawnEntities(self);
         initialEnemyCount = remainingEnemies.size();
         raidWaveBar.setPercent(getWaveProgress());
+
+        setWaveBar();
+
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave", new TextArgs().put("wave", wave.name())));
     }
 
     private Text getRaidName() {
-        return Text.literal("Artifact Extraction - " + level);
+        return Text.translatable("raid_bar.echoes_of_the_elders.raid_health.title", level + 1);
     }
 
     private Text getWaveName() {
-        var current = initialWaves - remainingWaves;
-        return Text.literal("Wave [" + current + "/" + initialWaves + "]");
+        var current = initialWaves - remainingWaves + 1;
+        return Text.translatable("raid_bar.echoes_of_the_elders.raid_wave.title", current, initialWaves);
     }
 
     private float getWaveProgress() {
         return remainingEnemies.size() / (float) initialEnemyCount;
     }
 
+    // called after the key insertion grace period is over
     public void begin() {
         this.active = true;
         ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
@@ -128,8 +169,9 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         if (remainingWaves == -1) {
             // init vars
-            remainingWaves = 5;
-            initialWaves = 5;
+            var amt = getWavesPerRaid();
+            remainingWaves = amt;
+            initialWaves = amt;
 
             // announce
             if (!self.getWorld().isClient) {
@@ -203,6 +245,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         NbtList nbtItemstackList = new NbtList();
         NbtList nbtUuidList = new NbtList();
+        NbtList nbtAnswerList = new NbtList();
 
         remainingEnemies.forEach(eUuid -> nbtUuidList.add(NbtHelper.fromUuid(eUuid)));
 
@@ -212,8 +255,16 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
             nbtItemstackList.add(itemstackNbt);
         });
 
+        raidAnswers.forEach(p -> {
+            var c = new NbtCompound();
+            c.putUuid("uuid", p.getLeft());
+            c.putInt("answer", p.getRight().value);
+        });
+
         nbt.put(Keys.REMAINING_ENEMIES, nbtUuidList);
         nbt.put(Keys.ITEM_STACKS, nbtItemstackList);
+        nbt.put(Keys.RAID_ANSWERS, nbtAnswerList);
+
     }
 
     @Override
@@ -224,6 +275,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         active = nbt.getBoolean(Keys.ACTIVE);
 
         var nbtItemstackList = nbt.getList(Keys.ITEM_STACKS, NbtElement.COMPOUND_TYPE);
+        var nbtAnswerList = nbt.getList(Keys.RAID_ANSWERS, NbtElement.COMPOUND_TYPE);
         var nbtUuidList = nbt.getList(Keys.REMAINING_ENEMIES, NbtElement.INT_ARRAY_TYPE);
 
         nbtItemstackList.forEach(c -> {
@@ -236,13 +288,164 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
             remainingEnemies.add(uuid);
         });
 
+        nbtAnswerList.forEach(c -> {
+            var compound = (NbtCompound) c;
+            var uuid = compound.getUuid("uuid");
+            var answer = RaidAnswer.values()[compound.getInt("answer")];
+            raidAnswers.add(new Pair<>(uuid, answer));
+        });
+
         raidWaveBar.setName(getWaveName());
         raidWaveBar.setPercent(getWaveProgress());
+
+        if (isInContinuePhase()) {
+            setContinueBar();
+        }
+    }
+
+    public void setWaveBar() {
+        raidWaveBar.setName(getWaveName());
+        raidWaveBar.setColor(BossBar.Color.RED);
+    }
+
+    public void setContinueBar() {
+        raidWaveBar.setName(Text.translatable("screen.echoes_of_the_elders.raid_continue.continue"));
+        raidWaveBar.setColor(BossBar.Color.BLUE);
+    }
+
+    public void dropLeaverLoot() {
+        var newItems = new ArrayList<ItemStack>();
+        items.forEach(stack -> {
+            var sb = Soulbound.getUuid(stack);
+            var isContinueUser = raidAnswers.stream().anyMatch(p -> p.getRight() == RaidAnswer.CONTINUE && p.getLeft().equals(sb));
+            if (isContinueUser) {
+                newItems.add(stack);
+                return;
+            }
+
+            var bag = new ItemStack(ModItems.PANDORAS_BAG);
+            RaidReward.set(bag, RaidReward.get(stack));
+            Soulbound.setUuid(bag, sb);
+            Soulbound.setName(bag, Soulbound.getName(stack));
+
+            // PandorasBag.setBagInventory(bag, RaidReward.get(stack));
+
+            self.dropStack(bag);
+        });
+
+        this.items.clear();
+        this.items.addAll(newItems);
+    }
+
+    public void closeOpenScreens() {
+        PlayerLookup.tracking(self).forEach(player -> {
+            if (player.currentScreenHandler instanceof RaidContinueScreenHandler handler) {
+                var id = handler.inventory.getStack(2);
+                var uuid = Soulbound.getUuid(id);
+                if (self.getUuid().equals(uuid)) {
+                    player.closeHandledScreen();
+                }
+            }
+        });
+    }
+
+    // called once the raid continue grace period is over
+    // evaluates the current choices made by all players
+    public void advance() {
+        var shouldContinue = raidAnswers.stream().anyMatch(p -> p.getRight() == RaidAnswer.CONTINUE);
+
+        closeOpenScreens();
+
+        dropLeaverLoot();
+
+
+        if (shouldContinue) {
+            onContinue();
+        } else {
+            onComplete();
+        }
+    }
+
+    // called once all players choose to extract, this is the absolute end of this entity
+    public void onComplete() {
+        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.victory"));
+        self.discard();
+    }
+
+    // called once continue grace period is over and at least one player picked continue
+    public void onContinue() {
+        raidAnswers = new ArrayList<>();
+
+        var amt = getWavesPerRaid();
+        remainingWaves = amt;
+        initialWaves = amt;
+
+        raidHealthBar.setName(getRaidName());
+        raidWaveBar.setName(getWaveName());
+
+        ModCapabilities.RAID_OBJECTIVE.syncEntityCapability(self);
+
+        spawnWave();
+    }
+
+    public void answer(PlayerEntity player, RaidAnswer answer) {
+        var owner = player.getUuid();
+        raidAnswers.removeIf(p -> p.getLeft().equals(owner));
+        raidAnswers.add(new Pair<>(owner, answer));
+
+        if (raidAnswers.size() == items.size()) {
+            self.removeStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE);
+            // advance();
+        }
+    }
+
+    @Nullable
+    public ItemStack getPlayerStack(PlayerEntity player) {
+        var owner = player.getUuid();
+        return items.stream()
+                .filter(stack -> {
+                    var sb = Soulbound.getUuid(stack);
+                    return owner.equals(sb);
+                })
+                .findFirst().orElse(null);
+    }
+
+    public void tryOpenPickerScreen(ServerPlayerEntity player) {
+        if (!self.hasStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE)) return;
+
+        var playerStack = getPlayerStack(player);
+        if (playerStack == null) return;
+
+        var inv = RaidReward.get(playerStack);
+        var lastGottenItem = inv.getStack(0);
+        var bag = new ItemStack(ModItems.PANDORAS_BAG);
+        RaidReward.set(bag, inv);
+        var id = new ItemStack(ModItems.CORRUPTED_KEY);
+        Soulbound.setUuid(id, self.getUuid());
+
+        var screenInv = new SimpleInventory(3);
+        screenInv.setStack(0, lastGottenItem);
+        screenInv.setStack(1, bag);
+        screenInv.setStack(2, id);
+
+        player.openHandledScreen(new NamedScreenHandlerFactory() {
+            @Override
+            public Text getDisplayName() {
+                return Text.translatable("screen.echoes_of_the_elders.raid_continue.title", level);
+            }
+
+            @Override
+            public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+                return new RaidContinueScreenHandler(syncId, playerInventory, screenInv);
+            }
+        });
     }
 
     public void addRaidBars(ServerPlayerEntity player) {
         raidHealthBar.addPlayer(player);
         raidWaveBar.addPlayer(player);
+
+        tryOpenPickerScreen(player);
     }
 
     public void removeRaidBars(ServerPlayerEntity player) {
@@ -255,6 +458,27 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         if (!self.getWorld().isClient) {
             raidHealthBar.setPercent(self.getHealth() / self.getMaxHealth());
+
+
+            if (isInContinuePhase()) {
+                var status = self.getStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE);
+                if (status != null) {
+                    var progress = status.getDuration() / (float) (30 * 20);
+                    raidWaveBar.setPercent(progress);
+                }
+            }
+        }
+    }
+
+    public enum RaidAnswer {
+        NONE(0),
+        CONTINUE(1),
+        LEAVE(2);
+
+        public final int value;
+
+        RaidAnswer(int value) {
+            this.value = value;
         }
     }
 }
