@@ -1,5 +1,10 @@
 package com.bajookie.echoes_of_the_elders.system.Raid.waves;
 
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.equipments.EquipmentSequence;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders.PhantomRaider;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders.RaidEntityFeature;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders.SkeletonRaider;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders.ZombieRaider;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.SkeletonEntity;
@@ -12,48 +17,55 @@ import oshi.util.tuples.Triplet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class WaveFeatures {
 
-    public static void registerWaveRecords(){
+    public static void registerWaveRecords() {
         EntityFeature.bootstrap();
         EntityToolFeature.bootstrap();
         EntityEffectFeature.bootstrap();
     }
 
     public static class EntityFeature {
-        private static final List<EntityFeatureRecord> featureList = new ArrayList<>();
+        public static List<RaidEntityFeature<? extends LivingEntity>> list = new ArrayList<>();
+        public static ZombieRaider ZOMBIE_RAIDER = (ZombieRaider) register(new ZombieRaider(1, 1, 5));
+        public static SkeletonRaider SKELETON_RAIDER = (SkeletonRaider) register(new SkeletonRaider(1, 1, 5));
+        public static PhantomRaider PHANTOM_RAIDER = (PhantomRaider) register(new PhantomRaider(5,1,4));
 
-        public static void bootstrap(){
-            register(0, 10, 1, ZombieEntity.class, 10, Optional.empty(), Optional.empty());
-            register(0, 10, 1, SkeletonEntity.class, 9, Optional.empty(), Optional.empty());
+        public static void bootstrap() {
         }
-
-        private static void register(int minLevel, int weight, int levelStep, Class<? extends LivingEntity> entity, int baseCount, Optional<Integer> plusMinusRandom, Optional<Pair<Integer, Integer>> commonWaveAndMultiplier) {
-            featureList.add(new EntityFeatureRecord(minLevel,weight,levelStep,entity,baseCount,plusMinusRandom,commonWaveAndMultiplier));
+        private static RaidEntityFeature<? extends LivingEntity> register(RaidEntityFeature<? extends LivingEntity> raidEntityFeature){
+            list.add(raidEntityFeature);
+            return raidEntityFeature;
         }
-        public static List<EntityFeatureRecord> getEntityRecordList(){
-            return featureList;
-        }
-
     }
+
     public static class EntityEffectFeature {
-        public static void bootstrap(){
+        public static void bootstrap() {
         }
     }
+
     public static class EntityToolFeature {
-        private static final List<EntityToolFeatureRecord> featureList = new ArrayList<>();
-
-        public static void bootstrap(){
-            register(0, EquipmentSlot.MAINHAND, Items.WOODEN_SHOVEL,10,1,20,new Triplet<>(false,0,0));
-            register(1,EquipmentSlot.MAINHAND,Items.WOODEN_AXE,6,1,15,new Triplet<>(false,0,0));
+        public static EquipmentSequence ZOMBIE_HAND = new EquipmentSequence.SequenceBuilder(1,EquipmentSlot.MAINHAND).addEquipment(Items.WOODEN_SHOVEL,2).addEquipment(Items.WOODEN_AXE,4).build();
+        public static EquipmentSequence HELMETS = new EquipmentSequence.SequenceBuilder(2,EquipmentSlot.HEAD).addEquipment(Items.LEATHER_HELMET,3).addEquipment(Items.GOLDEN_HELMET,4).build();
+        public static void bootstrap() {
         }
 
-        private static void register(int minLevel, EquipmentSlot equipmentSlot, Item item,int weight,int step,int peak, Triplet<Boolean,Integer,Integer> enchantability) {
-            featureList.add(new EntityToolFeatureRecord(minLevel,equipmentSlot,item,weight,step,peak,new Triplet<> (false,0,0)));
-        }
-        public static List<EntityToolFeatureRecord> getEntityToolRecordList(){
-            return featureList;
+    }
+    public static List<RaidEntityFeature<? extends LivingEntity>> getRaidersList(int level){
+        List<RaidEntityFeature<? extends LivingEntity>> list = EntityFeature.list.stream().filter(raidEntityFeature -> raidEntityFeature.canApply(level)).collect(Collectors.toList());
+        List<RaidEntityFeature<? extends LivingEntity>> listFinal = new ArrayList<>();
+
+        if (list.size()<=3){
+            return list;
+        } else {
+            Random random = new Random();
+            for (int i = 0; i < 3; i++) {
+                listFinal.add(list.get(random.nextInt(list.size())));
+            }
+            return listFinal;
         }
     }
 }
