@@ -9,8 +9,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
 
 public class RaidContinueScreenHandler extends ScreenHandler {
-    private static final int INVENTORY_SIZE = 2;
-    private final Inventory inventory;
+    private static final int INVENTORY_SIZE = 3;
+    public final Inventory inventory;
 
     public RaidContinueScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(INVENTORY_SIZE));
@@ -26,6 +26,7 @@ public class RaidContinueScreenHandler extends ScreenHandler {
 
         this.addSlot(new SlotUtil.Readonly(inventory, 0, 69, 40));
         this.addSlot(new SlotUtil.Readonly(inventory, 1, 97, 40));
+        this.addSlot(new SlotUtil.Data(inventory, 2, 0, 0));
     }
 
 

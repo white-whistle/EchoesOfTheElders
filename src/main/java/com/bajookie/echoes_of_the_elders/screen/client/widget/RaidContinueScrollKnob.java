@@ -44,6 +44,24 @@ public abstract class RaidContinueScrollKnob extends SliderWidget {
     public abstract void onCommitted();
 
     @Override
+    public void onClick(double mouseX, double mouseY) {
+        super.onClick(mouseX, mouseY);
+
+        if (this.value < 0.25) {
+            this.value = 0;
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, 1.0f));
+        } else if (this.value > 0.75) {
+            this.value = 1;
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, 1.0f));
+        } else {
+            this.value = 0.51;
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+        }
+
+        onCommitted();
+    }
+
+    @Override
     public void onRelease(double mouseX, double mouseY) {
         if (this.value < 0.25) {
             this.value = 0;

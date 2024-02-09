@@ -1,23 +1,19 @@
 package com.bajookie.echoes_of_the_elders.effects;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
-import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
-import com.bajookie.echoes_of_the_elders.entity.ModDamageTypes;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
-import net.minecraft.entity.*;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.entity.damage.DamageTypes;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
@@ -62,6 +58,14 @@ public class ModEffects {
     public static final StatusEffect RAID_OBJECTIVE_START_COOLDOWN = registerStatusEffect("raid_objective_start_cooldown", DelayedEffect.create(StatusEffectCategory.NEUTRAL, (instance, entity) -> {
         ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::begin);
     }));
+
+    public static final StatusEffect RAID_OBJECTIVE_VICTORY_PHASE = registerStatusEffect("raid_objective_victory_phase", DelayedEffect.create(StatusEffectCategory.NEUTRAL, (instance, entity) -> {
+        ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::onVictory);
+    }));
+
+    public static final StatusEffect RAID_OBJECTIVE_CONTINUE_PHASE = registerStatusEffect("raid_objective_continue_phase", DelayedEffect.create(StatusEffectCategory.NEUTRAL, (instance, entity) -> {
+        ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::advance);
+    }));
     public static final StatusEffect SHOCK_EFFECT = registerStatusEffect("shock_effect", new ShockEffect());
     public static final StatusEffect ELECTRIC_STUN_EFFECT = registerStatusEffect("electric_stun", new ElectricStunEffect());
     public static final StatusEffect NO_GRAVITY_EFFECT = registerStatusEffect("no_gravity_effect", new NoGravityEffect());
@@ -103,6 +107,16 @@ public class ModEffects {
 
     private static StatusEffect registerStatusEffect(String name, StatusEffect effect) {
         return Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, name), effect);
+    }
+
+    public static StatusEffect registerGracefulStatusEffect(String name, StatusEffect effect, int graceTicks) {
+        var ret = registerStatusEffect(name, effect);
+        return registerStatusEffect(name + "_grace", new DelayedEffect(StatusEffectCategory.NEUTRAL) {
+            @Override
+            public void onRemoved(StatusEffectInstance effectInstance, LivingEntity entity) {
+                entity.addStatusEffect(new StatusEffectInstance(ret, graceTicks));
+            }
+        });
     }
 
     public static void registerEffects() {
