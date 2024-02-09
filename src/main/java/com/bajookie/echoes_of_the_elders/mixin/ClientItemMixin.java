@@ -59,9 +59,9 @@ public class ClientItemMixin {
             if (!isSingleItem && iArtifact.canArtifactMerge()) {
                 tryPad.run();
                 if (StackLevel.isMaxed(stack)) {
-                    tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack.max", new TextArgs().putI("count", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));
+                    tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack.max", new TextArgs().putI("baseCount", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));
                 } else {
-                    tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack", new TextArgs().putI("count", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));
+                    tooltip.add(ModText.STACK_LEVEL.apply(TextUtil.translatable("tooltip.echoes_of_the_elders.artifact_stack", new TextArgs().putI("baseCount", count).putI("maxCount", maxCount, Formatting.DARK_GRAY))));
                 }
             }
         }

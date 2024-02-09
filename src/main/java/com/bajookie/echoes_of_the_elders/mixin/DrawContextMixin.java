@@ -29,7 +29,7 @@ public abstract class DrawContextMixin {
 
     @Redirect(method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getCount()I", ordinal = 0))
     public int drawTextProxy(ItemStack instance) {
-        // trick artifacts into going to itemstack count rendering
+        // trick artifacts into going to itemstack baseCount rendering
         var level = StackLevel.get(currentItemStack);
         if (level > 1) return 2;
 
