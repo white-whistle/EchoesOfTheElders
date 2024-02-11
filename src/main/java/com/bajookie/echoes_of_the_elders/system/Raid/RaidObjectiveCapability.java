@@ -87,10 +87,11 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     // called when a bundle of waves is won
     public void onVictory() {
 
+        level++;
+        
         items.forEach((stack) -> {
             Tier.raise(stack, 1);
-            for (int i = 0; i < 100; i++)
-                RaidReward.queueItem(stack, getRandomRelicDropStack());
+            RaidReward.queueItem(stack, getRandomRelicDropStack());
         });
 
         self.addStatusEffect(new StatusEffectInstance(RAID_OBJECTIVE_CONTINUE_PHASE, 20 * 30));
@@ -102,7 +103,6 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     // called when a wave has been won
     public void onWaveVictory() {
         remainingWaves--;
-        level++;
 
         if (remainingWaves < 1) {
             sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.level_complete"));

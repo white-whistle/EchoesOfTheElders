@@ -121,5 +121,9 @@
   "raid_bar.echoes_of_the_elders.raid_health.title": "level %s raid",
   "raid_bar.echoes_of_the_elders.raid_wave.title": "wave [%s/%s]",
   "screen.echoes_of_the_elders.raid_continue.title": "level %s complete",
+  "screen.echoes_of_the_elders.raid_continue.battle.title": "Battle",
+  "screen.echoes_of_the_elders.raid_continue.battle.description": "Risk fighting for greater rewards",
+  "screen.echoes_of_the_elders.raid_continue.leave.title": "Leave",
+  "screen.echoes_of_the_elders.raid_continue.leave.description": "Exit the raid and claim your rewards",
   "screen.echoes_of_the_elders.raid_continue.continue": "continue?"
 }
