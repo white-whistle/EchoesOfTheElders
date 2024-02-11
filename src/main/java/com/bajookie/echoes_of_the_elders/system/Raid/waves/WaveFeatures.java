@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.system.Raid.waves;
 
 import com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders.*;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.roles.ZombieFighterRole;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Items;
@@ -39,6 +40,7 @@ public class WaveFeatures {
     }
 
     public static class EntityRoleFeature{
+        public static ZombieFighterRole ZOMBIE_FIGHTER_ROLE = new ZombieFighterRole();
 
         public static void bootstrap(){}
     }
@@ -49,7 +51,7 @@ public class WaveFeatures {
         public static EquipmentSequence CHEST_PLATES = new EquipmentSequence.SequenceBuilder(4,EquipmentSlot.CHEST).addEquipment(Items.LEATHER_CHESTPLATE.getDefaultStack(),9).addEquipment(Items.CHAINMAIL_CHESTPLATE.getDefaultStack(),14).build();
         public static EquipmentSequence LEGGINGS = new EquipmentSequence.SequenceBuilder(3,EquipmentSlot.LEGS).addEquipment(Items.LEATHER_LEGGINGS.getDefaultStack(),8).addEquipment(Items.CHAINMAIL_LEGGINGS.getDefaultStack(),13).build();
         public static EquipmentSequence BOOTS = new EquipmentSequence.SequenceBuilder(1,EquipmentSlot.FEET).addEquipment(Items.LEATHER_BOOTS.getDefaultStack(),6).addEquipment(Items.CHAINMAIL_BOOTS.getDefaultStack(),11).build();
-        public static EquipmentSequence BOW = new EquipmentSequence.SequenceBuilder(3,EquipmentSlot.MAINHAND).addEquipment(Items.BOW.getDefaultStack(),4).build();
+        public static EquipmentSequence BOW = new EquipmentSequence.SequenceBuilder(3,EquipmentSlot.MAINHAND).addEquipment(Items.BOW.getDefaultStack(),7).build();
         public static void bootstrap() {
         }
 

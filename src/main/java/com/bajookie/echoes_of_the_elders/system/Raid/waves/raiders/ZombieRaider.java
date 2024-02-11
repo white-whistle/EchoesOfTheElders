@@ -5,6 +5,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class ZombieRaider extends RaidEntityFeature<ZombieEntity>{
     public ZombieRaider(int minimumLevel, int step, int baseCount) {
         super(EntityType.ZOMBIE, minimumLevel, step, baseCount);
@@ -20,11 +22,17 @@ public class ZombieRaider extends RaidEntityFeature<ZombieEntity>{
 
     @Override
     public void equipEntity(ZombieEntity entity,int level) {
-        WaveFeatures.EntityToolFeature.ZOMBIE_HAND.equip(entity,level);
-        WaveFeatures.EntityToolFeature.HELMETS.equip(entity,level);
-        WaveFeatures.EntityToolFeature.CHEST_PLATES.equip(entity,level);
-        WaveFeatures.EntityToolFeature.LEGGINGS.equip(entity,level);
-        WaveFeatures.EntityToolFeature.BOOTS.equip(entity,level);
+        Random r = new Random();
+        if (r.nextInt(2) == 1){
+            WaveFeatures.EntityRoleFeature.ZOMBIE_FIGHTER_ROLE.applyItems(entity,level);
+
+        } else {
+            WaveFeatures.EntityToolFeature.ZOMBIE_HAND.equip(entity,level);
+            WaveFeatures.EntityToolFeature.HELMETS.equip(entity,level);
+            WaveFeatures.EntityToolFeature.CHEST_PLATES.equip(entity,level);
+            WaveFeatures.EntityToolFeature.LEGGINGS.equip(entity,level);
+            WaveFeatures.EntityToolFeature.BOOTS.equip(entity,level);
+        }
     }
 
     @Override
