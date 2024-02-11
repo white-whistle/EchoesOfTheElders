@@ -134,6 +134,7 @@ public class ModTextComponent
             var arg = args.get(argName);
 
             if (arg instanceof Text t) return t;
+            if (arg == null) return Text.literal("bug here");
 
             return Text.literal(arg.toString());
         }, false);
