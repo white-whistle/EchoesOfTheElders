@@ -3,23 +3,20 @@ package com.bajookie.echoes_of_the_elders.entity.custom;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ArrowEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -42,7 +39,7 @@ public class StarArrowProjectile extends ArrowEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (this.getWorld() != null && !this.getWorld().isClient &&this.star) {
+        if (this.getWorld() != null && !this.getWorld().isClient && this.star) {
             dropStars(blockHitResult.getPos());
             this.discard();
         } else {
@@ -74,6 +71,7 @@ public class StarArrowProjectile extends ArrowEntity {
             Random r = new Random();
             for (LivingEntity entity : entities) {
                 if (entity instanceof PlayerEntity) continue;
+                if (ModCapabilities.RAID_OBJECTIVE.hasCapability(entity)) continue;
                 if (this.getOwner() instanceof LivingEntity living) {
                     entity.setAttacker(living);
                 }

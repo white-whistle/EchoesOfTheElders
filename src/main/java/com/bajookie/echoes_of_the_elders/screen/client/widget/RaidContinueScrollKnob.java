@@ -76,4 +76,27 @@ public abstract class RaidContinueScrollKnob extends SliderWidget {
 
         onCommitted();
     }
+
+    private boolean snapped = false;
+
+    @Override
+    protected void onDrag(double mouseX, double mouseY, double deltaX, double deltaY) {
+        super.onDrag(mouseX, mouseY, deltaX, deltaY);
+
+        if (this.value < 0.25) {
+            this.value = 0;
+            if (!snapped) {
+                snapped = true;
+                MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, 1.0f));
+            }
+        } else if (this.value > 0.75) {
+            this.value = 1;
+            if (!snapped) {
+                snapped = true;
+                MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, 1.0f));
+            }
+        } else {
+            snapped = false;
+        }
+    }
 }

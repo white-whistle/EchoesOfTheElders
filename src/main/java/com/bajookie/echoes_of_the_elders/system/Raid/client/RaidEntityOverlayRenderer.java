@@ -103,10 +103,10 @@ public class RaidEntityOverlayRenderer {
     public static void render(MatrixStack matrix, LivingEntity entity, double x, double y) {
         Matrix4f m4f = matrix.peek().getPositionMatrix();
 
-        ModCapabilities.RAID_OBJECTIVE.use(entity, o -> {
-            if (!o.active) return;
-            drawStatusEffect(m4f, x, y, FULL_SIZE, RAID_DEFEND);
-        });
+        // ModCapabilities.RAID_OBJECTIVE.use(entity, o -> {
+        //     if (!o.active) return;
+        //     drawStatusEffect(m4f, x, y, FULL_SIZE, RAID_DEFEND);
+        // });
 
         ModCapabilities.RAID_ENEMY.use(entity, o -> {
             drawStatusEffect(m4f, x, y, FULL_SIZE, RAID_ENEMY);

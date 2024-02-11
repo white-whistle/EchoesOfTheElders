@@ -1,12 +1,11 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.mixin.ThrownItemEntityAccessor;
+import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -15,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -72,14 +70,15 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
             Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(20);
             var entities = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             int delay = 0;
-            int amp = this.getItem().getCount()/16;
+            int amp = this.getItem().getCount() / 16;
             for (LivingEntity entity : entities) {
-                if(entity instanceof PlayerEntity) continue;
-                if (this.getOwner() instanceof LivingEntity living){
+                if (entity instanceof PlayerEntity) continue;
+                if (ModCapabilities.RAID_OBJECTIVE.hasCapability(entity)) continue;
+                if (this.getOwner() instanceof LivingEntity living) {
                     entity.setAttacker(living);
                 }
-                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT,delay,amp));
-                delay +=5;
+                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, delay, amp));
+                delay += 5;
             }
             this.discard();
         }

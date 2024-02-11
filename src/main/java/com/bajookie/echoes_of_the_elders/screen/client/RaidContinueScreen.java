@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.screen.client;
 
 import com.bajookie.echoes_of_the_elders.screen.RaidContinueScreenHandler;
+import com.bajookie.echoes_of_the_elders.screen.client.widget.BattleWidget;
+import com.bajookie.echoes_of_the_elders.screen.client.widget.LeaveWidget;
 import com.bajookie.echoes_of_the_elders.screen.client.widget.RaidContinueScrollKnob;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
@@ -70,6 +72,10 @@ public class RaidContinueScreen extends HandledScreen<RaidContinueScreenHandler>
 
         int i = (this.width - this.backgroundWidth) / 2;
         int j = (this.height - this.backgroundHeight) / 2;
+
+        this.addDrawableChild(new LeaveWidget(i + 21, j + 109, 16, 16));
+        this.addDrawableChild(new BattleWidget(i + 116, j + 109, 16, 16));
+
         this.knob = this.addDrawableChild(new RaidContinueScrollKnob(i + 13, j + 101, 127, currentValue) {
             @Override
             public void onCommitted() {
@@ -83,6 +89,8 @@ public class RaidContinueScreen extends HandledScreen<RaidContinueScreenHandler>
 
         this.knob.setFocused(true);
         this.focusOn(this.knob);
+
+
     }
 
     @Override
