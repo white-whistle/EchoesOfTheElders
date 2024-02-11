@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.Raid.waves.raiders;
 
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.WaveFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.SkeletonEntity;
 import net.minecraft.world.World;
@@ -18,9 +19,8 @@ public class SkeletonRaider extends RaidEntityFeature<SkeletonEntity>{
 
     @Override
     public void equipEntity(SkeletonEntity entity,int level) {
-
+        WaveFeatures.EntityToolFeature.BOW.equip(entity,level);
     }
-
     @Override
     public void buffEntity(SkeletonEntity entity,int level) {
 

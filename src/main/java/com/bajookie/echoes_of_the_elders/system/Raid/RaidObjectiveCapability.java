@@ -9,6 +9,7 @@ import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.RaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
+import com.bajookie.echoes_of_the_elders.system.Raid.waves.WaveFeatures;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
@@ -17,6 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.boss.BossBar;
 import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SimpleInventory;
@@ -33,6 +35,7 @@ import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -114,14 +117,28 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void spawnWave() {
-        var wave = RaidWaves.getWave(level);
-        remainingEnemies = wave.spawnEntities(self);
+        var wave = WaveFeatures.getEntities(self.getWorld(),level);
+        ArrayList<UUID> uu = new ArrayList<>();
+        for (LivingEntity liv : wave){
+            var pos = RaidPositioner.random(10, 20).next(liv.getWorld(),self,liv);
+            liv.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
+            liv.getWorld().spawnEntity(liv);
+            if (liv instanceof MobEntity mobEntity) {
+                mobEntity.setTarget(self);
+                mobEntity.setPersistent();
+            }
+
+            ModCapabilities.RAID_ENEMY.attach(liv, e -> {
+                e.setRaidTarget(self);
+            });
+            uu.add(liv.getUuid());
+        }
+        remainingEnemies = uu;
         initialEnemyCount = remainingEnemies.size();
         raidWaveBar.setPercent(getWaveProgress());
-
         setWaveBar();
 
-        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave", new TextArgs().put("wave", wave.name())));
+        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave", new TextArgs().put("wave", Text.translatable("message.echoes_of_the_elders.raid.wave.zombies")))); // was wave.name()
     }
 
     private Text getRaidName() {

@@ -22,6 +22,9 @@ public class ZombieRaider extends RaidEntityFeature<ZombieEntity>{
     public void equipEntity(ZombieEntity entity,int level) {
         WaveFeatures.EntityToolFeature.ZOMBIE_HAND.equip(entity,level);
         WaveFeatures.EntityToolFeature.HELMETS.equip(entity,level);
+        WaveFeatures.EntityToolFeature.CHEST_PLATES.equip(entity,level);
+        WaveFeatures.EntityToolFeature.LEGGINGS.equip(entity,level);
+        WaveFeatures.EntityToolFeature.BOOTS.equip(entity,level);
     }
 
     @Override
