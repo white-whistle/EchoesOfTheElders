@@ -100,7 +100,7 @@ public class ModEffects {
         if (!entity.getWorld().isClient) {
             World world = entity.getWorld();
             world.playSound(null, entity.getBlockPos(), ModSounds.ELECTRIC_STRIKE, SoundCategory.AMBIENT, 4f, 4f);
-            entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, entity.getLastAttacker()), 4);
+            entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, entity.getLastAttacker()),8);
             entity.addStatusEffect(new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 5 * 20), entity.getLastAttacker());
         }
     })));

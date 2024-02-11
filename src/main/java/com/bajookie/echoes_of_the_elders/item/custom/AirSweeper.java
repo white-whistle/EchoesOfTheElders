@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class AirSweeper extends Item implements IArtifact, IStackPredicate, IHasCooldown {
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 10 * 20);
+    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 5 * 20);
     protected final StackedItemStat.Float maxPull = new StackedItemStat.Float(0.1f, 0.4f);
     protected final StackedItemStat.Float maxSpeed = new StackedItemStat.Float(0.5f, 1.3f);
 
