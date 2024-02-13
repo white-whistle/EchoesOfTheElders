@@ -25,6 +25,9 @@ public class WaveFeatures {
         public static SkeletonRaider SKELETON_RAIDER = (SkeletonRaider) register(new SkeletonRaider(0, 1, 5));
         public static PhantomRaider PHANTOM_RAIDER = (PhantomRaider) register(new PhantomRaider(5,1,4));
         public static VindicatorRaider VINDICATOR_RAIDER = (VindicatorRaider) register(new VindicatorRaider(7,1,2));
+        public static WitherSkeletonRaider WITHER_SKELETON_RAIDER = (WitherSkeletonRaider) register(new WitherSkeletonRaider(15,1,4));
+        public static WitchRaider WITCH_RAIDER = (WitchRaider) register(new WitchRaider(18,1,7));
+        public static PillagerRaider PILLAGER_RAIDER = (PillagerRaider) register(new PillagerRaider(24,1,6));
 
         public static void bootstrap() {
         }
@@ -64,11 +67,18 @@ public class WaveFeatures {
             return list;
         } else {
             Random random = new Random();
-            for (int i = 0; i < 3; i++) {
+            System.out.println(list.size());
+            for (int i = 0; i <entityTypes(level); i++) {
                 listFinal.add(list.get(random.nextInt(list.size())));
             }
             return listFinal;
         }
+    }
+    private static int entityTypes(int level){
+        if (level>40) return 5;
+        else if (level>20) return 4;
+        else return 3;
+
     }
     public static List<LivingEntity> getEntities(World world, int level){
         List<LivingEntity> list = new ArrayList<>();
