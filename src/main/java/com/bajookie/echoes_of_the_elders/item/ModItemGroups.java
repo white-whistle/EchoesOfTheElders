@@ -83,6 +83,7 @@ public class ModItemGroups {
                 entries.add(ModItems.STARFALL_BOW);
                 entries.add(ModItems.EARTH_SPIKE_RELIC);
                 entries.add(ModItems.ICICLE_RELIC);
+                entries.add(ModItems.ANCIENT_MINIGUN);
                 // disabled until we think this one out
                 // entries.add(ModItems.SILENT_FIRE);
             }).build());

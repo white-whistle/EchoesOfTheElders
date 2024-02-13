@@ -26,7 +26,7 @@ public class EquipmentSequence {
         int pos = this.minLevel;
         while (it.hasNext()) {
             Pair<Integer, ItemStack> pair = it.next();
-            pos += pair.getA();
+            pos = pair.getA();
             if (level <= pos && level>=minLevel) {
                 living.equipStack(slot, pair.getB());
                 return;

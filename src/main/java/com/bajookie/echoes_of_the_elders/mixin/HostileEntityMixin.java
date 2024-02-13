@@ -18,5 +18,13 @@ public class HostileEntityMixin {
             cir.setReturnValue(false);
         }
     }
+    @Inject(method = "shouldDropXp",at = @At("HEAD"),cancellable = true)
+    private void shouldDropXP(CallbackInfoReturnable<Boolean> cir) {
+        var self = (LivingEntity) (Object) this;
+        if (ModCapabilities.RAID_ENEMY.hasCapability(self)) {
+            cir.setReturnValue(false);
+        }
+    }
+
 
 }

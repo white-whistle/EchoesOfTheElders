@@ -70,7 +70,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public int getWavesPerRaid() {
-        return 1;
+        return 5;
     }
 
     public boolean isInContinuePhase() {
@@ -120,6 +120,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         var wave = WaveFeatures.getEntities(self.getWorld(),level);
         ArrayList<UUID> uu = new ArrayList<>();
         for (LivingEntity liv : wave){
+            if (liv == null) continue;
             var pos = RaidPositioner.random(10, 20).next(liv.getWorld(),self,liv);
             liv.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
             liv.getWorld().spawnEntity(liv);

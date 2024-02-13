@@ -12,17 +12,22 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.text.Text;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -81,6 +86,15 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
         } else {
             return super.getAttributeModifiers(stack, slot);
         }
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        CreeperEntity creeper = new CreeperEntity(EntityType.CREEPER,world);
+        creeper.setPosition(user.getPos());
+        creeper.equipStack(EquipmentSlot.MAINHAND,new ItemStack(Items.TOTEM_OF_UNDYING));
+        world.spawnEntity(creeper);
+        return super.use(world, user, hand);
     }
 
     @Override
