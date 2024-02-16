@@ -14,6 +14,10 @@ public class ModSounds {
     public static final SoundEvent SPIRIT_HURT = registerSoundEvent("spirit_entity_hurt");
     public static final SoundEvent SPIRIT_DEATH = registerSoundEvent("spirit_entity_death");
     public static final SoundEvent ELECTRIC_STRIKE = registerSoundEvent("electric_sound");
+    public static final SoundEvent MINIGUN_CHARGE = registerSoundEvent("minigun_charge");
+    public static final SoundEvent MINIGUN_FIRE = registerSoundEvent("minigun_fire");
+    public static final SoundEvent MINIGUN_FIRE2 = registerSoundEvent("minigun_fire2");
+    public static final SoundEvent MINIGUN_END = registerSoundEvent("minigun_end");
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = new Identifier(MOD_ID,name);
