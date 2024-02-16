@@ -3,13 +3,12 @@ package com.bajookie.echoes_of_the_elders.system.Raid;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.text.Text;
 
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-public record RaidWave(Text name, int level, int count, RaidSpawner spawner, RaidPositioner positioner) {
+public record RaidWave(int level, int count, RaidSpawner spawner, RaidPositioner positioner) {
     static Random r = new Random();
 
     public ArrayList<UUID> spawnEntities(LivingEntity objective) {

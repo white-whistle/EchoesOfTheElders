@@ -27,50 +27,48 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
 
     @Override
     public void generateAdvancement(Consumer<AdvancementEntry> consumer) {
-        AdvancementEntry elderPrism = registerAdvancementTaskNoParent(ModItems.ELDER_PRISM, "Got Lost?", consumer);
+        AdvancementEntry elderPrism = registerAdvancementTaskNoParent(ModItems.ELDER_PRISM, consumer);
         AdvancementEntry dimEnterAdvancement = Advancement.Builder.create()
                 .display(new AdvancementDisplay(new ItemStack(ModBlocks.ARTIFACT_VAULT),
-                        Text.literal("Got Lost?"),
-                        Text.literal("get to the lost dimension"),
+                        Text.translatable("advance.echoes_of_the_elders.enter_spirit_realm.title"),
+                        Text.translatable("advance.echoes_of_the_elders.enter_spirit_realm.description"),
                         new Identifier(MOD_ID, "textures/block/ancient_tree_log.png"),
                         AdvancementFrame.CHALLENGE,
                         true,
                         true,
                         false))
                 .parent(elderPrism)
-                .criterion("dim_enter", ChangedDimensionCriterion.Conditions.to(ModDimensions.DEFENSE_DIM_LEVEL_KEY))
+                .criterion(MOD_ID + ":enter_spirit_realm", ChangedDimensionCriterion.Conditions.to(ModDimensions.DEFENSE_DIM_LEVEL_KEY))
                 .build(consumer, MOD_ID + "enter_lost_dim_adv");
-        AdvancementEntry midas = registerAdvancementTask(ModItems.MIDAS_HAMMER, "Golden Power", dimEnterAdvancement, consumer);
-        AdvancementEntry lightningOrb = registerAdvancementTask(ModItems.CHAIN_LIGHTNING_ITEM, "Electric Power", dimEnterAdvancement, consumer);
-        AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_TOKEN, "Back in Time", dimEnterAdvancement, consumer);
-        AdvancementEntry lotus = registerAdvancementTask(ModItems.RADIANT_LOTUS, "Clarity", dimEnterAdvancement, consumer);
-        AdvancementEntry vitality = registerAdvancementTask(ModItems.VITALITY_PUMP, "Pump It", dimEnterAdvancement, consumer);
-        AdvancementEntry gale = registerAdvancementTask(ModItems.GALE_CORE, "Up and Away", dimEnterAdvancement, consumer);
-        AdvancementEntry scorchersMitts = registerAdvancementTask(ModItems.SCORCHERS_MITTS, "Burning Snap", dimEnterAdvancement, consumer);
-        AdvancementEntry doomStick = registerAdvancementTask(ModItems.DOOMSTICK_ITEM, "Blast It", dimEnterAdvancement, consumer);
-        AdvancementEntry mirage = registerAdvancementTask(ModItems.POTION_MIRAGE, "Dupe It", dimEnterAdvancement, consumer);
-        AdvancementEntry witherBulk = registerAdvancementTask(ModItems.WITHER_SCALES_ITEM, "Blocked!", dimEnterAdvancement, consumer);
-        AdvancementEntry quickening = registerAdvancementTask(ModItems.QUICKENING_BAND, "Fast Thinking!", dimEnterAdvancement, consumer);
-        AdvancementEntry realityPick = registerAdvancementTask(ModItems.REALITY_PICK, "But How?", dimEnterAdvancement, consumer);
-        AdvancementEntry godSlayer = registerAdvancementTask(ModItems.GODSLAYER, "Slayed", dimEnterAdvancement, consumer);
-        AdvancementEntry jumper = registerAdvancementTask(ModItems.GUNHEELS, "Jumper", dimEnterAdvancement, consumer);
-        AdvancementEntry cheater = registerAdvancementTask(ModItems.WTF_TOKEN, "Cheater", "Cheat the WTF!", dimEnterAdvancement, consumer);
-
-
+        AdvancementEntry midas = registerAdvancementTask(ModItems.MIDAS_HAMMER, dimEnterAdvancement, consumer);
+        AdvancementEntry lightningOrb = registerAdvancementTask(ModItems.CHAIN_LIGHTNING_ITEM, dimEnterAdvancement, consumer);
+        AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_TOKEN, dimEnterAdvancement, consumer);
+        AdvancementEntry lotus = registerAdvancementTask(ModItems.RADIANT_LOTUS, dimEnterAdvancement, consumer);
+        AdvancementEntry vitality = registerAdvancementTask(ModItems.VITALITY_PUMP, dimEnterAdvancement, consumer);
+        AdvancementEntry gale = registerAdvancementTask(ModItems.GALE_CORE, dimEnterAdvancement, consumer);
+        AdvancementEntry scorchersMitts = registerAdvancementTask(ModItems.SCORCHERS_MITTS, dimEnterAdvancement, consumer);
+        AdvancementEntry doomStick = registerAdvancementTask(ModItems.DOOMSTICK_ITEM, dimEnterAdvancement, consumer);
+        AdvancementEntry mirage = registerAdvancementTask(ModItems.POTION_MIRAGE, dimEnterAdvancement, consumer);
+        AdvancementEntry witherBulk = registerAdvancementTask(ModItems.WITHER_SCALES_ITEM, dimEnterAdvancement, consumer);
+        AdvancementEntry quickening = registerAdvancementTask(ModItems.QUICKENING_BAND, dimEnterAdvancement, consumer);
+        AdvancementEntry realityPick = registerAdvancementTask(ModItems.REALITY_PICK, dimEnterAdvancement, consumer);
+        AdvancementEntry godSlayer = registerAdvancementTask(ModItems.GODSLAYER, dimEnterAdvancement, consumer);
+        AdvancementEntry jumper = registerAdvancementTask(ModItems.GUNHEELS, dimEnterAdvancement, consumer);
+        AdvancementEntry cheater = registerAdvancementTask(ModItems.WTF_TOKEN, dimEnterAdvancement, consumer);
     }
 
     public AdvancementEntry registerAdvancement(Item display, AdvancementFrame frame, boolean showToast, boolean announceToChat, boolean hidden, AdvancementEntry prev, Consumer<AdvancementEntry> consumer) {
         return Advancement.Builder.create()
                 .display(new AdvancementDisplay(new ItemStack(display),
                         Text.translatable(display.getTranslationKey()),
-                        Text.translatable("echoes_of_the_elders:advance.description.general", Text.translatable(display.getTranslationKey())),
+                        Text.translatable("advance.echoes_of_the_elders.description.general", Text.translatable(display.getTranslationKey())),
                         new Identifier(MOD_ID, "textures/block/ancient_tree_log.png"),
                         frame,
                         showToast,
                         announceToChat,
                         hidden))
-                .criterion("get" + display.toString(), InventoryChangedCriterion.Conditions.items(display))
-                .parent(prev).build(consumer, MOD_ID + display.toString() + "_adv");
+                .criterion(MOD_ID + ":get_" + display, InventoryChangedCriterion.Conditions.items(display))
+                .parent(prev).build(consumer, MOD_ID + display + "_adv");
     }
 
     public AdvancementEntry registerAdvancementNoParent(Item display, AdvancementFrame frame, boolean showToast, boolean announceToChat, boolean hidden, Consumer<AdvancementEntry> consumer) {
@@ -107,7 +105,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         return registerAdvancementNoParent(display, AdvancementFrame.CHALLENGE, true, true, false, consumer);
     }
 
-    public AdvancementEntry registerAdvancementTask(Item display, String title, String description, AdvancementEntry prev, Consumer<AdvancementEntry> consumer) {
+    public AdvancementEntry registerAdvancementTask(Item display, AdvancementEntry prev, Consumer<AdvancementEntry> consumer) {
         return registerAdvancement(display, AdvancementFrame.TASK, true, false, false, prev, consumer);
     }
 
@@ -115,11 +113,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         return registerAdvancementNoParent(display, AdvancementFrame.TASK, true, false, false, consumer);
     }
 
-    public AdvancementEntry registerAdvancementTask(Item display, String title, AdvancementEntry prev, Consumer<AdvancementEntry> consumer) {
-        return registerAdvancement(display, AdvancementFrame.TASK, true, false, false, prev, consumer);
-    }
-
-    public AdvancementEntry registerAdvancementTaskNoParent(Item display, String title, Consumer<AdvancementEntry> consumer) {
+    public AdvancementEntry registerAdvancementTaskNoParent(Item display, Consumer<AdvancementEntry> consumer) {
         return registerAdvancementNoParent(display, AdvancementFrame.TASK, true, false, false, consumer);
     }
 }

@@ -15,7 +15,6 @@
     "LivingEntityCapabilityMixin",
     "LivingEntityMixin",
     "LivingEntityRaidMixin",
-    "LivingEntityRendererMixin",
     "MobEntityAccessor",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
@@ -24,6 +23,7 @@
     "ServerPlayerInteractionManagerMixin",
     "ServerWorldAccessor",
     "SplashPotionUseMixin",
+    "TextSerializerMixin",
     "ThrownItemEntityAccessor",
     "TrunkPlacerTypeInvoker"
   ],
@@ -39,6 +39,7 @@
     "InGameHudMixin",
     "ItemRendererAccessor",
     "ItemRendererMixin",
+    "LivingEntityRendererMixin",
     "MinecraftClientMixin",
     "ModelLoaderMixin",
     "TooltipComponentMixin",

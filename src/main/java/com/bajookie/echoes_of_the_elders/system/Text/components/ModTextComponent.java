@@ -33,6 +33,11 @@ public class ModTextComponent
         this.args = args;
     }
 
+    public ModTextComponent(String content) {
+        this.content = content;
+        this.args = new TextArgs();
+    }
+
     protected void updateMessageParts() {
         try {
             this.messageParts = parseMessage(content);
