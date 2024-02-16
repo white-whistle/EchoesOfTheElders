@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.entity.custom.IcicleProjectile;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ILeftClickAbility;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
@@ -64,7 +65,10 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
     @Override
     public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(ItemStack stack, EquipmentSlot slot) {
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -1.4f, EntityAttributeModifier.Operation.ADDITION));
+        if (slot == EquipmentSlot.MAINHAND) {
+            builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -1.4f, EntityAttributeModifier.Operation.ADDITION));
+            return builder.build();
+        }
 
         return builder.build();
     }

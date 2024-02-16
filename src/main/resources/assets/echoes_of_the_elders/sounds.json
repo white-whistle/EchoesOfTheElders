@@ -22,6 +22,29 @@
     "sounds": [
       "echoes_of_the_elders:electric_sound"
     ]
+  },
+  "minigun_charge": {
+    "subtitle": "sounds.echos_of_the_elders.minigun_charge",
+    "sounds": [
+      "echoes_of_the_elders:minigun_charge"
+    ]
+  },
+  "minigun_fire": {
+    "subtitle": "sounds.echos_of_the_elders.minigun_fire",
+    "sounds": [
+      "echoes_of_the_elders:minigun_fire"
+    ]
+  },
+  "minigun_fire2": {
+    "subtitle": "sounds.echos_of_the_elders.minigun_fire2",
+    "sounds": [
+      "echoes_of_the_elders:minigun_fire2"
+    ]
+  },
+  "minigun_end": {
+    "subtitle": "sounds.echos_of_the_elders.minigun_end",
+    "sounds": [
+      "echoes_of_the_elders:minigun_end"
+    ]
   }
-
 }
