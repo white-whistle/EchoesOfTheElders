@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.item.custom.IUpgradeItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,12 @@ public class ItemStackMixin {
     private void onArtifactClicked(ItemStack other, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference, CallbackInfoReturnable<Boolean> cir) {
         var stack = (ItemStack) (Object) (this);
         var item = stack.getItem();
+
+        var clicked = IUpgradeItem.handleClick(other, stack, slot, clickType, player, cursorStackReference);
+        if (clicked.isPresent()) {
+            cir.setReturnValue(clicked.get());
+            return;
+        }
 
         if (item instanceof IArtifact iArtifact) {
             var ret = iArtifact.onArtifactClicked(stack, other, slot, clickType, player, cursorStackReference);

@@ -2,8 +2,12 @@ package com.bajookie.echoes_of_the_elders.item;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -53,39 +57,52 @@ public class ModItemGroups {
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 100), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
             }).build());
 
+    public static void addStackedVariants(ItemGroup.Entries entries, Item item) {
+        entries.add(item);
+
+        if (item instanceof IStackPredicate iStackPredicate && item instanceof IArtifact iArtifact) {
+            var textures = iStackPredicate.getTextureIndex(iArtifact.getArtifactMaxStack());
+            for (int i = 1; i < (textures + 1); i++) {
+                int level = (int) ((i / (float) textures) * iArtifact.getArtifactMaxStack());
+                entries.add(StackLevel.set(new ItemStack(item), level), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+            }
+        }
+    }
+
     public static final ItemGroup MOD_ARTIFACT_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_artifact_group"),
             FabricItemGroup.builder().displayName(Text.translatable("artifact-group.echoes_of_the_elders")).icon(() -> new ItemStack(ModItems.VITALITY_PUMP)).entries((displayContext, entries) -> {
-                entries.add(ModItems.RADIANT_LOTUS);
-                entries.add(ModItems.VITALITY_PUMP);
-                entries.add(ModItems.PORTAL_RING);
-                entries.add(ModItems.MIDAS_HAMMER);
-                entries.add(ModItems.GALE_CORE);
-                entries.add(ModItems.SCORCHERS_MITTS);
-                entries.add(ModItems.DOOMSTICK_ITEM);
-                entries.add(ModItems.POTION_MIRAGE);
-                entries.add(ModItems.WITHER_SCALES_ITEM);
-                entries.add(ModItems.QUICKENING_BAND);
-                // entries.add(ModItems.SECOND_SUN_ITEM);
-                entries.add(ModItems.CHAIN_LIGHTNING_ITEM);
-                entries.add(ModItems.REALITY_PICK);
-                entries.add(ModItems.GODSLAYER);
-                entries.add(ModItems.GUNHEELS);
-                entries.add(ModItems.ELDER_PRISM);
-                entries.add(ModItems.STAT_FRUIT_HP);
-                entries.add(ModItems.TIME_TOKEN);
-                entries.add(ModItems.WTF_RELIC);
-                entries.add(ModItems.ARC_LIGHTNING);
-                entries.add(ModItems.AIR_SWEEPER);
-                entries.add(ModItems.VACUUM_RELIC);
-                entries.add(ModItems.MOLTEN_CHAMBER);
-                entries.add(ModItems.ECHOING_SWORD);
-                entries.add(ModItems.TV_ARROW);
-                entries.add(ModItems.STARFALL_BOW);
-                entries.add(ModItems.EARTH_SPIKE_RELIC);
-                entries.add(ModItems.ICICLE_RELIC);
-                entries.add(ModItems.ANCIENT_MINIGUN);
-                // disabled until we think this one out
-                // entries.add(ModItems.SILENT_FIRE);
+                addStackedVariants(entries, ModItems.RADIANT_LOTUS);
+                addStackedVariants(entries, ModItems.VITALITY_PUMP);
+                addStackedVariants(entries, ModItems.PORTAL_RING);
+                addStackedVariants(entries, ModItems.MIDAS_HAMMER);
+                addStackedVariants(entries, ModItems.GALE_CORE);
+                addStackedVariants(entries, ModItems.SCORCHERS_MITTS);
+                addStackedVariants(entries, ModItems.DOOMSTICK_ITEM);
+                addStackedVariants(entries, ModItems.POTION_MIRAGE);
+                addStackedVariants(entries, ModItems.WITHER_SCALES_ITEM);
+                addStackedVariants(entries, ModItems.QUICKENING_BAND);
+                // addStackedVariants(entries, );(ModItems.SECOND_SUN_ITEM);
+                addStackedVariants(entries, ModItems.CHAIN_LIGHTNING_ITEM);
+                addStackedVariants(entries, ModItems.REALITY_PICK);
+                addStackedVariants(entries, ModItems.GODSLAYER);
+                addStackedVariants(entries, ModItems.GUNHEELS);
+                addStackedVariants(entries, ModItems.ELDER_PRISM);
+                addStackedVariants(entries, ModItems.STAT_FRUIT_HP);
+                addStackedVariants(entries, ModItems.TIME_TOKEN);
+                addStackedVariants(entries, ModItems.WTF_TOKEN);
+                addStackedVariants(entries, ModItems.ARC_LIGHTNING);
+                addStackedVariants(entries, ModItems.AIR_SWEEPER);
+                addStackedVariants(entries, ModItems.VACUUM_RELIC);
+                addStackedVariants(entries, ModItems.MOLTEN_CHAMBER);
+                addStackedVariants(entries, ModItems.ECHOING_SWORD);
+                addStackedVariants(entries, ModItems.TV_ARROW);
+                addStackedVariants(entries, ModItems.STARFALL_BOW);
+                addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
+                addStackedVariants(entries, ModItems.ICICLE_RELIC);
+                addStackedVariants(entries, ModItems.WTF_HAMMER);
+                addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
+                addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
+                entries.add(ModItems.MAGIC_HAMMER);
             }).build());
 
     public static void registerGroups() {

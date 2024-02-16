@@ -50,7 +50,7 @@ public class ModItems {
     public static final Item REALITY_PICK = registerItem("reality_pick", new RealityPick());
     public static final Item ELDER_PRISM = registerItem("elder_prism", new ElderPrismItem());
     public static final Item TIME_TOKEN = registerItem("time_token", new TimeTokenItem());
-    public static final Item WTF_RELIC = registerItem("wtf_relic", new WTFRelic());
+    public static final Item WTF_TOKEN = registerItem("wtf_token", new WTFToken());
     public static final Item STASIS_STOPWATCH = registerItem("stasis_stopwatch", new StasisStopwatch());
     public static final Item STAT_FRUIT_HP = registerItem("stat_fruit_hp", new StatFruit(StatFruit.Type.HP));
     public static final Item RAID_DEBUG_ITEM = registerItem("raid_debug_item", new RaidDebugItem());
@@ -72,6 +72,9 @@ public class ModItems {
     public static final Item RAID_TOTEM_EGG = registerItem("raid_totem_egg", new SpawnEggItem(ModEntities.RAID_TOTEM_ENTITY, 0x8b778c, 0x403341, new FabricItemSettings()));
     public static final Item STARFALL_BOW = registerItem("starfall_bow", new StarfallBow());
 
+    public static final Item MAGIC_HAMMER = registerItem("magic_hammer", new MagicHammer());
+    public static final Item ARTIFACT_HAMMER = registerItem("artifact_hammer", new ArtifactHammer());
+    public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
 
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {
