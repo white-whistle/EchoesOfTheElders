@@ -88,7 +88,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void onVictory() {
 
         level++;
-        
+
         items.forEach((stack) -> {
             Tier.raise(stack, 1);
             RaidReward.queueItem(stack, getRandomRelicDropStack());
@@ -212,6 +212,9 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         });
 
         remainingEnemies.clear();
+
+        // just in case
+        closeOpenScreens();
 
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.defeat"));
     }

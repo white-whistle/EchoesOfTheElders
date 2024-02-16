@@ -13,6 +13,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -98,6 +99,15 @@ public class RaidContinueScreen extends HandledScreen<RaidContinueScreenHandler>
         int i = (this.width - this.backgroundWidth) / 2;
         int j = (this.height - this.backgroundHeight) / 2;
         context.drawTexture(TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+
+        if (this.client == null) return;
+        if (this.client.player == null) return;
+        var offsetX = 20 - 10;
+        var offsetY = 32;
+        var width = 30 + 20;
+        var height = 60;
+        InventoryScreen.drawEntity(context, i + offsetX, j + offsetY, i + offsetX + width, j + offsetY + height, 30, 0.0625f, mouseX, mouseY + 16, this.client.player);
+
     }
 
     @Override
