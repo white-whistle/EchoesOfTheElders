@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.Text;
 
+import com.google.gson.JsonObject;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -8,14 +9,14 @@ import java.util.function.BiFunction;
 
 @SuppressWarnings("unused")
 public class TextArgs {
-    private final HashMap<String, Object> args;
+    private final HashMap<String, Text> args;
 
     public TextArgs() {
         args = new HashMap<>();
     }
 
     public TextArgs put(String k, Object v) {
-        this.args.put(k, v);
+        this.args.put(k, v instanceof Text t ? t : Text.literal(v.toString()));
         return this;
     }
 
@@ -76,5 +77,32 @@ public class TextArgs {
         }
 
         return false;
+    }
+
+    public boolean isEmpty() {
+        return this.args.isEmpty();
+    }
+
+    public JsonObject toJson() {
+        var json = new JsonObject();
+
+        this.args.forEach((k, v) -> {
+            json.add(k, Text.Serializer.toJsonTree(v));
+        });
+
+        return json;
+    }
+
+    public void fromJson(JsonObject jsonObject) {
+        jsonObject.keySet().forEach(key -> {
+            var j = jsonObject.get(key);
+            if (j.isJsonPrimitive()) {
+                this.args.put(key, TextUtil.plain(j.getAsString()));
+            }
+
+            if (j.isJsonObject()) {
+                this.args.put(key, Text.Serializer.fromJson(j));
+            }
+        });
     }
 }

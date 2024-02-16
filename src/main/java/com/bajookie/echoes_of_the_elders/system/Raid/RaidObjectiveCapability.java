@@ -117,11 +117,11 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void spawnWave() {
-        var wave = WaveFeatures.getEntities(self.getWorld(),level);
+        var wave = WaveFeatures.getEntities(self.getWorld(), level);
         ArrayList<UUID> uu = new ArrayList<>();
-        for (LivingEntity liv : wave){
+        for (LivingEntity liv : wave) {
             if (liv == null) continue;
-            var pos = RaidPositioner.random(10, 20).next(liv.getWorld(),self,liv);
+            var pos = RaidPositioner.random(10, 20).next(liv.getWorld(), self, liv);
             liv.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
             liv.getWorld().spawnEntity(liv);
             if (liv instanceof MobEntity mobEntity) {
@@ -139,7 +139,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         raidWaveBar.setPercent(getWaveProgress());
         setWaveBar();
 
-        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave", new TextArgs().put("wave", Text.translatable("message.echoes_of_the_elders.raid.wave.zombies")))); // was wave.name()
+        sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave")); // was wave.name()
     }
 
     private Text getRaidName() {

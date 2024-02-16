@@ -15,4 +15,7 @@ public class ModScreenHandlerTypes {
         return Registry.register(Registries.SCREEN_HANDLER, new ModIdentifier(id), new ScreenHandlerType<>(factory, FeatureFlags.VANILLA_FEATURES));
     }
 
+    public static void init() {
+    }
+
 }

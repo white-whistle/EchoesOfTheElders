@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.util;
 
 import com.bajookie.echoes_of_the_elders.mixin.ClientWorldAccessor;
 import com.bajookie.echoes_of_the_elders.mixin.ServerWorldAccessor;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
@@ -55,6 +57,7 @@ public class EntityUtil {
         }
     }
 
+    @Environment(EnvType.CLIENT)
     public static boolean showEntityOverlay(Entity entity, MinecraftClient client) {
         return entity instanceof LivingEntity
                 && !(entity instanceof ArmorStandEntity)

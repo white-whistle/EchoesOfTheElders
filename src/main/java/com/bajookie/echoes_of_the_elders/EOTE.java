@@ -7,6 +7,7 @@ import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.ModItemGroups;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
+import com.bajookie.echoes_of_the_elders.screen.ModScreenHandlerTypes;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.util.ModLootTablesModifiers;
 import com.bajookie.echoes_of_the_elders.world.gen.ModWorldGeneration;
@@ -40,6 +41,7 @@ public class EOTE implements ModInitializer {
         ModSounds.registerSounds();
         ModTrunkPlacerTypes.register();
         ServerNetworking.init();
+        ModScreenHandlerTypes.init();
     }
 
 
