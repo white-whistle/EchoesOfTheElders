@@ -4,11 +4,11 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -18,9 +18,9 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -42,25 +42,32 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     }
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.getItemCooldownManager().isCoolingDown(this)) {
-            Vec3d userPos = user.getPos();
-            Vec3d entityPos = entity.getPos();
-            Vec3d diff = userPos.subtract(entityPos);
-            Random r = new Random();
-            if (!user.getWorld().isClient()) {
-                ServerWorld world = (ServerWorld) user.getWorld();
-                for (double i = 1; i <= 20; i++) {
-                    world.spawnParticles(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 1, 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 1);
-                }
-                user.getItemCooldownManager().set(this, this.getCooldown(stack));
-                entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, user), this.effectDamage.get(stack));
-            }
-            user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        var stack = user.getStackInHand(hand);
+        var ret = VectorUtil.raycastWithBlocks(user, 32);
+        if (ret != null) {
+            var entity = ret.getEntity();
+            if (!user.getItemCooldownManager().isCoolingDown(this)) {
+                Vec3d userPos = user.getPos();
+                Vec3d entityPos = entity.getPos();
+                Vec3d diff = userPos.subtract(entityPos);
+                Random r = new Random();
+                if (!user.getWorld().isClient()) {
+                    ServerWorld serverWorld = (ServerWorld) user.getWorld();
+                    for (double i = 1; i <= 20; i++) {
+                        serverWorld.spawnParticles(ParticleTypes.LAVA, userPos.x - (diff.x * (i / 20)), userPos.y - (diff.y * (i / 20)) + 1, userPos.z - (diff.z * (i / 20)), 1, 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 0.1 * ((float) r.nextInt(11) / 10), 1);
+                    }
+                    user.getItemCooldownManager().set(this, this.getCooldown(stack));
 
+                    entity.damage(serverWorld.getDamageSources().create(DamageTypes.MAGIC, user), this.effectDamage.get(stack));
+                }
+                user.getWorld().playSound(user, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 5f, 0.2f);
+
+                return TypedActionResult.success(stack, world.isClient());
+            }
         }
 
-        return super.useOnEntity(stack, user, entity, hand);
+        return super.use(world, user, hand);
     }
 
     @Override

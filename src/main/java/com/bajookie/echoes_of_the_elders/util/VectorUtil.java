@@ -1,8 +1,6 @@
 package com.bajookie.echoes_of_the_elders.util;
 
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
@@ -58,17 +56,25 @@ public class VectorUtil {
     }
 
     @Nullable
-    public static EntityHitResult raycastHit(double distance) {
+    public static EntityHitResult raycast(Entity from, double distance) {
         distance = distance * (300f / 17f);
-        Entity entity2 = MinecraftClient.getInstance().getCameraEntity();
-        if (entity2 != null) {
-            Vec3d vec3d2 = entity2.getRotationVec(1.0f);
-            Vec3d vec3d = entity2.getCameraPosVec(0.5f);
-            Vec3d vec3d3 = vec3d.add(vec3d2.x * distance, vec3d2.y * distance, vec3d2.z * distance);
+        if (from != null) {
+            Vec3d startPos = from.getEyePos();
+            Vec3d vec3d2 = from.getRotationVec(1.0f);
+            Vec3d endPos = startPos.add(vec3d2.x * distance, vec3d2.y * distance, vec3d2.z * distance);
             float f = 1.0f;
-            Box box = entity2.getBoundingBox().stretch(vec3d2.multiply(distance)).expand(1.0, 1.0, 1.0);
-            return ProjectileUtil.raycast(entity2, vec3d, vec3d3, box, entity -> !entity.isSpectator() && entity.canHit(), distance);
+            Box box = from.getBoundingBox().stretch(vec3d2.multiply(distance)).expand(1.0, 1.0, 1.0);
+            return ProjectileUtil.raycast(from, startPos, endPos, box, entity -> !entity.isSpectator() && entity.canHit(), distance);
         }
         return null;
+    }
+
+    public static EntityHitResult raycastWithBlocks(Entity from, double distance) {
+        var hit = ProjectileUtil.getCollision(from, entity -> !entity.isSpectator() && entity.canHit(), distance);
+
+        if (hit == null) return null;
+        if (hit.getType() != HitResult.Type.ENTITY) return null;
+
+        return (EntityHitResult) hit;
     }
 }

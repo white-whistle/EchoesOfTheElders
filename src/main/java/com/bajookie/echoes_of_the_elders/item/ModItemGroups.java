@@ -99,10 +99,10 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.STARFALL_BOW);
                 addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
                 addStackedVariants(entries, ModItems.ICICLE_RELIC);
-                addStackedVariants(entries, ModItems.WTF_HAMMER);
-                addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
-                addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
                 entries.add(ModItems.MAGIC_HAMMER);
+                addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
+                addStackedVariants(entries, ModItems.WTF_HAMMER);
+                addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
             }).build());
 
     public static void registerGroups() {

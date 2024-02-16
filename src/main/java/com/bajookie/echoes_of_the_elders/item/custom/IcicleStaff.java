@@ -9,7 +9,6 @@ import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
@@ -19,7 +18,6 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -27,7 +25,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +41,7 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (!world.isClient) {
             if (!user.getItemCooldownManager().isCoolingDown(this)) {
-                EntityHitResult e = VectorUtil.raycastHit(10);
+                EntityHitResult e = VectorUtil.raycastWithBlocks(user, 10);
                 if (e == null && !user.getItemCooldownManager().isCoolingDown(this)) {
                     return super.use(world, user, hand);
                 } else {
@@ -86,7 +83,7 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
 
     @Override
     public void performLeftClickAbility(ItemStack stack, World world, PlayerEntity user) {
-        if (!world.isClient){
+        if (!world.isClient) {
             IcicleProjectile projectile = new IcicleProjectile(world, user.getX(), user.getY() + 1.6, user.getZ(), user, false);
             projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 0.5f, 0f);
             world.spawnEntity(projectile);
