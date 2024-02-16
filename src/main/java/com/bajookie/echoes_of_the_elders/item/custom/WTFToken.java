@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WTFRelic extends Item implements IArtifact, ICooldownReduction {
-    public WTFRelic() {
+public class WTFToken extends Item implements IArtifact, ICooldownReduction {
+    public WTFToken() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 

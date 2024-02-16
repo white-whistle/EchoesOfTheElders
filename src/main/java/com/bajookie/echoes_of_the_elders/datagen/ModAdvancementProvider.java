@@ -2,8 +2,6 @@ package com.bajookie.echoes_of_the_elders.datagen;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
@@ -56,7 +54,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry realityPick = registerAdvancementTask(ModItems.REALITY_PICK, "But How?", dimEnterAdvancement, consumer);
         AdvancementEntry godSlayer = registerAdvancementTask(ModItems.GODSLAYER, "Slayed", dimEnterAdvancement, consumer);
         AdvancementEntry jumper = registerAdvancementTask(ModItems.GUNHEELS, "Jumper", dimEnterAdvancement, consumer);
-        AdvancementEntry cheater = registerAdvancementTask(ModItems.WTF_RELIC, "Cheater", "Cheat the WTF!", dimEnterAdvancement, consumer);
+        AdvancementEntry cheater = registerAdvancementTask(ModItems.WTF_TOKEN, "Cheater", "Cheat the WTF!", dimEnterAdvancement, consumer);
 
 
     }

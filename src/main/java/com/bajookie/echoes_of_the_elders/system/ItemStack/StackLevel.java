@@ -26,7 +26,7 @@ public class StackLevel {
     }
 
     public static boolean isMaxed(ItemStack itemStack) {
-        return get(itemStack) == getMax(itemStack);
+        return get(itemStack) >= getMax(itemStack);
     }
 
     public static float getStackProgress(ItemStack itemStack) {

@@ -4,12 +4,12 @@ import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.client.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
@@ -31,7 +31,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.ELDER_LILY_FLOWER, ModBlocks.POTTED_ELDER_LILY_FLOWER, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerTintableCross(ModBlocks.SPIRITAL_GRASS, BlockStateModelGenerator.TintType.TINTED);
         blockStateModelGenerator.registerFlowerbed(ModBlocks.SPIRIT_PETALS);
-        //blockStateModelGenerator.registerPlantPart();
+        // blockStateModelGenerator.registerPlantPart();
         blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARTIFACT_VAULT);
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SUN_RUNE_BLOCK);
@@ -58,9 +58,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.SCORCHERS_MITTS,
                 ModItems.STASIS_STOPWATCH,
                 ModItems.TIME_TOKEN,
-                ModItems.WTF_RELIC,
+                ModItems.WTF_TOKEN,
                 ModItems.VACUUM_RELIC,
-                ModItems.WTF_RELIC,
                 ModItems.STARFALL_BOW
         );
     }
@@ -89,8 +88,8 @@ public class ModModelProvider extends FabricModelProvider {
                 return;
             }
 
-            if (item instanceof IStackPredicate iStackPredicate) {
-                var levels = iStackPredicate.getTextureIndex(item.getMaxCount()) + 1;
+            if (item instanceof IStackPredicate iStackPredicate && item instanceof IArtifact iArtifact) {
+                var levels = iStackPredicate.getTextureIndex(iArtifact.getArtifactMaxStack()) + 1;
                 var modelId = ModelIds.getItemModelId(item);
                 var baseModel = iStackPredicate.getBaseModel();
 

@@ -44,7 +44,7 @@ public class CustomItemColors {
             return BiomeColors.getGrassColor(view, pos);
         }, ModBlocks.SPIRITAL_GRASS);
         ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
-            BlockState blockState = ((BlockItem)stack.getItem()).getBlock().getDefaultState();
+            BlockState blockState = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
             return MinecraftClient.getInstance().getBlockColors().getColor(blockState, null, null, tintIndex);
         }, ModBlocks.SPIRITAL_GRASS);
         ColorProviderRegistry.ITEM.register((stack, index) -> {
@@ -65,8 +65,8 @@ public class CustomItemColors {
 
         ColorProviderRegistry.ITEM.register((stack, index) -> {
             if (index == 0) return 0xFFFFFF;
-            
+
             return rainbow().getRGB();
-        }, ModItems.WTF_RELIC);
+        }, ModItems.WTF_TOKEN);
     }
 }
