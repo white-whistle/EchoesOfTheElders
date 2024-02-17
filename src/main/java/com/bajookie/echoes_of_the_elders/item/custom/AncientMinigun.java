@@ -1,24 +1,23 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.entity.custom.MagmaBullet;
-import com.bajookie.echoes_of_the_elders.entity.custom.PelletProjectile;
-import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
-import com.bajookie.echoes_of_the_elders.util.VectorUtil;
+import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
+import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
+import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.joml.Vector3f;
 
 public class AncientMinigun extends Item implements IArtifact {
     public AncientMinigun() {
@@ -54,9 +53,30 @@ public class AncientMinigun extends Item implements IArtifact {
                 player.getItemCooldownManager().set(this, 20 * 7);
             } else {
                 if (!world.isClient) {
-                    PelletProjectile bullet = new PelletProjectile(world, user.getEyePos().x, user.getEyePos().y-0.2, user.getEyePos().z, 6, user, user.getPitch(), user.getYaw());
-                    bullet.setVelocity(user, user.getPitch(), user.getYaw(), user.getRoll(), 5f, 7);
-                    world.spawnEntity(bullet);
+                    var hit = ProjectileUtil.getCollision(user, entity -> !entity.isSpectator() && entity.canHit(), 60);
+
+                    if (hit != null) {
+                        ServerWorld serverWorld = (ServerWorld) world;
+
+                        Vec3d pos = hit.getPos();
+                        if (hit.getType() == HitResult.Type.ENTITY && hit instanceof EntityHitResult entityHitResult) {
+                            var ent = entityHitResult.getEntity();
+
+                            ent.damage(ModDamageSources.echoAttack(user), 1);
+                        }
+
+                        var startPos = user.getEyePos();
+
+                        var up = new Vector3f(0, 1, 0);
+                        var right = new Vector3f(pos.toVector3f()).sub(startPos.toVector3f()).cross(up).normalize();
+
+
+                        serverWorld.spawnParticles(new LineParticleEffect(
+                                new Vector3f((float) (startPos.x), (float) (startPos.y), (float) (startPos.z)).add(up.mul(-0.4f)).add(right.mul(0.6f)),
+                                new Vector3f((float) (pos.x), (float) (pos.y), (float) (pos.z)),
+                                new Vector3f(250 / 255f, 245 / 255f, 182 / 255f)
+                        ), startPos.x, startPos.y, startPos.z, 1, 0, 0, 0, 0);
+                    }
                 }
                 stack.setDamage(currentAmmo + 1);
             }
