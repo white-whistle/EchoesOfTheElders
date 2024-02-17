@@ -10,7 +10,6 @@ import com.bajookie.echoes_of_the_elders.system.ItemStack.RaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Raid.waves.WaveFeatures;
-import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
@@ -21,8 +20,10 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
@@ -30,12 +31,13 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -101,6 +103,10 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         setContinueBar();
 
         PlayerLookup.tracking(self).forEach(this::tryOpenPickerScreen);
+
+        PlayerLookup.tracking(self).forEach(player -> {
+            player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), SoundCategory.AMBIENT, 1, 1);
+        });
     }
 
     // called when a wave has been won
@@ -140,6 +146,10 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         setWaveBar();
 
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.incoming_wave")); // was wave.name()
+
+        PlayerLookup.tracking(self).forEach(player -> {
+            player.playSound(SoundEvents.GOAT_HORN_SOUNDS.get(2).value(), SoundCategory.AMBIENT, 1, 1);
+        });
     }
 
     private Text getRaidName() {
@@ -235,6 +245,10 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         closeOpenScreens();
 
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.defeat"));
+
+        PlayerLookup.tracking(self).forEach(player -> {
+            player.playSound(SoundEvents.GOAT_HORN_SOUNDS.get(4).value(), SoundCategory.AMBIENT, 1, 1);
+        });
     }
 
     private void sendMessage(Text text) {
@@ -244,6 +258,8 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void onEnemyKilled(LivingEntity enemy) {
+        if (enemy.getWorld().isClient) return;
+
         remainingEnemies.removeIf(e -> e.equals(enemy.getUuid()));
         raidWaveBar.setPercent(getWaveProgress());
 
@@ -390,6 +406,31 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     // called once all players choose to extract, this is the absolute end of this entity
     public void onComplete() {
         sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.victory"));
+
+        PlayerLookup.tracking(self).forEach(player -> {
+            player.playSound(SoundEvents.ITEM_TOTEM_USE, SoundCategory.AMBIENT, 1, 1);
+        });
+
+
+        var nbt = new NbtCompound();
+        var fireworks = new NbtCompound();
+        var explosions = new NbtList();
+        var e1 = new NbtCompound();
+        nbt.put("Fireworks", fireworks);
+        fireworks.put("Explosions", explosions);
+        explosions.add(e1);
+        fireworks.putInt("Flight", 2);
+
+        e1.putInt("Type", 1);
+        e1.putIntArray("Colors", new int[]{14602026, 12801229});
+        e1.putIntArray("FadeColors", new int[]{8073150, 4312372});
+
+        var fireworkStack = new ItemStack(Items.FIREWORK_ROCKET);
+        fireworkStack.setNbt(nbt);
+
+        FireworkRocketEntity fireworkRocketEntity = new FireworkRocketEntity(self.getWorld(), null, self.getX(), self.getY(), self.getZ(), fireworkStack);
+        self.getWorld().spawnEntity(fireworkRocketEntity);
+
         self.discard();
     }
 
@@ -416,7 +457,6 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         if (raidAnswers.size() == items.size()) {
             self.removeStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE);
-            // advance();
         }
     }
 
