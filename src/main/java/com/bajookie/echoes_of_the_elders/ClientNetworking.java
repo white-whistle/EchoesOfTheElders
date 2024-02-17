@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
+import com.bajookie.echoes_of_the_elders.system.Capability.Capabilities;
 import com.bajookie.echoes_of_the_elders.system.Capability.IHasCapability;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RequestCapabilitySync;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
@@ -20,8 +21,8 @@ public class ClientNetworking {
         ClientPlayNetworking.registerGlobalReceiver(CapabilitySync.TYPE, ((packet, player, responseSender) -> {
             var world = player.getWorld();
             var entityToSync = EntityUtil.getEntityByUUID(world, packet.entityUuid());
-            if (entityToSync instanceof IHasCapability iHasCapability) {
-                iHasCapability.echoesOfTheElders$setCapabilities(packet.capabilities());
+            if (entityToSync instanceof IHasCapability iHasCapability && packet.capabilities() instanceof Capabilities.UnboundCapabilities uc) {
+                iHasCapability.echoesOfTheElders$setCapabilities(uc.bind(entityToSync));
             }
         }));
 

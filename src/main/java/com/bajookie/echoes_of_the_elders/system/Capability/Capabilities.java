@@ -44,4 +44,16 @@ public class Capabilities extends HashMap<String, Capability<?>> {
 
         return map;
     }
+
+    public static class UnboundCapabilities extends Capabilities {
+        private final NbtCompound compound;
+
+        public UnboundCapabilities(NbtCompound compound) {
+            this.compound = compound;
+        }
+
+        public Capabilities bind(Object capabilityHolder) {
+            return Capabilities.readCapabilities(compound, capabilityHolder);
+        }
+    }
 }

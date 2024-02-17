@@ -78,11 +78,15 @@ public class ClientItemMixin {
             var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
             var cdm = player.getItemCooldownManager();
 
-            if (cdm.isCoolingDown(item)) {
-                var remainingTime = cdm.getCooldownProgress(item, mc.getTickDelta()) * cd;
+            if (cdm.isCoolingDown(item) && cdm instanceof ItemCooldownManagerAccessor a) {
+                var cdEntry = a.getEntries().get(item);
+                if (cdEntry instanceof ItemCooldownManagerEntryAccessor e) {
+                    var totalTicks = e.getEndTick() - e.getStartTick();
+                    var remainingTime = cdm.getCooldownProgress(item, mc.getTickDelta()) * totalTicks / 20f;
 
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().putF("seconds", cd, Formatting.BLUE).putF("remaining", remainingTime));
-                tooltip.add(msg);
+                    var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().putF("seconds", cd, Formatting.BLUE).putF("remaining", remainingTime));
+                    tooltip.add(msg);
+                }
             } else {
                 var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().putF("seconds", cd, Formatting.BLUE));
                 tooltip.add(msg);

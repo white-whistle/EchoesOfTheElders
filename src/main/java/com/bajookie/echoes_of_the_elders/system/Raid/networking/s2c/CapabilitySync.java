@@ -18,7 +18,7 @@ public record CapabilitySync(UUID entityUuid, Capabilities capabilities) impleme
     public static final PacketType<CapabilitySync> TYPE = PacketType.create(new ModIdentifier("s2c_capability_sync"), CapabilitySync::new);
 
     public CapabilitySync(PacketByteBuf buf) {
-        this(buf.readUuid(), Capabilities.readCapabilities(Objects.requireNonNull(buf.readNbt()), null));
+        this(buf.readUuid(), new Capabilities.UnboundCapabilities(Objects.requireNonNull(buf.readNbt())));
     }
 
     @Override

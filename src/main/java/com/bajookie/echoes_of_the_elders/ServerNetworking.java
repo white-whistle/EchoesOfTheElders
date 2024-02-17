@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders;
 import com.bajookie.echoes_of_the_elders.item.ILeftClickAbility;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
+import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RaidContinueAnswer;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RequestCapabilitySync;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RequestLeftClickAbilitySync;
@@ -41,6 +42,10 @@ public class ServerNetworking {
             ModCapabilities.RAID_OBJECTIVE.use(livingEntity, o -> {
                 o.answer(player, answer);
             });
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(C2SSyncItemCooldown.TYPE, (packet, player, responseSender) -> {
+            player.getItemCooldownManager().set(packet.item(), packet.duration());
         });
     }
 }
