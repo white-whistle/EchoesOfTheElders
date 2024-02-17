@@ -7,6 +7,7 @@ import com.bajookie.echoes_of_the_elders.system.screen_switch.ScreenSwitchCapabi
 import com.bajookie.echoes_of_the_elders.util.ModIdentifier;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -21,6 +22,7 @@ public class ModCapabilities {
     public static CapabilityWrapper<LivingEntity, RaidEnemyCapability> RAID_ENEMY = registerCapability("raid_enemy", RaidEnemyCapability::new);
     public static CapabilityWrapper<LivingEntity, RaidObjectiveCapability> RAID_OBJECTIVE = registerCapability("raid_objective", RaidObjectiveCapability::new);
     public static CapabilityWrapper<LivingEntity, ScreenSwitchCapability> SCREEN_SWITCH_OBJECTIVE = registerCapability("tv_arrow_objective", ScreenSwitchCapability::new);
+    public static CapabilityWrapper<PlayerEntity, PersistentCooldownCapability> PERSISTENT_COOLDOWN = registerCapability("persistent_cooldown", PersistentCooldownCapability::new);
 
 
     public static <H, T extends Capability<H>> CapabilityWrapper<H, T> registerCapability(String name, Function<H, T> factory) {

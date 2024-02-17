@@ -21,14 +21,15 @@ public class ItemStackMixin {
         var item = stack.getItem();
 
         var clicked = IUpgradeItem.handleClick(other, stack, slot, clickType, player, cursorStackReference);
-        if (clicked.isPresent()) {
-            cir.setReturnValue(clicked.get());
-            return;
-        }
+        switch (clicked) {
+            case SUCCESS, FAILURE -> cir.setReturnValue(true);
 
-        if (item instanceof IArtifact iArtifact) {
-            var ret = iArtifact.onArtifactClicked(stack, other, slot, clickType, player, cursorStackReference);
-            cir.setReturnValue(ret);
+            case FORWARD -> {
+                if (item instanceof IArtifact iArtifact) {
+                    var ret = iArtifact.onArtifactClicked(stack, other, slot, clickType, player, cursorStackReference);
+                    cir.setReturnValue(ret);
+                }
+            }
         }
     }
 

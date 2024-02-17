@@ -9,7 +9,13 @@ import java.util.Map;
 
 @Mixin(ItemCooldownManager.class)
 public interface ItemCooldownManagerAccessor {
-    
+
+    @Accessor()
+    int getTick();
+
+    @Accessor()
+    void setTick(int v);
+
     @Accessor("entries")
-    Map<Item, Object> getEntries();
+    Map<Item, ItemCooldownManager.Entry> getEntries();
 }

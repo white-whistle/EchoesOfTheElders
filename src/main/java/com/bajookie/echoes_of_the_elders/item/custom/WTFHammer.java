@@ -20,7 +20,7 @@ public class WTFHammer extends UpgradeHammer {
     }
 
     @Override
-    public boolean canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
+    public ClickResult canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
         if (!(other.getItem() instanceof IArtifact)) return fail(user, self, other);
         return success(user, self, other);
     }

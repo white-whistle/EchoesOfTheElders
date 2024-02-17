@@ -21,19 +21,18 @@ public class UpgradeHammer extends Item implements IUpgradeItem {
         }
     }
 
-    public boolean success(PlayerEntity user, ItemStack self, ItemStack other) {
+    public ClickResult success(PlayerEntity user, ItemStack self, ItemStack other) {
         user.playSound(SoundEvents.BLOCK_SMITHING_TABLE_USE, 0.8f, 0.8f + user.getWorld().getRandom().nextFloat() * 0.4f);
-        return true;
+        return (ClickResult.SUCCESS);
     }
 
-    public boolean fail(PlayerEntity user, ItemStack self, ItemStack other) {
+    public ClickResult fail(PlayerEntity user, ItemStack self, ItemStack other) {
         user.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.2f, 0.8f + user.getWorld().getRandom().nextFloat() * 0.4f);
-        return false;
+        return (ClickResult.FAILURE);
     }
 
     @Override
-    public boolean canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
-
+    public ClickResult canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
         if (!(other.getItem() instanceof IArtifact)) return fail(user, self, other);
         if (StackLevel.isMaxed(other)) return fail(user, self, other);
 

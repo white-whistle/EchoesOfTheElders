@@ -9,6 +9,7 @@
     "HostileEntityMixin",
     "IgnoreProjectileMixin",
     "ItemCooldownManagerAccessor",
+    "ItemCooldownManagerEntryAccessor",
     "ItemCooldownManagerMixin",
     "ItemEntityMixin",
     "ItemStackMixin",

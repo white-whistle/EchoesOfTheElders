@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
+import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,17 +18,27 @@ public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldo
     }
 
     @Override
-    public boolean canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
-        if (user.getItemCooldownManager().isCoolingDown(self.getItem())) return false;
+    public ClickResult canUpgrade(PlayerEntity user, ItemStack self, ItemStack other) {
+        if (user.getItemCooldownManager().isCoolingDown(self.getItem())) {
+            if (other.isOf(this)) {
+                return ClickResult.FORWARD;
+            }
+
+            return fail(user, self, other);
+        }
 
         return super.canUpgrade(user, self, other);
     }
 
     @Override
     public void onUpgrade(PlayerEntity user, ItemStack self, ItemStack other, StackReference cursor) {
-        super.onUpgrade(user, self, other, cursor);
+        StackLevel.raise(other, 1);
 
         user.getItemCooldownManager().set(self.getItem(), getCooldown(self));
+
+        if (user.getWorld().isClient) {
+            C2SSyncItemCooldown.send(self.getItem(), getCooldown(self));
+        }
     }
 
     @Override
