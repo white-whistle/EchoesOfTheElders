@@ -29,7 +29,11 @@ public interface IUpgradeItem {
         if (item instanceof IUpgradeItem iUpgradeItem) {
 
             if (clickType != ClickType.RIGHT) {
-                return (ClickResult.PASS);
+                return (ClickResult.FORWARD);
+            }
+
+            if (other.isEmpty()) {
+                return (ClickResult.FORWARD);
             }
 
             var canUpgrade = iUpgradeItem.canUpgrade(player, cursorStack, other);
@@ -41,6 +45,6 @@ public interface IUpgradeItem {
             return canUpgrade;
         }
 
-        return ClickResult.PASS;
+        return ClickResult.FORWARD;
     }
 }
