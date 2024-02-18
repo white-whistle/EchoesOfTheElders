@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.AirSweeperProjectileEntity;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -13,6 +14,7 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.mob.FlyingEntity;
 import net.minecraft.entity.passive.BatEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;

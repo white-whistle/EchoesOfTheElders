@@ -46,5 +46,11 @@
     "sounds": [
       "echoes_of_the_elders:minigun_end"
     ]
+  },
+  "gun_shot_01": {
+    "subtitle": "sounds.echos_of_the_elders.gun_shot_01",
+    "sounds": [
+      "echoes_of_the_elders:gun_shot_01"
+    ]
   }
 }

@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
 import com.bajookie.echoes_of_the_elders.entity.custom.MagmaBullet;
 import com.bajookie.echoes_of_the_elders.entity.custom.PelletProjectile;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
@@ -19,6 +20,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
@@ -64,7 +66,7 @@ public class AncientMinigun extends Item implements IArtifact {
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (remainingUseTicks < 590) {
-            world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_FIRE2, SoundCategory.PLAYERS,4f,1f,false);
+            world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_FIRE2, SoundCategory.PLAYERS,2f,1f,false);
             int currentAmmo = stack.getDamage();
             if (currentAmmo >= this.getMaxDamage() && user instanceof PlayerEntity player) {
                 player.getItemCooldownManager().set(this, 20 * 7);
@@ -72,9 +74,10 @@ public class AncientMinigun extends Item implements IArtifact {
             } else {
                 if (!world.isClient) {
                     if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)){
-                        PelletProjectile bullet = new PelletProjectile(world, user.getEyePos().x, user.getEyePos().y-0.2, user.getEyePos().z, 6, user, user.getPitch(), user.getYaw());
-                        bullet.setVelocity(user, user.getPitch(), user.getYaw(), user.getRoll(), 5f, 7);
-                        world.spawnEntity(bullet);
+                        EntityHitResult hit = VectorUtil.raycast(user,40,3,3);
+                        if (hit != null && (hit.getEntity() instanceof LivingEntity living)){
+                            living.damage(ModDamageSources.echoAttack(user),6);
+                        }
                     }
                 }
                 stack.setDamage(currentAmmo + 1);

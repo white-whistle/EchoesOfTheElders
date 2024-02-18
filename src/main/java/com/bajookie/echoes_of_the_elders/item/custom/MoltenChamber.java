@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.entity.custom.MagmaBullet;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -62,7 +63,7 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
     }
 
     private void endUse(PlayerEntity player, int remainingUseTicks, ItemStack stack, World world) {
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL, 0.1f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+        world.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.GUN_SHOT_01, SoundCategory.PLAYERS, 0.5f, 1f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         int damage = (6 - remainingUseTicks / 10);
         if (damage == 0) damage = 1;
         MagmaBullet bullet = new MagmaBullet(world, player.getEyePos().x, player.getEyePos().y, player.getEyePos().z, damage * this.shotDamage.get(stack), player, player.getPitch(), player.getYaw());
