@@ -60,7 +60,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.WTF_TOKEN,
                 ModItems.VACUUM_RELIC,
                 ModItems.STARFALL_BOW
-        );
+         );
     }
 
     public static final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);

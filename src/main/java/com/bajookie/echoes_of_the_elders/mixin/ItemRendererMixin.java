@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.mixin;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.models.MinigunModel;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import net.minecraft.block.Block;
 import net.minecraft.block.StainedGlassPaneBlock;
@@ -24,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.math.MatrixUtil;
+import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Final;
 import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,6 +49,9 @@ public abstract class ItemRendererMixin {
     @Shadow
     @Final
     private ItemModels models;
+
+    @Shadow public abstract ItemModels getModels();
+
     @Unique
     private final List<ModelTransformationMode> HELD_RENDER_MODES = Arrays.asList(
             ModelTransformationMode.FIRST_PERSON_LEFT_HAND,
@@ -84,10 +89,24 @@ public abstract class ItemRendererMixin {
             if (item == ModItems.SCORCHERS_MITTS){
                 return getCustomItemModel("scorchers_mitts_3d");
             }
+            if (item == ModItems.ANCIENT_MINIGUN){
+                return getCustomItemModel("ancient_minigun_3d");
+            }
 
         }
 
         return value;
+    }
+    @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",at = @At("HEAD"),cancellable = true)
+    private void renderAnimation(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci){
+        if (stack.isOf(ModItems.ANCIENT_MINIGUN)){
+            matrices.push();
+            matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(180)));
+            MinigunModel.applyTranslates(renderMode,matrices);
+            ((ItemRendererAccessor)this).getBuiltinModelItemRenderer().render(stack,renderMode,matrices,vertexConsumers,light,overlay);
+            matrices.pop();
+            ci.cancel();
+        }
     }
 
     @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderBakedItemModel(Lnet/minecraft/client/render/model/BakedModel;Lnet/minecraft/item/ItemStack;IILnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;)V", shift = At.Shift.AFTER))

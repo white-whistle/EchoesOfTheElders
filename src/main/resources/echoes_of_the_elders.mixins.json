@@ -29,6 +29,8 @@
     "TrunkPlacerTypeInvoker"
   ],
   "client": [
+    "BuiltinModelItemRendererAccessor",
+    "BuiltinModelItemRendererMixin",
     "ArmorFeatureRendererMixin",
     "ClientItemMixin",
     "ClientPlayerEntityMixin",
