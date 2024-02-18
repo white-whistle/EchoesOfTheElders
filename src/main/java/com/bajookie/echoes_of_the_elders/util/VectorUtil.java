@@ -1,6 +1,8 @@
 package com.bajookie.echoes_of_the_elders.util;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.util.Pair;
 import net.minecraft.util.hit.EntityHitResult;
@@ -8,8 +10,15 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.RaycastContext;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+
+import java.util.function.Predicate;
+
+import static net.minecraft.entity.projectile.ProjectileUtil.getEntityCollision;
 
 @SuppressWarnings("unused")
 public class VectorUtil {
@@ -64,7 +73,7 @@ public class VectorUtil {
             Vec3d endPos = startPos.add(vec3d2.x * distance, vec3d2.y * distance, vec3d2.z * distance);
             float f = 1.0f;
             Box box = from.getBoundingBox().stretch(vec3d2.multiply(distance)).expand(1.0, 1.0, 1.0);
-            return ProjectileUtil.raycast(from, startPos, endPos, box, entity -> !entity.isSpectator() && entity.canHit(), distance);
+            return ProjectileUtil.raycast(from, startPos, endPos, box, entity -> !entity.isSpectator() && entity.canHit() && entity.isAlive(), distance);
         }
         return null;
     }
@@ -76,5 +85,35 @@ public class VectorUtil {
         if (hit.getType() != HitResult.Type.ENTITY) return null;
 
         return (EntityHitResult) hit;
+    }
+
+    @Nullable
+    public static EntityHitResult raycast(LivingEntity caster, double range, float horizontalDispersion, float verticalDispersion) {
+        Random r = Random.create();
+        double yaw = caster.getYaw() + r.nextTriangular(0.0, 0.0172275 * (double) horizontalDispersion);
+        double pitch = caster.getPitch() + r.nextTriangular(0.0, 0.0172275 * (double) verticalDispersion);
+        float x = -MathHelper.sin(caster.getYaw() * 0.017453292F) * MathHelper.cos(caster.getPitch() * 0.017453292F);
+        float y = -MathHelper.sin((caster.getPitch() + caster.getRoll()) * 0.017453292F);
+        float z = MathHelper.cos(caster.getYaw() * 0.017453292F) * MathHelper.cos(caster.getPitch() * 0.017453292F);
+        Vec3d vec3d = (new Vec3d(x, y, z)).normalize().multiply(range);
+        Vec3d vec3d2 = caster.getEyePos();
+        HitResult hit = getCollision(vec3d2, caster, entity -> !entity.isSpectator() && entity.canHit() && entity.isAlive(), vec3d, caster.getWorld());
+        if (hit != null && (hit.getType() == HitResult.Type.ENTITY)) return (EntityHitResult) hit;
+        return null;
+    }
+
+    private static HitResult getCollision(Vec3d pos, Entity entity, Predicate<Entity> predicate, Vec3d velocity, World world) {
+        Vec3d vec3d = pos.add(velocity);
+        HitResult hitResult = world.raycast(new RaycastContext(pos, vec3d, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, entity));
+        if (((HitResult) hitResult).getType() != HitResult.Type.MISS) {
+            vec3d = ((HitResult) hitResult).getPos();
+        }
+
+        HitResult hitResult2 = getEntityCollision(world, entity, pos, vec3d, entity.getBoundingBox().stretch(velocity).expand(1.0), predicate);
+        if (hitResult2 != null) {
+            hitResult = hitResult2;
+        }
+
+        return (HitResult) hitResult;
     }
 }
