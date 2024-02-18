@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.entity.client;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.item.models.MinigunModel;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
@@ -20,6 +21,7 @@ public class ModModelLayers {
     public static final EntityModelLayer ZOMBEE_ENTITY_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "zombee_entity"), "main");
     public static final EntityModelLayer MAGMA_BULLET_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "magma_bullet_entity"), "main");
     public static final EntityModelLayer PELLET_PROJECTILE_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "pellet_entity"), "main");
+    public static final EntityModelLayer MINIGUN_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "minigun_layer"), "main");
 
     /**
      * Register Model Layers here:
@@ -46,5 +48,6 @@ public class ModModelLayers {
 
         EntityModelLayerRegistry.registerModelLayer(ZOMBEE_ENTITY_LAYER, ZomBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeRenderer::new);
-    }
+
+        EntityModelLayerRegistry.registerModelLayer(MINIGUN_LAYER, MinigunModel::getTexturedModelData);}
 }

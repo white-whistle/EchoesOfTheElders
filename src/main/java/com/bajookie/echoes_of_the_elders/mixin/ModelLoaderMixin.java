@@ -32,6 +32,7 @@ public abstract class ModelLoaderMixin {
         this.addModel(new ModelIdentifier(EOTE.MOD_ID,"arc_lightning_3d","inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID,"scorchers_mitts_3d","inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "soulbound", "inventory"));
+        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "ancient_minigun_3d", "inventory"));
 
         ModItems.registeredModItems.forEach(item -> {
             if (item instanceof IHasUpscaledModel) {
