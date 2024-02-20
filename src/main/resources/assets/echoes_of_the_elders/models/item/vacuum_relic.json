@@ -6,9 +6,24 @@
   "overrides": [
     {
       "predicate": {
-        "echoes_of_the_elders:active": 1
+        "echoes_of_the_elders:active": 1.0,
+        "echoes_of_the_elders:stack_level": 0.0
+      },
+      "model": "echoes_of_the_elders:item/vacuum_relic_active"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:active": 0.0,
+        "echoes_of_the_elders:stack_level": 1.0
       },
       "model": "echoes_of_the_elders:item/vacuum_relic_01"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:active": 1.0,
+        "echoes_of_the_elders:stack_level": 1.0
+      },
+      "model": "echoes_of_the_elders:item/vacuum_relic_01_active"
     }
   ]
 }

@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class VacuumRelic extends Item implements IArtifact, IHasCooldown {
+public class VacuumRelic extends Item implements IArtifact, IHasCooldown, IStackPredicate {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public VacuumRelic() {
