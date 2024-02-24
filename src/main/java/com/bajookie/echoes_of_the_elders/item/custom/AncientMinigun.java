@@ -24,6 +24,8 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class AncientMinigun extends Item implements IArtifact {
     public AncientMinigun() {
         super(new FabricItemSettings().maxCount(1).maxDamage(200));
@@ -37,7 +39,7 @@ public class AncientMinigun extends Item implements IArtifact {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.setCurrentHand(hand);
-        world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_CHARGE, SoundCategory.PLAYERS,4f,1f,false);
+        world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_CHARGE, SoundCategory.PLAYERS, 4f, 1f, false);
         return super.use(world, user, hand);
     }
 
@@ -53,34 +55,38 @@ public class AncientMinigun extends Item implements IArtifact {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS,4f,1f,false);
+        world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
     }
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS,4f,1f,false);
+        world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
         return super.finishUsing(stack, world, user);
     }
 
     @Override
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (remainingUseTicks < 590) {
-            world.playSound(user.getX(),user.getY(),user.getZ(), ModSounds.MINIGUN_FIRE2, SoundCategory.PLAYERS,2f,1f,false);
             int currentAmmo = stack.getDamage();
             if (currentAmmo >= this.getMaxDamage() && user instanceof PlayerEntity player) {
                 player.getItemCooldownManager().set(this, 20 * 7);
                 player.stopUsingItem();
             } else {
-                if (!world.isClient) {
-                    if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)){
-                        EntityHitResult hit = VectorUtil.raycast(user,40,3,3);
-                        if (hit != null && (hit.getEntity() instanceof LivingEntity living)){
-                            living.damage(ModDamageSources.echoAttack(user),6);
+                if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)) {
+                    Random r = new Random();
+                    user.setPitch((float) (user.getPitch() + (0.3 * r.nextInt(-1, 2))));
+                    user.setYaw((float) (user.getYaw() + (0.3 * r.nextInt(-1, 2))));
+                    world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_FIRE2, SoundCategory.PLAYERS, 2f, 1f, false);
+                    if (!world.isClient) {
+                        EntityHitResult hit = VectorUtil.raycast(user, 40, 3, 3);
+                        if (hit != null && (hit.getEntity() instanceof LivingEntity living)) {
+                            living.damage(ModDamageSources.echoAttack(user), 6);
                         }
                     }
+                    stack.setDamage(currentAmmo + 1);
                 }
-                stack.setDamage(currentAmmo + 1);
+
             }
         }
         super.usageTick(world, user, stack, remainingUseTicks);
