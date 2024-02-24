@@ -6,9 +6,24 @@
   "overrides": [
     {
       "predicate": {
-        "echoes_of_the_elders:on": 1
+        "echoes_of_the_elders:on": 1.0,
+        "echoes_of_the_elders:stack_level": 0.0
       },
-      "model": "echoes_of_the_elders:item/wither_scales_open"
+      "model": "echoes_of_the_elders:item/wither_scales_item_open"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:on": 0.0,
+        "echoes_of_the_elders:stack_level": 1.0
+      },
+      "model": "echoes_of_the_elders:item/wither_scales_item_01"
+    },
+    {
+      "predicate": {
+        "echoes_of_the_elders:on": 1.0,
+        "echoes_of_the_elders:stack_level": 1.0
+      },
+      "model": "echoes_of_the_elders:item/wither_scales_item_01_open"
     }
   ]
 }

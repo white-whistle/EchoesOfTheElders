@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.entity.custom.MagmaBullet;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -7,6 +8,7 @@ import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.data.client.Model;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -102,5 +104,10 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
         tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.shot_max", new TextArgs().putF("damage_max", 6 * this.shotDamage.get(stack))));
         tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.shot_wall", new TextArgs().putF("melt", this.meltThrow.get(stack))));
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public Model getBaseModel() {
+        return ModModelProvider.GUN;
     }
 }

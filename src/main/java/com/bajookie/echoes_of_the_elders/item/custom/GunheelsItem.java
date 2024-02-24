@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown {
+public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown, IStackPredicate {
 
     public GunheelsItem() {
         super(GUNHEEL_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
@@ -53,14 +53,14 @@ public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown {
         }
     }
 
-    public void doBulletjump(PlayerEntity player, ItemStack stack) {
-        if (!player.isSprinting()) return;
-        if (player.isUsingRiptide()) return;
+    public boolean doBulletjump(PlayerEntity player, ItemStack stack) {
+        if (!player.isSprinting()) return false;
+        if (player.isUsingRiptide()) return false;
 
         var cdm = player.getItemCooldownManager();
         var item = stack.getItem();
 
-        if (cdm.isCoolingDown(item)) return;
+        if (cdm.isCoolingDown(item)) return false;
 
         cdm.set(item, this.getCooldown(stack));
 
@@ -83,6 +83,8 @@ public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown {
         }
         SoundEvent soundEvent = SoundEvents.ITEM_TRIDENT_RIPTIDE_2;
         world.playSoundFromEntity(null, player, soundEvent, SoundCategory.PLAYERS, 1.0f, 1.0f);
+
+        return true;
     }
 
     private static final ArmorMaterial GUNHEEL_ARMOR_MATERIAL = new ArmorMaterial() {

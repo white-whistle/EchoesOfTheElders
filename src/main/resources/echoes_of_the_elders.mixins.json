@@ -29,6 +29,7 @@
     "TrunkPlacerTypeInvoker"
   ],
   "client": [
+    "ArmorFeatureRendererMixin",
     "ClientItemMixin",
     "ClientPlayerEntityMixin",
     "ClientWorldAccessor",

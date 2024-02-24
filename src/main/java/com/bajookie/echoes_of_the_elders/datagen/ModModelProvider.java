@@ -48,8 +48,7 @@ public class ModModelProvider extends FabricModelProvider {
         protected static final List<Item> HANDHELD = List.of(
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
-                ModItems.MIDAS_HAMMER,
-                ModItems.MOLTEN_CHAMBER
+                ModItems.MIDAS_HAMMER
         );
         protected static final List<Item> SKIP = List.of(
                 ModItems.WITHER_SCALES_ITEM,
@@ -64,7 +63,8 @@ public class ModModelProvider extends FabricModelProvider {
         );
     }
 
-    public final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);
+    public static final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);
+    public static final Model GUN = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/gun")), Optional.empty(), TextureKey.LAYER0);
 
     @Override
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
