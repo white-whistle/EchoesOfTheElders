@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.models.MinigunModel;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -25,11 +26,13 @@ public class BuiltinModelItemRendererMixin {
 
     @Inject(method = "render",at = @At(value = "INVOKE_ASSIGN",target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true)
     private void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo info) {
-        matrices.push();
-        VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, minigunModel.getLayer(MinigunModel.TEXTURE), false, false);
-        minigunModel.render(matrices, vertexConsumer2, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrices.pop();
-        info.cancel();
+        if (stack.isOf(ModItems.ANCIENT_MINIGUN)){
+            matrices.push();
+            VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, minigunModel.getLayer(MinigunModel.TEXTURE), false, false);
+            minigunModel.render(matrices, vertexConsumer2, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
+            matrices.pop();
+            info.cancel();
+        }
     }
     @Inject(method = "reload",at = @At("HEAD"))
     private void reload(ResourceManager manager,CallbackInfo info) {
