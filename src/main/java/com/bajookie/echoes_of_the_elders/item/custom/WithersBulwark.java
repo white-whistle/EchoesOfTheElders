@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WithersBulwark extends Item implements IArtifact, IHasCooldown {
+public class WithersBulwark extends Item implements IArtifact, IHasCooldown, IStackPredicate {
     private final StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10);
 
     public WithersBulwark() {

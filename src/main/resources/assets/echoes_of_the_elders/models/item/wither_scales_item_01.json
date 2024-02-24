@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "echoes_of_the_elders:item/wither_scales_01_closed"
+  }
+}

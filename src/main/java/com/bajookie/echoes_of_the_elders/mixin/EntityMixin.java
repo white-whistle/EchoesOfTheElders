@@ -27,9 +27,10 @@ public class EntityMixin {
             var stack = player.getInventory().getArmorStack(EquipmentSlot.FEET.getEntitySlotId());
 
             if (stack.isOf(ModItems.GUNHEELS)) {
-                ModItems.GUNHEELS.doBulletjump(player, stack);
+                if (ModItems.GUNHEELS.doBulletjump(player, stack)) {
+                    ci.cancel();
+                }
 
-                ci.cancel();
             }
         }
     }

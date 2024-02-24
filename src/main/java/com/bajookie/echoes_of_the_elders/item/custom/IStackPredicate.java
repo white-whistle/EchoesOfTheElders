@@ -21,4 +21,17 @@ public interface IStackPredicate {
     default float getProgress(ItemStack stack) {
         return getTextureIndex(stack) / (float) getTextureIndex(StackLevel.getMax(stack));
     }
+
+    static String stackAppendix(ItemStack itemStack) {
+
+        if (itemStack.getItem() instanceof IStackPredicate iStackPredicate) {
+            var textureIndex = iStackPredicate.getTextureIndex(itemStack);
+            if (textureIndex < 1) return "";
+
+            return String.format("_%02d", textureIndex);
+        }
+
+        return "";
+
+    }
 }
