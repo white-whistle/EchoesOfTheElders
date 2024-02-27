@@ -19,6 +19,7 @@ public class ModSounds {
     public static final SoundEvent MINIGUN_FIRE2 = registerSoundEvent("minigun_fire2");
     public static final SoundEvent MINIGUN_END = registerSoundEvent("minigun_end");
     public static final SoundEvent GUN_SHOT_01 = registerSoundEvent("gun_shot_01");
+    public static final SoundEvent ZEPHYR_SOUND = registerSoundEvent("zephyr_sound");
 
     private static SoundEvent registerSoundEvent(String name){
         Identifier id = new Identifier(MOD_ID,name);
