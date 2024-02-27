@@ -23,6 +23,7 @@ public class MagicHammer extends UpgradeHammer implements IStackPredicate {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.magic_hammer.info1"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.one_time_use"));
 
         super.appendTooltip(stack, world, tooltip, context);
     }

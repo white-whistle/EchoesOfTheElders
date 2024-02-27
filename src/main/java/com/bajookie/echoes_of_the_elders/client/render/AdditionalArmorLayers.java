@@ -16,6 +16,7 @@ public class AdditionalArmorLayers {
 
     static {
         ADDITIONAL_ARMOR_LAYERS.put(ModItems.GUNHEELS, EffectLayer::getGlowFromBaseTexture);
+        ADDITIONAL_ARMOR_LAYERS.put(ModItems.GANGWAY, EffectLayer::getGlowFromBaseTexture);
     }
 
     @Nullable

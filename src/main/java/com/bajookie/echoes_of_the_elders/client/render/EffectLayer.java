@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class EffectLayer {
     private static final Function<Identifier, RenderLayer> GLOW = Util.memoize(texture -> {
         RenderPhase.Texture texture2 = new RenderPhase.Texture((Identifier) texture, false, false);
-        return RenderLayer.of("eote_glow", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, false, true, RenderLayer.MultiPhaseParameters.builder().program(RenderPhase.EYES_PROGRAM).texture(texture2).cull(RenderPhase.DISABLE_CULLING).depthTest(RenderPhase.EQUAL_DEPTH_TEST)/*.transparency(GLINT_TRANSPARENCY)*/.transparency(RenderPhase.ADDITIVE_TRANSPARENCY).layering(RenderPhase.VIEW_OFFSET_Z_LAYERING).writeMaskState(RenderPhase.COLOR_MASK).build(false));
+        return RenderLayer.of("eote_glow", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, false, true, RenderLayer.MultiPhaseParameters.builder().program(RenderPhase.EYES_PROGRAM).texture(texture2).cull(RenderPhase.DISABLE_CULLING).depthTest(RenderPhase.EQUAL_DEPTH_TEST)/*.transparency(GLINT_TRANSPARENCY)*/.transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY).layering(RenderPhase.VIEW_OFFSET_Z_LAYERING).writeMaskState(RenderPhase.COLOR_MASK).build(false));
     });
 
     private static final Function<Identifier, RenderLayer> PORTAL_MASKED = Util.memoize(texture -> {
