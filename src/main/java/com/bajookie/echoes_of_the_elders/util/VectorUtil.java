@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static net.minecraft.entity.projectile.ProjectileUtil.getEntityCollision;

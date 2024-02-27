@@ -52,5 +52,11 @@
     "sounds": [
       "echoes_of_the_elders:gun_shot_01"
     ]
+  },
+  "zephyr_sound": {
+    "subtitle": "sounds.echos_of_the_elders.zephyr_sound",
+    "sounds": [
+      "echoes_of_the_elders:zephyr_sound"
+    ]
   }
 }

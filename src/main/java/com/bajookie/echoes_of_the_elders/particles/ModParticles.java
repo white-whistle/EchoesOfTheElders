@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.particles;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.particles.type.LineParticleType;
+import com.bajookie.echoes_of_the_elders.particles.type.ZapParticleType;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.particle.DefaultParticleType;
 import net.minecraft.particle.ParticleType;
@@ -36,6 +37,7 @@ public class ModParticles {
             "thick_trail_particle", FabricParticleTypes.simple());
 
     public static final LineParticleType LINE_PARTICLE_TYPE = registerParticle("line_particle", new LineParticleType(true, LineParticleEffect.PARAMETERS_FACTORY));
+    public static final ZapParticleType ZAP_PARTICLE_TYPE = registerParticle("zap_particle", new ZapParticleType(true, ZapParticleEffect.PARAMETERS_FACTORY));
 
     private static <T extends ParticleType<?>> T registerParticle(String name, T particleType) {
         return Registry.register(Registries.PARTICLE_TYPE, new Identifier(MOD_ID, name), particleType);
