@@ -15,7 +15,7 @@ public class AdditionalArmorLayers {
     public static HashMap<Item, BlockStateVariantMap.QuadFunction<ItemStack, EquipmentSlot, LivingEntity, Integer, RenderLayer>> ADDITIONAL_ARMOR_LAYERS = new HashMap<>();
 
     static {
-        ADDITIONAL_ARMOR_LAYERS.put(ModItems.GUNHEELS, GlowLayer::getGlowFromBaseTexture);
+        ADDITIONAL_ARMOR_LAYERS.put(ModItems.GUNHEELS, EffectLayer::getGlowFromBaseTexture);
     }
 
     @Nullable

@@ -5,15 +5,13 @@ import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
 import com.bajookie.echoes_of_the_elders.client.RaidObjectiveHoverOverlay;
 import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
 import com.bajookie.echoes_of_the_elders.client.TvArrowOverlay;
+import com.bajookie.echoes_of_the_elders.client.render.ModShaderTypes;
+import com.bajookie.echoes_of_the_elders.client.render.ModShaders;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.events.PlayerAttackHandler;
 import com.bajookie.echoes_of_the_elders.particles.*;
-import com.bajookie.echoes_of_the_elders.particles.ModParticles;
-import com.bajookie.echoes_of_the_elders.particles.SecondSunParticle;
-import com.bajookie.echoes_of_the_elders.particles.StarParticle;
-import com.bajookie.echoes_of_the_elders.particles.StarfallTrailParticle;
 import com.bajookie.echoes_of_the_elders.screen.client.ModHandledScreens;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
@@ -25,6 +23,9 @@ import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 public class EOTEClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ModShaderTypes.init();
+        ModShaders.init();
+
         ModModelLayers.registerModMobLayers();
         ModBlocks.registerModBlocksModelLayers();
 
