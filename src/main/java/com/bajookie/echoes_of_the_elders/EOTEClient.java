@@ -1,10 +1,7 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
-import com.bajookie.echoes_of_the_elders.client.CustomItemColors;
-import com.bajookie.echoes_of_the_elders.client.RaidObjectiveHoverOverlay;
-import com.bajookie.echoes_of_the_elders.client.StopwatchOverlay;
-import com.bajookie.echoes_of_the_elders.client.TvArrowOverlay;
+import com.bajookie.echoes_of_the_elders.client.*;
 import com.bajookie.echoes_of_the_elders.client.render.ModShaderTypes;
 import com.bajookie.echoes_of_the_elders.client.render.ModShaders;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
@@ -44,6 +41,7 @@ public class EOTEClient implements ClientModInitializer {
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
         HudRenderCallback.EVENT.register(new RaidObjectiveHoverOverlay());
         HudRenderCallback.EVENT.register(new TvArrowOverlay());
+        HudRenderCallback.EVENT.register(new EquipmentCooldownOverlay());
 
         TooltipComponentCallback.EVENT.register((data) -> {
             if (data instanceof ItemTooltipData itemTooltipData) {
@@ -59,5 +57,6 @@ public class EOTEClient implements ClientModInitializer {
         AttackEntityCallback.EVENT.register(new PlayerAttackHandler());
 
         ModHandledScreens.init();
+        ModKeyBindings.init();
     }
 }

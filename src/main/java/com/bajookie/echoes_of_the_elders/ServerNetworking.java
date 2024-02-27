@@ -1,12 +1,10 @@
 package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.item.ILeftClickAbility;
+import com.bajookie.echoes_of_the_elders.item.ability.IHasSlotAbility;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.RaidObjectiveCapability;
-import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
-import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RaidContinueAnswer;
-import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RequestCapabilitySync;
-import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.RequestLeftClickAbilitySync;
+import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.*;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -46,6 +44,10 @@ public class ServerNetworking {
 
         ServerPlayNetworking.registerGlobalReceiver(C2SSyncItemCooldown.TYPE, (packet, player, responseSender) -> {
             player.getItemCooldownManager().set(packet.item(), packet.duration());
+        });
+
+        ServerPlayNetworking.registerGlobalReceiver(C2SCastItemStack.TYPE, (packet, player, responseSender) -> {
+            IHasSlotAbility.handleCast(player, packet.slot());
         });
     }
 }

@@ -41,6 +41,7 @@
   "item.echoes_of_the_elders.quickening_band": "Quickening Band",
   "item.echoes_of_the_elders.reality_pick": "Reality Pick",
   "item.echoes_of_the_elders.godslayer": "Godslayer",
+  "item.echoes_of_the_elders.gangway": "Mask of Dawn",
   "item.echoes_of_the_elders.gunheels": "Gunheels",
   "item.echoes_of_the_elders.old_key_item": "Old Key",
   "item.echoes_of_the_elders.pandoras_bag": "Pandora's Bag",
@@ -63,6 +64,7 @@
   "itemgroup.echoes_of_the_elders": "EchoesOfTheElders Items",
   "artifact-group.echoes_of_the_elders": "EchoesOfTheElders Artifacts",
   "tooltip.echoes_of_the_elders.soulbound": "<soulbound> Soulbound - {player}</soulbound>",
+  "tooltip.echoes_of_the_elders.one_time_use": "<GRAY>one time use</GRAY>",
   "tooltip.echoes_of_the_elders.raid_rewards": "<star/> {items} rewards",
   "message.echoes_of_the_elders.soulbound.wrong_user": "<soulbound/> <RED>Cannot use this item, it belongs to {player}</RED> <soulbound/>",
   "tooltip.echoes_of_the_elders.tier": "<tier>{tier}</tier>",
@@ -117,6 +119,7 @@
   "tooltip.echoes_of_the_elders.magic_hammer.info1": "<star/> upgrade <power_star>relic level</power_star> <unique>+1</unique>",
   "tooltip.echoes_of_the_elders.wtf_hammer.info1": "<star/> upgrade <power_star>relic level</power_star> to <unique>max level</unique>",
   "tooltip.echoes_of_the_elders.wtf_hammer.info2": "<star/> upgrade <power_star>relic level</power_star> <unique>past max level</unique>",
+  "tooltip.echoes_of_the_elders.hotkey": "{name} [<key/>{hotkey}]",
   "message.echoes_of_the_elders.raid.defeat": "<RED>You have failed to defend the raid objective</RED>",
   "message.echoes_of_the_elders.raid.victory": "<GREEN>You have completed the raid</GREEN>",
   "message.echoes_of_the_elders.raid.incoming_wave": "<RED>Wave Incoming</RED>",
@@ -131,5 +134,10 @@
   "screen.echoes_of_the_elders.raid_continue.battle.description": "Risk fighting for greater rewards",
   "screen.echoes_of_the_elders.raid_continue.leave.title": "Leave",
   "screen.echoes_of_the_elders.raid_continue.leave.description": "Exit the raid and claim your rewards",
-  "screen.echoes_of_the_elders.raid_continue.continue": "continue?"
+  "screen.echoes_of_the_elders.raid_continue.continue": "continue?",
+  "key.echoes_of_the_elders.activate_helmet_effect": "Activate helmet effect",
+  "category.echoes_of_the_elders.artifact_key_bindings": "EOTE Artifacts",
+  "ability.echoes_of_the_elders.gangway.name": "Gangway",
+  "ability.echoes_of_the_elders.gangway.info1": "<pad/> Shoot a piercing beam",
+  "ability.echoes_of_the_elders.gangway.info2": "<pad/> for {damage} <magic>magic damage</magic>"
 }

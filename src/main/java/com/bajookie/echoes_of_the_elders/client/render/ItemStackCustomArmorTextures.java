@@ -18,6 +18,7 @@ public class ItemStackCustomArmorTextures {
 
     static {
         ITEMSTACK_CUSTOM_ARMOR_TEXTURE_IDENTIFIER.put(ModItems.GUNHEELS, (stack, equipmentSlot, livingEntity) -> new ModIdentifier("gunheel" + IStackPredicate.stackAppendix(stack)));
+        ITEMSTACK_CUSTOM_ARMOR_TEXTURE_IDENTIFIER.put(ModItems.GANGWAY, (stack, equipmentSlot, livingEntity) -> new ModIdentifier("gangway" + IStackPredicate.stackAppendix(stack)));
     }
 
     @Nullable

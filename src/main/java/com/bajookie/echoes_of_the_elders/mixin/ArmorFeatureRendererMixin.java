@@ -38,11 +38,11 @@ public class ArmorFeatureRendererMixin {
         currentEntity = entity;
         currentStack = currentEntity.getEquippedStack(currentSlot);
 
+        System.out.println("render armor!!");
     }
 
     @Inject(method = "renderArmorParts", at = @At("TAIL"))
     private void renderExtraArmorLayers(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, ArmorItem item, BipedEntityModel<LivingEntity> model, boolean secondTextureLayer, float red, float green, float blue, @Nullable String overlay, CallbackInfo ci) {
-
         var renderLayer = AdditionalArmorLayers.get(currentStack, currentSlot, currentEntity, secondTextureLayer ? 2 : 1);
         if (renderLayer != null) {
             var vertexConsumer = vertexConsumers.getBuffer(renderLayer);
@@ -50,11 +50,15 @@ public class ArmorFeatureRendererMixin {
             model.render(matrices, vertexConsumer, 0xF00000, OverlayTexture.DEFAULT_UV, 1.0f, 1.0f, 1.0f, 1.0f);
         }
 
+        System.out.println("render armor parts!");
     }
 
     @Inject(method = "getArmorTexture", at = @At("HEAD"), cancellable = true)
     private void getCustomArmorTexture(ArmorItem item, boolean secondLayer, String overlay, CallbackInfoReturnable<Identifier> cir) {
         var id = ItemStackCustomArmorTextures.get(currentStack, currentSlot, currentEntity, secondLayer ? 2 : 1);
+        System.out.println("WTF");
+        System.out.println(id);
+        System.out.println(currentStack);
         if (id != null) {
             cir.setReturnValue(id);
         }

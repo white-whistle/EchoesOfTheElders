@@ -44,6 +44,7 @@ public class ModText {
 
     public static final Function<MutableText, Text> RIGHT_CLICK = registerIconTag("right_click");
     public static final Function<MutableText, Text> LEFT_CLICK = registerIconTag("left_click");
+    public static final Function<MutableText, Text> KEY = registerIconTag("key");
 
     public static final Function<MutableText, Text> PAD = registerIconTag("pad");
     public static final Function<MutableText, Text> RAINBOW = registerTag("rainbow", ModText::rainbowText);
