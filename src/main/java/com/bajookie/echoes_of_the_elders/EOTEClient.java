@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.client.*;
+import com.bajookie.echoes_of_the_elders.client.render.ModArmor;
 import com.bajookie.echoes_of_the_elders.client.render.ModShaderTypes;
 import com.bajookie.echoes_of_the_elders.client.render.ModShaders;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
@@ -22,6 +23,7 @@ public class EOTEClient implements ClientModInitializer {
     public void onInitializeClient() {
         ModShaderTypes.init();
         ModShaders.init();
+        ModArmor.init();
 
         ModModelLayers.registerModMobLayers();
         ModBlocks.registerModBlocksModelLayers();
