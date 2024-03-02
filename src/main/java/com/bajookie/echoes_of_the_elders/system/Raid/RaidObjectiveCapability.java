@@ -231,6 +231,8 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void cleanupEnemies() {
+        if (self == null || self.getWorld().isClient) return;
+        
         remainingEnemies.forEach(eUuid -> {
             var ent = EntityUtil.getEntityByUUID(self.getWorld(), eUuid);
             if (ent != null) ent.discard();
