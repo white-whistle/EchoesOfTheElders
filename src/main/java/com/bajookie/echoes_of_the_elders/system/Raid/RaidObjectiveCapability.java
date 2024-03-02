@@ -91,6 +91,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     // called when a bundle of waves is won
     public void onVictory() {
+        if (self.getWorld().isClient) return;
 
         level++;
 
@@ -111,6 +112,8 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     // called when a wave has been won
     public void onWaveVictory() {
+        if (self.getWorld().isClient) return;
+
         remainingWaves--;
 
         if (remainingWaves < 1) {
@@ -123,23 +126,28 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void spawnWave() {
+        if (self == null || self.getWorld().isClient) return;
+
         var wave = WaveFeatures.getEntities(self.getWorld(), level);
         ArrayList<UUID> uu = new ArrayList<>();
-        for (LivingEntity liv : wave) {
-            if (liv == null) continue;
-            var pos = RaidPositioner.random(10, 20).next(liv.getWorld(), self, liv);
-            liv.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
-            liv.getWorld().spawnEntity(liv);
-            if (liv instanceof MobEntity mobEntity) {
+
+        for (LivingEntity entity : wave) {
+            var pos = RaidPositioner.random(50, 100).next(entity.getWorld(), self, entity);
+
+            entity.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
+            entity.getWorld().spawnEntity(entity);
+
+            if (entity instanceof MobEntity mobEntity) {
                 mobEntity.setTarget(self);
                 mobEntity.setPersistent();
             }
 
-            ModCapabilities.RAID_ENEMY.attach(liv, e -> {
+            ModCapabilities.RAID_ENEMY.attach(entity, e -> {
                 e.setRaidTarget(self);
             });
-            uu.add(liv.getUuid());
+            uu.add(entity.getUuid());
         }
+
         remainingEnemies = uu;
         initialEnemyCount = remainingEnemies.size();
         raidWaveBar.setPercent(getWaveProgress());
@@ -222,6 +230,15 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         return true;
     }
 
+    public void cleanupEnemies() {
+        remainingEnemies.forEach(eUuid -> {
+            var ent = EntityUtil.getEntityByUUID(self.getWorld(), eUuid);
+            if (ent != null) ent.discard();
+        });
+
+        remainingEnemies.clear();
+    }
+
     public void onLose() {
         if (self == null) return;
 
@@ -234,12 +251,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
             self.dropStack(stack);
         });
 
-        remainingEnemies.forEach(eUuid -> {
-            var ent = EntityUtil.getEntityByUUID(self.getWorld(), eUuid);
-            if (ent != null) ent.discard();
-        });
-
-        remainingEnemies.clear();
+        cleanupEnemies();
 
         // just in case
         closeOpenScreens();
