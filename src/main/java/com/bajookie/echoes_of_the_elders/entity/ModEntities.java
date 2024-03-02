@@ -22,7 +22,7 @@ public class ModEntities {
     public static final EntityType<RaidTotemEntity> RAID_TOTEM_ENTITY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "raid_totem_entity"),
             FabricEntityTypeBuilder.create(SpawnGroup.MISC, RaidTotemEntity::new)
-                    .dimensions(EntityDimensions.fixed(0.5f, 4f)).build());
+                    .dimensions(EntityDimensions.fixed(0.5f, 4f)).trackRangeChunks(16).build());
 
     public static final EntityType<SpiritEntity> SPIRIT_ENTITY_KEY = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "spirit_entity"), SpiritEntity.createEntityType(List.of(Items.CAKE, Items.BREAD, ModItems.OLD_KEY)));

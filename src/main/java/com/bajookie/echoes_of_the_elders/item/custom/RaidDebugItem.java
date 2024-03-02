@@ -25,32 +25,17 @@ public class RaidDebugItem extends Item {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
 
-        var world = entity.getWorld();
-
-        if (entity instanceof IHasCapability iHasCapability) {
-            System.out.println(iHasCapability.echoesOfTheElders$hasCapabilities());
-        }
+        ModCapabilities.RAID_OBJECTIVE.use(entity, o -> {
+            o.cleanupEnemies();
+            o.spawnWave();
+        });
 
         return ActionResult.SUCCESS;
     }
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        var world = context.getWorld();
-        var pos = context.getBlockPos().add(0, 1, 0);
-
-        if (!world.isClient) {
-            var raidObjective = EntityType.PIG.create(world);
-            assert raidObjective != null;
-            raidObjective.refreshPositionAndAngles((double) pos.getX() + 0.5, (double) pos.getY(), (double) pos.getZ() + 0.5, MathHelper.wrapDegrees(world.random.nextFloat() * 360.0f), 0.0f);
-
-            world.spawnEntity(raidObjective);
-
-            ModCapabilities.RAID_OBJECTIVE.attach(raidObjective);
-        }
-
         return ActionResult.SUCCESS;
-
     }
 
 }
