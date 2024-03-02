@@ -5,11 +5,11 @@ import com.bajookie.echoes_of_the_elders.mixin.MobEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
+import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
@@ -31,124 +31,65 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
         super(self);
 
         if (self instanceof MobEntity mobEntity && mobEntity instanceof MobEntityAccessor mobEntityAccessor) {
+            var world = mobEntity.getWorld();
+            if (world.isClient) return;
+
             var targeting = mobEntityAccessor.getTargetSelector();
             var goals = mobEntityAccessor.getGoalSelector();
 
             targeting.add(0, new ActiveTargetGoal<>(mobEntity, RaidTotemEntity.class, true) {
-                // @Override
-                // public boolean canStart() {
-                //     return true;
-                // }
+                private int buildCooldown = 20;
+
+                @Override
+                public boolean canStart() {
+                    super.canStart();
+                    return true;
+                }
 
                 @Override
                 protected Box getSearchBox(double distance) {
                     return this.mob.getBoundingBox().expand(distance * ENEMY_SEARCH_MODIFIER, 30, distance * ENEMY_SEARCH_MODIFIER);
                 }
 
-                // @Override
-                // public boolean shouldContinue() {
-                //     return true;
-                // }
-
-                // @Override
-                // protected void findClosestTarget() {
-                //     this.targetEntity = getRaidTarget(this.mob.getWorld());
-                //     // this.targetEntity = (LivingEntity) EntityUtil.getEntityByUUID(this.mob.getWorld(), raidTargetUUID);
-                // }
-            });
-
-            goals.add(0, new Goal() {
-                private Vec3d lastPos;
-                private int inPlaceTicks = 0;
-                private int buildCooldown = 0;
-
-                private void reset() {
-                    lastPos = mobEntity.getPos();
-                    ;
-                    inPlaceTicks = 0;
-                    buildCooldown = 0;
-                }
-
-                private boolean checkMovement() {
-                    var currPos = mobEntity.getPos();
-                    // System.out.println("check");
-
-                    if (lastPos == null) {
-                        lastPos = currPos;
-                        return false;
-                    }
-
-                    // System.out.println("dist" + currPos.distanceTo(lastPos));
-                    if (currPos.distanceTo(lastPos) < 2) {
-                        lastPos = currPos;
-                        return true;
-                    }
-
-                    reset();
-                    return false;
-                }
-
-                @Override
-                public boolean canStart() {
-                    // System.out.println("can start?!");
-                    if (mobEntity.getTarget() == null) return false;
-                    // if (isSameHeight()) return false;
-
-                    // System.out.println("target!");
-                    if (checkMovement()) {
-                        System.out.println(inPlaceTicks);
-                        // System.out.println("Movement!?");
-                        if (inPlaceTicks > 20 * 10) {
-                            // inPlaceTicks = 10;
-                            return true;
-                        }
-
-                        inPlaceTicks++;
-                        return false;
-                    }
-
-                    return false;
-                }
-
                 @Override
                 public boolean shouldContinue() {
-                    var target = mobEntity.getTarget();
-                    if (target == null) return false;
+                    var ret = super.shouldContinue();
 
-                    return checkMovement();
+                    if (ret) return true;
 
-                    // return true;
-                    // return isSameHeight();
+                    var raidTarget = getRaidTarget(mobEntity.getWorld());
+                    if (this.mob.getNavigation().isIdle()) {
+                        if (buildCooldown <= 0) {
+                            if (raidTarget.getBlockY() < mobEntity.getBlockY()) {
+                                breakDown();
+                            } else if (raidTarget.getBlockY() > mobEntity.getBlockY()) {
+                                buildUp();
+                            } else {
+                                breakFront();
+                            }
+                            buildCooldown = 4;
+                        } else {
+                            buildCooldown--;
+                        }
+
+                        return false;
+                    }
+
+
+                    return true;
                 }
 
                 @Override
                 public void start() {
-                    System.out.println("Here");
-                    if (buildCooldown <= 0) {
-                        var target = mobEntity.getTarget();
-                        if (target == null) return;
-
-                        if (target.getY() < mobEntity.getY()) {
-                            breakDown();
-                        } else if (target.getY() > mobEntity.getY()) {
-                            buildUp();
-                        } else {
-                            System.out.println("Got here??");
-                            breakFront();
-                        }
-
-
-                        buildCooldown = 20;
-                    } else {
-                        buildCooldown--;
-                    }
+                    this.findClosestTarget();
+                    super.start();
                 }
 
                 private void buildUp() {
                     var world = mobEntity.getWorld();
                     var blockPos = mobEntity.getBlockPos();
 
-                    mobEntity.setPos(mobEntity.getX(), mobEntity.getY() + 1.1, mobEntity.getZ());
+                    mobEntity.setPos(mobEntity.getX(), (int) (mobEntity.getY() + 1.1), mobEntity.getZ());
                     BlockState blockState = Blocks.COBBLESTONE.getDefaultState();
                     world.setBlockState(blockPos, blockState);
                 }
@@ -157,7 +98,7 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
                     var world = mobEntity.getWorld();
                     var blockPos = mobEntity.getBlockPos().add(0, -1, 0);
 
-                    mobEntity.setPos(mobEntity.getX(), mobEntity.getY() - 1.1, mobEntity.getZ());
+                    mobEntity.setPos(mobEntity.getX(), (int) (mobEntity.getY() - 1.1), mobEntity.getZ());
                     BlockState blockState = Blocks.AIR.getDefaultState();
                     world.setBlockState(blockPos, blockState);
                 }
@@ -173,25 +114,59 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
                     var world = mobEntity.getWorld();
 
                     var pos = mobEntity.getPos();
-                    var vec3d = mobEntity.getRotationVec(0);
+                    var dir = mobEntity.getMovementDirection().getVector();
 
-                    HitResult hitResult = world.raycast(new RaycastContext(pos.add(0, Math.random() * mobEntity.getHeight(), 0), vec3d, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mobEntity));
+                    var target = getRaidTarget(world);
+
+                    var iHeight = (int) Math.round(mobEntity.getHeight());
+
+                    for (int i = 0; i < iHeight; i++) {
+                        // break facing blocks
+                        HitResult hitResult = world.raycast(new RaycastContext(pos.add(0, i, 0), pos.add(0, i, 0).add(new Vec3d(dir.getX(), dir.getY(), dir.getZ()).normalize()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mobEntity));
+
+                        if (hitResult.getType() == HitResult.Type.BLOCK) {
+                            var blockHit = (BlockHitResult) hitResult;
+                            var blockPos = blockHit.getBlockPos();
+
+                            BlockState blockState = Blocks.AIR.getDefaultState();
+                            world.setBlockState(blockPos, blockState);
+
+                            return;
+                        }
+                    }
+
+                    var lookDir = VectorUtil.pitchYawRollToDirection(mobEntity.getPitch(), mobEntity.getYaw(), 0);
+                    HitResult hitResult = world.raycast(new RaycastContext(mobEntity.getEyePos(), mobEntity.getEyePos().add(lookDir.x, lookDir.y, lookDir.z), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mobEntity));
 
                     if (hitResult.getType() == HitResult.Type.BLOCK) {
                         var blockHit = (BlockHitResult) hitResult;
                         var blockPos = blockHit.getBlockPos();
 
-                        mobEntity.setPos(mobEntity.getX(), mobEntity.getY() - 1.1, mobEntity.getZ());
                         BlockState blockState = Blocks.AIR.getDefaultState();
                         world.setBlockState(blockPos, blockState);
+
+                        return;
                     }
 
+                    // build out from tower
+                    if (mobEntity.squaredDistanceTo(target) > 1) {
+                        var blockPos = mobEntity.getBlockPos().add(0, -1, 0).add(dir);
+
+                        if (world.getBlockState(blockPos).isAir()) {
+                            BlockState blockState = Blocks.COBBLESTONE.getDefaultState();
+                            world.setBlockState(blockPos, blockState);
+                        }
+                    }
+
+                }
+
+                @Override
+                protected void findClosestTarget() {
+                    this.targetEntity = getRaidTarget(this.mob.getWorld());
                 }
             });
 
             mobEntity.clearGoals(g -> g instanceof WanderAroundGoal);
-
-            // mobEntity.setStepHeight(3);
         }
     }
 
