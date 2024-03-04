@@ -1,23 +1,17 @@
 package com.bajookie.echoes_of_the_elders.system.Raid;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.RaidTotemEntity;
+import com.bajookie.echoes_of_the_elders.entity.goals.SummonVehicleAndReachObjectiveGoal;
 import com.bajookie.echoes_of_the_elders.mixin.MobEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.util.EntityUtil;
-import com.bajookie.echoes_of_the_elders.util.VectorUtil;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.WanderAroundGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,8 +32,6 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
             var goals = mobEntityAccessor.getGoalSelector();
 
             targeting.add(0, new ActiveTargetGoal<>(mobEntity, RaidTotemEntity.class, true) {
-                private int buildCooldown = 20;
-
                 @Override
                 public boolean canStart() {
                     super.canStart();
@@ -53,28 +45,7 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
 
                 @Override
                 public boolean shouldContinue() {
-                    var ret = super.shouldContinue();
-
-                    if (ret) return true;
-
-                    var raidTarget = getRaidTarget(mobEntity.getWorld());
-                    if (this.mob.getNavigation().isIdle()) {
-                        if (buildCooldown <= 0) {
-                            if (raidTarget.getBlockY() < mobEntity.getBlockY()) {
-                                breakDown();
-                            } else if (raidTarget.getBlockY() > mobEntity.getBlockY()) {
-                                buildUp();
-                            } else {
-                                breakFront();
-                            }
-                            buildCooldown = 4;
-                        } else {
-                            buildCooldown--;
-                        }
-
-                        return false;
-                    }
-
+                    super.shouldContinue();
 
                     return true;
                 }
@@ -85,80 +56,6 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
                     super.start();
                 }
 
-                private void buildUp() {
-                    var world = mobEntity.getWorld();
-                    var blockPos = mobEntity.getBlockPos();
-
-                    mobEntity.setPos(mobEntity.getX(), (int) (mobEntity.getY() + 1.1), mobEntity.getZ());
-                    BlockState blockState = Blocks.COBBLESTONE.getDefaultState();
-                    world.setBlockState(blockPos, blockState);
-                }
-
-                private void breakDown() {
-                    var world = mobEntity.getWorld();
-                    var blockPos = mobEntity.getBlockPos().add(0, -1, 0);
-
-                    mobEntity.setPos(mobEntity.getX(), (int) (mobEntity.getY() - 1.1), mobEntity.getZ());
-                    BlockState blockState = Blocks.AIR.getDefaultState();
-                    world.setBlockState(blockPos, blockState);
-                }
-
-                private boolean isSameHeight() {
-                    var target = mobEntity.getTarget();
-                    if (target == null) return false;
-
-                    return target.getBlockY() == mobEntity.getBlockY();
-                }
-
-                private void breakFront() {
-                    var world = mobEntity.getWorld();
-
-                    var pos = mobEntity.getPos();
-                    var dir = mobEntity.getMovementDirection().getVector();
-
-                    var target = getRaidTarget(world);
-
-                    var iHeight = (int) Math.round(mobEntity.getHeight());
-
-                    for (int i = 0; i < iHeight; i++) {
-                        // break facing blocks
-                        HitResult hitResult = world.raycast(new RaycastContext(pos.add(0, i, 0), pos.add(0, i, 0).add(new Vec3d(dir.getX(), dir.getY(), dir.getZ()).normalize()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mobEntity));
-
-                        if (hitResult.getType() == HitResult.Type.BLOCK) {
-                            var blockHit = (BlockHitResult) hitResult;
-                            var blockPos = blockHit.getBlockPos();
-
-                            BlockState blockState = Blocks.AIR.getDefaultState();
-                            world.setBlockState(blockPos, blockState);
-
-                            return;
-                        }
-                    }
-
-                    var lookDir = VectorUtil.pitchYawRollToDirection(mobEntity.getPitch(), mobEntity.getYaw(), 0);
-                    HitResult hitResult = world.raycast(new RaycastContext(mobEntity.getEyePos(), mobEntity.getEyePos().add(lookDir.x, lookDir.y, lookDir.z), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mobEntity));
-
-                    if (hitResult.getType() == HitResult.Type.BLOCK) {
-                        var blockHit = (BlockHitResult) hitResult;
-                        var blockPos = blockHit.getBlockPos();
-
-                        BlockState blockState = Blocks.AIR.getDefaultState();
-                        world.setBlockState(blockPos, blockState);
-
-                        return;
-                    }
-
-                    // build out from tower
-                    if (mobEntity.squaredDistanceTo(target) > 1) {
-                        var blockPos = mobEntity.getBlockPos().add(0, -1, 0).add(dir);
-
-                        if (world.getBlockState(blockPos).isAir()) {
-                            BlockState blockState = Blocks.COBBLESTONE.getDefaultState();
-                            world.setBlockState(blockPos, blockState);
-                        }
-                    }
-
-                }
 
                 @Override
                 protected void findClosestTarget() {
@@ -166,7 +63,24 @@ public class RaidEnemyCapability extends Capability<LivingEntity> {
                 }
             });
 
+            // if (!(mobEntity.getMoveControl() instanceof FlightMoveControl)) {
+            // goals.add(0, new BuildAndBreakGoal(mobEntity) {
+            //     @Override
+            //     public LivingEntity getRaidTarget() {
+            //         return RaidEnemyCapability.this.getRaidTarget(mobEntity.getWorld());
+            //     }
+            // });
+
+            goals.add(0, new SummonVehicleAndReachObjectiveGoal(mobEntity) {
+                @Override
+                public LivingEntity getRaidTarget() {
+                    return RaidEnemyCapability.this.getRaidTarget(mobEntity.getWorld());
+                }
+            });
+
             mobEntity.clearGoals(g -> g instanceof WanderAroundGoal);
+            // }
+
         }
     }
 

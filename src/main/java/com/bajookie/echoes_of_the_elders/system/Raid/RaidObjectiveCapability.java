@@ -46,6 +46,7 @@ import static com.bajookie.echoes_of_the_elders.effects.ModEffects.RAID_OBJECTIV
 public class RaidObjectiveCapability extends Capability<LivingEntity> {
     private static class Keys {
         private static final String REMAINING_ENEMIES = "remainingEnemies";
+        private static final String INITIAL_ENEMIES = "initialEnemies";
         private static final String REMAINING_WAVES = "remainingWaves";
         private static final String INITIAL_WAVES = "initialWaves";
         private static final String LEVEL = "level";
@@ -129,7 +130,8 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         if (self == null || self.getWorld().isClient) return;
 
         var wave = WaveFeatures.getEntities(self.getWorld(), level);
-        ArrayList<UUID> uu = new ArrayList<>();
+
+        remainingEnemies.clear();
 
         for (LivingEntity entity : wave) {
             var pos = RaidPositioner.random(50, 100).next(entity.getWorld(), self, entity);
@@ -137,18 +139,10 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
             entity.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
             entity.getWorld().spawnEntity(entity);
 
-            if (entity instanceof MobEntity mobEntity) {
-                mobEntity.setTarget(self);
-                mobEntity.setPersistent();
-            }
+            addEnemy(entity);
 
-            ModCapabilities.RAID_ENEMY.attach(entity, e -> {
-                e.setRaidTarget(self);
-            });
-            uu.add(entity.getUuid());
         }
 
-        remainingEnemies = uu;
         initialEnemyCount = remainingEnemies.size();
         raidWaveBar.setPercent(getWaveProgress());
         setWaveBar();
@@ -232,7 +226,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     public void cleanupEnemies() {
         if (self == null || self.getWorld().isClient) return;
-        
+
         remainingEnemies.forEach(eUuid -> {
             var ent = EntityUtil.getEntityByUUID(self.getWorld(), eUuid);
             if (ent != null) ent.discard();
@@ -243,6 +237,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     public void onLose() {
         if (self == null) return;
+        if (self.getWorld().isClient) return;
 
         items.forEach((i) -> {
             var stack = new ItemStack(ModItems.CORRUPTED_KEY);
@@ -285,11 +280,22 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     public void addEnemy(LivingEntity entity) {
         remainingEnemies.add(entity.getUuid());
         initialEnemyCount++;
+
+        if (entity instanceof MobEntity mobEntity) {
+            mobEntity.setTarget(self);
+            mobEntity.setPersistent();
+        }
+
+        ModCapabilities.RAID_ENEMY.attach(entity, e -> {
+            e.setRaidTarget(self);
+        });
     }
 
     @Override
     public void writeToNbt(NbtCompound nbt) {
+        System.out.println("initial enemy count" + initialEnemyCount);
         nbt.putInt(Keys.REMAINING_WAVES, remainingWaves);
+        nbt.putInt(Keys.INITIAL_ENEMIES, initialEnemyCount);
         nbt.putInt(Keys.INITIAL_WAVES, initialWaves);
         nbt.putInt(Keys.LEVEL, level);
         nbt.putBoolean(Keys.ACTIVE, active);
@@ -321,9 +327,12 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     @Override
     public void readFromNbt(NbtCompound nbt) {
         remainingWaves = nbt.getInt(Keys.REMAINING_WAVES);
+        initialEnemyCount = nbt.getInt(Keys.INITIAL_ENEMIES);
         initialWaves = nbt.getInt(Keys.INITIAL_WAVES);
         level = nbt.getInt(Keys.LEVEL);
         active = nbt.getBoolean(Keys.ACTIVE);
+
+        System.out.println(nbt.toString());
 
         var nbtItemstackList = nbt.getList(Keys.ITEM_STACKS, NbtElement.COMPOUND_TYPE);
         var nbtAnswerList = nbt.getList(Keys.RAID_ANSWERS, NbtElement.COMPOUND_TYPE);
@@ -348,6 +357,11 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         raidWaveBar.setName(getWaveName());
         raidWaveBar.setPercent(getWaveProgress());
+
+        System.out.println("Loaded raide objective");
+        System.out.println(remainingEnemies.size() / (float) initialEnemyCount);
+        System.out.println((float) initialEnemyCount);
+        System.out.println(remainingEnemies.size());
 
         if (isInContinuePhase()) {
             setContinueBar();
@@ -389,6 +403,8 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
     }
 
     public void closeOpenScreens() {
+        if (self.getWorld().isClient) return;
+
         PlayerLookup.tracking(self).forEach(player -> {
             if (player.currentScreenHandler instanceof RaidContinueScreenHandler handler) {
                 var id = handler.inventory.getStack(2);
