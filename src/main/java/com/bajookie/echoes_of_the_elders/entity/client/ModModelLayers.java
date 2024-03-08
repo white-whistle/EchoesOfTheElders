@@ -28,6 +28,7 @@ public class ModModelLayers {
     public static final EntityModelLayer HALO_LAYER = new EntityModelLayer(new ModIdentifier("halo"), "main");
     public static final EntityModelLayer PELLET_PROJECTILE_LAYER = new EntityModelLayer(new ModIdentifier("pellet_entity"), "main");
     public static final EntityModelLayer MINIGUN_LAYER = new EntityModelLayer(new ModIdentifier("minigun_layer"), "main");
+    public static final EntityModelLayer MONOLOOK_LAYER = new EntityModelLayer(new Identifier(MOD_ID, "monolook_entity"), "main");
 
     static class FarFlyingItemRenderer extends FlyingItemEntityRenderer {
         public FarFlyingItemRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
@@ -69,6 +70,9 @@ public class ModModelLayers {
 
         EntityModelLayerRegistry.registerModelLayer(ZOMBEE_ENTITY_LAYER, ZomBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(MONOLOOK_LAYER, MonolookEntityModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MONOLOOK_ENTITY_TYPE, MonolookEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(MINIGUN_LAYER, MinigunModel::getTexturedModelData);
         EntityModelLayerRegistry.registerModelLayer(HAT_BRIM, HaloModel.getTexturedModelData(0, 0, 0));
