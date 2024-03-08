@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.datagen;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.block.custom.AncientGrainsCrop;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
@@ -42,6 +43,8 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_LEAVES);
         blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+
+        blockStateModelGenerator.registerCrop(ModBlocks.ANCIENT_GRAINS_CROP, AncientGrainsCrop.AGE,0,1,2,3,4,5);
     }
 
     static class ItemModelConfig {
@@ -59,7 +62,8 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.TIME_TOKEN,
                 ModItems.WTF_TOKEN,
                 ModItems.VACUUM_RELIC,
-                ModItems.STARFALL_BOW
+                ModItems.STARFALL_BOW,
+                ModItems.ANCIENT_GRAINS_SEEDS
          );
     }
 

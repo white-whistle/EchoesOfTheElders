@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "echoes_of_the_elders:totem_struct",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 564736324,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.custom.*;
 import com.bajookie.echoes_of_the_elders.item.custom.OrbOfLightning;
@@ -8,10 +9,7 @@ import com.bajookie.echoes_of_the_elders.item.custom.SecondSunItem;
 import com.bajookie.echoes_of_the_elders.item.custom.ElderPrismItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.ToolMaterials;
+import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -78,6 +76,7 @@ public class ModItems {
     public static final Item ARTIFACT_HAMMER = registerItem("artifact_hammer", new ArtifactHammer());
     public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
     public static final Item ZEPHYR_RELIC = registerItem("zephyr_relic",new ZephyrRelic());
+    public static final Item ANCIENT_GRAINS_SEEDS = registerItem("ancient_grains_seeds",new AliasedBlockItem(ModBlocks.ANCIENT_GRAINS_CROP,new FabricItemSettings().maxCount(64)));
 
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {

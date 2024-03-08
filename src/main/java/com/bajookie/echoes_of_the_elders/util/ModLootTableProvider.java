@@ -1,11 +1,15 @@
 package com.bajookie.echoes_of_the_elders.util;
 
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
+import com.bajookie.echoes_of_the_elders.block.custom.AncientGrainsCrop;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.data.server.loottable.BlockLootTableGenerator;
+import net.minecraft.item.Items;
+import net.minecraft.loot.condition.BlockStatePropertyLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.predicate.StatePredicate;
 
 public class ModLootTableProvider extends FabricBlockLootTableProvider {
     public ModLootTableProvider(FabricDataOutput dataOutput) {
@@ -24,6 +28,10 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
         addDrop(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
         addDrop(ModBlocks.ANCIENT_TREE_PLANKS);
+
+        BlockStatePropertyLootCondition.Builder builder = BlockStatePropertyLootCondition.builder(ModBlocks.ANCIENT_GRAINS_CROP).properties(StatePredicate.Builder.create()
+                .exactMatch(AncientGrainsCrop.AGE,5));
+        addDrop(ModBlocks.ANCIENT_GRAINS_CROP,cropDrops(ModBlocks.ANCIENT_GRAINS_CROP, Items.WHEAT,ModItems.ANCIENT_GRAINS_SEEDS,builder));
     }
 
 
