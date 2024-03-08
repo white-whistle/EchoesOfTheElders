@@ -112,6 +112,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.HARELEAP_STRIDERS);
                 addStackedVariants(entries, ModItems.ATLAS_GREAVES);
                 addStackedVariants(entries, ModItems.SPIRAL_SWORD);
+                addStackedVariants(entries, ModItems.MONOLOOK_SPAWN);
             }).build());
 
     public static void registerGroups() {

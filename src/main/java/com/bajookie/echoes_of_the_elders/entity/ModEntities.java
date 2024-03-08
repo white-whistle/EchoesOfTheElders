@@ -35,6 +35,11 @@ public class ModEntities {
             FabricEntityTypeBuilder.<ZomBeeEntity>create(SpawnGroup.MONSTER, ZomBeeEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(8).build());
 
+    public static final EntityType<MonolookEntity> MONOLOOK_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "monolook_entity"),
+            FabricEntityTypeBuilder.<MonolookEntity>create(SpawnGroup.CREATURE, MonolookEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(8).build());
+
     public static final EntityType<SecondSunProjectileEntity> SECOND_SUN_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "second_sun_entity"),
             FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE, SecondSunProjectileEntity::new)
@@ -86,5 +91,6 @@ public class ModEntities {
         FabricDefaultAttributeRegistry.register(ModEntities.SPIRIT_ENTITY_KEY, SpiritEntity.createSpiritEntityAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanEntity.createEndermanAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeEntity.createZombeeAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MONOLOOK_ENTITY_TYPE, MonolookEntity.createMonolookEntityAttributes());
     }
 }

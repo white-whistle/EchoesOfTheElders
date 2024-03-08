@@ -63,6 +63,7 @@ public class ModItems {
     public static final Item ICICLE_RELIC = registerItem("icicle_staff", new IcicleStaff());
     public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun());
     public static final Item GANGWAY = registerItem("gangway", new Gangway());
+    public static final Item MONOLOOK_SPAWN = registerItem("monolook_spawn", new MonolookSpawn());
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
     public static final Item HARELEAP_STRIDERS = registerItem("hareleap_striders", new HareleapStriders());
     public static final Item ATLAS_GREAVES = registerItem("atlas_greaves", new AtlasGreaves());
