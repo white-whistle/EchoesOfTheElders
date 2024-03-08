@@ -47,6 +47,8 @@ public class ModBlocks {
     public static final Block SPIRITAL_GRASS = registerBlock("spirital_grass", new SpiritalGrass(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).replaceable().noCollision().breakInstantly().sounds(BlockSoundGroup.GRASS).offset(AbstractBlock.OffsetType.XYZ).burnable().pistonBehavior(PistonBehavior.DESTROY)));
     //public static final Block SPIRIT_PETALS = registerBlock("spirit_petals",new FlowerbedBlock(AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().sounds(BlockSoundGroup.PINK_PETALS).pistonBehavior(PistonBehavior.DESTROY)));
 
+    public static final Block ANCIENT_GRAINS_CROP = Registry.register(Registries.BLOCK, new Identifier(EOTE.MOD_ID, "ancient_grains_crop"), new AncientGrainsCrop());
+    public static final Block TOTEM_SPAWN_BLOCK = registerBlock("totem_spawn_block",new TotemSpawnBlock());
     private static Block registerBlock(String name, Block block) {
         return registerBlock(name, block, new FabricItemSettings());
     }
@@ -76,5 +78,6 @@ public class ModBlocks {
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRITAL_GRASS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(SPIRIT_PETALS, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(WOOL_TENT_DOOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(ANCIENT_GRAINS_CROP, RenderLayer.getCutout());
     }
 }

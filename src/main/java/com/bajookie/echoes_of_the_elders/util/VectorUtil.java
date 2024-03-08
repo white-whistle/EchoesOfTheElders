@@ -16,6 +16,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -102,7 +103,6 @@ public class VectorUtil {
         if (hit != null && (hit.getType() == HitResult.Type.ENTITY)) return (EntityHitResult) hit;
         return null;
     }
-
     private static HitResult getCollision(Vec3d pos, Entity entity, Predicate<Entity> predicate, Vec3d velocity, World world) {
         Vec3d vec3d = pos.add(velocity);
         HitResult hitResult = world.raycast(new RaycastContext(pos, vec3d, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, entity));
@@ -110,7 +110,7 @@ public class VectorUtil {
             vec3d = ((HitResult) hitResult).getPos();
         }
 
-        HitResult hitResult2 = getEntityCollision(world, entity, pos, vec3d, entity.getBoundingBox().stretch(velocity).expand(1.0), predicate);
+        HitResult hitResult2 = ProjectileUtil.getEntityCollision(world, entity, pos, vec3d, entity.getBoundingBox().stretch(velocity).expand(1.0), predicate);
         if (hitResult2 != null) {
             hitResult = hitResult2;
         }

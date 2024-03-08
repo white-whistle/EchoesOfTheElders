@@ -50,6 +50,8 @@ public class ModItemGroups {
                 entries.add(ModItems.RAID_TOTEM_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModItems.ZOMBEE_SPAWN_EGG);
+                entries.add(ModItems.ANCIENT_GRAINS_SEEDS);
+                entries.add(ModBlocks.TOTEM_SPAWN_BLOCK);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 10), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
