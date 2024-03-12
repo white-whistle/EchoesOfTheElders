@@ -28,7 +28,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class StarfallBow extends BowItem implements IArtifact, IHasCooldown {
-    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(10*20, 10*20);
+    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10 * 20);
+    public static final int STARFALL_DAMAGE = 4;
+    public static final int STARFALL_STAR_COUNT = 1;
 
     public StarfallBow() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
@@ -67,7 +69,7 @@ public class StarfallBow extends BowItem implements IArtifact, IHasCooldown {
             if (user instanceof PlayerEntity player) {
                 if (!player.getItemCooldownManager().isCoolingDown(this)) {
                     starArrow = new StarArrowProjectile(user.getWorld(), user, true);
-                    player.getItemCooldownManager().set(this,this.cooldown.get(stack));
+                    player.getItemCooldownManager().set(this, this.cooldown.get(stack));
                 } else {
                     starArrow = new StarArrowProjectile(user.getWorld(), user, false);
                 }
@@ -104,8 +106,8 @@ public class StarfallBow extends BowItem implements IArtifact, IHasCooldown {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.starfall_bow.attack.info"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.starfall_bow.effect.info"));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info1"));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info2", new TextArgs().putI("damage", STARFALL_DAMAGE)));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

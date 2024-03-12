@@ -45,6 +45,10 @@ public class ModArmor {
                 }
             });
         }), ModItems.GANGWAY);
+
+        ArmorRenderer.register(new CustomArmor((ctx) -> {
+            ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "cowplate")));
+        }), ModItems.COWPLATE);
     }
 
     public static Identifier armorIdentifier(String name) {

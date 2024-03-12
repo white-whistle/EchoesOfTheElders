@@ -293,7 +293,6 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
     @Override
     public void writeToNbt(NbtCompound nbt) {
-        System.out.println("initial enemy count" + initialEnemyCount);
         nbt.putInt(Keys.REMAINING_WAVES, remainingWaves);
         nbt.putInt(Keys.INITIAL_ENEMIES, initialEnemyCount);
         nbt.putInt(Keys.INITIAL_WAVES, initialWaves);
@@ -357,11 +356,6 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         raidWaveBar.setName(getWaveName());
         raidWaveBar.setPercent(getWaveProgress());
-
-        System.out.println("Loaded raide objective");
-        System.out.println(remainingEnemies.size() / (float) initialEnemyCount);
-        System.out.println((float) initialEnemyCount);
-        System.out.println(remainingEnemies.size());
 
         if (isInContinuePhase()) {
             setContinueBar();
