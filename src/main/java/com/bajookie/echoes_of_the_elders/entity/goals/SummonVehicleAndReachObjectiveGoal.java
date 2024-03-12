@@ -39,6 +39,7 @@ public abstract class SummonVehicleAndReachObjectiveGoal extends Goal {
         if (buildCooldown <= 0) {
             if (mobEntity instanceof ZomBeeEntity) {
                 tunnel();
+                buildCooldown = 4;
                 return;
             }
 

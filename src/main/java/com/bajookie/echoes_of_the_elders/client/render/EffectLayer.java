@@ -26,11 +26,20 @@ public class EffectLayer {
         return RenderLayer.of("eote_portal_masked", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, false, true, multiPhaseParameters);
     });
 
+    private static final Function<Identifier, RenderLayer> ARMOR_CUTOUT_WITH_CULLING = Util.memoize(texture -> {
+        RenderLayer.MultiPhaseParameters multiPhaseParameters = RenderLayer.MultiPhaseParameters.builder().program(RenderPhase.ARMOR_CUTOUT_NO_CULL_PROGRAM).texture(new RenderPhase.Texture(texture, false, false)).transparency(RenderPhase.NO_TRANSPARENCY).cull(RenderPhase.ENABLE_CULLING).lightmap(RenderPhase.ENABLE_LIGHTMAP).overlay(RenderPhase.ENABLE_OVERLAY_COLOR).layering(RenderPhase.VIEW_OFFSET_Z_LAYERING).depthTest(RenderPhase.LEQUAL_DEPTH_TEST).build(true);
+        return RenderLayer.of("eote_armor_cutout_with_culling", VertexFormats.POSITION_COLOR_TEXTURE_OVERLAY_LIGHT_NORMAL, VertexFormat.DrawMode.QUADS, 256, true, false, multiPhaseParameters);
+    });
+
     public static RenderLayer getGlow(Identifier texture) {
         return GLOW.apply(texture);
     }
 
     public static RenderLayer getPortalMasked(Identifier texture) {
         return PORTAL_MASKED.apply(texture);
+    }
+
+    public static RenderLayer getArmorCutoutWithCulling(Identifier texture) {
+        return ARMOR_CUTOUT_WITH_CULLING.apply(texture);
     }
 }
