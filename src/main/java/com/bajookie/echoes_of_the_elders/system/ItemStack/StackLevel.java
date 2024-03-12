@@ -30,7 +30,7 @@ public class StackLevel {
     }
 
     public static float getStackProgress(ItemStack itemStack) {
-        return get(itemStack) / (float) (getMax(itemStack) - 1);
+        return (get(itemStack) - 1) / (float) (getMax(itemStack) - 1);
     }
 
     public static ItemStack set(ItemStack itemStack, int tier) {
