@@ -124,6 +124,9 @@ public class CustomArmor implements ArmorRenderer {
         }
 
         public void render(CustomArmor customArmor, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
+            if (!this.shouldRender(customArmor, matrices, vertexConsumers, stack, entity, slot, light, contextModel))
+                return;
+
             var renderLayer = renderLayerGetter.apply(stack);
             var vertexConsumer = ItemRenderer.getArmorGlintConsumer(vertexConsumers, renderLayer, false, stack.hasGlint());
             var model = modelGetter.apply(entity);
@@ -133,6 +136,10 @@ public class CustomArmor implements ArmorRenderer {
             CustomArmor.setVisible(model, slot);
 
             model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
+        }
+
+        public boolean shouldRender(CustomArmor customArmor, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
+            return true;
         }
 
     }
