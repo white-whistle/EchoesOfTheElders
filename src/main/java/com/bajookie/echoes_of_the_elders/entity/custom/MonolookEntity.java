@@ -7,6 +7,8 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.data.DataTracker;
@@ -20,10 +22,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.EntityView;
@@ -40,6 +44,7 @@ import java.util.UUID;
 public class MonolookEntity extends TameableEntity {
     public static final TrackedData<Integer> SHOOT_PROGRESS = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+    private final ServerBossBar HP = new ServerBossBar(Text.literal("companion hp"), BossBar.Color.RED, BossBar.Style.NOTCHED_6);
 
     public MonolookEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -85,12 +90,18 @@ public class MonolookEntity extends TameableEntity {
         if (this.getOwner() != null) {
             var living = this.getOwner();
             if (!this.getWorld().isClient){
+                this.HP.setPercent(this.getHealth()/this.getMaxHealth());
                 var dir = Math.toRadians(living.getYaw()+100);
                 var look = new Vec3d(Math.sin(dir)*-1, 0, Math.cos(dir)).normalize().multiply(0.6).add(0,2 +0.3*Math.sin(this.age*0.04),0);
                 Vec3d ownerPos = living.getPos().add(look);
                 this.setPosition(ownerPos);
             }
         }
+    }
+
+    @Override
+    protected void mobTick() {
+        super.mobTick();
     }
 
     @Override
@@ -125,8 +136,6 @@ public class MonolookEntity extends TameableEntity {
         return false;
     }
 
-
-
     @Override
     public void setOwner(PlayerEntity player) {
         super.setOwner(player);
@@ -134,8 +143,23 @@ public class MonolookEntity extends TameableEntity {
 
     @Override
     public void setOwnerUuid(@Nullable UUID uuid) {
-        System.out.println(uuid);
         this.dataTracker.set(OWNER_UUID, Optional.ofNullable(uuid));
+    }
+
+    @Override
+    public void onStoppedTrackingBy(ServerPlayerEntity player) {
+        super.onStoppedTrackingBy(player);
+        if (player.getUuid().equals(this.getOwnerUuid())){
+            HP.removePlayer(player);
+        }
+    }
+
+    @Override
+    public void onStartedTrackingBy(ServerPlayerEntity player) {
+        super.onStartedTrackingBy(player);
+        if (player.getUuid().equals(this.getOwnerUuid())){
+            HP.addPlayer(player);
+        }
     }
 
     @Override
