@@ -66,10 +66,14 @@ public class EntityMixin {
     @Inject(method = "interact", at = @At("HEAD"), cancellable = true)
     private void onInteract(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         var self = (Entity) (Object) this;
-        if (self instanceof PlayerEntity target) {
+        
+        System.out.println("here1");
+        if (self instanceof LivingEntity target) {
+            System.out.println("here2");
             var chestStack = target.getEquippedStack(EquipmentSlot.CHEST);
+            System.out.println("here3" + chestStack);
             if (chestStack.getItem() instanceof Cowplate cowplate) {
-                if (cowplate.handleBucket(chestStack, target, player, hand)) {
+                if (cowplate.handleBucket(chestStack, player, hand)) {
                     cir.setReturnValue(ActionResult.success(target.getWorld().isClient));
                 }
             }

@@ -1,6 +1,9 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
+import com.bajookie.echoes_of_the_elders.screen.client.particles.imps.StarParticle;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
+import com.bajookie.echoes_of_the_elders.util.Interator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.Item;
@@ -23,6 +26,14 @@ public class UpgradeHammer extends Item implements IUpgradeItem {
 
     public ClickResult success(PlayerEntity user, ItemStack self, ItemStack other) {
         user.playSound(SoundEvents.BLOCK_SMITHING_TABLE_USE, 0.8f, 0.8f + user.getWorld().getRandom().nextFloat() * 0.4f);
+
+        Interator.of(20).forEach(i -> {
+            ScreenParticleManager.addParticle(
+                    new StarParticle(ScreenParticleManager.getMousePos())
+                            .randomizeVelocity(5f)
+            );
+        });
+
         return (ClickResult.SUCCESS);
     }
 

@@ -127,7 +127,7 @@ public class Cowplate extends ArmorItem implements IArtifact, IHasSlotAbility, I
         }
     }
 
-    public boolean handleBucket(ItemStack stack, PlayerEntity target, PlayerEntity user, Hand hand) {
+    public boolean handleBucket(ItemStack stack, PlayerEntity user, Hand hand) {
         var handStack = user.getStackInHand(hand);
 
         var isMaxed = StackLevel.isMaxed(stack);

@@ -331,8 +331,6 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         level = nbt.getInt(Keys.LEVEL);
         active = nbt.getBoolean(Keys.ACTIVE);
 
-        System.out.println(nbt.toString());
-
         var nbtItemstackList = nbt.getList(Keys.ITEM_STACKS, NbtElement.COMPOUND_TYPE);
         var nbtAnswerList = nbt.getList(Keys.RAID_ANSWERS, NbtElement.COMPOUND_TYPE);
         var nbtUuidList = nbt.getList(Keys.REMAINING_ENEMIES, NbtElement.INT_ARRAY_TYPE);
