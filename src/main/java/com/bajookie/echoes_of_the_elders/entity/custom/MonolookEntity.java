@@ -38,7 +38,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public class MonolookEntity extends TameableEntity {
-    private static final TrackedData<Boolean> SHOOTING = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    public static final TrackedData<Integer> SHOOT_PROGRESS = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
 
     public MonolookEntity(EntityType<? extends TameableEntity> entityType, World world) {
@@ -64,8 +64,8 @@ public class MonolookEntity extends TameableEntity {
     @Override
     protected void initDataTracker() {
         super.initDataTracker();
-        this.dataTracker.startTracking(SHOOTING, false);
         this.dataTracker.startTracking(OWNER_UUID, Optional.empty());
+        this.dataTracker.startTracking(SHOOT_PROGRESS,0);
     }
 
     @Override
@@ -158,17 +158,9 @@ public class MonolookEntity extends TameableEntity {
         return 5.0f;
     }
 
-    public boolean isShooting() {
-        return this.dataTracker.get(SHOOTING);
-    }
-
     @Override
     public boolean hasNoGravity() {
         return true;
-    }
-
-    public void setShooting(boolean shooting) {
-        this.dataTracker.set(SHOOTING, shooting);
     }
 
     @Nullable
@@ -297,7 +289,6 @@ public class MonolookEntity extends TameableEntity {
 
         @Override
         public void stop() {
-            this.monolook.setShooting(false);
         }
 
         @Override
@@ -318,6 +309,9 @@ public class MonolookEntity extends TameableEntity {
                 if (this.cooldown == 10 && !this.monolook.isSilent()) {
                     world.syncWorldEvent(null, WorldEvents.GHAST_WARNS, this.monolook.getBlockPos(), 0);
                 }
+                if (this.cooldown>10 && !monolook.getWorld().isClient){
+                    monolook.dataTracker.set(SHOOT_PROGRESS,this.cooldown-10);
+                }
                 if (this.cooldown == 20) {
                     if (!this.monolook.isSilent()) {
                         world.syncWorldEvent(null, WorldEvents.GHAST_SHOOTS, this.monolook.getBlockPos(), 0);
@@ -334,13 +328,13 @@ public class MonolookEntity extends TameableEntity {
                                 new Vector3f(255 / 255f, 184 / 255f, 117 / 255f)
                         ), startPos.x, startPos.y, startPos.z, 1, 0, 0, 0, 0);
                         livingEntity.damage(world.getDamageSources().create(DamageTypes.MAGIC), 8);
+                        monolook.dataTracker.set(SHOOT_PROGRESS,0);
                     }
                     this.cooldown = -20;
                 }
             } else if (this.cooldown > 0) {
                 --this.cooldown;
             }
-            this.monolook.setShooting(this.cooldown > 10);
         }
     }
 }

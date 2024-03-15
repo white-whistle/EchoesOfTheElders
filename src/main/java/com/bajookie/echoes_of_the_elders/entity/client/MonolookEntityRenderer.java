@@ -12,6 +12,7 @@ public class MonolookEntityRenderer extends MobEntityRenderer<MonolookEntity,Mon
 
     public MonolookEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new MonolookEntityModel(context.getPart(ModModelLayers.MONOLOOK_LAYER)), 0.6f);
+        this.addFeature(new MonolookEyeFeatureRenderer(this));
     }
 
     @Override
