@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
 import net.minecraft.entity.*;
@@ -17,6 +18,7 @@ import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -28,6 +30,7 @@ import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Math;
 import org.joml.Vector3f;
 
 import java.util.EnumSet;
@@ -37,12 +40,15 @@ import java.util.UUID;
 public class MonolookEntity extends TameableEntity {
     private static final TrackedData<Boolean> SHOOTING = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     protected static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
+
     public MonolookEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
     }
+
     public MonolookEntity(World world) {
         super(ModEntities.MONOLOOK_ENTITY_TYPE, world);
     }
+
     public static DefaultAttributeContainer.Builder createMonolookEntityAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20)
@@ -59,30 +65,77 @@ public class MonolookEntity extends TameableEntity {
     protected void initDataTracker() {
         super.initDataTracker();
         this.dataTracker.startTracking(SHOOTING, false);
-        this.dataTracker.startTracking(OWNER_UUID,Optional.empty());
+        this.dataTracker.startTracking(OWNER_UUID, Optional.empty());
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(6, new LookAroundGoal(this));
-        this.targetSelector.add(2, new AttackWithOwnerGoal(this));
-        this.goalSelector.add(7, new ShootFireballGoal(this));
-        this.goalSelector.add(7, new LookAtTargetGoal(this));
-        this.targetSelector.add(3, new ActiveTargetGoal<LivingEntity>(this,LivingEntity.class,0,true,false,living -> living instanceof Monster && living.isAlive()));
+        this.goalSelector.add(9, new LookAroundGoal(this));
+        this.goalSelector.add(5,new LookAtMoveDirection(this));
+        this.goalSelector.add(6, new ShootFireballGoal(this));
+        this.goalSelector.add(6, new LookAtTargetGoal(this));
+        this.targetSelector.add(4, new RevengeGoal(this, new Class[0]).setGroupRevenge(new Class[0]));
+        this.targetSelector.add(3, new AttackWithOwnerGoal(this));
+        this.targetSelector.add(5, new ActiveTargetGoal<LivingEntity>(this, LivingEntity.class, 0, true, false, living -> living instanceof Monster && living.isAlive()));
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.getOwner() != null){
+        if (this.getOwner() != null) {
             var living = this.getOwner();
-            Vec3d ownerPos = living.getPos().add(0.5,2,0.5);
-            this.setPosition(ownerPos);
+            if (!this.getWorld().isClient){
+                var dir = Math.toRadians(living.getYaw()+100);
+                var look = new Vec3d(Math.sin(dir)*-1, 0, Math.cos(dir)).normalize().multiply(0.6).add(0,2 +0.3*Math.sin(this.age*0.04),0);
+                Vec3d ownerPos = living.getPos().add(look);
+                this.setPosition(ownerPos);
+            }
         }
     }
+
     @Override
     public SoundCategory getSoundCategory() {
-        return SoundCategory.HOSTILE;
+        return SoundCategory.PLAYERS;
+    }
+
+    @Override
+    public boolean shouldDropXp() {
+        return false;
+    }
+
+    @Override
+    protected void pushAway(Entity entity) {
+    }
+
+    @Override
+    public boolean canBreatheInWater() {
+        return true;
+    }
+
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        if (source.getAttacker() instanceof PlayerEntity) return false;
+        if (this.hasStatusEffect(ModEffects.RAID_OBJECTIVE_CONTINUE_PHASE)) return false;
+
+        return super.damage(source, amount);
+    }
+
+    @Override
+    public boolean isPushable() {
+        return false;
+    }
+
+
+
+    @Override
+    public void setOwner(PlayerEntity player) {
+        super.setOwner(player);
+    }
+
+    @Override
+    public void setOwnerUuid(@Nullable UUID uuid) {
+        System.out.println(uuid);
+        this.dataTracker.set(OWNER_UUID, Optional.ofNullable(uuid));
     }
 
     @Override
@@ -121,10 +174,9 @@ public class MonolookEntity extends TameableEntity {
     @Nullable
     @Override
     public UUID getOwnerUuid() {
-        if (this.dataTracker.get(OWNER_UUID).isPresent()){
+        if (this.dataTracker.get(OWNER_UUID).isPresent()) {
             return this.dataTracker.get(OWNER_UUID).get();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -136,7 +188,7 @@ public class MonolookEntity extends TameableEntity {
 
 
     protected boolean isOwner(Entity entity) {
-        if (this.dataTracker.get(OWNER_UUID).isPresent()){
+        if (this.dataTracker.get(OWNER_UUID).isPresent()) {
             return entity.getUuid().equals(this.dataTracker.get(OWNER_UUID).get());
         }
         return false;
@@ -146,7 +198,6 @@ public class MonolookEntity extends TameableEntity {
     @Override
     public LivingEntity getOwner() {
         UUID uUID = this.getOwnerUuid();
-        System.out.println(uUID);
         if (uUID == null) {
             return null;
         }
@@ -185,9 +236,42 @@ public class MonolookEntity extends TameableEntity {
                 if (livingEntity.squaredDistanceTo(this.monolook) < 512.0) {
                     double e = livingEntity.getX() - this.monolook.getX();
                     double f = livingEntity.getZ() - this.monolook.getZ();
-                    this.monolook.setYaw(-((float)MathHelper.atan2(e, f)) * 57.295776f);
+                    this.monolook.setYaw(-((float) MathHelper.atan2(e, f)) * 57.295776f);
                     this.monolook.bodyYaw = this.monolook.getYaw();
                 }
+            }
+        }
+    }
+
+    static class LookAtMoveDirection extends Goal {
+        private final MonolookEntity monolook;
+
+        public LookAtMoveDirection(MonolookEntity monolook) {
+            this.monolook = monolook;
+            this.setControls(EnumSet.of(Control.LOOK));
+        }
+
+        @Override
+        public boolean canStart() {
+            if (monolook.getOwner() != null) {
+                Vec3d movement = monolook.getOwner().getVelocity();
+                if (!movement.equals(new Vec3d(0, 0, 0)) && monolook.getTarget() == null) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean shouldRunEveryTick() {
+            return true;
+        }
+
+        @Override
+        public void tick() {
+            if (monolook.getOwner() != null) {
+                double movement = monolook.getOwner().getYaw();
+                monolook.setYaw((float) movement);
             }
         }
     }
@@ -249,7 +333,7 @@ public class MonolookEntity extends TameableEntity {
                                 new Vector3f((float) (entityPos.x), (float) (livingEntity.getBodyY(0.5)), (float) (entityPos.z)),
                                 new Vector3f(255 / 255f, 184 / 255f, 117 / 255f)
                         ), startPos.x, startPos.y, startPos.z, 1, 0, 0, 0, 0);
-                        livingEntity.damage(world.getDamageSources().create(DamageTypes.MAGIC),8);
+                        livingEntity.damage(world.getDamageSources().create(DamageTypes.MAGIC), 8);
                     }
                     this.cooldown = -20;
                 }
