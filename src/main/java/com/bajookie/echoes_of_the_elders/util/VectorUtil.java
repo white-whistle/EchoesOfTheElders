@@ -14,6 +14,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector2f;
 import org.joml.Vector3f;
 
 import java.util.List;
@@ -24,6 +25,13 @@ import static net.minecraft.entity.projectile.ProjectileUtil.getEntityCollision;
 
 @SuppressWarnings("unused")
 public class VectorUtil {
+    public static java.util.Random random = new java.util.Random();
+
+    public static Vector2f randomDirection() {
+        float a = (float) (random.nextFloat() * 2 * Math.PI);
+        return new Vector2f((float) Math.cos(a), (float) Math.sin(a));
+    }
+
     public static Vector3f pitchYawRollToDirection(float pitch, float yaw, float roll) {
         float f = -MathHelper.sin(yaw * ((float) Math.PI / 180)) * MathHelper.cos(pitch * ((float) Math.PI / 180));
         float g = -MathHelper.sin((pitch + roll) * ((float) Math.PI / 180));

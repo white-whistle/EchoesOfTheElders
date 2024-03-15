@@ -64,12 +64,6 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
     }
 
     @Override
-    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        System.out.println("used on entity");
-        return super.useOnEntity(stack, user, entity, hand);
-    }
-
-    @Override
     public int getCooldown(ItemStack itemStack) {
         return cooldown.get(itemStack);
     }

@@ -11,7 +11,7 @@ public interface IStackPredicate {
     }
 
     default int getTextureIndex(ItemStack itemStack) {
-        return getTextureIndex(StackLevel.get(itemStack));
+        return Math.min(getTextureIndex(StackLevel.get(itemStack)), getTextureIndex(StackLevel.getMax(itemStack)));
     }
 
     default Model getBaseModel() {

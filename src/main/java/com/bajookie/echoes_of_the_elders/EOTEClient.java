@@ -11,6 +11,7 @@ import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.events.PlayerAttackHandler;
 import com.bajookie.echoes_of_the_elders.particles.*;
 import com.bajookie.echoes_of_the_elders.screen.client.ModHandledScreens;
+import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
@@ -24,6 +25,8 @@ public class EOTEClient implements ClientModInitializer {
         ModShaderTypes.init();
         ModShaders.init();
         ModArmor.init();
+
+        ScreenParticleManager.INSTANCE.init();
 
         ModModelLayers.registerModMobLayers();
         ModBlocks.registerModBlocksModelLayers();

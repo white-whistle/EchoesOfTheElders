@@ -54,7 +54,6 @@ public class AirSweeper extends Item implements IArtifact, IStackPredicate, IHas
                     Box box = new Box(user.getX() - 60, user.getY() - 60, user.getZ() - 60, user.getX() + 60, user.getY() + 60, user.getZ() + 60);
                     List<Entity> list = world.getOtherEntities(user, box, entityer -> ((entityer instanceof FlyingEntity) & !(entityer instanceof BatEntity)) || entityer instanceof EnderDragonEntity || entityer instanceof WitherEntity);
                     if (!list.isEmpty()) {
-                        System.out.println(this.maxSpeed.get(stack));
                         AirSweeperProjectileEntity sweeper = new AirSweeperProjectileEntity(world, user.getX(), user.getY(), user.getZ(), list.get(0).getId(), this.maxPull.get(stack), stack.getCount() == stack.getMaxCount(), this.maxSpeed.get(stack), stack.getCount());
                         world.spawnEntity(sweeper);
                         user.getItemCooldownManager().set(this, this.getCooldown(stack));

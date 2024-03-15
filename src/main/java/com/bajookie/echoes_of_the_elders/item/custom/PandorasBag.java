@@ -70,30 +70,7 @@ public class PandorasBag extends Item implements IArtifact {
         var invNbt = nbt.get(BAG_INVENTORY);
         var rewards = RaidReward.get(stack);
 
-        System.out.println("REWARDS");
-        System.out.println(rewards.size());
-
         if (invNbt == null && rewards.size() < 1) return TypedActionResult.fail(stack);
-
-        // var rewards = RaidReward.get(stack);
-        //
-        // var inv = new SimpleInventory(3 * 9) {
-        //     @Override
-        //     public void onClose(PlayerEntity player) {
-        //         super.onClose(player);
-        //
-        //         if (this.isEmpty()) {
-        //             stack.decrement(1);
-        //             return;
-        //         }
-        //
-        //         var invNbt = this.toNbtList();
-        //         var nbt = stack.getNbt();
-        //         nbt.put(BAG_INVENTORY, invNbt);
-        //     }
-        // };
-        // inv.readNbtList((NbtList) invNbt);
-
 
         // open inventory
         user.openHandledScreen(new NamedScreenHandlerFactory() {
