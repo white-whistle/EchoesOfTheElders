@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
+import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.EntityType;
@@ -61,7 +62,7 @@ public class RaidTotemEntity extends AnimalEntity {
     public boolean damage(DamageSource source, float amount) {
         if (source.getAttacker() instanceof PlayerEntity) return false;
         if (this.hasStatusEffect(ModEffects.RAID_OBJECTIVE_CONTINUE_PHASE)) return false;
-        
+
         return super.damage(source, amount);
     }
 
@@ -84,5 +85,13 @@ public class RaidTotemEntity extends AnimalEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+
+        var world = this.getWorld();
+        world.setBlockState(this.getBlockPos(), ModBlocks.TOTEM_SPAWN_BLOCK.getDefaultState());
     }
 }

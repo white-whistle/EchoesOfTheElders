@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "echoes_of_the_elders:block/totem_spawn_block"
+    }
+  }
+}

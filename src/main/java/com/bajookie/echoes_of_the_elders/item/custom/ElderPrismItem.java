@@ -1,11 +1,14 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.block.custom.IPrismActionable;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Pair;
 import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
@@ -34,6 +37,23 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact {
         }
 
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    @Override
+    public ActionResult useOnBlock(ItemUsageContext context) {
+
+        var blockPos = context.getBlockPos();
+        var world = context.getWorld();
+        var stack = context.getStack();
+        var user = context.getPlayer();
+
+        var blockState = world.getBlockState(blockPos);
+        if (blockState.getBlock() instanceof IPrismActionable iPrismActionable && user != null && !user.getItemCooldownManager().isCoolingDown(this)) {
+            var side = context.getSide();
+            if (iPrismActionable.onPrism(stack, user, world, blockPos, side)) return ActionResult.SUCCESS;
+        }
+
+        return super.useOnBlock(context);
     }
 
     @Override
