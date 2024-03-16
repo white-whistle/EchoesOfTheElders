@@ -4,9 +4,12 @@ import com.bajookie.echoes_of_the_elders.block.custom.IPrismActionable;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Pair;
@@ -35,6 +38,7 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact {
                 tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.other"));
             }
         }
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.interact"));
 
         super.appendTooltip(stack, world, tooltip, context);
     }
@@ -50,7 +54,13 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact {
         var blockState = world.getBlockState(blockPos);
         if (blockState.getBlock() instanceof IPrismActionable iPrismActionable && user != null && !user.getItemCooldownManager().isCoolingDown(this)) {
             var side = context.getSide();
-            if (iPrismActionable.onPrism(stack, user, world, blockPos, side)) return ActionResult.SUCCESS;
+            if (iPrismActionable.onPrism(stack, user, world, blockPos, side)) {
+                if (world.isClient) {
+                    MinecraftClient.getInstance().gameRenderer.showFloatingItem(stack);
+                }
+                world.playSound(user, blockPos, SoundEvents.BLOCK_AMETHYST_BLOCK_RESONATE, SoundCategory.PLAYERS, 1, 0.5f);
+                return ActionResult.SUCCESS;
+            }
         }
 
         return super.useOnBlock(context);
