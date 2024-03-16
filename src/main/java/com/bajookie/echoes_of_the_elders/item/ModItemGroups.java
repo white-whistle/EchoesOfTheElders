@@ -105,9 +105,11 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
                 addStackedVariants(entries, ModItems.WTF_HAMMER);
                 addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
-                addStackedVariants(entries,ModItems.ZEPHYR_RELIC);
+                addStackedVariants(entries, ModItems.ZEPHYR_RELIC);
                 addStackedVariants(entries, ModItems.GANGWAY);
                 addStackedVariants(entries, ModItems.COWPLATE);
+                addStackedVariants(entries, ModItems.HARELEAP_STRIDERS);
+                addStackedVariants(entries, ModItems.ATLAS_GREAVES);
             }).build());
 
     public static void registerGroups() {

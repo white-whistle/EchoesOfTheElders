@@ -64,6 +64,8 @@ public class ModItems {
     public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun());
     public static final Item GANGWAY = registerItem("gangway", new Gangway());
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
+    public static final Item HARELEAP_STRIDERS = registerItem("hareleap_striders", new HareleapStriders());
+    public static final Item ATLAS_GREAVES = registerItem("atlas_greaves", new AtlasGreaves());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
@@ -75,8 +77,8 @@ public class ModItems {
     public static final Item MAGIC_HAMMER = registerItem("magic_hammer", new MagicHammer());
     public static final Item ARTIFACT_HAMMER = registerItem("artifact_hammer", new ArtifactHammer());
     public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
-    public static final Item ZEPHYR_RELIC = registerItem("zephyr_relic",new ZephyrRelic());
-    public static final Item ANCIENT_GRAINS_SEEDS = registerItem("ancient_grains_seeds",new AliasedBlockItem(ModBlocks.ANCIENT_GRAINS_CROP,new FabricItemSettings().maxCount(64)));
+    public static final Item ZEPHYR_RELIC = registerItem("zephyr_relic", new ZephyrRelic());
+    public static final Item ANCIENT_GRAINS_SEEDS = registerItem("ancient_grains_seeds", new AliasedBlockItem(ModBlocks.ANCIENT_GRAINS_CROP, new FabricItemSettings().maxCount(64)));
 
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {
