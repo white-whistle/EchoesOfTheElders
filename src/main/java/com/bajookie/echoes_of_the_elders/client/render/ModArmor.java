@@ -31,7 +31,7 @@ public class ModArmor {
 
         ArmorRenderer.register(new CustomArmor((ctx) -> {
             ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(ModArmor::armorCutout, "gunheel")));
-            ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(EffectLayer::getGlow, "gunheel_glow")));
+            ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(EffectLayer::getGlow, "gunheel_glow")));
         }), ModItems.GUNHEELS);
 
         ArmorRenderer.register(new CustomArmor((ctx) -> {

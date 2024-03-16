@@ -44,7 +44,7 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
         blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
 
-        blockStateModelGenerator.registerCrop(ModBlocks.ANCIENT_GRAINS_CROP, AncientGrainsCrop.AGE,0,1,2,3,4,5);
+        blockStateModelGenerator.registerCrop(ModBlocks.ANCIENT_GRAINS_CROP, AncientGrainsCrop.AGE, 0, 1, 2, 3, 4, 5);
     }
 
     static class ItemModelConfig {
@@ -64,7 +64,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.VACUUM_RELIC,
                 ModItems.STARFALL_BOW,
                 ModItems.ANCIENT_GRAINS_SEEDS
-         );
+        );
     }
 
     public static final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);

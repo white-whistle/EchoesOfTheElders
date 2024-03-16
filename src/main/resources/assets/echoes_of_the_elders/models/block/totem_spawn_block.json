@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "echoes_of_the_elders:block/totem_spawn_block_bottom",
+    "side": "echoes_of_the_elders:block/totem_spawn_block_side",
+    "top": "echoes_of_the_elders:block/totem_spawn_block_top"
+  }
+}
