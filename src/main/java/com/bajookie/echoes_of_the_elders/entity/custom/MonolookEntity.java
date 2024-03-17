@@ -44,7 +44,6 @@ import java.util.UUID;
 public class MonolookEntity extends TameableEntity {
     public static final TrackedData<Integer> SHOOT_PROGRESS = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.INTEGER);
     protected static final TrackedData<Optional<UUID>> OWNER_UUID = DataTracker.registerData(MonolookEntity.class, TrackedDataHandlerRegistry.OPTIONAL_UUID);
-    private final ServerBossBar HP = new ServerBossBar(Text.literal("companion hp"), BossBar.Color.RED, BossBar.Style.NOTCHED_6);
 
     public MonolookEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -90,7 +89,6 @@ public class MonolookEntity extends TameableEntity {
         if (this.getOwner() != null) {
             var living = this.getOwner();
             if (!this.getWorld().isClient){
-                this.HP.setPercent(this.getHealth()/this.getMaxHealth());
                 var dir = Math.toRadians(living.getYaw()+100);
                 var look = new Vec3d(Math.sin(dir)*-1, 0, Math.cos(dir)).normalize().multiply(0.6).add(0,2 +0.3*Math.sin(this.age*0.04),0);
                 Vec3d ownerPos = living.getPos().add(look);
@@ -144,22 +142,6 @@ public class MonolookEntity extends TameableEntity {
     @Override
     public void setOwnerUuid(@Nullable UUID uuid) {
         this.dataTracker.set(OWNER_UUID, Optional.ofNullable(uuid));
-    }
-
-    @Override
-    public void onStoppedTrackingBy(ServerPlayerEntity player) {
-        super.onStoppedTrackingBy(player);
-        if (player.getUuid().equals(this.getOwnerUuid())){
-            HP.removePlayer(player);
-        }
-    }
-
-    @Override
-    public void onStartedTrackingBy(ServerPlayerEntity player) {
-        super.onStartedTrackingBy(player);
-        if (player.getUuid().equals(this.getOwnerUuid())){
-            HP.addPlayer(player);
-        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.entity.custom.MonolookEntity;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import java.util.UUID;
 
 public class MonolookSpawn extends Item {
     public MonolookSpawn() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(1).maxDamage(100));
     }
 
     @Override
@@ -58,7 +59,11 @@ public class MonolookSpawn extends Item {
                 ServerWorld serverWorld = (ServerWorld) world;
                 var e =serverWorld.getEntity(comp.getUuid("entity_id"));
                 if (e == null){
+                    stack.setDamage(0);
                     comp.remove("entity_id");
+                }else {
+                    LivingEntity mono = (LivingEntity) e;
+                    stack.setDamage((int) (100 - ((mono.getHealth()/mono.getMaxHealth())*100)));
                 }
             }
         }
