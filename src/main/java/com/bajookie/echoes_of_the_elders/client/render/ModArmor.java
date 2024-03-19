@@ -49,6 +49,10 @@ public class ModArmor {
         ArmorRenderer.register(new CustomArmor((ctx) -> {
             ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "cowplate")));
         }), ModItems.COWPLATE);
+
+        ArmorRenderer.register(new CustomArmor((ctx) -> {
+            ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "hareleap_striders")));
+        }), ModItems.HARELEAP_STRIDERS);
     }
 
     public static Identifier armorIdentifier(String name) {
