@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.block.custom.entity.ModBlockEntities;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.item.ModFuelItems;
 import com.bajookie.echoes_of_the_elders.item.ModItemGroups;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
@@ -42,6 +43,7 @@ public class EOTE implements ModInitializer {
         ModTrunkPlacerTypes.register();
         ServerNetworking.init();
         ModScreenHandlerTypes.init();
+        ModFuelItems.init();
     }
 
 

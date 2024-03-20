@@ -66,6 +66,8 @@ public class ModItems {
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
     public static final Item HARELEAP_STRIDERS = registerItem("hareleap_striders", new HareleapStriders());
     public static final Item ATLAS_GREAVES = registerItem("atlas_greaves", new AtlasGreaves());
+    public static final Item HEAT_STONE = registerItem("heat_stone", new HeatStone());
+    public static final Item STEPPING_STONE = registerItem("stepping_stone", new SteppingStone());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));

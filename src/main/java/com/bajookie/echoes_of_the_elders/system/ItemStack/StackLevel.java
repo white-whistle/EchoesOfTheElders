@@ -1,8 +1,12 @@
 package com.bajookie.echoes_of_the_elders.system.ItemStack;
 
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.util.ModIdentifier;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.stream.Stream;
 
 public class StackLevel {
 
@@ -15,6 +19,15 @@ public class StackLevel {
         if (nbt == null) return 1;
 
         return nbt.getInt(Keys.STACK_LEVEL);
+    }
+
+    public static int compare(ItemStack a, ItemStack b) {
+        return get(a) - get(b);
+    }
+
+    @Nullable
+    public static ItemStack getBest(Stream<ItemStack> stream) {
+        return stream.filter(s -> s.isOf(ModItems.STEPPING_STONE)).max(StackLevel::compare).orElse(null);
     }
 
     public static int getMax(ItemStack itemStack) {

@@ -135,7 +135,12 @@ public class CustomArmor implements ArmorRenderer {
 
             CustomArmor.setVisible(model, slot);
 
-            model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1, 1, 1, 1);
+            var alpha = this.getAlpha();
+            model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV, 1, 1, 1, alpha);
+        }
+
+        public float getAlpha() {
+            return 1;
         }
 
         public boolean shouldRender(CustomArmor customArmor, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {

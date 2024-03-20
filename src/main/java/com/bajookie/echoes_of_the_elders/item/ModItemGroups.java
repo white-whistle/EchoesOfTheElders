@@ -102,6 +102,8 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
                 addStackedVariants(entries, ModItems.ICICLE_RELIC);
                 entries.add(ModItems.MAGIC_HAMMER);
+                entries.add(ModItems.HEAT_STONE);
+                entries.add(ModItems.STEPPING_STONE);
                 addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
                 addStackedVariants(entries, ModItems.WTF_HAMMER);
                 addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);

@@ -30,8 +30,8 @@ public class ModArmor {
     public static void init() {
 
         ArmorRenderer.register(new CustomArmor((ctx) -> {
-            ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(ModArmor::armorCutout, "gunheel")));
-            ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(EffectLayer::getGlow, "gunheel_glow")));
+            ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "gunheel")));
+            ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(EffectLayer::getGlow, "gunheel_glow")));
         }), ModItems.GUNHEELS);
 
         ArmorRenderer.register(new CustomArmor((ctx) -> {
@@ -53,6 +53,21 @@ public class ModArmor {
         ArmorRenderer.register(new CustomArmor((ctx) -> {
             ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "hareleap_striders")));
         }), ModItems.HARELEAP_STRIDERS);
+
+        ArmorRenderer.register(new CustomArmor((ctx) -> {
+            ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(ModArmor::armorCutout, "atlas_greaves")));
+            ctx.parts.add(new CustomArmor.Part(ctx::getInnerArmor, getStackedLayer(EffectLayer::getGlow, "atlas_greaves_glow")) {
+                @Override
+                public boolean shouldRender(CustomArmor customArmor, MatrixStack matrices, VertexConsumerProvider vertexConsumers, ItemStack stack, LivingEntity entity, EquipmentSlot slot, int light, BipedEntityModel<LivingEntity> contextModel) {
+                    return entity.isOnGround();
+                }
+
+                @Override
+                public float getAlpha() {
+                    return 0.5f;
+                }
+            });
+        }), ModItems.ATLAS_GREAVES);
     }
 
     public static Identifier armorIdentifier(String name) {

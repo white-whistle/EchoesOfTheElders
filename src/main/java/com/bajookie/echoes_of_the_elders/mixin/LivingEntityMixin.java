@@ -4,11 +4,18 @@ import com.bajookie.echoes_of_the_elders.effects.IRemoveEffect;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.custom.HareleapStriders;
+import com.bajookie.echoes_of_the_elders.item.custom.SteppingStone;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
+import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
+import com.bajookie.echoes_of_the_elders.util.InventoryUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,10 +24,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
-public class LivingEntityMixin {
+public abstract class LivingEntityMixin extends Entity {
 
     @Shadow
     private float movementSpeed;
+
+    public LivingEntityMixin(EntityType<?> type, World world) {
+        super(type, world);
+    }
 
     @Inject(method = "onStatusEffectRemoved", at = @At("TAIL"))
     private void onEffectRemoved(StatusEffectInstance effect, CallbackInfo ci) {
@@ -88,6 +99,17 @@ public class LivingEntityMixin {
         var feetStack = self.getEquippedStack(EquipmentSlot.FEET);
         if (feetStack.getItem() instanceof HareleapStriders hareleapStriders) {
             hareleapStriders.handleJump(self, feetStack);
+        }
+    }
+
+    @Inject(method = "getStepHeight", at = @At("HEAD"), cancellable = true)
+    private void getJumpHeight(CallbackInfoReturnable<Float> cir) {
+        var self = (LivingEntity) (Object) this;
+        if (self instanceof PlayerEntity player) {
+            var best = StackLevel.getBest(InventoryUtil.toStream(player.getInventory()).filter(s -> s.isOf(ModItems.STEPPING_STONE)));
+            if (best != null) {
+                cir.setReturnValue(super.getStepHeight() + SteppingStone.BONUS_STEP.get(best));
+            }
         }
     }
 
