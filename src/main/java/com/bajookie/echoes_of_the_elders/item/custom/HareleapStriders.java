@@ -90,7 +90,7 @@ public class HareleapStriders extends ArmorItem implements IArtifact, IStackPred
             amp = Math.min(statusInstance.getAmplifier() + 1, MAX_HOP_STACKS.get(stack) - 1);
         }
 
-        entity.addStatusEffect(new StatusEffectInstance(ModEffects.HOP, 20 * 10, amp));
+        entity.addStatusEffect(new StatusEffectInstance(ModEffects.HOP, 20 * 4, amp));
     }
 
 }
