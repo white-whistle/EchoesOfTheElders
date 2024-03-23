@@ -49,7 +49,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry scorchersMitts = registerAdvancementTask(ModItems.SCORCHERS_MITTS, dimEnterAdvancement, consumer);
         AdvancementEntry doomStick = registerAdvancementTask(ModItems.DOOMSTICK_ITEM, dimEnterAdvancement, consumer);
         AdvancementEntry mirage = registerAdvancementTask(ModItems.POTION_MIRAGE, dimEnterAdvancement, consumer);
-        AdvancementEntry witherBulk = registerAdvancementTask(ModItems.WITHER_SCALES_ITEM, dimEnterAdvancement, consumer);
+        AdvancementEntry witherBulk = registerAdvancementTask(ModItems.WITHERS_BULWARK, dimEnterAdvancement, consumer);
         AdvancementEntry quickening = registerAdvancementTask(ModItems.QUICKENING_BAND, dimEnterAdvancement, consumer);
         AdvancementEntry realityPick = registerAdvancementTask(ModItems.REALITY_PICK, dimEnterAdvancement, consumer);
         AdvancementEntry godSlayer = registerAdvancementTask(ModItems.GODSLAYER, dimEnterAdvancement, consumer);

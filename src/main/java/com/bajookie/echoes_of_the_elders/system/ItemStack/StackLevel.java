@@ -8,17 +8,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.stream.Stream;
 
+import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.STACK_LEVEL;
+
 public class StackLevel {
 
-    private static class Keys {
-        public static final String STACK_LEVEL = ModIdentifier.string("stack_level");
-    }
-
     public static int get(ItemStack itemStack) {
-        var nbt = itemStack.getNbt();
-        if (nbt == null) return 1;
-
-        return nbt.getInt(Keys.STACK_LEVEL);
+        return STACK_LEVEL.get(itemStack);
     }
 
     public static int compare(ItemStack a, ItemStack b) {
@@ -27,7 +22,7 @@ public class StackLevel {
 
     @Nullable
     public static ItemStack getBest(Stream<ItemStack> stream) {
-        return stream.filter(s -> s.isOf(ModItems.STEPPING_STONE)).max(StackLevel::compare).orElse(null);
+        return stream.max(StackLevel::compare).orElse(null);
     }
 
     public static int getMax(ItemStack itemStack) {
@@ -47,11 +42,7 @@ public class StackLevel {
     }
 
     public static ItemStack set(ItemStack itemStack, int tier) {
-        var nbt = itemStack.getOrCreateNbt();
-
-        nbt.putInt(Keys.STACK_LEVEL, tier);
-
-        return itemStack;
+        return STACK_LEVEL.set(itemStack, tier);
     }
 
     public static void raise(ItemStack itemStack, int amt) {

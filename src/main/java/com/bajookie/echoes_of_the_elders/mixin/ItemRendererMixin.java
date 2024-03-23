@@ -1,18 +1,17 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
-import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
+import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.IStackPredicate;
 import com.bajookie.echoes_of_the_elders.item.models.MinigunModel;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import net.minecraft.block.Block;
 import net.minecraft.block.StainedGlassPaneBlock;
 import net.minecraft.block.TransparentBlock;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.*;
 import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
@@ -20,14 +19,9 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
-import net.minecraft.util.math.MatrixUtil;
 import org.joml.Quaternionf;
-import org.spongepowered.asm.mixin.Final;
-import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,6 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
+import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
 @Mixin(ItemRenderer.class)
 public abstract class ItemRendererMixin {
@@ -47,10 +42,7 @@ public abstract class ItemRendererMixin {
     protected abstract void renderBakedItemModel(BakedModel model, ItemStack stack, int light, int overlay, MatrixStack matrices, VertexConsumer vertices);
 
     @Shadow
-    @Final
-    private ItemModels models;
-
-    @Shadow public abstract ItemModels getModels();
+    public abstract ItemModels getModels();
 
     @Unique
     private final List<ModelTransformationMode> HELD_RENDER_MODES = Arrays.asList(
@@ -83,13 +75,13 @@ public abstract class ItemRendererMixin {
             if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD)) {
                 return getCustomItemModel("shiny_ancient_stone_sword_3d");
             }
-            if (item == ModItems.ARC_LIGHTNING){
+            if (item == ModItems.ARC_LIGHTNING) {
                 return getCustomItemModel("arc_lightning_3d");
             }
-            if (item == ModItems.SCORCHERS_MITTS){
+            if (item == ModItems.SCORCHERS_MITTS) {
                 return getCustomItemModel("scorchers_mitts_3d");
             }
-            if (item == ModItems.ANCIENT_MINIGUN){
+            if (item == ModItems.ANCIENT_MINIGUN) {
                 return getCustomItemModel("ancient_minigun_3d");
             }
 
@@ -97,20 +89,21 @@ public abstract class ItemRendererMixin {
 
         return value;
     }
-    @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",at = @At("HEAD"),cancellable = true)
-    private void renderAnimation(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci){
-        if (stack.isOf(ModItems.ANCIENT_MINIGUN)){
+
+    @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At("HEAD"), cancellable = true)
+    private void renderAnimation(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
+        if (stack.isOf(ModItems.ANCIENT_MINIGUN)) {
             matrices.push();
             matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(180)));
-            MinigunModel.applyTranslates(renderMode,matrices);
-            ((ItemRendererAccessor)this).getBuiltinModelItemRenderer().render(stack,renderMode,matrices,vertexConsumers,light,overlay);
+            MinigunModel.applyTranslates(renderMode, matrices);
+            ((ItemRendererAccessor) this).getBuiltinModelItemRenderer().render(stack, renderMode, matrices, vertexConsumers, light, overlay);
             matrices.pop();
             ci.cancel();
         }
     }
 
-    @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderBakedItemModel(Lnet/minecraft/client/render/model/BakedModel;Lnet/minecraft/item/ItemStack;IILnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;)V", shift = At.Shift.AFTER))
-    private void renderSoulbound(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
+    @Unique
+    private void renderSoulbound(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
         var soulbound = Soulbound.getUuid(stack);
         if (soulbound == null) return;
 
@@ -130,7 +123,61 @@ public abstract class ItemRendererMixin {
         var nModel = getCustomItemModel("soulbound");
 
         renderBakedItemModel(nModel, stack, light, overlay, matrices, vertexConsumer);
+    }
 
+    @Unique
+    private void renderToggleUI(ItemStack stack, ModelTransformationMode renderMode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        var item = stack.getItem();
+        if (!(item instanceof IHasToggledEffect)) return;
+
+        var mc = MinecraftClient.getInstance();
+        if (mc.currentScreen == null) return;
+
+        var enabled = EFFECT_ENABLED.get(stack);
+
+        if (renderMode != ModelTransformationMode.GUI) return;
+
+        VertexConsumer vertexConsumer;
+        boolean bl22 = true;
+        RenderLayer renderLayer = RenderLayers.getItemLayer(stack, bl22);
+        vertexConsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, renderLayer, true, stack.hasGlint());
+
+        var nModel = getCustomItemModel(enabled ? "switch_on" : "switch_off");
+
+        matrices.push();
+        matrices.translate(1 / 16f, 1 / 16f, 0);
+        renderBakedItemModel(nModel, stack, light, overlay, matrices, vertexConsumer);
+        matrices.pop();
+    }
+
+    @Unique
+    private void renderFlatOverlay(ItemStack stack, ModelTransformationMode renderMode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
+        var item = stack.getItem();
+        if (!(item instanceof IHasFlatOverlay iHasFlatOverlay)) return;
+        if (!iHasFlatOverlay.showFlatOverlay(stack)) return;
+        if (renderMode == ModelTransformationMode.GUI) return;
+        if (renderMode == ModelTransformationMode.GROUND) return;
+
+        VertexConsumer vertexConsumer;
+
+        RenderLayer renderLayer = iHasFlatOverlay.getFlatRenderLayer();
+        vertexConsumer = vertexConsumers.getBuffer(renderLayer);
+
+        var modelId = IHasFlatOverlay.getFlatItemModel(item).withSuffixedPath(IStackPredicate.stackAppendix(stack));
+        var nModel = getCustomItemModel(modelId.getPath());
+
+        matrices.push();
+        IHasFlatOverlay.translateMatrix(matrices);
+        renderBakedItemModel(nModel, stack, 0xF00000, OverlayTexture.DEFAULT_UV, matrices, vertexConsumer);
+        matrices.pop();
+    }
+
+    @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/item/ItemRenderer;renderBakedItemModel(Lnet/minecraft/client/render/model/BakedModel;Lnet/minecraft/item/ItemStack;IILnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;)V", shift = At.Shift.AFTER))
+    private void renderItemOverlays(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
+        renderFlatOverlay(stack, renderMode, matrices, vertexConsumers, light, overlay);
+
+        renderSoulbound(stack, renderMode, leftHanded, matrices, vertexConsumers, light, overlay);
+        renderToggleUI(stack, renderMode, matrices, vertexConsumers, light, overlay);
     }
 
     @Unique

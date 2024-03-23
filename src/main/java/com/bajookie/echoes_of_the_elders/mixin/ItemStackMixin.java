@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
+import com.bajookie.echoes_of_the_elders.item.IEmptyClick;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.item.custom.IUpgradeItem;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +20,13 @@ public class ItemStackMixin {
     private void onArtifactClicked(ItemStack other, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference, CallbackInfoReturnable<Boolean> cir) {
         var stack = (ItemStack) (Object) (this);
         var item = stack.getItem();
+
+        if (clickType == ClickType.RIGHT && other.isEmpty() && item instanceof IEmptyClick iEmptyClick) {
+            if (iEmptyClick.onEmptyClick(player, stack, cursorStackReference)) {
+                cir.setReturnValue(true);
+                return;
+            }
+        }
 
         var clicked = IUpgradeItem.handleClick(other, stack, slot, clickType, player, cursorStackReference);
         switch (clicked) {

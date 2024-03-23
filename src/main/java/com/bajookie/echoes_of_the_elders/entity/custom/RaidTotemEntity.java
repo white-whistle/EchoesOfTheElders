@@ -92,6 +92,8 @@ public class RaidTotemEntity extends AnimalEntity {
         super.onDeath(damageSource);
 
         var world = this.getWorld();
-        world.setBlockState(this.getBlockPos(), ModBlocks.TOTEM_SPAWN_BLOCK.getDefaultState());
+        if (!world.isClient) {
+            world.setBlockState(this.getBlockPos(), ModBlocks.TOTEM_SPAWN_BLOCK.getDefaultState());
+        }
     }
 }

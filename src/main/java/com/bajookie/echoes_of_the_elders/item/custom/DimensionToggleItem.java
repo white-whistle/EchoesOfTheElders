@@ -1,7 +1,5 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -29,13 +27,9 @@ public abstract class DimensionToggleItem extends Item {
         super(settings);
     }
 
-    public int getMinUsageTicks() {
-        return 20 * 2;
-    }
-
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return 72000;
+        return 20 * 2;
     }
 
     @Override
@@ -58,26 +52,24 @@ public abstract class DimensionToggleItem extends Item {
     }
 
     @Override
-    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if (!(user instanceof PlayerEntity)) {
-            return;
+            return stack;
         }
-        
+
         if (!world.isClient()) {
             ServerWorld serverWorld = (ServerWorld) world;
             PlayerEntity playerEntity = (PlayerEntity) user;
 
             MinecraftServer minecraftServer = serverWorld.getServer();
 
-            var currentTicks = this.getMaxUseTime(stack) - remainingUseTicks;
-
             var destinationDimKey = this.getNextDimension(stack, world, user);
             var dimensionValid = destinationDimKey != null;
-            var enoughUseTicks = currentTicks >= this.getMinUsageTicks();
 
-            if (!dimensionValid || !enoughUseTicks) {
+
+            if (!dimensionValid) {
                 world.playSound(playerEntity, playerEntity.getBlockPos(), SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.PLAYERS);
-                return;
+                return stack;
             }
 
             ServerWorld destinationWorld = minecraftServer.getWorld(destinationDimKey);
@@ -85,7 +77,7 @@ public abstract class DimensionToggleItem extends Item {
             if (destinationWorld != null && minecraftServer.isNetherAllowed() && !playerEntity.hasVehicle()) {
 
                 if (playerEntity.isRemoved()) {
-                    return;
+                    return stack;
                 }
                 double d = DimensionType.getCoordinateScaleFactor(playerEntity.getWorld().getDimension(), destinationWorld.getDimension());
                 WorldBorder worldBorder = destinationWorld.getWorldBorder();
@@ -93,14 +85,17 @@ public abstract class DimensionToggleItem extends Item {
                 playerEntity.teleport(destinationWorld, destinationPos.getX(), destinationPos.getY(), destinationPos.getZ(), Set.of(), playerEntity.getYaw(), playerEntity.getPitch());
                 var pos = user.getPos();
                 var random = user.getRandom();
-                //world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f, false);
-                //MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.ambient(SoundEvents.BLOCK_PORTAL_TRAVEL, random.nextFloat() * 0.4f + 0.8f, 0.25f));
+                // world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_TRAVEL, SoundCategory.BLOCKS, 0.5f, random.nextFloat() * 0.4f + 0.8f, false);
+                // MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.ambient(SoundEvents.BLOCK_PORTAL_TRAVEL, random.nextFloat() * 0.4f + 0.8f, 0.25f));
 
             }
 
             playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
         }
+
+        return stack;
     }
+
 
     @Nullable
     public abstract RegistryKey<World> getNextDimension(ItemStack stack, World world, LivingEntity user);

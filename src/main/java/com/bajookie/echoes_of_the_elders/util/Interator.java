@@ -24,7 +24,7 @@ public record Interator(int size) implements Iterable<Integer> {
 
         @Override
         public boolean hasNext() {
-            return index < size - 1;
+            return index < size;
         }
 
         @Override

@@ -23,7 +23,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown {
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
+    protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);
+    public static final StackedItemStat.Int LIGHTNING_STRIKES = new StackedItemStat.Int(1, 3);
 
     public OrbOfLightning() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
@@ -55,15 +56,14 @@ public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, 
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        var args = new TextArgs().put("numLightning", Text.literal("5"));
-
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.chain_lightning_item.effect", args));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.chain_lightning_item.effect.info1", new TextArgs().putI("strikes", LIGHTNING_STRIKES.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.chain_lightning_item.effect.info2"));
 
         super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 }

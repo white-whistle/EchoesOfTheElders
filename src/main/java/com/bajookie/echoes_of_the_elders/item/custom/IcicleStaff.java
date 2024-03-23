@@ -21,6 +21,8 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
@@ -80,8 +82,8 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.left"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.right"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.effect1.info1"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.effect2.info1"));
         super.appendTooltip(stack, world, tooltip, context);
     }
 
@@ -91,6 +93,7 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
             IcicleProjectile projectile = new IcicleProjectile(world, user.getX(), user.getY() + 1.6, user.getZ(), user, false);
             projectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 0.5f, 0f);
             world.spawnEntity(projectile);
+            world.playSound(null, user.getBlockPos(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.PLAYERS, 0.5f, 1f);
         }
     }
 }

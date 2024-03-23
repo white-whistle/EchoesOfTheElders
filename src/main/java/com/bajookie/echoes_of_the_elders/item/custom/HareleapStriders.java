@@ -26,7 +26,7 @@ import java.util.List;
 public class HareleapStriders extends ArmorItem implements IArtifact, IStackPredicate {
 
     public static StackedItemStat.Int MAX_HOP_STACKS = new StackedItemStat.Int(3, 9);
-    public static float HOP_STACK_SPEED_INCREASE = 0.1f;
+    public static float HOP_STACK_SPEED_INCREASE = 0.05f;
 
     public HareleapStriders() {
         super(HARELEAP_STRIDERS_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));

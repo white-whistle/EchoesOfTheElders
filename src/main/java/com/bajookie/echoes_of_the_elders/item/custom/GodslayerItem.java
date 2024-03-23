@@ -1,5 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.client.render.EffectLayer;
+import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
@@ -11,6 +13,8 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
 import net.minecraft.entity.EquipmentSlot;
@@ -26,12 +30,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate {
-    private static final int MAX_COUNT = 16;
+public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate, IHasFlatOverlay {
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(10f, 64f);
 
     private final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers(index -> {
-        var progress = index / (float) (MAX_COUNT - 1);
+        var progress = index / (float) (GodslayerItem.this.getArtifactMaxStack() - 1);
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
 
@@ -40,11 +43,6 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
 
         return builder.build();
     });
-
-    @Override
-    public int getArtifactMaxStack() {
-        return MAX_COUNT;
-    }
 
     public GodslayerItem() {
         super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
@@ -73,5 +71,15 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
     @Override
     public Model getBaseModel() {
         return Models.HANDHELD;
+    }
+
+    @Override
+    public boolean showFlatOverlay(ItemStack itemStack) {
+        return true;
+    }
+
+    @Override
+    public RenderLayer getFlatRenderLayer() {
+        return EffectLayer.getPortalMasked(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE);
     }
 }

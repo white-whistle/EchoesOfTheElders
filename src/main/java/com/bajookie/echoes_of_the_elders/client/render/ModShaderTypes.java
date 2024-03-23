@@ -9,6 +9,7 @@ public class ModShaderTypes {
 
     public static ShaderProgram renderTypeMaskedEndPortal;
     public static ShaderProgram renderTypeEntityTest;
+    public static ShaderProgram renderTypeItemEntityTranslucentSimple;
 
     public static ShaderProgram getRenderTypeMaskedEndPortal() {
         return renderTypeMaskedEndPortal;
@@ -16,6 +17,10 @@ public class ModShaderTypes {
 
     public static ShaderProgram getRenderTypeEntityTest() {
         return renderTypeEntityTest;
+    }
+
+    public static ShaderProgram getRenderTypeItemEntityTranslucentSimple() {
+        return renderTypeItemEntityTranslucentSimple;
     }
 
     public static void init() {
@@ -26,6 +31,10 @@ public class ModShaderTypes {
 
             ctx.register(new ModIdentifier("rendertype_entity_test"), VertexFormats.POSITION, shaderProgram -> {
                 renderTypeEntityTest = shaderProgram;
+            });
+
+            ctx.register(new ModIdentifier("rendertype_item_entity_translucent_simple"), VertexFormats.POSITION, shaderProgram -> {
+                renderTypeItemEntityTranslucentSimple = shaderProgram;
             });
         });
     }

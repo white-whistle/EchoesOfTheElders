@@ -39,7 +39,7 @@ public class ModItems {
     public static final PotionMirageItem POTION_MIRAGE = registerItem("potion_mirage_item", new PotionMirageItem());
     public static final Item QUICKENING_BAND = registerItem("quickening_band", new QuickeningBand());
     public static final Item OLD_KEY = registerItem("old_key_item", new OldKeyItem());
-    public static final WithersBulwark WITHER_SCALES_ITEM = registerItem("wither_scales_item", new WithersBulwark());
+    public static final WithersBulwark WITHERS_BULWARK = registerItem("wither_scales_item", new WithersBulwark());
     public static final Item SECOND_SUN_ITEM = registerItem("second_sun_item", new SecondSunItem(new FabricItemSettings().maxCount(1)));
     public static final Item CHAIN_LIGHTNING_ITEM = registerItem("chain_lightning_item", new OrbOfLightning());
     public static final Item ECHOING_SWORD = registerItem("echoing_sword", new EchoingSword());
@@ -68,19 +68,20 @@ public class ModItems {
     public static final Item ATLAS_GREAVES = registerItem("atlas_greaves", new AtlasGreaves());
     public static final Item HEAT_STONE = registerItem("heat_stone", new HeatStone());
     public static final Item STEPPING_STONE = registerItem("stepping_stone", new SteppingStone());
+    public static final Item STARFALL_BOW = registerItem("starfall_bow", new StarfallBow());
+    public static final Item SPIRAL_SWORD = registerItem("spiral_sword", new SpiralSword());
+    public static final Item ANCIENT_GRAINS_SEEDS = registerItem("ancient_grains_seeds", new AliasedBlockItem(ModBlocks.ANCIENT_GRAINS_CROP, new FabricItemSettings().maxCount(64)));
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));
     public static final Item ELDERMAN_SPAWN_EGG = registerItem("elderman_spawn_egg", new SpawnEggItem(ModEntities.ELDERMAN_ENTITY, 0x341061, 0x3c3940, new FabricItemSettings()));
     public static final Item ZOMBEE_SPAWN_EGG = registerItem("zombee_spawn_egg", new SpawnEggItem(ModEntities.ZOMBEE_ENTITY_TYPE, 0x4a854e, 0x3c3940, new FabricItemSettings()));
     public static final Item RAID_TOTEM_EGG = registerItem("raid_totem_egg", new SpawnEggItem(ModEntities.RAID_TOTEM_ENTITY, 0x8b778c, 0x403341, new FabricItemSettings()));
-    public static final Item STARFALL_BOW = registerItem("starfall_bow", new StarfallBow());
 
     public static final Item MAGIC_HAMMER = registerItem("magic_hammer", new MagicHammer());
     public static final Item ARTIFACT_HAMMER = registerItem("artifact_hammer", new ArtifactHammer());
     public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
     public static final Item ZEPHYR_RELIC = registerItem("zephyr_relic", new ZephyrRelic());
-    public static final Item ANCIENT_GRAINS_SEEDS = registerItem("ancient_grains_seeds", new AliasedBlockItem(ModBlocks.ANCIENT_GRAINS_CROP, new FabricItemSettings().maxCount(64)));
 
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {
