@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.item.custom.OrbOfLightning;
 import com.bajookie.echoes_of_the_elders.mixin.ThrownItemEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import net.minecraft.entity.EntityType;
@@ -70,7 +71,7 @@ public class ChainLightningProjectileEntity extends ThrownItemEntity {
             Box box = new Box(new BlockPos((int) pos.getX(), (int) pos.getY(), (int) pos.getZ())).expand(20);
             var entities = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             int delay = 0;
-            int amp = this.getItem().getCount() / 16;
+            int amp = OrbOfLightning.LIGHTNING_STRIKES.get(this.getItem());
             for (LivingEntity entity : entities) {
                 if (entity instanceof PlayerEntity) continue;
                 if (ModCapabilities.RAID_OBJECTIVE.hasCapability(entity)) continue;

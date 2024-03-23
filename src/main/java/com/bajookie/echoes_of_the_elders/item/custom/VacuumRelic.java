@@ -85,7 +85,8 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown, IStack
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vacuum_relic.use", new TextArgs().putF("max_use", 60)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vacuum_relic.use1"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vacuum_relic.use2"));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

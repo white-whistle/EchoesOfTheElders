@@ -15,9 +15,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
@@ -26,17 +26,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MoltenChamber extends Item implements IArtifact, IStackPredicate, IHasCooldown {
-    protected final StackedItemStat.Int reloadSpeed = new StackedItemStat.Int(10 * 6, 20 * 3);
-    protected final StackedItemStat.Int shotDamage = new StackedItemStat.Int(10, 30);
-    protected final StackedItemStat.Int meltThrow = new StackedItemStat.Int(0, 4);
+    protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(10 * 6, 20 * 3);
+    protected final StackedItemStat.Int SHOT_DAMAGE = new StackedItemStat.Int(10, 30);
 
     public MoltenChamber() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
     }
 
     @Override
     public int getMaxUseTime(ItemStack stack) {
-        return 10 * 6;
+        return 72000;
     }
 
     @Override
@@ -48,28 +47,18 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
     }
 
     @Override
-    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if (user instanceof PlayerEntity player) {
-            if (!world.isClient) {
-                endUse(player, 0, stack, world);
-            }
-        }
-        return super.finishUsing(stack, world, user);
-    }
-
-    @Override
     public boolean isDamageable() {
         return false;
     }
 
-    private void endUse(PlayerEntity player, int remainingUseTicks, ItemStack stack, World world) {
+    private void shootProjectile(PlayerEntity player, int remainingUseTicks, ItemStack stack, World world) {
         world.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.GUN_SHOT_01, SoundCategory.PLAYERS, 0.5f, 1f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         int damage = (6 - remainingUseTicks / 10);
         if (damage == 0) damage = 1;
-        MagmaBullet bullet = new MagmaBullet(world, player.getEyePos().x, player.getEyePos().y, player.getEyePos().z, damage * this.shotDamage.get(stack), player, player.getPitch(), player.getYaw());
+        MagmaBullet bullet = new MagmaBullet(world, player.getEyePos().x, player.getEyePos().y, player.getEyePos().z, damage * this.SHOT_DAMAGE.get(stack), player, player.getPitch(), player.getYaw());
         bullet.setVelocity(player, player.getPitch(), player.getYaw(), player.getRoll(), 5f, 0);
         world.spawnEntity(bullet);
-        player.getItemCooldownManager().set(this, this.reloadSpeed.get(stack));
+        player.getItemCooldownManager().set(this, this.getCooldown(stack));
     }
 
     @Override
@@ -82,7 +71,7 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
         if (user instanceof PlayerEntity player) {
             if (!player.getItemCooldownManager().isCoolingDown(this)) {
                 if (!world.isClient) {
-                    endUse(player, remainingUseTicks, stack, world);
+                    shootProjectile(player, remainingUseTicks, stack, world);
                 }
             }
         }
@@ -96,14 +85,13 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return reloadSpeed.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.shot_min", new TextArgs().putF("damage_min", this.shotDamage.get(stack))));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.shot_max", new TextArgs().putF("damage_max", 6 * this.shotDamage.get(stack))));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.shot_wall", new TextArgs().putF("melt", this.meltThrow.get(stack))));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.effect.info1", new TextArgs().putF("damage_min", this.SHOT_DAMAGE.get(stack)).putF("damage_max", 6 * this.SHOT_DAMAGE.get(stack))));
+
         super.appendTooltip(stack, world, tooltip, context);
     }
 

@@ -1,9 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -27,8 +30,15 @@ public class AtlasGreaves extends ArmorItem implements IArtifact, IStackPredicat
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info1"));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info2"));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info3"));
 
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    public static boolean isEffectActive(LivingEntity entity) {
+        var legStack = entity.getEquippedStack(EquipmentSlot.LEGS);
+        return legStack.isOf(ModItems.ATLAS_GREAVES) && entity.isOnGround();
     }
 
     private static final ArmorMaterial ATLAS_GREAVES_MATERIAL = new ArmorMaterial() {

@@ -14,7 +14,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
@@ -25,8 +24,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class ArcLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown {
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 20 * 20);
-    protected final StackedItemStat.Int attacks = new StackedItemStat.Int(4, 20);
+    protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 40, 20 * 20);
+    protected final StackedItemStat.Int ATTACKS = new StackedItemStat.Int(4, 20);
+    protected final StackedItemStat.Float STUN_DURATION = new StackedItemStat.Float(2f, 8f);
 
     public ArcLightning() {
         super(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
@@ -58,20 +58,20 @@ public class ArcLightning extends Item implements IArtifact, IStackPredicate, IH
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         if (!target.getWorld().isClient()) {
-            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, attacks.get(stack), true, false));
+            target.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, ATTACKS.get(stack), true, false));
         }
         return false;
     }
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.hit", new TextArgs().putF("number_of_attacks", this.attacks.get(stack)).putF("damage", 4)));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.active"));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.hit", new TextArgs().putF("number_of_attacks", this.ATTACKS.get(stack)).putF("damage", 4)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.arc_lightning.active", new TextArgs().putF("stun_seconds", STUN_DURATION.get(stack))));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

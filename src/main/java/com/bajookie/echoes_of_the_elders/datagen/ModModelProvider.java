@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.datagen;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.block.custom.AncientGrainsCrop;
+import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
@@ -54,7 +55,7 @@ public class ModModelProvider extends FabricModelProvider {
                 ModItems.MIDAS_HAMMER
         );
         protected static final List<Item> SKIP = List.of(
-                ModItems.WITHER_SCALES_ITEM,
+                ModItems.WITHERS_BULWARK,
                 ModItems.CHAIN_LIGHTNING_ITEM,
                 ModItems.REALITY_PICK,
                 ModItems.SCORCHERS_MITTS,
@@ -68,6 +69,7 @@ public class ModModelProvider extends FabricModelProvider {
     }
 
     public static final Model HANDHELD_X32 = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32")), Optional.empty(), TextureKey.LAYER0);
+    public static final Model HANDHELD_X32_FLAT = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/handheld_32_flat")), Optional.empty(), TextureKey.LAYER0);
     public static final Model GUN = new Model(Optional.of(new Identifier(EOTE.MOD_ID, "item/gun")), Optional.empty(), TextureKey.LAYER0);
 
     @Override
@@ -103,7 +105,13 @@ public class ModModelProvider extends FabricModelProvider {
                     if (baseModel == Models.HANDHELD) {
                         addStackedVariants(itemModelGenerator, modelId.withSuffixedPath("_x32"), levels, HANDHELD_X32);
                     }
+                    if (item instanceof IHasFlatOverlay) {
+                        if (baseModel == Models.HANDHELD) {
+                            addStackedVariants(itemModelGenerator, modelId.withSuffixedPath("_x32_flat"), levels, HANDHELD_X32_FLAT);
+                        }
+                    }
                 }
+
 
                 return;
             }

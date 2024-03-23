@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.mixin;
 import com.bajookie.echoes_of_the_elders.effects.IRemoveEffect;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.AtlasGreaves;
 import com.bajookie.echoes_of_the_elders.item.custom.HareleapStriders;
 import com.bajookie.echoes_of_the_elders.item.custom.SteppingStone;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
@@ -22,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -106,10 +109,26 @@ public abstract class LivingEntityMixin extends Entity {
     private void getJumpHeight(CallbackInfoReturnable<Float> cir) {
         var self = (LivingEntity) (Object) this;
         if (self instanceof PlayerEntity player) {
-            var best = StackLevel.getBest(InventoryUtil.toStream(player.getInventory()).filter(s -> s.isOf(ModItems.STEPPING_STONE)));
+            var best = StackLevel.getBest(InventoryUtil.toStream(player.getInventory()).filter(s -> s.isOf(ModItems.STEPPING_STONE) && EFFECT_ENABLED.get(s)));
             if (best != null) {
                 cir.setReturnValue(super.getStepHeight() + SteppingStone.BONUS_STEP.get(best));
             }
+        }
+    }
+
+    @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
+    private void isPushableMx(CallbackInfoReturnable<Boolean> cir) {
+        var self = (LivingEntity) (Object) this;
+        if (AtlasGreaves.isEffectActive(self)) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    @Inject(method = "takeKnockback", at = @At("HEAD"), cancellable = true)
+    private void takeKnockbackMx(double strength, double x, double z, CallbackInfo ci) {
+        var self = (LivingEntity) (Object) this;
+        if (AtlasGreaves.isEffectActive(self)) {
+            ci.cancel();
         }
     }
 

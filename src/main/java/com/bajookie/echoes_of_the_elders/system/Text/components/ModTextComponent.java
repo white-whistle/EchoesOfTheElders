@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -139,7 +140,8 @@ public class ModTextComponent
             var arg = args.get(argName);
 
             if (arg instanceof Text t) return t;
-            if (arg == null) return Text.literal("bug here");
+            if (arg == null)
+                return Text.literal("{#ERR! missing '" + argName + "'}").styled(s -> s.withColor(Formatting.RED));
 
             return Text.literal(arg.toString());
         }, false);

@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -27,6 +28,10 @@ public class WTFToken extends Item implements IArtifact, ICooldownReduction {
         var cdm = user.getItemCooldownManager();
 
         TimeTokenItem.clearCooldowns(cdm);
+
+        if (world.isClient) {
+            MinecraftClient.getInstance().gameRenderer.showFloatingItem(stack);
+        }
 
         return TypedActionResult.success(stack);
     }

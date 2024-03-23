@@ -35,6 +35,10 @@ public class TextUtil {
         return MutableText.of(new ModTextComponent(content, args));
     }
 
+    public static MutableText join(MutableText t1, MutableText t2) {
+        return Text.translatable("tooltip.echoes_of_the_elders.join_spaced", t1, t2);
+    }
+
     public static TooltipComponentSlot component(TooltipData data) {
         return new TooltipComponentSlot(data);
     }

@@ -26,7 +26,7 @@ public class ModModelPredicateProvider {
         });
         registerBow(ModItems.STARFALL_BOW);
 
-        ModelPredicateProviderRegistry.register(ModItems.WITHER_SCALES_ITEM, new Identifier(MOD_ID, "on"),
+        ModelPredicateProviderRegistry.register(ModItems.WITHERS_BULWARK, new Identifier(MOD_ID, "on"),
                 ((stack, world, entity, seed) -> {
                     if (entity instanceof PlayerEntity player) {
                         return player.getItemCooldownManager().isCoolingDown(stack.getItem()) ? 0f : 1f;
@@ -61,13 +61,14 @@ public class ModModelPredicateProvider {
         ModelPredicateProviderRegistry.register(ModItems.VACUUM_RELIC, new Identifier(MOD_ID, "active"),
                 (stack, world, entity, seed) -> {
                     if (entity != null && entity.isUsingItem()) {
-                        if (entity.getStackInHand(entity.getActiveHand()).getItem() == ModItems.VACUUM_RELIC){
+                        if (entity.getStackInHand(entity.getActiveHand()).getItem() == ModItems.VACUUM_RELIC) {
                             return 1;
                         }
                     }
                     return 0;
                 });
     }
+
     private static void registerBow(Item bow) {
         ModelPredicateProviderRegistry.register(bow, new Identifier("pull"), (stack, world, entity, seed) -> {
             if (entity == null) {
@@ -76,7 +77,7 @@ public class ModModelPredicateProvider {
             if (entity.getActiveItem() != stack) {
                 return 0.0f;
             }
-            return (float)(stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f;
+            return (float) (stack.getMaxUseTime() - entity.getItemUseTimeLeft()) / 20.0f;
         });
         ModelPredicateProviderRegistry.register(bow, new Identifier("pulling"),
                 (stack, world, entity, seed) -> entity != null && entity.isUsingItem() && entity.getActiveItem() == stack ? 1.0f : 0.0f);

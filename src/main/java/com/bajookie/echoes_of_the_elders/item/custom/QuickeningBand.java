@@ -49,7 +49,8 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
 
         var eLevel = this.effectLevel.get(stack) + 1;
 
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect", new TextArgs().putI("level", eLevel)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect.info1", new TextArgs().putI("level", eLevel)));
+        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect.info2", new TextArgs().putF("seconds", EFFECT_DURATION / 20f)));
 
         super.appendTooltip(stack, world, tooltip, context);
     }

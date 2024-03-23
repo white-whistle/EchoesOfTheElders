@@ -107,7 +107,8 @@ public class StarfallBow extends BowItem implements IArtifact, IHasCooldown {
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info2", new TextArgs().putI("damage", STARFALL_DAMAGE)));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info2"));
+        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info3", new TextArgs().putI("damage", STARFALL_DAMAGE)));
         super.appendTooltip(stack, world, tooltip, context);
     }
 }

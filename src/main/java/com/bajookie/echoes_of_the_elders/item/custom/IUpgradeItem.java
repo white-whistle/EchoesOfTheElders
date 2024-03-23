@@ -19,9 +19,18 @@ public interface IUpgradeItem {
         PASS,
     }
 
+    enum EmptyStackPolicy {
+        FORWARD,
+        INTERACT
+    }
+
     void onUpgrade(PlayerEntity user, ItemStack self, ItemStack other, StackReference cursor);
 
     ClickResult canUpgrade(PlayerEntity user, ItemStack self, ItemStack other);
+
+    default EmptyStackPolicy getEmptyStackPolicy() {
+        return EmptyStackPolicy.FORWARD;
+    }
 
     static ClickResult handleClick(ItemStack cursorStack, ItemStack other, Slot slot, ClickType clickType, PlayerEntity player, StackReference cursorStackReference) {
         var item = cursorStack.getItem();
@@ -32,7 +41,7 @@ public interface IUpgradeItem {
                 return (ClickResult.FORWARD);
             }
 
-            if (other.isEmpty()) {
+            if (other.isEmpty() && iUpgradeItem.getEmptyStackPolicy() == EmptyStackPolicy.FORWARD) {
                 return (ClickResult.FORWARD);
             }
 

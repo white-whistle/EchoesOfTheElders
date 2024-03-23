@@ -81,9 +81,8 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.SCORCHERS_MITTS);
                 addStackedVariants(entries, ModItems.DOOMSTICK_ITEM);
                 addStackedVariants(entries, ModItems.POTION_MIRAGE);
-                addStackedVariants(entries, ModItems.WITHER_SCALES_ITEM);
+                addStackedVariants(entries, ModItems.WITHERS_BULWARK);
                 addStackedVariants(entries, ModItems.QUICKENING_BAND);
-                // addStackedVariants(entries, );(ModItems.SECOND_SUN_ITEM);
                 addStackedVariants(entries, ModItems.CHAIN_LIGHTNING_ITEM);
                 addStackedVariants(entries, ModItems.REALITY_PICK);
                 addStackedVariants(entries, ModItems.GODSLAYER);
@@ -112,6 +111,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.COWPLATE);
                 addStackedVariants(entries, ModItems.HARELEAP_STRIDERS);
                 addStackedVariants(entries, ModItems.ATLAS_GREAVES);
+                addStackedVariants(entries, ModItems.SPIRAL_SWORD);
             }).build());
 
     public static void registerGroups() {
