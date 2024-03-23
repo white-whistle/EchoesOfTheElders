@@ -1,0 +1,13 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "echoes_of_the_elders:font/hunger.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "@"
+      ]
+    }
+  ]
+}
