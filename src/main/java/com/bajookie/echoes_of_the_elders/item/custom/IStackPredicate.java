@@ -48,8 +48,6 @@ public interface IStackPredicate {
 
         var maxIndex = iStackPredicate.getTextureIndex(iArtifact.getArtifactMaxStack());
 
-        new Interator(5).forEach(System.out::println);
-
         return new Interator(maxIndex + 1);
     }
 }

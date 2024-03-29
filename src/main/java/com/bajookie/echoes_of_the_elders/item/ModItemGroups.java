@@ -43,14 +43,14 @@ public class ModItemGroups {
                 entries.add(ModItems.OLD_KEY);
                 entries.add(ModItems.CORRUPTED_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
-                entries.add(ModItems.RAID_DEBUG_ITEM);
-                entries.add(ModBlocks.SPIRIT_PETALS);
+                // entries.add(ModItems.RAID_DEBUG_ITEM);
+                // entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
                 entries.add(ModItems.RAID_TOTEM_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModItems.ZOMBEE_SPAWN_EGG);
-                entries.add(ModItems.ANCIENT_GRAINS_SEEDS);
+                // entries.add(ModItems.ANCIENT_GRAINS_SEEDS);
                 entries.add(ModBlocks.TOTEM_SPAWN_BLOCK);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
@@ -96,7 +96,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.VACUUM_RELIC);
                 addStackedVariants(entries, ModItems.MOLTEN_CHAMBER);
                 addStackedVariants(entries, ModItems.ECHOING_SWORD);
-                addStackedVariants(entries, ModItems.TV_ARROW);
+                addStackedVariants(entries, ModItems.ORB_OF_ANNIHILATION);
                 addStackedVariants(entries, ModItems.STARFALL_BOW);
                 addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
                 addStackedVariants(entries, ModItems.ICICLE_RELIC);

@@ -27,7 +27,7 @@ import java.util.List;
 public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledModel, IStackPredicate {
     protected static final int MAX_COUNT = 16;
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(4f, 16f);
-    private final StackedItemStat.Float miningSpeedMultiplier = new StackedItemStat.Float(0.1f, 2f);
+    private final StackedItemStat.Float miningSpeedMultiplier = new StackedItemStat.Float(0.1f, 4f);
 
     protected final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers((index) -> {
         var progress = index / (float) (MAX_COUNT - 1);
@@ -76,6 +76,6 @@ public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledM
 
     @Override
     public boolean shouldUseUpscaledModel(ItemStack itemStack) {
-        return itemStack.getCount() >= 16;
+        return StackLevel.isMaxed(itemStack);
     }
 }

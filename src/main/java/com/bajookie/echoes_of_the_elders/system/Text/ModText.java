@@ -25,6 +25,7 @@ public class ModText {
     public static final Function<MutableText, Text> GOLD = registerIconTag("gold", colored(0xE9B115));
     public static final Function<MutableText, Text> HEART = registerIconTag("heart", colored(0xD32A2A));
     public static final Function<MutableText, Text> HUNGER = registerIconTag("hunger", colored(0xb58657));
+    public static final Function<MutableText, Text> EXPLOSION = registerIconTag("explosion", colored(0xf6ad5b));
     public static final Function<MutableText, Text> POTION = registerIconTag("potion", colored(0xC9AEFF));
     public static final Function<MutableText, Text> DIMENSION = registerIconTag("dimension", colored(0xA960C2));
     public static final Function<MutableText, Text> ON_HIT = registerIconTag("on_hit");

@@ -2,8 +2,6 @@ package com.bajookie.echoes_of_the_elders.entity;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.*;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.item.custom.IcicleStaff;
-import com.bajookie.echoes_of_the_elders.item.custom.TvArrow;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -75,9 +73,9 @@ public class ModEntities {
             new Identifier(MOD_ID, "pellet_entity"),
             FabricEntityTypeBuilder.<PelletProjectile>create(SpawnGroup.CREATURE, PelletProjectile::new)
                     .dimensions(EntityDimensions.fixed(0.1f, 0.1f)).build());
-    public static final EntityType<TvArrowEntity> TV_ARROW_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(MOD_ID, "tv_arrow_entity"),
-            FabricEntityTypeBuilder.<TvArrowEntity>create(SpawnGroup.CREATURE, TvArrowEntity::new)
+    public static final EntityType<OrbOfAnnihilationEntity> ORB_OF_ANNIHILATION_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(MOD_ID, "orb_of_annihilation_entity"),
+            FabricEntityTypeBuilder.<OrbOfAnnihilationEntity>create(SpawnGroup.CREATURE, OrbOfAnnihilationEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).trackRangeChunks(20).build());
 
     /**

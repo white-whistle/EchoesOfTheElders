@@ -1,49 +1,49 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
+import com.bajookie.echoes_of_the_elders.item.custom.OrbOfAnnihilation;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.s2c.CapabilitySync;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
-import net.fabricmc.fabric.api.entity.FakePlayer;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.*;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ChunkTicketType;
-import net.minecraft.server.world.ServerChunkManager;
-import net.minecraft.server.world.ServerEntityManager;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.ChunkStatus;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Predicate;
+import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
-public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,Mount {
-    public TvArrowEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
+public class OrbOfAnnihilationEntity extends ProjectileEntity implements FlyingItemEntity, Mount {
+
+    private static final TrackedData<ItemStack> STACK = DataTracker.registerData(OrbOfAnnihilationEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
+
+    public OrbOfAnnihilationEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.speed = 0.5f;
     }
+
+    public void setStack(ItemStack itemStack) {
+        this.dataTracker.set(STACK, itemStack);
+    }
+
     @Override
     protected void initDataTracker() {
+        this.dataTracker.startTracking(STACK, ItemStack.EMPTY);
     }
 
     @Override
@@ -52,15 +52,15 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
         return new EntitySpawnS2CPacket(this, entity == null ? 0 : entity.getId());
     }
 
-    public TvArrowEntity(World world, double x, double y, double z, float speed, LivingEntity owner) {
-        super((EntityType<? extends ProjectileEntity>) ModEntities.TV_ARROW_ENTITY_ENTITY_TYPE, world);
+    public OrbOfAnnihilationEntity(World world, double x, double y, double z, float speed, LivingEntity owner) {
+        super(ModEntities.ORB_OF_ANNIHILATION_ENTITY_TYPE, world);
         this.setOwner(owner);
         this.setPosition(x, y, z);
         this.prevPitch = owner.getPitch();
         this.prevYaw = owner.getYaw();
         this.setRotation(owner.getYaw(), owner.getPitch());
         this.speed = speed;
-        this.setVelocity(0,0.8,0);
+        this.setVelocity(0, 0.8, 0);
         this.refreshPositionAndAngles(x, y, z, owner.getYaw(), owner.getPitch());
     }
 
@@ -73,10 +73,9 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             this.onCollision(hitResult);
             this.velocityDirty = true;
         }
-        if (this.age<20){
+        if (this.age < 20) {
             this.setPosition(this.getPos().add(this.getVelocity()));
-        }
-        else if (this.age < 300) {
+        } else if (this.age < 300) {
             var pass = this.getControllingPassenger();
             if (pass != null) {
                 Vec3d desiredDirection = new Vec3d(VectorUtil.pitchYawRollToDirection(pass.getPitch(), pass.getYaw(), pass.getRoll()));
@@ -85,7 +84,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
                 this.setVelocity(newDirection.multiply(1.3));
                 this.setPosition(this.getPos().add(this.getVelocity()));
             } else {
-                Vec3d desiredDirection = new Vec3d(0,0,0);
+                Vec3d desiredDirection = new Vec3d(0, 0, 0);
                 this.updateRotation();
                 Vec3d newDirection = this.getVelocity().normalize().add(desiredDirection.multiply(0.13)).normalize();
                 this.setVelocity(newDirection.multiply(1.3));
@@ -99,6 +98,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
             this.refreshPositionAndAngles(this.getX(), this.getY(), this.getZ(), this.getYaw(), this.getPitch());
         }
     }
+
     private void detonate() {
         if (!this.getWorld().isClient) {
             var user = (PlayerEntity) this.getOwner();
@@ -108,7 +108,7 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
                 }));
                 CapabilitySync.send((ServerPlayerEntity) user, user);
             }
-            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), 16, true, World.ExplosionSourceType.MOB);
+            this.getWorld().createExplosion(this.getOwner(), this.getX(), this.getY(), this.getZ(), OrbOfAnnihilation.EXPLOSION_POWER.get(this.getStack()), EFFECT_ENABLED.get(this.getStack()), World.ExplosionSourceType.MOB);
         }
         this.discard();
     }
@@ -147,11 +147,6 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
     }
 
     @Override
-    public ItemStack getStack() {
-        return Items.FIREWORK_ROCKET.getDefaultStack();
-    }
-
-    @Override
     protected boolean canAddPassenger(Entity passenger) {
         return true;
     }
@@ -159,6 +154,11 @@ public class TvArrowEntity extends ProjectileEntity implements FlyingItemEntity,
     @Nullable
     @Override
     public LivingEntity getControllingPassenger() {
-        return this.getPassengerList().isEmpty()? null : (LivingEntity) this.getPassengerList().get(0);
+        return this.getPassengerList().isEmpty() ? null : (LivingEntity) this.getPassengerList().get(0);
+    }
+
+    @Override
+    public ItemStack getStack() {
+        return this.dataTracker.get(STACK);
     }
 }

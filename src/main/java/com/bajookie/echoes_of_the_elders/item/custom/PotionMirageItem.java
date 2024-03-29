@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class PotionMirageItem extends Item implements IArtifact, IHasCooldown {
-    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20*20, 10*20);
+public class PotionMirageItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
+    protected StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 10 * 20);
 
     public PotionMirageItem() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));

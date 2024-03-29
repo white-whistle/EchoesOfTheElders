@@ -5,9 +5,12 @@ import com.bajookie.echoes_of_the_elders.item.models.MinigunModel;
 import com.bajookie.echoes_of_the_elders.util.ModIdentifier;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.client.render.Frustum;
 import net.minecraft.client.render.entity.ArrowEntityRenderer;
+import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
@@ -26,6 +29,21 @@ public class ModModelLayers {
     public static final EntityModelLayer PELLET_PROJECTILE_LAYER = new EntityModelLayer(new ModIdentifier("pellet_entity"), "main");
     public static final EntityModelLayer MINIGUN_LAYER = new EntityModelLayer(new ModIdentifier("minigun_layer"), "main");
 
+    static class FarFlyingItemRenderer extends FlyingItemEntityRenderer {
+        public FarFlyingItemRenderer(EntityRendererFactory.Context ctx, float scale, boolean lit) {
+            super(ctx, scale, lit);
+        }
+
+        public FarFlyingItemRenderer(EntityRendererFactory.Context context) {
+            super(context);
+        }
+
+        @Override
+        public boolean shouldRender(Entity entity, Frustum frustum, double x, double y, double z) {
+            return true;
+        }
+    }
+
     /**
      * Register Model Layers here:
      */
@@ -39,7 +57,7 @@ public class ModModelLayers {
         EntityRendererRegistry.register(ModEntities.VACUUM_PROJECTILE_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.TELEPORT_EYE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityRendererRegistry.register(ModEntities.AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
-        EntityRendererRegistry.register(ModEntities.TV_ARROW_ENTITY_ENTITY_TYPE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.ORB_OF_ANNIHILATION_ENTITY_TYPE, FarFlyingItemRenderer::new);
         EntityRendererRegistry.register(ModEntities.ICICLE_PROJECTILE_ENTITY_TYPE, FlyingItemEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MAGMA_BULLET_LAYER, MagmaBulletModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.MAGMA_BULLET_ENTITY_TYPE, MagmaBulletEntityRenderer::new);
