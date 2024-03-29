@@ -44,6 +44,7 @@ public class EOTEClient implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ModParticles.THICK_TRAIL_PARTICLE, ThickTrailParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.LINE_PARTICLE_TYPE, LineParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ModParticles.ZAP_PARTICLE_TYPE, ZapParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ModParticles.LINK_PARTICLE_TYPE, LinkParticle.Factory::new);
         HudRenderCallback.EVENT.register(new StopwatchOverlay());
         HudRenderCallback.EVENT.register(new RaidObjectiveHoverOverlay());
         HudRenderCallback.EVENT.register(new TvArrowOverlay());

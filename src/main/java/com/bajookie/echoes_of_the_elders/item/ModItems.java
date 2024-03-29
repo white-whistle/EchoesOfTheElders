@@ -64,6 +64,7 @@ public class ModItems {
     public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun());
     public static final Item GANGWAY = registerItem("gangway", new Gangway());
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
+    public static final Item LIFE_LINK = registerItem("life_link", new LifeLinkRelic());
 
     // spawn eggs
     public static final Item SPIRIT_SPAWN_EGG = registerItem("spirit_spawn_egg", new RainbowSpawnEgg(ModEntities.SPIRIT_ENTITY_KEY, 0xb4d4e1, new FabricItemSettings()));

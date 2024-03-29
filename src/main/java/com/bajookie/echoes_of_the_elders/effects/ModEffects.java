@@ -67,6 +67,7 @@ public class ModEffects {
         ModCapabilities.RAID_OBJECTIVE.use(entity, RaidObjectiveCapability::advance);
     }));
     public static final StatusEffect SHOCK_EFFECT = registerStatusEffect("shock_effect", new ShockEffect());
+    public static final StatusEffect LINK_EFFECT = registerStatusEffect("link_effect", new LinkEffect());
     public static final StatusEffect ELECTRIC_STUN_EFFECT = registerStatusEffect("electric_stun", new ElectricStunEffect());
     public static final StatusEffect NO_GRAVITY_EFFECT = registerStatusEffect("no_gravity_effect", new NoGravityEffect());
     public static final StatusEffect ECHO_HIT = registerStatusEffect("echo_hit_effect", DelayedEffect.create(StatusEffectCategory.HARMFUL, (effectInstance, living) -> {
