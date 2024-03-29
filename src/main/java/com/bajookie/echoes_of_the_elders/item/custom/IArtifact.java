@@ -12,13 +12,45 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ClickType;
 
+import java.util.List;
+
 public interface IArtifact {
-    default int getArtifactMaxStack() {
-        return 16;
+
+    List<Tag> NO_TAGS = List.of();
+
+    enum Tag {
+        THROWN,
+        CHARGED,
+
+        WEAPON,
+        GUN,
+        SWORD,
+
+        GEAR,
+
+        TOOL,
+        CATALYST,
+
+        ODDITY,
+        UNIQUE,
+
+        SUPPORT,
+
+
+        FIRE,
+        ICE,
+        LIGHTNING,
+        DIVINE,
+        VOID,
+        CONSTRUCT,
     }
 
-    default boolean shouldDrop() {
-        return true;
+    default List<Tag> getTags() {
+        return NO_TAGS;
+    }
+
+    default int getArtifactMaxStack() {
+        return 16;
     }
 
     default boolean canArtifactMerge() {

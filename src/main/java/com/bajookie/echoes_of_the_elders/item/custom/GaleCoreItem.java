@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +14,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
+public class GaleCoreItem extends Item implements IArtifact, IHasCooldown, IRaidReward {
     private final String usedTicksId = new Identifier(EOTE.MOD_ID, "use").toString();
     private final String regenTicksId = new Identifier(EOTE.MOD_ID, "regen").toString();
     private final String relicActiveId = new Identifier(EOTE.MOD_ID, "active").toString();
@@ -31,7 +31,7 @@ public class GaleCoreItem extends Item implements IArtifact, IHasCooldown {
     protected static final int MAX_USAGE = 256;
 
     public GaleCoreItem() {
-        super(new FabricItemSettings().maxCount(1).maxDamage(MAX_USAGE).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings().maxCount(1).maxDamage(MAX_USAGE));
     }
 
     @Override

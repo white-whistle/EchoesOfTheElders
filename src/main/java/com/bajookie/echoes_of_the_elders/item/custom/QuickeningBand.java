@@ -1,11 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -14,20 +15,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown, IStackPredicate {
+public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown, IStackPredicate, IRaidReward {
 
     protected static final int EFFECT_DURATION = 20 * 15;
     protected StackedItemStat.Int effectLevel = new StackedItemStat.Int(1, 8);
 
     public QuickeningBand() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new ArtifactItemSettings());
     }
 
     @Override

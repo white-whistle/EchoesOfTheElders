@@ -1,11 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.ChainLightningProjectileEntity;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,19 +16,18 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown {
+public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
     protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);
     public static final StackedItemStat.Int LIGHTNING_STRIKES = new StackedItemStat.Int(1, 3);
 
     public OrbOfLightning() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings());
     }
 
     @Override

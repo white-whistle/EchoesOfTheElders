@@ -58,4 +58,15 @@ public class StackLevel {
 
         if (get(itemStack) <= 0) itemStack.decrement(1);
     }
+
+    public interface IThreshold {
+        boolean test(ItemStack itemStack);
+    }
+
+    public record Threshold(int threshold) implements IThreshold {
+        @Override
+        public boolean test(ItemStack itemStack) {
+            return StackLevel.get(itemStack) >= threshold;
+        }
+    }
 }

@@ -1,11 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.client.render.EffectLayer;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
-import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -24,13 +25,12 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.text.Text;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate, IHasFlatOverlay {
+public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate, IHasFlatOverlay, IRaidReward {
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(10f, 64f);
 
     private final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers(index -> {
@@ -45,7 +45,7 @@ public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledM
     });
 
     public GodslayerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new ArtifactItemSettings());
     }
 
     @Override

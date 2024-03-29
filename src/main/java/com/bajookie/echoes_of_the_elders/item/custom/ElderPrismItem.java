@@ -1,9 +1,9 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.block.custom.IPrismActionable;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Pair;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,7 +20,7 @@ import java.util.List;
 
 public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, IStackPredicate {
     public ElderPrismItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON), new Pair<>(World.OVERWORLD, ModDimensions.DEFENSE_DIM_LEVEL_KEY));
+        super(new ArtifactItemSettings(), new Pair<>(World.OVERWORLD, ModDimensions.DEFENSE_DIM_LEVEL_KEY));
     }
 
     @Override
@@ -64,10 +63,5 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, 
         }
 
         return super.useOnBlock(context);
-    }
-
-    @Override
-    public boolean shouldDrop() {
-        return false;
     }
 }

@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
-import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -18,13 +19,12 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
 import net.minecraft.text.Text;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledModel, IStackPredicate {
+public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledModel, IStackPredicate, IRaidReward {
     protected static final int MAX_COUNT = 16;
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(4f, 16f);
     private final StackedItemStat.Float miningSpeedMultiplier = new StackedItemStat.Float(0.1f, 4f);
@@ -46,7 +46,7 @@ public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledM
     }
 
     public RealityPick() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new ArtifactItemSettings());
     }
 
     @Override

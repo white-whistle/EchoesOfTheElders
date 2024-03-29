@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
@@ -17,7 +18,6 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,10 +25,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown, IStackPredicate {
+public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     public GunheelsItem() {
-        super(GUNHEEL_ARMOR_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
+        super(GUNHEEL_ARMOR_MATERIAL, Type.BOOTS, new ArtifactItemSettings());
     }
 
     @Override

@@ -1,13 +1,15 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.bajookie.echoes_of_the_elders.util.HandUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
@@ -21,7 +23,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -31,10 +32,10 @@ import org.joml.Vector3f;
 import java.util.List;
 import java.util.Random;
 
-public class DoomstickItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
+public class DoomstickItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     public DoomstickItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new ArtifactItemSettings());
     }
 
     @Override
@@ -92,9 +93,11 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
                 var up = new Vector3f(0, 1, 0);
                 var right = new Vector3f(entityPos.toVector3f()).sub(startPos.toVector3f()).cross(up).normalize();
 
+                var dir = HandUtil.getHandDir(user, HandUtil.stackToHand(user, stack));
+
                 // beam effect
                 serverWorld.spawnParticles(new LineParticleEffect(
-                        new Vector3f((float) (startPos.x), (float) (startPos.y), (float) (startPos.z)).add(up.mul(-0.4f)).add(right.mul(0.6f)),
+                        new Vector3f((float) (startPos.x), (float) (startPos.y), (float) (startPos.z)).add(up.mul(-0.4f)).add(right.mul(0.6f * dir)),
                         new Vector3f((float) (entityPos.x), (float) (entityPos.y), (float) (entityPos.z)),
                         new Vector3f(255 / 255f, 184 / 255f, 117 / 255f)
                 ), startPos.x, startPos.y, startPos.z, 10, 0, 0, 0, 0);

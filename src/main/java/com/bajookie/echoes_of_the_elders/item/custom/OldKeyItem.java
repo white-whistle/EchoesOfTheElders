@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
@@ -135,7 +136,8 @@ public class OldKeyItem extends Item {
 
     private ItemStack getRandomRelicDropStack() {
         Random r = new Random();
-        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact iArtifact && iArtifact.shouldDrop()).toList();
+        var ctx = new IRaidReward.RaidRewardDropContext(null, null, null, 0);
+        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IRaidReward iRaidReward && iRaidReward.shouldDrop(ctx)).toList();
 
         var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
 

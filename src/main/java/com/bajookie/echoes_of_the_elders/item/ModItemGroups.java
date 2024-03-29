@@ -88,7 +88,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.GODSLAYER);
                 addStackedVariants(entries, ModItems.GUNHEELS);
                 addStackedVariants(entries, ModItems.ELDER_PRISM);
-                addStackedVariants(entries, ModItems.STAT_FRUIT_HP);
+                // addStackedVariants(entries, ModItems.STAT_FRUIT_HP);
                 addStackedVariants(entries, ModItems.TIME_TOKEN);
                 addStackedVariants(entries, ModItems.WTF_TOKEN);
                 addStackedVariants(entries, ModItems.ARC_LIGHTNING);
@@ -106,7 +106,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
                 addStackedVariants(entries, ModItems.WTF_HAMMER);
                 addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
-                addStackedVariants(entries, ModItems.ZEPHYR_RELIC);
+                addStackedVariants(entries, ModItems.VOID_RAY);
                 addStackedVariants(entries, ModItems.GANGWAY);
                 addStackedVariants(entries, ModItems.COWPLATE);
                 addStackedVariants(entries, ModItems.HARELEAP_STRIDERS);

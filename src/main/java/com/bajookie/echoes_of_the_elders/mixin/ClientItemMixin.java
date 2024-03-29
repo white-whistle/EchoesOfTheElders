@@ -47,6 +47,7 @@ public class ClientItemMixin {
             }
         };
 
+
         if (item instanceof ICooldownReduction iCooldownReduction) {
             var p = iCooldownReduction.getCooldownReductionPercentage(stack);
             tryPad.run();

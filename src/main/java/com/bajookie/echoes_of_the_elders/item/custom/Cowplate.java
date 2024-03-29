@@ -1,14 +1,15 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.ability.IHasSlotAbility;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.LivingEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -21,18 +22,17 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Cowplate extends ArmorItem implements IArtifact, IHasSlotAbility, IHasCooldown, IStackPredicate {
+public class Cowplate extends ArmorItem implements IArtifact, IHasSlotAbility, IHasCooldown, IStackPredicate, IRaidReward {
 
     private static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60, 20 * 2);
 
     public Cowplate() {
-        super(COWPLATE_ITEM_MATERIAL, Type.CHESTPLATE, new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
+        super(COWPLATE_ITEM_MATERIAL, Type.CHESTPLATE, new ArtifactItemSettings());
     }
 
     @Override
