@@ -55,13 +55,17 @@ public class AncientMinigun extends Item implements IArtifact {
 
     @Override
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
+        if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)) {
+            world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
+        }
         super.onStoppedUsing(stack, world, user, remainingUseTicks);
     }
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
+        if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)) {
+            world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
+        }
         return super.finishUsing(stack, world, user);
     }
 
@@ -71,6 +75,7 @@ public class AncientMinigun extends Item implements IArtifact {
             int currentAmmo = stack.getDamage();
             if (currentAmmo >= this.getMaxDamage() && user instanceof PlayerEntity player) {
                 player.getItemCooldownManager().set(this, 20 * 7);
+                world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.MINIGUN_END, SoundCategory.PLAYERS, 4f, 1f, false);
                 player.stopUsingItem();
             } else {
                 if (user instanceof PlayerEntity player && !player.getItemCooldownManager().isCoolingDown(this)) {
@@ -85,6 +90,13 @@ public class AncientMinigun extends Item implements IArtifact {
                         }
                     }
                     stack.setDamage(currentAmmo + 1);
+                } else {
+                    if (stack.getDamage() != 0) {
+                        stack.setDamage(stack.getDamage() - 1);
+                        if (stack.getDamage() != 0) {
+                            stack.setDamage(stack.getDamage() - 1);
+                        }
+                    }
                 }
 
             }
