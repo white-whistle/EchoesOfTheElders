@@ -115,7 +115,6 @@ public class ModBiomes {
     }
     public static Biome deepLostOceanBiome(Registerable<Biome> ctx) {
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
-        spawnBuilder.spawn(SpawnGroup.WATER_CREATURE, new SpawnSettings.SpawnEntry(EntityType.GLOW_SQUID, 6, 1, 2));
         GenerationSettings.LookupBackedBuilder biomeBuilder = new GenerationSettings.LookupBackedBuilder(
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE), ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );
@@ -172,7 +171,6 @@ public class ModBiomes {
     }
     public static Biome lostBeachBiome(Registerable<Biome> ctx) {
         SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
-        spawnBuilder.spawn(SpawnGroup.WATER_CREATURE, new SpawnSettings.SpawnEntry(EntityType.TURTLE, 5, 2, 4));
         GenerationSettings.LookupBackedBuilder biomeBuilder = new GenerationSettings.LookupBackedBuilder(
                 ctx.getRegistryLookup(RegistryKeys.PLACED_FEATURE), ctx.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER)
         );

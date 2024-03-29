@@ -70,7 +70,7 @@ public class MinigunModel extends Model {
         if (player != null){
             Item item = player.getMainHandStack().getItem();
             if (item == ModItems.ANCIENT_MINIGUN){
-                if (player.isUsingItem()){
+                if (player.isUsingItem() && !player.getItemCooldownManager().isCoolingDown(item)){
                     if (this.rollSpeed <=0.045f){
                         this.rollSpeed =this.rollSpeed+ 0.0001f;
                     }
