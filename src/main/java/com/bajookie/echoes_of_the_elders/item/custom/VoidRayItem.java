@@ -1,11 +1,15 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
-import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.ZapParticleEffect;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
+import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.util.HandUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.minecraft.data.client.Model;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -20,11 +24,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.joml.Vector3f;
 
-import java.util.Random;
+public class VoidRayItem extends Item implements IArtifact, IStackPredicate, IRaidReward {
+    public static StackedItemStat.Float RAY_DAMAGE = new StackedItemStat.Float(2f, 8f);
 
-public class ZephyrRelic extends Item {
-    public ZephyrRelic() {
-        super(new FabricItemSettings().maxCount(16));
+    public VoidRayItem() {
+        super(new ArtifactItemSettings());
     }
 
     @Override
@@ -47,25 +51,34 @@ public class ZephyrRelic extends Item {
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (!world.isClient && remainingUseTicks % 4 == 0) {
 
+            var activeHand = user.getActiveHand();
+            var dir = HandUtil.getHandDir(user, activeHand);
+
             Vec3d startPos = user.getEyePos();
             Vec3d _end = new Vec3d(VectorUtil.pitchYawRollToDirection(user.getPitch(), user.getYaw(), user.getRoll())).normalize().multiply(8);
             Vec3d end = startPos.add(_end);
             ServerWorld serverWorld = (ServerWorld) world;
             var up = new Vector3f(0, 1, 0);
-            var right = new Vector3f(end.toVector3f()).sub(startPos.toVector3f()).cross(up).normalize();
+            var forward = new Vector3f(end.toVector3f()).sub(startPos.toVector3f()).normalize();
+            var right = new Vector3f(forward).cross(up).normalize();
             serverWorld.spawnParticles(new ZapParticleEffect(
-                    new Vector3f((float) (startPos.x), (float) (startPos.y), (float) (startPos.z)).add(up.mul(-0.4f)).add(right.mul(0.6f)),
+                    new Vector3f((float) (startPos.x), (float) (startPos.y), (float) (startPos.z)).add(up.mul(-0.2f)).add(right.mul(0.35f * dir).add(forward.mul(0.45f))),
                     new Vector3f((float) (end.x), (float) (end.y), (float) (end.z)),
                     new Vector3f(92f / 255, 5f / 255, 179f / 255)
             ), startPos.x, startPos.y, startPos.z, 1, 0, 0, 0, 0);
             EntityHitResult hit = VectorUtil.raycast(user, 6, 3, 3);
             if (hit != null && (hit.getEntity() instanceof LivingEntity living)) {
-                living.damage(ModDamageSources.echoAttack(user), 8);
+                living.damage(ModDamageSources.echoAttack(user), RAY_DAMAGE.get(stack));
             }
         }
         if (remainingUseTicks % 4 == 0) {
             world.playSound(user.getX(), user.getY(), user.getZ(), ModSounds.ZEPHYR_SOUND, SoundCategory.PLAYERS, 4f, 1f, false);
         }
         super.usageTick(world, user, stack, remainingUseTicks);
+    }
+
+    @Override
+    public Model getBaseModel() {
+        return ModModelProvider.GUN;
     }
 }

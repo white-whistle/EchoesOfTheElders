@@ -1,11 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -15,20 +16,19 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
+public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     protected StackedItemStat.Int healAmt = new StackedItemStat.Int(2, 4);
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(60, 10);
 
     public VitalityPumpItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings());
     }
 
     @Override

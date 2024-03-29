@@ -39,6 +39,10 @@ public class TextUtil {
         return Text.translatable("tooltip.echoes_of_the_elders.join_spaced", t1, t2);
     }
 
+    public static MutableText padded(MutableText t1) {
+        return join(TextUtil.translatable("tooltip.echoes_of_the_elders.pad"), t1);
+    }
+
     public static TooltipComponentSlot component(TooltipData data) {
         return new TooltipComponentSlot(data);
     }

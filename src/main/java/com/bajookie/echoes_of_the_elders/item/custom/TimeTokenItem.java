@@ -1,10 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.ItemCooldownManagerAccessor;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -13,18 +14,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TimeTokenItem extends Item implements IArtifact, IHasCooldown {
+public class TimeTokenItem extends Item implements IArtifact, IHasCooldown, IRaidReward {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(1200 * 20, 60 * 20);
 
     public TimeTokenItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings());
     }
 
     @Override

@@ -44,11 +44,6 @@ public class WTFToken extends Item implements IArtifact, ICooldownReduction {
     }
 
     @Override
-    public boolean shouldDrop() {
-        return false;
-    }
-
-    @Override
     public float getCooldownReductionPercentage(ItemStack stack) {
         return 1;
     }

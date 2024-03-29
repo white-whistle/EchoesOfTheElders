@@ -1,20 +1,20 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Rarity;
 
-public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldown {
+public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldown, IRaidReward {
     StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * (60 * 60) * 3, 20 * (60 * 30));
 
     public ArtifactHammer() {
-        super(new FabricItemSettings().rarity(Rarity.EPIC).maxCount(1));
+        super(new ArtifactItemSettings());
     }
 
     @Override

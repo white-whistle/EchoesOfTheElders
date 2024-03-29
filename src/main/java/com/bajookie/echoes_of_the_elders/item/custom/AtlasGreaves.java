@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -15,16 +16,15 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class AtlasGreaves extends ArmorItem implements IArtifact, IStackPredicate {
+public class AtlasGreaves extends ArmorItem implements IArtifact, IStackPredicate, IRaidReward {
 
     public AtlasGreaves() {
-        super(ATLAS_GREAVES_MATERIAL, Type.LEGGINGS, new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
+        super(ATLAS_GREAVES_MATERIAL, Type.LEGGINGS, new ArtifactItemSettings());
     }
 
     @Override

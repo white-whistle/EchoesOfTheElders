@@ -1,8 +1,9 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -21,20 +22,19 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Random;
 
-public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown {
+public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown, IRaidReward {
 
     protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 100f);
     protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
 
     public MidasHammerItem() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new StackableItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new ArtifactItemSettings());
     }
 
 

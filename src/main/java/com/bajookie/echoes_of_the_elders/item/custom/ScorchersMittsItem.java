@@ -1,11 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.ParticleUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -26,13 +26,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
+public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     protected StackedItemStat.Float effectRange = new StackedItemStat.Float(16f, 64f);
     protected StackedItemStat.Float fireModifier = new StackedItemStat.Float(1f, 5f);
 
     public ScorchersMittsItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new ArtifactItemSettings());
     }
 
     @Override

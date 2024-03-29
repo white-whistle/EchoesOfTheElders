@@ -1,15 +1,15 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.IcicleProjectile;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ILeftClickAbility;
-import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.data.client.Models;
@@ -25,7 +25,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
@@ -33,11 +32,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStackPredicate, ILeftClickAbility {
+public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStackPredicate, ILeftClickAbility, IRaidReward {
+    private static final List<Tag> TAGS = List.of(Tag.ICE);
+
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 10 * 20);
 
     public IcicleStaff() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
+        super(new ArtifactItemSettings());
+    }
+
+    @Override
+    public List<Tag> getTags() {
+        return TAGS;
     }
 
     @Override

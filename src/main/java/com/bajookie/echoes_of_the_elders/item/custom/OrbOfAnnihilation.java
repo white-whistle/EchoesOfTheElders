@@ -1,29 +1,29 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.OrbOfAnnihilationEntity;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class OrbOfAnnihilation extends Item implements IArtifact, IStackPredicate, IHasToggledEffect {
+public class OrbOfAnnihilation extends Item implements IArtifact, IStackPredicate, IHasToggledEffect, IRaidReward {
     public static StackedItemStat.Float EXPLOSION_POWER = new StackedItemStat.Float(6f, 20f);
 
     public OrbOfAnnihilation() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings());
     }
 
     @Override

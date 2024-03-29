@@ -2,7 +2,7 @@ package com.bajookie.echoes_of_the_elders.system.Raid;
 
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
-import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.screen.RaidContinueScreenHandler;
 import com.bajookie.echoes_of_the_elders.system.Capability.Capability;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
@@ -38,7 +38,6 @@ import net.minecraft.util.Pair;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 import static com.bajookie.echoes_of_the_elders.effects.ModEffects.RAID_OBJECTIVE_CONTINUE_PHASE;
@@ -81,24 +80,17 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         return self.hasStatusEffect(RAID_OBJECTIVE_CONTINUE_PHASE);
     }
 
-    private ItemStack getRandomRelicDropStack() {
-        Random r = new Random();
-        var artifacts = ModItems.registeredModItems.stream().filter(item -> item instanceof IArtifact iArtifact && iArtifact.shouldDrop()).toList();
-
-        var randomArtifactItem = artifacts.get(r.nextInt(artifacts.size()));
-
-        return new ItemStack(randomArtifactItem, 1);
-    }
-
     // called when a bundle of waves is won
     public void onVictory() {
-        if (self.getWorld().isClient) return;
+        var world = self.getWorld();
+        if (world.isClient) return;
 
         level++;
 
         items.forEach((stack) -> {
             Tier.raise(stack, 1);
-            RaidReward.queueItem(stack, getRandomRelicDropStack());
+            var player = (PlayerEntity) EntityUtil.getEntityByUUID(world, Soulbound.getUuid(stack));
+            RaidReward.queueItem(stack, IRaidReward.getRaidReward(new IRaidReward.RaidRewardDropContext(world, RaidObjectiveCapability.this, player, level)));
         });
 
         self.addStatusEffect(new StatusEffectInstance(RAID_OBJECTIVE_CONTINUE_PHASE, 20 * 30));

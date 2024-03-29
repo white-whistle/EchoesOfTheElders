@@ -1,12 +1,13 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.custom.AirSweeperProjectileEntity;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.WitherEntity;
@@ -27,13 +28,13 @@ import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
-public class AirSweeper extends Item implements IArtifact, IStackPredicate, IHasCooldown, IHasToggledEffect {
+public class AirSweeper extends Item implements IArtifact, IStackPredicate, IHasCooldown, IHasToggledEffect, IRaidReward {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 10, 3 * 20);
     protected final StackedItemStat.Float maxPull = new StackedItemStat.Float(0.1f, 0.4f);
     protected final StackedItemStat.Float maxSpeed = new StackedItemStat.Float(0.5f, 1.3f);
 
     public AirSweeper() {
-        super(new FabricItemSettings().maxCount(1));
+        super(new ArtifactItemSettings());
     }
 
     @Override

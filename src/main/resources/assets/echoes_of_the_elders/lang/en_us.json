@@ -64,6 +64,7 @@
   "item.echoes_of_the_elders.wtf_hammer": "WTF Hammer",
   "item.echoes_of_the_elders.artifact_hammer": "Artifact Hammer",
   "item.echoes_of_the_elders.cowplate": "Cowplate",
+  "item.echoes_of_the_elders.void_ray": "Void Ray",
   "item.echoes_of_the_elders.atlas_greaves": "Atlas Greaves",
   "item.echoes_of_the_elders.hareleap_striders": "Hareleap Striders",
   "item.echoes_of_the_elders.heat_stone": "Heat Stone",
@@ -110,6 +111,7 @@
   "tooltip.echoes_of_the_elders.old_key_item.effect": "<right_click/> can open:",
   "tooltip.echoes_of_the_elders.join": "%s%s",
   "tooltip.echoes_of_the_elders.join_spaced": "%s %s",
+  "tooltip.echoes_of_the_elders.pad": "<pad/>",
   "tooltip.echoes_of_the_elders.click_to_toggle": "{state} [<cursor/><right_click/>]",
   "tooltip.echoes_of_the_elders.switch_on": "<switch_on>ON</switch_on>",
   "tooltip.echoes_of_the_elders.switch_off": "<switch_off>OFF</switch_off>",
@@ -177,5 +179,8 @@
   "ability.echoes_of_the_elders.auto_attack.info1": "<pad/> Attack enemies <unique>automatically</unique>",
   "ability.echoes_of_the_elders.gangway.name": "<active/> Gangway",
   "ability.echoes_of_the_elders.gangway.info1": "<pad/> Shoot a piercing beam",
-  "ability.echoes_of_the_elders.gangway.info2": "<pad/> for {damage} <magic>magic damage</magic>"
+  "ability.echoes_of_the_elders.gangway.info2": "<pad/> for {damage} <magic>magic damage</magic>",
+  "raid_drops.echoes_of_the_elders.title": "Dropped in raids:",
+  "raid_drops.echoes_of_the_elders.level": "<power_star/> Level {min}-{max}",
+  "raid_drops.echoes_of_the_elders.dimension": "<dimension/> Dimension {dimension}"
 }

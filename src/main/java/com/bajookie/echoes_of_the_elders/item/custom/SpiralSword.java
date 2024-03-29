@@ -1,11 +1,8 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
-import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
-import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
-import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
-import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.*;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
-import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -26,7 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +30,7 @@ import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
-public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate, IHasToggledEffect, IHasUpscaledModel, IHasFlatOverlay {
+public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate, IHasToggledEffect, IHasUpscaledModel, IHasFlatOverlay, IRaidReward {
     private static final StackedItemStat.Float ATTACK_DAMAGE = new StackedItemStat.Float(4f, 12f);
     private static final StackedItemStat.Float ATTACK_SPEED = new StackedItemStat.Float(-3.5f, -2f);
     private final TargetPredicate targetPredicate = TargetPredicate.createAttackable().setBaseMaxDistance(5).setPredicate(l -> true);
@@ -51,7 +47,7 @@ public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate
     });
 
     public SpiralSword() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new ArtifactItemSettings());
     }
 
     @Override
@@ -88,10 +84,8 @@ public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate
         var closestTarget = world.getClosestEntity(HostileEntity.class, targetPredicate, null, 0, 0, 0, player.getBoundingBox().expand(5, 3, 5));
         if (closestTarget == null) return;
 
-        if (!player.getWorld().isClient) {
-            player.attack(closestTarget);
-            player.swingHand(Hand.MAIN_HAND, !world.isClient);
-        }
+        player.attack(closestTarget);
+        player.swingHand(Hand.MAIN_HAND, !world.isClient);
 
     }
 

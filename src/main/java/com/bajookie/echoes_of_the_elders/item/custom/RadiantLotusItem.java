@@ -1,15 +1,15 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.effect.StatusEffectInstance;
-
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
+public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
     protected StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60 * 5, 60);
     protected StackedItemStat.Float HEAL_PERCENT = new StackedItemStat.Float(0.1f, 0.25f);
     protected StackedItemStat.Int HUNGER_RESTORE = new StackedItemStat.Int(2, 4);
@@ -33,7 +32,7 @@ public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, I
     private final TargetPredicate targetPredicate = TargetPredicate.createNonAttackable();
 
     public RadiantLotusItem() {
-        super(new FabricItemSettings().maxCount(1).rarity(Rarity.RARE));
+        super(new ArtifactItemSettings());
     }
 
     public void removePlayerNegativeEffects(PlayerEntity player) {

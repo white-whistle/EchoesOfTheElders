@@ -2,10 +2,11 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -17,19 +18,18 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class HareleapStriders extends ArmorItem implements IArtifact, IStackPredicate {
+public class HareleapStriders extends ArmorItem implements IArtifact, IStackPredicate, IRaidReward {
 
     public static StackedItemStat.Int MAX_HOP_STACKS = new StackedItemStat.Int(3, 9);
     public static float HOP_STACK_SPEED_INCREASE = 0.05f;
 
     public HareleapStriders() {
-        super(HARELEAP_STRIDERS_MATERIAL, Type.BOOTS, new FabricItemSettings().rarity(Rarity.RARE).maxCount(1));
+        super(HARELEAP_STRIDERS_MATERIAL, Type.BOOTS, new ArtifactItemSettings());
     }
 
     @Override

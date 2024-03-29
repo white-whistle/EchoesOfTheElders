@@ -81,7 +81,7 @@ public class ModItems {
     public static final Item MAGIC_HAMMER = registerItem("magic_hammer", new MagicHammer());
     public static final Item ARTIFACT_HAMMER = registerItem("artifact_hammer", new ArtifactHammer());
     public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
-    public static final Item ZEPHYR_RELIC = registerItem("zephyr_relic", new ZephyrRelic());
+    public static final Item VOID_RAY = registerItem("void_ray", new VoidRayItem());
 
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {

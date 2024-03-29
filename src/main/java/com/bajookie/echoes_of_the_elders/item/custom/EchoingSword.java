@@ -1,9 +1,10 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
-import com.bajookie.echoes_of_the_elders.system.StackedItem.StackableItemSettings;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
@@ -26,7 +27,6 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Rarity;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -34,12 +34,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown {
+public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
     private final StackedItemStat.Int stackedAttackDamage = new StackedItemStat.Int(5, 16);
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public EchoingSword() {
-        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new StackableItemSettings().rarity(Rarity.EPIC).maxCount(1));
+        super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new ArtifactItemSettings());
     }
 
     private final StackedAttributeModifiers stackedAttributeModifiers = new StackedAttributeModifiers(index -> {
@@ -90,9 +90,9 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        CreeperEntity creeper = new CreeperEntity(EntityType.CREEPER,world);
+        CreeperEntity creeper = new CreeperEntity(EntityType.CREEPER, world);
         creeper.setPosition(user.getPos());
-        creeper.equipStack(EquipmentSlot.MAINHAND,new ItemStack(Items.TOTEM_OF_UNDYING));
+        creeper.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TOTEM_OF_UNDYING));
         world.spawnEntity(creeper);
         return super.use(world, user, hand);
     }
