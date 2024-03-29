@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact {
+public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, IStackPredicate {
     public ElderPrismItem() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.UNCOMMON), new Pair<>(World.OVERWORLD, ModDimensions.DEFENSE_DIM_LEVEL_KEY));
     }

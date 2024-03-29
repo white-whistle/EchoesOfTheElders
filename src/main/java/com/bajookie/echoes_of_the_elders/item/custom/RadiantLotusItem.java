@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 
-public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown {
+public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, IStackPredicate {
     protected StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60 * 5, 60);
     protected StackedItemStat.Float HEAL_PERCENT = new StackedItemStat.Float(0.1f, 0.25f);
     protected StackedItemStat.Int HUNGER_RESTORE = new StackedItemStat.Int(2, 4);

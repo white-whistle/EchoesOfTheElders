@@ -57,7 +57,7 @@ public class ModItems {
     public static final Item VACUUM_RELIC = registerItem("vacuum_relic", new VacuumRelic());
     public static final Item CORRUPTED_KEY = registerItem("corrupted_key", new Item(new FabricItemSettings()));
     public static final Item MOLTEN_CHAMBER = registerItem("molten_chamber", new MoltenChamber());
-    public static final Item TV_ARROW = registerItem("tv_arrow", new TvArrow());
+    public static final Item ORB_OF_ANNIHILATION = registerItem("orb_of_annihilation", new OrbOfAnnihilation());
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
     public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic());
     public static final Item ICICLE_RELIC = registerItem("icicle_staff", new IcicleStaff());
