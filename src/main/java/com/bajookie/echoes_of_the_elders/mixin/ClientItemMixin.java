@@ -76,20 +76,20 @@ public class ClientItemMixin {
         }
 
         if (item instanceof IHasCooldown iHasCooldown) {
-            var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack)) / 20f;
+            var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack));
             var cdm = player.getItemCooldownManager();
 
             if (cdm.isCoolingDown(item) && cdm instanceof ItemCooldownManagerAccessor a) {
                 var cdEntry = a.getEntries().get(item);
                 if (cdEntry instanceof ItemCooldownManagerEntryAccessor e) {
                     var totalTicks = e.getEndTick() - e.getStartTick();
-                    var remainingTime = cdm.getCooldownProgress(item, mc.getTickDelta()) * totalTicks / 20f;
+                    var remainingTime = (int) (cdm.getCooldownProgress(item, mc.getTickDelta()) * totalTicks);
 
-                    var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().putF("seconds", cd, Formatting.BLUE).putF("remaining", remainingTime));
+                    var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))).put("remaining", TextUtil.formatTime(remainingTime)));
                     tooltip.add(msg);
                 }
             } else {
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().putF("seconds", cd, Formatting.BLUE));
+                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))));
                 tooltip.add(msg);
             }
         }

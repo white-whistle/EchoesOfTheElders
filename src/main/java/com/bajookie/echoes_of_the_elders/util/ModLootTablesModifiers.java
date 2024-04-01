@@ -17,7 +17,7 @@ public class ModLootTablesModifiers {
     private static final Identifier ABANDON_ID = new Identifier("minecraft", "chests/abandoned_mineshaft");
 
     private static final Collection<LootPoolEntry> ITEMS_TO_DROP = List.of(
-            ItemEntry.builder(ModItems.GALE_CORE).weight(1).build(),
+            ItemEntry.builder(ModItems.GALE_QUIVER).weight(1).build(),
             ItemEntry.builder(ModItems.DOOMSTICK_ITEM).weight(1).build(),
             ItemEntry.builder(ModItems.PORTAL_RING).weight(1).build(),
             ItemEntry.builder(ModItems.MIDAS_HAMMER).weight(1).build(),

@@ -57,6 +57,7 @@ public class ModItemGroups {
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 10), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 28), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 100), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
+                entries.add(ModItems.GALE_ARROW);
             }).build());
 
     public static void addStackedVariants(ItemGroup.Entries entries, Item item) {
@@ -77,7 +78,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.VITALITY_PUMP);
                 addStackedVariants(entries, ModItems.PORTAL_RING);
                 addStackedVariants(entries, ModItems.MIDAS_HAMMER);
-                addStackedVariants(entries, ModItems.GALE_CORE);
+                addStackedVariants(entries, ModItems.GALE_QUIVER);
                 addStackedVariants(entries, ModItems.SCORCHERS_MITTS);
                 addStackedVariants(entries, ModItems.DOOMSTICK_ITEM);
                 addStackedVariants(entries, ModItems.POTION_MIRAGE);

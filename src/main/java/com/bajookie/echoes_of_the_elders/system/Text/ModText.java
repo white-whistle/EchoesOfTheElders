@@ -33,7 +33,10 @@ public class ModText {
     public static final Function<MutableText, Text> NEGATIVE_EFFECT = registerIconTag("negative_effect", colored(0xC73835), "effect", 0xC73835);
     public static final Function<MutableText, Text> POSITIVE_EFFECT = registerIconTag("positive_effect", colored(0x55C743), "effect", 0x55C743);
     public static final Function<MutableText, Text> SHIELD = registerIconTag("shield");
+    public static final Function<MutableText, Text> ARROW = registerIconTag("arrow");
 
+    public static final Function<MutableText, Text> INFO = registerIconTag("info");
+    public static final Function<MutableText, Text> RECHARGE = registerIconTag("recharge");
     public static final Function<MutableText, Text> COOLDOWN = registerIconTag("cooldown", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_STATIC = registerIconTag("cooldown_static", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_REDUCTION = registerIconTag("cooldown_reduction", colored(Formatting.BLUE));

@@ -45,7 +45,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_TOKEN, dimEnterAdvancement, consumer);
         AdvancementEntry lotus = registerAdvancementTask(ModItems.RADIANT_LOTUS, dimEnterAdvancement, consumer);
         AdvancementEntry vitality = registerAdvancementTask(ModItems.VITALITY_PUMP, dimEnterAdvancement, consumer);
-        AdvancementEntry gale = registerAdvancementTask(ModItems.GALE_CORE, dimEnterAdvancement, consumer);
+        AdvancementEntry gale = registerAdvancementTask(ModItems.GALE_QUIVER, dimEnterAdvancement, consumer);
         AdvancementEntry scorchersMitts = registerAdvancementTask(ModItems.SCORCHERS_MITTS, dimEnterAdvancement, consumer);
         AdvancementEntry doomStick = registerAdvancementTask(ModItems.DOOMSTICK_ITEM, dimEnterAdvancement, consumer);
         AdvancementEntry mirage = registerAdvancementTask(ModItems.POTION_MIRAGE, dimEnterAdvancement, consumer);

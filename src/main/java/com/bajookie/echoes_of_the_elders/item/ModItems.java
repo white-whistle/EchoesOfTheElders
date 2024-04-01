@@ -32,7 +32,8 @@ public class ModItems {
     public static final Item MIDAS_HAMMER = registerItem("midas_hammer", new MidasHammerItem());
     public static final Item VITALITY_PUMP = registerItem("vitality_pump", new VitalityPumpItem());
     public static final Item PORTAL_RING = registerItem("portal_ring", new PortalRingItem());
-    public static final Item GALE_CORE = registerItem("gale_core", new GaleCoreItem());
+    public static final Item GALE_QUIVER = registerItem("gale_quiver", new GaleQuiverItem());
+    public static final Item GALE_ARROW = registerItem("gale_arrow", new GaleQuiverItem.Arrow());
     public static final Item SILENT_FIRE = registerItem("silent_fire", new AuraItem(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC), StatusEffects.GLOWING, 25, 0));
     public static final Item SCORCHERS_MITTS = registerItem("scorchers_mitts", new ScorchersMittsItem());
     public static final Item DOOMSTICK_ITEM = registerItem("doomstick_item", new DoomstickItem());

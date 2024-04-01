@@ -39,6 +39,7 @@ public abstract class DrawContextMixin {
     @Redirect(method = "drawItemInSlot(Lnet/minecraft/client/font/TextRenderer;Lnet/minecraft/item/ItemStack;IILjava/lang/String;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/DrawContext;drawText(Lnet/minecraft/client/font/TextRenderer;Ljava/lang/String;IIIZ)I"))
     public int drawTextProxy(DrawContext instance, TextRenderer textRenderer, String text, int x, int y, int color, boolean shadow) {
         var level = StackLevel.get(currentItemStack);
+        var isRenderingDamageBar = currentItemStack.getDamage() > 0;
 
         if (currentItemStack == null || level <= 1) {
             return this.drawText(textRenderer, text, x, y, color, shadow);
@@ -51,6 +52,10 @@ public abstract class DrawContextMixin {
 
         var scale = 0.5f;
         mat.scale(scale, scale, 1);
+
+        if (isRenderingDamageBar) {
+            mat.translate(0, -8, 0);
+        }
 
         var nText = "✦" + level;
         var v = (int) (textRenderer.getWidth(text) - 1 - (textRenderer.getWidth(nText) * 0.5f));
