@@ -67,6 +67,7 @@ public class ModModelLayers {
         EntityModelLayerRegistry.registerModelLayer(ELDERMAN_ENTITY_LAYER, EldermanModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ELDERMAN_ENTITY, EldermanRenderer::new);
         EntityRendererRegistry.register(ModEntities.STAR_ARROW_ENTITY, ArrowEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GALE_ARROW_ENTITY, GaleArrowEntityRenderer::new);
 
         EntityModelLayerRegistry.registerModelLayer(ZOMBEE_ENTITY_LAYER, ZomBeeModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ZOMBEE_ENTITY_TYPE, ZomBeeRenderer::new);

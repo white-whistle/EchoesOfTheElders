@@ -108,6 +108,9 @@ public class ModEffects {
     public static final StatusEffect HOP = registerStatusEffect("hop", new StatusEffect(StatusEffectCategory.BENEFICIAL, 0x806866) {
     });
 
+
+    // ============= impl ==================
+
     private static StatusEffect registerStatusEffect(String name, StatusEffect effect) {
         return Registry.register(Registries.STATUS_EFFECT, new Identifier(MOD_ID, name), effect);
     }

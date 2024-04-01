@@ -43,6 +43,20 @@ public class TextUtil {
         return join(TextUtil.translatable("tooltip.echoes_of_the_elders.pad"), t1);
     }
 
+    public static MutableText formatTime(int ticks) {
+        float seconds = ticks / 20f;
+        if (seconds > 60) {
+            float minutes = seconds / 60;
+            if (minutes > 60) {
+                float hours = minutes / 60;
+                return TextUtil.translatable("tooltip.echoes_of_the_elders.hours", new TextArgs().putF("hours", hours));
+            }
+
+            return TextUtil.translatable("tooltip.echoes_of_the_elders.minutes", new TextArgs().putF("minutes", minutes));
+        }
+        return TextUtil.translatable("tooltip.echoes_of_the_elders.seconds", new TextArgs().putF("seconds", seconds));
+    }
+
     public static TooltipComponentSlot component(TooltipData data) {
         return new TooltipComponentSlot(data);
     }

@@ -29,6 +29,8 @@ public class ModParticles {
             "lightning_particle", FabricParticleTypes.simple());
     public static final DefaultParticleType MAGMA_BULLET_SPEED = registerParticle(
             "magma_bullet_particle", FabricParticleTypes.simple());
+    public static final DefaultParticleType GALE_CRIT = registerParticle(
+            "gale_crit_particle", FabricParticleTypes.simple());
     public static final DefaultParticleType EARTH_SPIKE_PARTICLE = registerParticle(
             "earth_spike_particle", FabricParticleTypes.simple());
     public static final DefaultParticleType SNOW_FLAKE_PARTICLE = registerParticle(

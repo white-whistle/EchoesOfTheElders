@@ -61,4 +61,11 @@ public class SimpleParticle extends LifetimeParticle {
 
         return this;
     }
+
+    public SimpleParticle randomizeOffset(float size) {
+
+        this.pos.add(VectorUtil.randomDirection().mul(size));
+
+        return this;
+    }
 }

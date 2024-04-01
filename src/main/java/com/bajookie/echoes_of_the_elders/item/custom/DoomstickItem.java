@@ -69,7 +69,7 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     }
 
     public static final StackedItemStat.Float ABILITY_DAMAGE = new StackedItemStat.Float(20f, 250f);
-    public static final Ability ABILITY = new Ability() {
+    public static final Ability ABILITY = new Ability("doom_beam", Ability.AbilityType.ACTIVE) {
 
         @Override
         public boolean cast(World world, PlayerEntity user, ItemStack stack, boolean ignoreCooldown) {
