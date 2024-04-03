@@ -34,7 +34,7 @@ public class ModModelPredicateProvider {
                     return 0f;
                 }));
 
-        ModelPredicateProviderRegistry.register(ModItems.CHAIN_LIGHTNING_ITEM, new Identifier(MOD_ID, "ready"),
+        ModelPredicateProviderRegistry.register(ModItems.ORB_OF_LIGHTNING, new Identifier(MOD_ID, "ready"),
                 ((stack, world, entity, seed) -> {
                     if (entity instanceof PlayerEntity player) {
                         return player.getItemCooldownManager().isCoolingDown(stack.getItem()) ? 0f : 1f;

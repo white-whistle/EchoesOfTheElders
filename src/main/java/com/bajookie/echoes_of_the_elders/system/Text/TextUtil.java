@@ -7,6 +7,8 @@ import net.minecraft.client.item.TooltipData;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
+import java.util.function.Function;
+
 @SuppressWarnings("unused")
 public class TextUtil {
     private static final TextArgs EMPTY_ARGS = new TextArgs();
@@ -39,8 +41,16 @@ public class TextUtil {
         return Text.translatable("tooltip.echoes_of_the_elders.join_spaced", t1, t2);
     }
 
+    public static MutableText joinSmall(MutableText t1, MutableText t2) {
+        return TextUtil.translatable("tooltip.echoes_of_the_elders.join_spaced_small", new TextArgs().put("1", t1).put("2", t2));
+    }
+
     public static MutableText padded(MutableText t1) {
         return join(TextUtil.translatable("tooltip.echoes_of_the_elders.pad"), t1);
+    }
+
+    public static MutableText withIcon(Function<MutableText, Text> fIcon, MutableText t1) {
+        return joinSmall((MutableText) fIcon.apply(Text.empty()), t1);
     }
 
     public static MutableText formatTime(int ticks) {

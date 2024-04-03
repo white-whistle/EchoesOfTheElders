@@ -7,6 +7,7 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IProjectileProvider;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.ability.TooltipHelper;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.imps.RegenParticle;
@@ -92,7 +93,7 @@ public class GaleQuiverItem extends Item implements IArtifact, IHasCooldown, ISt
         @Override
         public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
             section
-                    .info(new TextArgs().put("duration", TextUtil.formatTime(REGEN_RATE.get(stack))));
+                    .line("info1", new TextArgs().put("duration", TextUtil.formatTime(REGEN_RATE.get(stack))));
         }
     };
 
@@ -100,16 +101,17 @@ public class GaleQuiverItem extends Item implements IArtifact, IHasCooldown, ISt
         @Override
         public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
             section
-                    .info(new TextArgs().putF("damage", BONUS_ARROW_DAMAGE.get(stack)))
-                    .info();
+                    .line("info1", new TextArgs().putF("damage", BONUS_ARROW_DAMAGE.get(stack)))
+                    .line("info2");
         }
     };
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        BOTTOMLESS_QUIVER_ABILITY.appendTooltip(stack, world, tooltip, context);
-        tooltip.add(Text.empty());
-        GALE_ARROW_INFO.appendTooltip(stack, world, tooltip, context);
+        new TooltipHelper(stack, world, tooltip, context).sections(
+                BOTTOMLESS_QUIVER_ABILITY,
+                GALE_ARROW_INFO
+        );
 
         super.appendTooltip(stack, world, tooltip, context);
     }

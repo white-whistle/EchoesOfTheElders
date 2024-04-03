@@ -2,7 +2,7 @@
   "providers": [
     {
       "type": "bitmap",
-      "file": "echoes_of_the_elders:font/prism.png",
+      "file": "echoes_of_the_elders:font/space_small.png",
       "ascent": 8,
       "height": 9,
       "chars": [

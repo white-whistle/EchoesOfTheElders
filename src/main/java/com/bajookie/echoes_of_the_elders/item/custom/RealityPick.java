@@ -3,11 +3,11 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
@@ -57,11 +57,18 @@ public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledM
         return super.getAttributeModifiers(stack, slot);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.reality_pick.effect"));
+    public static final Ability COSMIC_PICK_ABILITY = new Ability("cosmic_pick", Ability.AbilityType.ON_MINE, Ability.AbilityTrigger.LEFT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final List<Ability> ABILITIES = List.of(COSMIC_PICK_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

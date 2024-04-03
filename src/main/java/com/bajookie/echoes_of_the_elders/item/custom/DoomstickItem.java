@@ -7,7 +7,6 @@ import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.util.HandUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import net.minecraft.client.item.TooltipContext;
@@ -47,15 +46,9 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         var stack = user.getStackInHand(hand);
 
-        ABILITY.cast(world, user, stack, false);
+        DOOM_BEAM.cast(world, user, stack, false);
 
         return super.use(world, user, hand);
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.doomstick.effect", new TextArgs().putF("damage", ABILITY_DAMAGE.get(stack))));
-        super.appendTooltip(stack, world, tooltip, context);
     }
 
     @Override
@@ -69,7 +62,7 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
     }
 
     public static final StackedItemStat.Float ABILITY_DAMAGE = new StackedItemStat.Float(20f, 250f);
-    public static final Ability ABILITY = new Ability("doom_beam", Ability.AbilityType.ACTIVE) {
+    public static final Ability DOOM_BEAM = new Ability("doom_beam", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
 
         @Override
         public boolean cast(World world, PlayerEntity user, ItemStack stack, boolean ignoreCooldown) {
@@ -122,5 +115,22 @@ public class DoomstickItem extends Item implements IArtifact, IHasCooldown, ISta
 
             return true;
         }
+
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", ABILITY_DAMAGE.get(stack)));
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
     };
+
+    public static final List<Ability> ABILITIES = List.of(DOOM_BEAM);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
+    }
 }

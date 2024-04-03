@@ -3,8 +3,6 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
-import com.bajookie.echoes_of_the_elders.item.ability.Ability;
-import com.bajookie.echoes_of_the_elders.item.ability.IHasSlotAbility;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.LivingEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
@@ -27,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Cowplate extends ArmorItem implements IArtifact, IHasSlotAbility, IHasCooldown, IStackPredicate, IRaidReward {
+public class Cowplate extends ArmorItem implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     private static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60, 20 * 2);
 
@@ -84,13 +82,6 @@ public class Cowplate extends ArmorItem implements IArtifact, IHasSlotAbility, I
             return 0;
         }
     };
-
-    @Override
-    public @Nullable Ability getAbility(EquipmentSlot equipmentSlot) {
-        if (equipmentSlot != EquipmentSlot.HEAD) return null;
-
-        return DoomstickItem.ABILITY;
-    }
 
     @Override
     public int getCooldown(ItemStack itemStack) {

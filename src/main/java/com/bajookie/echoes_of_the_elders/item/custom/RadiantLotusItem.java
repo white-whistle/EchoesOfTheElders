@@ -2,10 +2,10 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -25,9 +25,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
-    protected StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60 * 5, 60);
-    protected StackedItemStat.Float HEAL_PERCENT = new StackedItemStat.Float(0.1f, 0.25f);
-    protected StackedItemStat.Int HUNGER_RESTORE = new StackedItemStat.Int(2, 4);
+    public static StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60 * 5, 60);
+    public static StackedItemStat.Float HEAL_PERCENT = new StackedItemStat.Float(0.1f, 0.25f);
+    public static StackedItemStat.Int HUNGER_RESTORE = new StackedItemStat.Int(2, 4);
 
     private final TargetPredicate targetPredicate = TargetPredicate.createNonAttackable();
 
@@ -69,16 +69,28 @@ public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, I
         return super.use(world, user, hand);
     }
 
+    public static final Ability CLEANSING_RESONANCE_ABILITY = new Ability("cleansing_resonance", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            var hungerRestore = HUNGER_RESTORE.get(stack);
+            var healPercent = HEAL_PERCENT.get(stack);
+
+            section.line("info1");
+            section.line("info2", new TextArgs().putF("heal_percent", healPercent * 100).putI("hunger_amount", hungerRestore));
+            section.line("info3");
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(CLEANSING_RESONANCE_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        var hungerRestore = HUNGER_RESTORE.get(stack);
-        var healPercent = HEAL_PERCENT.get(stack);
-
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.radiant_lotus.effect.info1"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.radiant_lotus.effect.info2", new TextArgs().putF("heal_percent", healPercent * 100).putI("hunger_amount", hungerRestore)));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.radiant_lotus.effect.info3"));
-
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override
