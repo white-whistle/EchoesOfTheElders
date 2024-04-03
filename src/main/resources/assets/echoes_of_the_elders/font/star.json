@@ -3,8 +3,8 @@
     {
       "type": "bitmap",
       "file": "echoes_of_the_elders:font/star.png",
-      "ascent": 7,
-      "height": 8,
+      "ascent": 8,
+      "height": 9,
       "chars": [
         "@"
       ]

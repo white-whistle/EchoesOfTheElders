@@ -2,6 +2,8 @@ package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.ability.TooltipHelper;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
@@ -9,7 +11,7 @@ import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
 import com.bajookie.echoes_of_the_elders.system.Text.ModText;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
-import com.bajookie.echoes_of_the_elders.util.CooldownUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
@@ -25,6 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
 
 @Mixin(Item.class)
 public class ClientItemMixin {
@@ -38,6 +41,18 @@ public class ClientItemMixin {
         if (player == null) return;
 
         var item = stack.getItem();
+
+        boolean skipItemCooldown = false;
+        if (item instanceof IArtifact iArtifact) {
+            var abilities = iArtifact.getAbilities(stack);
+            var info = iArtifact.getAdditionalInfo(stack);
+
+            if (abilities.stream().anyMatch(Ability::hasCooldown)) skipItemCooldown = true;
+
+            new TooltipHelper(stack, world, tooltip, context).sections(
+                    Stream.concat(abilities.stream(), info.stream()).toArray(TooltipSection[]::new)
+            );
+        }
 
         AtomicBoolean padded = new AtomicBoolean(false);
         Runnable tryPad = () -> {
@@ -75,22 +90,10 @@ public class ClientItemMixin {
             tooltip.add((TextUtil.translatable("tooltip.echoes_of_the_elders.tier", new TextArgs().putI("tier", tier))));
         }
 
-        if (item instanceof IHasCooldown iHasCooldown) {
-            var cd = CooldownUtil.getReducedCooldown(player, stack.getItem(), iHasCooldown.getCooldown(stack));
-            var cdm = player.getItemCooldownManager();
-
-            if (cdm.isCoolingDown(item) && cdm instanceof ItemCooldownManagerAccessor a) {
-                var cdEntry = a.getEntries().get(item);
-                if (cdEntry instanceof ItemCooldownManagerEntryAccessor e) {
-                    var totalTicks = e.getEndTick() - e.getStartTick();
-                    var remainingTime = (int) (cdm.getCooldownProgress(item, mc.getTickDelta()) * totalTicks);
-
-                    var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))).put("remaining", TextUtil.formatTime(remainingTime)));
-                    tooltip.add(msg);
-                }
-            } else {
-                var msg = TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))));
-                tooltip.add(msg);
+        if (!skipItemCooldown) {
+            var cooldownMessage = IHasCooldown.getCooldownMessage(stack);
+            if (cooldownMessage != null) {
+                tooltip.add(cooldownMessage);
             }
         }
 

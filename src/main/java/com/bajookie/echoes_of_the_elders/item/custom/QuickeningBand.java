@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -23,8 +24,8 @@ import java.util.List;
 
 public class QuickeningBand extends Item implements IArtifact, ICooldownReduction, IHasCooldown, IStackPredicate, IRaidReward {
 
-    protected static final int EFFECT_DURATION = 20 * 15;
-    protected StackedItemStat.Int effectLevel = new StackedItemStat.Int(1, 8);
+    public static final int EFFECT_DURATION = 20 * 15;
+    public static final StackedItemStat.Int EFFECT_LEVEL = new StackedItemStat.Int(1, 8);
 
     public QuickeningBand() {
         super(new ArtifactItemSettings());
@@ -35,7 +36,7 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
         var stack = user.getStackInHand(hand);
         if (user.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
 
-        var eLevel = this.effectLevel.get(stack);
+        var eLevel = EFFECT_LEVEL.get(stack);
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, EFFECT_DURATION, eLevel));
         user.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, EFFECT_DURATION, eLevel));
 
@@ -44,16 +45,28 @@ public class QuickeningBand extends Item implements IArtifact, ICooldownReductio
         return TypedActionResult.success(stack, world.isClient());
     }
 
+    public static final Ability SURGE_ABILITY = new Ability("surge", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            var eLevel = EFFECT_LEVEL.get(stack) + 1;
+
+            section.line("info1", new TextArgs().putI("level", eLevel));
+            section.line("info2", new TextArgs().put("duration", TextUtil.formatTime(EFFECT_DURATION)));
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(SURGE_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-
-        var eLevel = this.effectLevel.get(stack) + 1;
-
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect.info1", new TextArgs().putI("level", eLevel)));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.quickening_band.effect.info2", new TextArgs().putF("seconds", EFFECT_DURATION / 20f)));
-
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
+
 
     @Override
     public float getCooldownReductionPercentage(ItemStack stack) {

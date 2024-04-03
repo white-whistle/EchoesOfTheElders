@@ -69,18 +69,18 @@ public abstract class ItemRendererMixin {
                 }
             }
 
-            if (stack.isOf(ModItems.ANCIENT_STONE_SWORD)) {
-                return getCustomItemModel("ancient_stone_sword_3d");
-            }
-            if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD)) {
-                return getCustomItemModel("shiny_ancient_stone_sword_3d");
-            }
-            if (item == ModItems.ARC_LIGHTNING) {
-                return getCustomItemModel("arc_lightning_3d");
-            }
-            if (item == ModItems.SCORCHERS_MITTS) {
-                return getCustomItemModel("scorchers_mitts_3d");
-            }
+            // if (stack.isOf(ModItems.ANCIENT_STONE_SWORD)) {
+            //     return getCustomItemModel("ancient_stone_sword_3d");
+            // }
+            // if (stack.isOf(ModItems.SHINY_ANCIENT_STONE_SWORD)) {
+            //     return getCustomItemModel("shiny_ancient_stone_sword_3d");
+            // }
+            // if (item == ModItems.ARC_LIGHTNING) {
+            //     return getCustomItemModel("arc_lightning_3d");
+            // }
+            // if (item == ModItems.SCORCHERS_MITTS) {
+            //     return getCustomItemModel("scorchers_mitts_3d");
+            // }
             if (item == ModItems.ANCIENT_MINIGUN) {
                 return getCustomItemModel("ancient_minigun_3d");
             }

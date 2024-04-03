@@ -88,7 +88,7 @@ public class Gangway extends ArmorItem implements IArtifact, IHasSlotAbility, IH
     public @Nullable Ability getAbility(EquipmentSlot equipmentSlot) {
         if (equipmentSlot != EquipmentSlot.HEAD) return null;
 
-        return DoomstickItem.ABILITY;
+        return DoomstickItem.DOOM_BEAM;
     }
 
     @Override

@@ -20,13 +20,12 @@ public abstract class TooltipSection {
     }
 
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(title(TextUtil.translatable(name + ".name")));
+        tooltip.add(title(stack, world, tooltip, context));
 
-        final int[] index = {1};
         var ctx = new TooltipSectionContext() {
             @Override
-            public TooltipSectionContext info(TextArgs args) {
-                tooltip.add(TooltipSection.this.info(TextUtil.translatable(name + ".info" + (index[0]++), args)));
+            public TooltipSectionContext line(String id, TextArgs args) {
+                tooltip.add(TooltipSection.this.info(TextUtil.translatable(name + "." + id, args)));
                 return this;
             }
         };
@@ -34,8 +33,8 @@ public abstract class TooltipSection {
         appendTooltipInfo(stack, world, tooltip, context, ctx);
     }
 
-    public MutableText title(MutableText text) {
-        return text;
+    public MutableText title(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        return TextUtil.translatable(name + ".name");
     }
 
     public MutableText info(MutableText text) {
@@ -45,10 +44,10 @@ public abstract class TooltipSection {
     public abstract void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section);
 
     public interface TooltipSectionContext {
-        TooltipSectionContext info(TextArgs args);
+        TooltipSectionContext line(String id, TextArgs args);
 
-        default TooltipSectionContext info() {
-            info(null);
+        default TooltipSectionContext line(String id) {
+            line(id, null);
             return this;
         }
     }
@@ -60,8 +59,8 @@ public abstract class TooltipSection {
         }
 
         @Override
-        public MutableText title(MutableText text) {
-            return (MutableText) ModText.INFO.apply(super.title(text));
+        public MutableText title(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+            return TextUtil.withIcon(ModText.INFO, super.title(stack, world, tooltip, context));
         }
     }
 

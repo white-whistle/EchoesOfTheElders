@@ -20,6 +20,7 @@ public class ModText {
     public static final Function<MutableText, Text> FIRE = registerIconTag("fire", colored(0xFFB12F));
     public static final Function<MutableText, Text> LIGHTNING = registerIconTag("lightning", colored(0xF8FF6F));
     public static final Function<MutableText, Text> MAGIC = registerIconTag("magic", colored(0xD874FF));
+    public static final Function<MutableText, Text> PHYSICAL = registerIconTag("physical", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> BOOST = registerIconTag("boost", colored(0x74CF5B));
     public static final Function<MutableText, Text> DASH = registerIconTag("dash", colored(0x2DD875));
     public static final Function<MutableText, Text> GOLD = registerIconTag("gold", colored(0xE9B115));
@@ -28,15 +29,16 @@ public class ModText {
     public static final Function<MutableText, Text> EXPLOSION = registerIconTag("explosion", colored(0xf6ad5b));
     public static final Function<MutableText, Text> POTION = registerIconTag("potion", colored(0xC9AEFF));
     public static final Function<MutableText, Text> DIMENSION = registerIconTag("dimension", colored(0xA960C2));
-    public static final Function<MutableText, Text> ON_HIT = registerIconTag("on_hit");
+    public static final Function<MutableText, Text> ON_HIT = registerIconTag("on_hit", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> UNIQUE = registerIconTag("unique", ModText::rainbowText);
     public static final Function<MutableText, Text> NEGATIVE_EFFECT = registerIconTag("negative_effect", colored(0xC73835), "effect", 0xC73835);
     public static final Function<MutableText, Text> POSITIVE_EFFECT = registerIconTag("positive_effect", colored(0x55C743), "effect", 0x55C743);
-    public static final Function<MutableText, Text> SHIELD = registerIconTag("shield");
-    public static final Function<MutableText, Text> ARROW = registerIconTag("arrow");
+    public static final Function<MutableText, Text> SHIELD = registerIconTag("shield", colored(Formatting.WHITE));
+    public static final Function<MutableText, Text> ARROW = registerIconTag("arrow", colored(Formatting.WHITE));
+    public static final Function<MutableText, Text> PICK = registerIconTag("pick", colored(Formatting.WHITE));
 
     public static final Function<MutableText, Text> INFO = registerIconTag("info");
-    public static final Function<MutableText, Text> RECHARGE = registerIconTag("recharge");
+    public static final Function<MutableText, Text> RECHARGE = registerIconTag("recharge", colored(0x6777ff));
     public static final Function<MutableText, Text> COOLDOWN = registerIconTag("cooldown", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_STATIC = registerIconTag("cooldown_static", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_REDUCTION = registerIconTag("cooldown_reduction", colored(Formatting.BLUE));
@@ -57,6 +59,7 @@ public class ModText {
     public static final Function<MutableText, Text> SWITCH_OFF = registerIconTag("switch_off", colored(Formatting.GRAY));
 
     public static final Function<MutableText, Text> PAD = registerIconTag("pad");
+    public static final Function<MutableText, Text> SPACE_SMALL = registerIconTag("space_small");
     public static final Function<MutableText, Text> RAINBOW = registerTag("rainbow", ModText::rainbowText);
 
     static {

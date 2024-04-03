@@ -56,7 +56,7 @@ public class ModModelProvider extends FabricModelProvider {
         );
         protected static final List<Item> SKIP = List.of(
                 ModItems.WITHERS_BULWARK,
-                ModItems.CHAIN_LIGHTNING_ITEM,
+                ModItems.ORB_OF_LIGHTNING,
                 ModItems.REALITY_PICK,
                 ModItems.SCORCHERS_MITTS,
                 ModItems.STASIS_STOPWATCH,

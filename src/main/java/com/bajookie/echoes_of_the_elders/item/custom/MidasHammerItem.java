@@ -3,10 +3,10 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -30,8 +30,8 @@ import java.util.Random;
 
 public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown, IRaidReward {
 
-    protected StackedItemStat.Float effectDamage = new StackedItemStat.Float(20f, 100f);
-    protected StackedItemStat.Float dropChancePercentage = new StackedItemStat.Float(0.1f, 1f);
+    public static final StackedItemStat.Float EFFECT_DAMAGE = new StackedItemStat.Float(20f, 100f);
+    public static final StackedItemStat.Float DROP_CHANCE = new StackedItemStat.Float(0.1f, 1f);
 
     public MidasHammerItem() {
         super(ModItems.ARTIFACT_BASE_MATERIAL, 6, -2f, new ArtifactItemSettings());
@@ -64,20 +64,38 @@ public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCoold
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         Random r = new Random();
-        if (r.nextFloat() < dropChancePercentage.get(stack)) {
+        if (r.nextFloat() < DROP_CHANCE.get(stack)) {
             ItemEntity item = new ItemEntity(target.getWorld(), target.getX(), target.getY(), target.getZ(), new ItemStack(Items.GOLD_NUGGET, 1));
             target.getWorld().spawnEntity(item);
         }
         return super.postHit(stack, target, attacker);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.attack", new TextArgs().putI("percent", (int) (dropChancePercentage.get(stack) * 100))));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect1", new TextArgs().putF("damage", this.effectDamage.get(stack))));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.midas_hammer.effect2"));
+    public static final Ability GREEDY_STRIKE = new Ability("greedy_strike", Ability.AbilityType.ON_HIT, Ability.AbilityTrigger.LEFT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putI("percent", (int) (DROP_CHANCE.get(stack) * 100)));
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final Ability EXECUTIONERS_FEE = new Ability("executioners_fee", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", EFFECT_DAMAGE.get(stack)));
+            section.line("info2");
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static List<Ability> ABILITIES = List.of(EXECUTIONERS_FEE, GREEDY_STRIKE);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

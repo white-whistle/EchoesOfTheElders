@@ -1,9 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.imps.StarParticle;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
+import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import com.bajookie.echoes_of_the_elders.util.Interator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
@@ -17,6 +19,8 @@ import java.util.List;
 public interface IArtifact {
 
     List<Tag> NO_TAGS = List.of();
+    List<Ability> NO_ABILITIES = List.of();
+    List<TooltipSection> NO_INFO = List.of();
 
     enum Tag {
         THROWN,
@@ -83,5 +87,13 @@ public interface IArtifact {
         }
 
         return false;
+    }
+
+    default List<Ability> getAbilities(ItemStack itemStack) {
+        return NO_ABILITIES;
+    }
+
+    default List<TooltipSection> getAdditionalInfo(ItemStack itemStack) {
+        return NO_INFO;
     }
 }

@@ -84,7 +84,7 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.POTION_MIRAGE);
                 addStackedVariants(entries, ModItems.WITHERS_BULWARK);
                 addStackedVariants(entries, ModItems.QUICKENING_BAND);
-                addStackedVariants(entries, ModItems.CHAIN_LIGHTNING_ITEM);
+                addStackedVariants(entries, ModItems.ORB_OF_LIGHTNING);
                 addStackedVariants(entries, ModItems.REALITY_PICK);
                 addStackedVariants(entries, ModItems.GODSLAYER);
                 addStackedVariants(entries, ModItems.GUNHEELS);

@@ -41,7 +41,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 .criterion(MOD_ID + ":enter_spirit_realm", ChangedDimensionCriterion.Conditions.to(ModDimensions.DEFENSE_DIM_LEVEL_KEY))
                 .build(consumer, MOD_ID + "enter_lost_dim_adv");
         AdvancementEntry midas = registerAdvancementTask(ModItems.MIDAS_HAMMER, dimEnterAdvancement, consumer);
-        AdvancementEntry lightningOrb = registerAdvancementTask(ModItems.CHAIN_LIGHTNING_ITEM, dimEnterAdvancement, consumer);
+        AdvancementEntry lightningOrb = registerAdvancementTask(ModItems.ORB_OF_LIGHTNING, dimEnterAdvancement, consumer);
         AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_TOKEN, dimEnterAdvancement, consumer);
         AdvancementEntry lotus = registerAdvancementTask(ModItems.RADIANT_LOTUS, dimEnterAdvancement, consumer);
         AdvancementEntry vitality = registerAdvancementTask(ModItems.VITALITY_PUMP, dimEnterAdvancement, consumer);
