@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.ability;
 
+import com.bajookie.echoes_of_the_elders.client.ModKeyBindings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
 import com.bajookie.echoes_of_the_elders.system.Text.ModText;
@@ -56,6 +57,16 @@ public class Ability extends TooltipSection {
         LEFT_CLICK(simpleIcon(ModText.LEFT_CLICK)),
         TOGGLED((stack, world, tooltip, context) -> {
             return IHasToggledEffect.getText(stack);
+        }),
+        CLICK_STACK((stack, world, tooltip, context) -> TextUtil.translatable("ability.echoes_of_the_elders.impl.trigger_over_stack")),
+        SNEAK_RIGHT_CLICK((stack, world, tooltip, context) -> {
+            return TextUtil.translatable("ability.echoes_of_the_elders.impl.trigger", new TextArgs().put("trigger", TextUtil.plus(
+                    (MutableText) ModText.KEY.apply(TextUtil.translatable("key.echoes_of_the_elders.sneak")),
+                    (MutableText) ModText.RIGHT_CLICK.apply(Text.empty())
+            )));
+        }),
+        GEAR((stack, world, tooltip, context) -> {
+            return TextUtil.translatable("ability.echoes_of_the_elders.impl.trigger", new TextArgs().put("trigger", ModText.KEY.apply((MutableText) ModKeyBindings.HELMET_ABILITY.getBoundKeyLocalizedText())));
         });
 
         final ITooltipMessageGetter messageGetter;

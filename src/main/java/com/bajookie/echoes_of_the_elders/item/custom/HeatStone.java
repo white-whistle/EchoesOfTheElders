@@ -2,8 +2,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,10 +33,17 @@ public class HeatStone extends Item implements IArtifact, IRaidReward {
         return new ItemStack(ModItems.HEAT_STONE);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.heat_stone.infiniburn.info1"));
+    public static final Ability INFINIBURN_ABILITY = new Ability("infiniburn", Ability.AbilityType.SPECIAL) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final List<Ability> ABILITIES = List.of(INFINIBURN_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

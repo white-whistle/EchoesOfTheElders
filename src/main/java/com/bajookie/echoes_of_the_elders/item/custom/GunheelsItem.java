@@ -3,8 +3,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
@@ -31,13 +31,26 @@ public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown, 
         super(GUNHEEL_ARMOR_MATERIAL, Type.BOOTS, new ArtifactItemSettings());
     }
 
+
+    public static final Ability BULLET_JUMP_ABILITY = new Ability("bullet_jump", Ability.AbilityType.SPECIAL) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(BULLET_JUMP_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.gunheels.effect"));
-
-        super.appendTooltip(stack, world, tooltip, context);
-
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
+
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {

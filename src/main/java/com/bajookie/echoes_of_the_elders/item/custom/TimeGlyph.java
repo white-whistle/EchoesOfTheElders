@@ -2,10 +2,10 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.ItemCooldownManagerAccessor;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.ItemCooldownManager;
@@ -20,10 +20,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class TimeTokenItem extends Item implements IArtifact, IHasCooldown, IRaidReward {
+public class TimeGlyph extends Item implements IArtifact, IHasCooldown, IRaidReward {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(1200 * 20, 60 * 20);
 
-    public TimeTokenItem() {
+    public TimeGlyph() {
         super(new ArtifactItemSettings());
     }
 
@@ -56,11 +56,23 @@ public class TimeTokenItem extends Item implements IArtifact, IHasCooldown, IRai
         }
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.time_token.info"));
+    public static final Ability REFRESH_ABILITY = new Ability("refresh", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
 
-        super.appendTooltip(stack, world, tooltip, context);
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(REFRESH_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

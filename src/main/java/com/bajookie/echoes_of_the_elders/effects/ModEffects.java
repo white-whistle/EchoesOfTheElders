@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.effects;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
+import com.bajookie.echoes_of_the_elders.item.custom.SparkingMitts;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
@@ -41,7 +42,7 @@ public class ModEffects {
             EntityType.LIGHTNING_BOLT.spawn(worldServer, entity.getBlockPos(), SpawnReason.TRIGGERED);
 
             if (level > 1) {
-                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, secondaryDelay, level - 1));
+                entity.addStatusEffect(new StatusEffectInstance(ModEffects.DELAYED_LIGHTNING_EFFECT, secondaryDelay, level - 1, true, false));
             }
         }
         //        spawn lightning at entity
@@ -93,15 +94,15 @@ public class ModEffects {
 
                     ((ServerWorld) world).spawnParticles(ModParticles.ELECTRIC_SHOCK, entityPos.x - (diff.x * i / 10) + r.nextInt(-5, 5) * 0.02, entityPos.y - (diff.y * i / 10) + r.nextInt(-5, 5) * 0.02 + 0.75, entityPos.z - (diff.z * i / 10) + r.nextInt(-5, 5) * 0.02, 1, 0, 0, 0, 0);
                 }
-                live.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, instance.getAmplifier() - 1));
+                live.addStatusEffect(new StatusEffectInstance(ModEffects.CONDUCTING_EFFECT, 5, instance.getAmplifier() - 1, true, false));
             }
         }
     }, ((entity, integer) -> {
         if (!entity.getWorld().isClient) {
             World world = entity.getWorld();
             world.playSound(null, entity.getBlockPos(), ModSounds.ELECTRIC_STRIKE, SoundCategory.AMBIENT, 4f, 4f);
-            entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, entity.getLastAttacker()), 8);
-            entity.addStatusEffect(new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 5 * 20), entity.getLastAttacker());
+            entity.damage(world.getDamageSources().create(DamageTypes.MAGIC, entity.getLastAttacker()), SparkingMitts.SPARK_DAMAGE);
+            entity.addStatusEffect(new StatusEffectInstance(ModEffects.SHOCK_EFFECT, 5 * 20, 0, true, false), entity.getLastAttacker());
         }
     })));
 

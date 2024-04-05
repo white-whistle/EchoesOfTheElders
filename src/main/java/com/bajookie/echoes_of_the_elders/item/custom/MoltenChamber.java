@@ -1,14 +1,14 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
-import com.bajookie.echoes_of_the_elders.entity.custom.MagmaBullet;
+import com.bajookie.echoes_of_the_elders.entity.custom.MoltenChamberShotProjectile;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.entity.LivingEntity;
@@ -26,10 +26,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class MoltenChamber extends Item implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
-    protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(10 * 6, 20 * 3);
-    protected final StackedItemStat.Int SHOT_DAMAGE = new StackedItemStat.Int(10, 30);
-    protected final StackedItemStat.Float SHOT_AMP = new StackedItemStat.Float(1f, 6f);
-    protected final int CHARGE_DURATION = 30;
+    public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(10 * 6, 20 * 3);
+    public static final StackedItemStat.Int SHOT_DAMAGE = new StackedItemStat.Int(10, 30);
+    public static final StackedItemStat.Float SHOT_AMP = new StackedItemStat.Float(1f, 6f);
+    public static final int CHARGE_DURATION = 30;
 
     public MoltenChamber() {
         super(new ArtifactItemSettings());
@@ -56,7 +56,7 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
     private void shootProjectile(PlayerEntity player, float charge, ItemStack stack, World world) {
         world.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.GUN_SHOT_01, SoundCategory.PLAYERS, 0.5f, 1f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         var amp = SHOT_AMP.get(charge);
-        MagmaBullet bullet = new MagmaBullet(world, player.getEyePos().x, player.getEyePos().y, player.getEyePos().z, (int) (amp * this.SHOT_DAMAGE.get(stack)), player, player.getPitch(), player.getYaw());
+        MoltenChamberShotProjectile bullet = new MoltenChamberShotProjectile(world, player.getEyePos().x, player.getEyePos().y, player.getEyePos().z, (int) (amp * SHOT_DAMAGE.get(stack)), player, player.getPitch(), player.getYaw());
         bullet.setVelocity(player, player.getPitch(), player.getYaw(), player.getRoll(), 5f, 0);
         world.spawnEntity(bullet);
         player.getItemCooldownManager().set(this, this.getCooldown(stack));
@@ -92,9 +92,28 @@ public class MoltenChamber extends Item implements IArtifact, IStackPredicate, I
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.effect.info1", new TextArgs().putF("damage_min", this.SHOT_DAMAGE.get(stack)).putF("damage_max", SHOT_AMP.max * this.SHOT_DAMAGE.get(stack))));
+        // tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.molten_chamber.effect.info1", new TextArgs().putF("damage_min", this.SHOT_DAMAGE.get(stack)).putF("damage_max", SHOT_AMP.max * this.SHOT_DAMAGE.get(stack))));
 
         super.appendTooltip(stack, world, tooltip, context);
+    }
+
+    public static final Ability MOLTEN_SHOT = new Ability("molten_shot", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage_min", SHOT_DAMAGE.get(stack)).putF("damage_max", SHOT_AMP.max * SHOT_DAMAGE.get(stack)));
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(MOLTEN_SHOT);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.entity.custom.VacuumProjectileEntity;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ExperienceOrbEntity;
@@ -24,10 +24,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class VacuumRelic extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
+public class PocketGalaxy extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
+    public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);
 
-    public VacuumRelic() {
+    public PocketGalaxy() {
         super(new ArtifactItemSettings());
     }
 
@@ -79,13 +79,32 @@ public class VacuumRelic extends Item implements IArtifact, IHasCooldown, IStack
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 
+    public static final Ability VACUUM_ABILITY = new Ability("vacuum", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
+
+    public static final Ability MINIATURE_BLACK_HOLE_ABILITY = new Ability("miniature_black_hole", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.SNEAK_RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(VACUUM_ABILITY, MINIATURE_BLACK_HOLE_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vacuum_relic.use1"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.vacuum_relic.use2"));
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

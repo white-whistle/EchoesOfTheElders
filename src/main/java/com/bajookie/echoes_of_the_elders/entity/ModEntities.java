@@ -45,9 +45,9 @@ public class ModEntities {
             FabricEntityTypeBuilder.<SecondSunProjectileEntity>create(SpawnGroup.CREATURE, SecondSunProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
-    public static final EntityType<ChainLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<OrbOfLightningProjectileEntity> CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "chain_lightning_entity"),
-            FabricEntityTypeBuilder.<ChainLightningProjectileEntity>create(SpawnGroup.CREATURE, ChainLightningProjectileEntity::new)
+            FabricEntityTypeBuilder.<OrbOfLightningProjectileEntity>create(SpawnGroup.CREATURE, OrbOfLightningProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
 
     public static final EntityType<IcicleProjectile> ICICLE_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
@@ -70,13 +70,13 @@ public class ModEntities {
             new Identifier(MOD_ID, "teleport_eye_entity"),
             FabricEntityTypeBuilder.<TeleportEyeProjectileEntity>create(SpawnGroup.CREATURE, TeleportEyeProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
-    public static final EntityType<AirSweeperProjectileEntity> AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<SkyWardProjectileEntity> AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "air_sweeper_entity"),
-            FabricEntityTypeBuilder.<AirSweeperProjectileEntity>create(SpawnGroup.CREATURE, AirSweeperProjectileEntity::new)
+            FabricEntityTypeBuilder.<SkyWardProjectileEntity>create(SpawnGroup.CREATURE, SkyWardProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
-    public static final EntityType<MagmaBullet> MAGMA_BULLET_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType<MoltenChamberShotProjectile> MOLTEN_CHAMBER_SHOT_PROJECTILE_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "magma_bullet_entity"),
-            FabricEntityTypeBuilder.<MagmaBullet>create(SpawnGroup.CREATURE, MagmaBullet::new)
+            FabricEntityTypeBuilder.<MoltenChamberShotProjectile>create(SpawnGroup.CREATURE, MoltenChamberShotProjectile::new)
                     .dimensions(EntityDimensions.fixed(0.5f, 0.5f)).build());
     public static final EntityType<PelletProjectile> PELLET_ENTITY_TYPE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(MOD_ID, "pellet_entity"),

@@ -44,7 +44,7 @@ public class ModArmor {
                     return StackLevel.isMaxed(stack);
                 }
             });
-        }), ModItems.GANGWAY);
+        }), ModItems.MASK_OF_DAWN);
 
         ArmorRenderer.register(new CustomArmor((ctx) -> {
             ctx.parts.add(new CustomArmor.Part(ctx::getOuterArmor, getStackedLayer(ModArmor::armorCutout, "cowplate")));

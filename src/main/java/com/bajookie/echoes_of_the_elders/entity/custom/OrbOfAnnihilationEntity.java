@@ -19,6 +19,8 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
@@ -90,8 +92,12 @@ public class OrbOfAnnihilationEntity extends ProjectileEntity implements FlyingI
                 this.setVelocity(newDirection.multiply(1.3));
                 this.setPosition(this.getPos().add(this.getVelocity()));
             }
+
+            if (this.age == 280) {
+                this.getWorld().playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GHAST_WARN, SoundCategory.PLAYERS, 1f, 1f, true);
+            }
         } else {
-            this.discard();
+            this.detonate();
         }
         if (!this.getWorld().isClient) {
             ((ServerWorld) this.getWorld()).spawnParticles(ModParticles.THICK_TRAIL_PARTICLE, this.prevX, this.prevY, this.prevZ, 1, 0, 0, 0, 0);

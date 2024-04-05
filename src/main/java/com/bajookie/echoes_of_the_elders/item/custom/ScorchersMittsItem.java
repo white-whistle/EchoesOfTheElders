@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
+public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward, GloveItem {
 
     protected static StackedItemStat.Float EFFECT_RANGE = new StackedItemStat.Float(16f, 64f);
     protected static StackedItemStat.Float FIRE_MODIFIER = new StackedItemStat.Float(1f, 5f);
@@ -100,14 +100,14 @@ public class ScorchersMittsItem extends Item implements IArtifact, IHasCooldown,
         }
     };
 
-    public static Ability SCORCHING_TOUCH = new Ability("scorching_touch", Ability.AbilityType.ON_HIT, Ability.AbilityTrigger.LEFT_CLICK) {
+    public static Ability SCORCHING_TOUCH_ABILITY = new Ability("scorching_touch", Ability.AbilityType.ON_HIT, Ability.AbilityTrigger.LEFT_CLICK) {
         @Override
         public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
             section.line("info1");
         }
     };
 
-    public static List<Ability> ABILITIES = List.of(FIRE_SNAP_ABILITY, SCORCHING_TOUCH);
+    public static List<Ability> ABILITIES = List.of(FIRE_SNAP_ABILITY, SCORCHING_TOUCH_ABILITY);
     public static List<TooltipSection> INFO = List.of(GloveItem.GLOVE_INFO);
 
     @Override

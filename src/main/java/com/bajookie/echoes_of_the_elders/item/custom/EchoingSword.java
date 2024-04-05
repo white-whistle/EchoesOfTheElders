@@ -3,31 +3,26 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.SwordItem;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.text.Text;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -35,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
-    private final StackedItemStat.Int stackedAttackDamage = new StackedItemStat.Int(5, 16);
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 20, 20 * 5);
+    public static final StackedItemStat.Int ATTACK_DAMAGE = new StackedItemStat.Int(5, 16);
+    public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);
 
     public EchoingSword() {
         super(ModItems.ARTIFACT_BASE_MATERIAL, 0, -1.4f, new ArtifactItemSettings());
@@ -47,7 +42,7 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
 
         ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
 
-        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) stackedAttackDamage.get(progress), EntityAttributeModifier.Operation.ADDITION));
+        builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Weapon modifier", (double) ATTACK_DAMAGE.get(progress), EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Weapon modifier", -1.4f, EntityAttributeModifier.Operation.ADDITION));
 
         return builder.build();
@@ -68,9 +63,6 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
 
     @Override
     public boolean postMine(ItemStack stack, World world, BlockState state, BlockPos pos, LivingEntity miner) {
-        if (state.getHardness(world, pos) != 0.0f) {
-            stack.damage(2, miner, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
-        }
         return true;
     }
 
@@ -89,22 +81,21 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        CreeperEntity creeper = new CreeperEntity(EntityType.CREEPER, world);
-        creeper.setPosition(user.getPos());
-        creeper.equipStack(EquipmentSlot.MAINHAND, new ItemStack(Items.TOTEM_OF_UNDYING));
-        world.spawnEntity(creeper);
-        return super.use(world, user, hand);
-    }
-
-    @Override
     public int getCooldown(ItemStack itemStack) {
-        return this.cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 
+    public static Ability ECHOED_STRIKE_ABILITY = new Ability("echoed_strike", Ability.AbilityType.ON_HIT, Ability.AbilityTrigger.LEFT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
+
+    public static List<Ability> ABILITIES = List.of(ECHOED_STRIKE_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.echoing_sword.effect"));
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack stack) {
+        return ABILITIES;
     }
 }

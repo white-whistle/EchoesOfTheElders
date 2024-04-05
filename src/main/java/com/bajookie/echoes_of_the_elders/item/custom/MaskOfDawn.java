@@ -1,7 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
-import com.bajookie.echoes_of_the_elders.client.ModKeyBindings;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
@@ -9,7 +8,6 @@ import com.bajookie.echoes_of_the_elders.item.ability.IHasSlotAbility;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -25,21 +23,31 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Gangway extends ArmorItem implements IArtifact, IHasSlotAbility, IHasCooldown, IStackPredicate, IRaidReward {
+public class MaskOfDawn extends ArmorItem implements IArtifact, IHasSlotAbility, IHasCooldown, IStackPredicate, IRaidReward {
 
     private static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60, 20 * 5);
 
-    public Gangway() {
+    public MaskOfDawn() {
         super(GANGWAY_ITEM_MATERIAL, Type.HELMET, new ArtifactItemSettings());
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.hotkey", new TextArgs().put("hotkey", ModKeyBindings.HELMET_ABILITY.getBoundKeyLocalizedText()).put("name", TextUtil.translatable("ability.echoes_of_the_elders.gangway.name"))));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.gangway.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.gangway.info2", new TextArgs().putF("damage", DoomstickItem.ABILITY_DAMAGE.get(stack))));
+    public static final Ability GANGWAY_ABILITY = new Ability("gangway", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.GEAR) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", DoomstickItem.ABILITY_DAMAGE.get(stack)));
+        }
 
-        super.appendTooltip(stack, world, tooltip, context);
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(GANGWAY_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     private static final ArmorMaterial GANGWAY_ITEM_MATERIAL = new ArmorMaterial() {

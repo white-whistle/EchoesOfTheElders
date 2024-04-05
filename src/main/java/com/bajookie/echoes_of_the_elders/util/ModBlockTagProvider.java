@@ -16,16 +16,16 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup arg) {
-        getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.ANCIENT_TREE_PLANKS);
-        getOrCreateTagBuilder(BlockTags.LOGS).add(ModBlocks.ANCIENT_TREE_LOG)
-                .add(ModBlocks.ANCIENT_TREE_WOOD)
-                .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
-                .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
-        getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).add(ModBlocks.ANCIENT_TREE_LOG)
-                .add(ModBlocks.ANCIENT_TREE_WOOD)
-                .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
-                .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
-        getOrCreateTagBuilder(BlockTags.LEAVES).add(ModBlocks.ANCIENT_TREE_LEAVES);
+        // getOrCreateTagBuilder(BlockTags.PLANKS).add(ModBlocks.ANCIENT_TREE_PLANKS);
+        // getOrCreateTagBuilder(BlockTags.LOGS).add(ModBlocks.ANCIENT_TREE_LOG)
+        //         .add(ModBlocks.ANCIENT_TREE_WOOD)
+        //         .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
+        //         .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        // getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN).add(ModBlocks.ANCIENT_TREE_LOG)
+        //         .add(ModBlocks.ANCIENT_TREE_WOOD)
+        //         .add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG)
+        //         .add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
+        // getOrCreateTagBuilder(BlockTags.LEAVES).add(ModBlocks.ANCIENT_TREE_LEAVES);
         getOrCreateTagBuilder(BlockTags.WOODEN_DOORS).add(ModBlocks.WOOL_TENT_DOOR);
     }
 }

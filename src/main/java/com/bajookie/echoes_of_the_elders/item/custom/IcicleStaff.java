@@ -4,9 +4,10 @@ import com.bajookie.echoes_of_the_elders.entity.custom.IcicleProjectile;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ILeftClickAbility;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -35,7 +36,9 @@ import java.util.List;
 public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStackPredicate, ILeftClickAbility, IRaidReward {
     private static final List<Tag> TAGS = List.of(Tag.ICE);
 
-    protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * 40, 10 * 20);
+    public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 40, 20 * 5);
+    public static final float SNOWBALL_DAMAGE = 10;
+    public static final float ICICLE_DAMAGE = 30;
 
     public IcicleStaff() {
         super(new ArtifactItemSettings());
@@ -67,7 +70,7 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return this.cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
     }
 
     @Override
@@ -86,11 +89,30 @@ public class IcicleStaff extends Item implements IArtifact, IHasCooldown, IStack
         return Models.HANDHELD;
     }
 
+    public static final Ability MAGIC_SNOWBALL_ABILITY = new Ability("magic_snowball", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.LEFT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", SNOWBALL_DAMAGE));
+        }
+    };
+
+    public static final Ability HEAVY_ICE_ABILITY = new Ability("heavy_ice", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", ICICLE_DAMAGE));
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(MAGIC_SNOWBALL_ABILITY, HEAVY_ICE_ABILITY);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.effect1.info1"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.icicle_staff.effect2.info1"));
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

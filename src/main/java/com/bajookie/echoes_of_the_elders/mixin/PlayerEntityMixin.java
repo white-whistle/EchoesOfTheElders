@@ -5,8 +5,11 @@ import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
 import com.bajookie.echoes_of_the_elders.events.ItemstackDecrementEvent;
 import com.bajookie.echoes_of_the_elders.item.IProjectileProvider;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.custom.GloveItem;
 import com.bajookie.echoes_of_the_elders.system.Capability.ModCapabilities;
 import com.bajookie.echoes_of_the_elders.util.InventoryUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.player.PlayerEntity;
@@ -65,6 +68,22 @@ public abstract class PlayerEntityMixin {
 
                     cir.setReturnValue(projectileStack);
                 });
+    }
+
+    @Inject(method = "attack", at = @At("TAIL"))
+    private void onPlayerAttacked(Entity target, CallbackInfo ci) {
+        var player = (PlayerEntity) (Object) this;
+
+        var offhandStack = player.getOffHandStack();
+        var mainhandStack = player.getMainHandStack();
+        if (offhandStack == mainhandStack) return;
+        if (offhandStack.isOf(mainhandStack.getItem())) return;
+
+        var offhandItem = offhandStack.getItem();
+
+        if (offhandItem instanceof GloveItem && target instanceof LivingEntity livingTarget) {
+            offhandItem.postHit(offhandStack, livingTarget, player);
+        }
     }
 
     /* can work well if we need to do special attack

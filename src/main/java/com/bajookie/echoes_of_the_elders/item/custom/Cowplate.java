@@ -3,11 +3,11 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.LivingEntityAccessor;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -33,12 +33,30 @@ public class Cowplate extends ArmorItem implements IArtifact, IHasCooldown, ISta
         super(COWPLATE_ITEM_MATERIAL, Type.CHESTPLATE, new ArtifactItemSettings());
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.cowplate.purge.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.cowplate.milkable.info1"));
+    public static final Ability SHRUG_ABILITY = new Ability("shrug", Ability.AbilityType.PASSIVE) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
 
-        super.appendTooltip(stack, world, tooltip, context);
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final Ability MILKABLE_ABILITY = new Ability("milkable", Ability.AbilityType.PASSIVE) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(SHRUG_ABILITY, MILKABLE_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     private static final ArmorMaterial COWPLATE_ITEM_MATERIAL = new ArmorMaterial() {

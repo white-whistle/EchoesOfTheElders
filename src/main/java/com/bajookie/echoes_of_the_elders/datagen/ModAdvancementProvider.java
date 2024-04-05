@@ -42,7 +42,7 @@ public class ModAdvancementProvider extends FabricAdvancementProvider {
                 .build(consumer, MOD_ID + "enter_lost_dim_adv");
         AdvancementEntry midas = registerAdvancementTask(ModItems.MIDAS_HAMMER, dimEnterAdvancement, consumer);
         AdvancementEntry lightningOrb = registerAdvancementTask(ModItems.ORB_OF_LIGHTNING, dimEnterAdvancement, consumer);
-        AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_TOKEN, dimEnterAdvancement, consumer);
+        AdvancementEntry timeToken = registerAdvancementTask(ModItems.TIME_GLYPH, dimEnterAdvancement, consumer);
         AdvancementEntry lotus = registerAdvancementTask(ModItems.RADIANT_LOTUS, dimEnterAdvancement, consumer);
         AdvancementEntry vitality = registerAdvancementTask(ModItems.VITALITY_PUMP, dimEnterAdvancement, consumer);
         AdvancementEntry gale = registerAdvancementTask(ModItems.GALE_QUIVER, dimEnterAdvancement, consumer);

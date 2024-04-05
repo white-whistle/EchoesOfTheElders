@@ -3,10 +3,11 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -32,13 +33,33 @@ public class HareleapStriders extends ArmorItem implements IArtifact, IStackPred
         super(HARELEAP_STRIDERS_MATERIAL, Type.BOOTS, new ArtifactItemSettings());
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.hareleap_striders.hop.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.hareleap_striders.hop.info2", new TextArgs().putI("speed_percent", (int) (HOP_STACK_SPEED_INCREASE * 100))));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.hareleap_striders.hop.info3", new TextArgs().putI("max_stacks", MAX_HOP_STACKS.get(stack))));
+    public static final Ability BUNNY_HOP_ABILITY = new Ability("bunny_hop", Ability.AbilityType.PASSIVE) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
 
-        super.appendTooltip(stack, world, tooltip, context);
+        }
+    };
+
+    public static final TooltipSection HOP_INFO = new TooltipSection.Info("hop") {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putI("speed_percent", (int) (HOP_STACK_SPEED_INCREASE * 100)));
+            section.line("info2", new TextArgs().putI("max_stacks", MAX_HOP_STACKS.get(stack)));
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(BUNNY_HOP_ABILITY);
+    public static final List<TooltipSection> INFO = List.of(HOP_INFO);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
+    }
+
+    @Override
+    public List<TooltipSection> getAdditionalInfo(ItemStack itemStack) {
+        return INFO;
     }
 
     private static final ArmorMaterial HARELEAP_STRIDERS_MATERIAL = new ArmorMaterial() {

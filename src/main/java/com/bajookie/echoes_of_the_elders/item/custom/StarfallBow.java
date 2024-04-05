@@ -3,10 +3,10 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.entity.custom.StarArrowProjectile;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -102,11 +102,23 @@ public class StarfallBow extends BowItem implements IArtifact, IHasCooldown, IRa
         playerEntity.incrementStat(Stats.USED.getOrCreateStat(this));
     }
 
+    public static final Ability STARFALL = new Ability("starfall", Ability.AbilityType.PASSIVE) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+            section.line("info2", new TextArgs().putI("damage", STARFALL_DAMAGE));
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(STARFALL);
+
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info2"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.starfall.info3", new TextArgs().putI("damage", STARFALL_DAMAGE)));
-        super.appendTooltip(stack, world, tooltip, context);
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

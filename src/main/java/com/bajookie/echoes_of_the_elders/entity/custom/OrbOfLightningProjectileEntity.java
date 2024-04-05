@@ -22,12 +22,12 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class ChainLightningProjectileEntity extends ThrownItemEntity {
-    public ChainLightningProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
+public class OrbOfLightningProjectileEntity extends ThrownItemEntity {
+    public OrbOfLightningProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public ChainLightningProjectileEntity(World world, LivingEntity livingEntity) {
+    public OrbOfLightningProjectileEntity(World world, LivingEntity livingEntity) {
         super(ModEntities.CHAIN_LIGHTNING_PROJECTILE_ENTITY_TYPE, livingEntity, world);
     }
 

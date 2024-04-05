@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
@@ -10,8 +11,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
 
+import java.util.List;
+
 public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldown, IRaidReward {
-    StackedItemStat.Int cooldown = new StackedItemStat.Int(20 * (60 * 60) * 3, 20 * (60 * 30));
+    public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * (60 * 60) * 3, 20 * (60 * 30));
 
     public ArtifactHammer() {
         super(new ArtifactItemSettings());
@@ -28,6 +31,11 @@ public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldo
         }
 
         return super.canUpgrade(user, self, other);
+    }
+
+    @Override
+    public boolean isOneTimeUse() {
+        return false;
     }
 
     @Override
@@ -48,6 +56,13 @@ public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldo
 
     @Override
     public int getCooldown(ItemStack itemStack) {
-        return cooldown.get(itemStack);
+        return COOLDOWN.get(itemStack);
+    }
+
+    public static final List<Ability> ABILITIES = List.of(ARTISANS_TOUCH_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

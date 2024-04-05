@@ -1,14 +1,17 @@
 package com.bajookie.echoes_of_the_elders.entity.custom;
 
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
-import net.minecraft.entity.*;
+import com.bajookie.echoes_of_the_elders.item.ModItems;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.FlyingItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
@@ -17,15 +20,15 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class AirSweeperProjectileEntity extends ProjectileEntity implements FlyingItemEntity {
+public class SkyWardProjectileEntity extends ProjectileEntity implements FlyingItemEntity {
     private final float maxPull;
     private final float speed;
     private final boolean isMaxed;
     private final int currentCount;
-    private static final TrackedData<Integer> TARGET_ID = DataTracker.registerData(AirSweeperProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> TARGET_ID = DataTracker.registerData(SkyWardProjectileEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
 
-    public AirSweeperProjectileEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
+    public SkyWardProjectileEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
         this.maxPull = 0.1f;
         this.isMaxed = false;
@@ -33,16 +36,16 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
         this.currentCount = 1;
     }
 
-    public AirSweeperProjectileEntity(World world, double x, double y, double z, int target,float maxPull, boolean isMaxed,float speed,int currentStacks) {
+    public SkyWardProjectileEntity(World world, double x, double y, double z, int target, float maxPull, boolean isMaxed, float speed, int currentStacks) {
         super((EntityType<? extends ProjectileEntity>) ModEntities.AIR_SWEEPER_PROJECTILE_ENTITY_ENTITY_TYPE, world);
         this.setPosition(x, y, z);
         this.maxPull = maxPull;
         this.isMaxed = isMaxed;
         this.speed = speed;
         this.currentCount = currentStacks;
-        this.dataTracker.set(TARGET_ID,target);
+        this.dataTracker.set(TARGET_ID, target);
         this.setVelocity(0, 0.5, 0);
-        this.refreshPositionAndAngles(x,y,z,this.getYaw(),this.getPitch());
+        this.refreshPositionAndAngles(x, y, z, this.getYaw(), this.getPitch());
     }
 
     @Override
@@ -53,27 +56,26 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
             this.onCollision(hitResult);
             this.velocityDirty = true;
         }
-        if (this.age >200){
+        if (this.age > 200) {
             this.discard();
         }
         if (this.dataTracker.get(TARGET_ID) == -1) {
             this.discard(); // TODO
         } else {
-            if (this.age>=20){
+            if (this.age >= 20) {
                 World world = this.getWorld();
                 Entity entity = world.getEntityById(this.dataTracker.get(TARGET_ID));
                 if (entity instanceof LivingEntity livingEntity) {
-                    if (!world.isClient){
-                        if (this.isMaxed){
-                            ((ServerWorld)world).spawnParticles(ParticleTypes.END_ROD,this.getX(),this.getY(),this.getZ(),1,0,0,0,0);
-                        }
-                        else if (this.currentCount >=16){
-                            ((ServerWorld)world).spawnParticles(ParticleTypes.FLAME,this.getX(),this.getY(),this.getZ(),1,0,0,0,0);
-                        } else if (this.currentCount >=8){
-                            ((ServerWorld)world).spawnParticles(ParticleTypes.SMOKE,this.getX(),this.getY(),this.getZ(),1,0,0,0,0);
+                    if (!world.isClient) {
+                        if (this.isMaxed) {
+                            ((ServerWorld) world).spawnParticles(ParticleTypes.END_ROD, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                        } else if (this.currentCount >= 16) {
+                            ((ServerWorld) world).spawnParticles(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
+                        } else if (this.currentCount >= 8) {
+                            ((ServerWorld) world).spawnParticles(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0);
                         }
                     }
-                    if (this.isMaxed){
+                    if (this.isMaxed) {
                         predictHoming(livingEntity);
                     } else {
                         simpleHoming(livingEntity);
@@ -87,7 +89,8 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
             }
         }
     }
-    private void simpleHoming(LivingEntity livingEntity){
+
+    private void simpleHoming(LivingEntity livingEntity) {
         Vec3d currentPosition = this.getPos();
         Vec3d targetPosition = livingEntity.getPos();
         Vec3d currentVelocity = this.getVelocity();
@@ -96,7 +99,8 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
         this.setVelocity(newDirection.multiply(this.speed));
         this.setPosition(this.getPos().add(this.getVelocity()));
     }
-    private void predictHoming(LivingEntity livingEntity){
+
+    private void predictHoming(LivingEntity livingEntity) {
         Vec3d currentPosition = this.getPos();
         Vec3d targetPosition = livingEntity.getPos();
         Vec3d currentVelocity = this.getVelocity();
@@ -116,8 +120,8 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        if (!entityHitResult.getEntity().getWorld().isClient){
-            entityHitResult.getEntity().getWorld().createExplosion(null,entityHitResult.getPos().x,entityHitResult.getPos().y,entityHitResult.getPos().z,3,false, World.ExplosionSourceType.MOB);
+        if (!entityHitResult.getEntity().getWorld().isClient) {
+            entityHitResult.getEntity().getWorld().createExplosion(null, entityHitResult.getPos().x, entityHitResult.getPos().y, entityHitResult.getPos().z, 3, false, World.ExplosionSourceType.MOB);
             this.discard();
         }
         super.onEntityHit(entityHitResult);
@@ -137,6 +141,6 @@ public class AirSweeperProjectileEntity extends ProjectileEntity implements Flyi
 
     @Override
     public ItemStack getStack() {
-        return Items.FIREWORK_ROCKET.getDefaultStack();
+        return ModItems.SKY_WARD_SHOT.getDefaultStack();
     }
 }

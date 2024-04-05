@@ -2,7 +2,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.block.custom.IPrismActionable;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
+import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -18,29 +19,50 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, IStackPredicate {
+public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, IStackPredicate, IHasCooldown {
+    public static final int REFRACT_COOLDOWN = 20 * 300;
+
     public ElderPrismItem() {
         super(new ArtifactItemSettings(), new Pair<>(World.OVERWORLD, ModDimensions.DEFENSE_DIM_LEVEL_KEY));
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (world != null) {
+    public static final Ability SPIRITUAL_SHIFT_ABILITY = new Ability("spiritual_shift", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            if (world != null) {
 
-            var worldKey = world.getRegistryKey();
+                var worldKey = world.getRegistryKey();
 
-            if (worldKey == ModDimensions.DEFENSE_DIM_LEVEL_KEY) {
-                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.to_overworld"));
-            } else if (worldKey == World.OVERWORLD) {
-                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.to_spirit_realm"));
-            } else {
-                tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.other"));
+                if (worldKey == ModDimensions.DEFENSE_DIM_LEVEL_KEY) {
+                    section.line("to_overworld");
+                } else if (worldKey == World.OVERWORLD) {
+                    section.line("to_spirit_realm");
+                } else {
+                    section.line("other");
+                }
             }
         }
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.elder_prism.effect.interact"));
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final Ability REFRACT_ABILITY = new Ability("refract", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(SPIRITUAL_SHIFT_ABILITY, REFRACT_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
+
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -54,6 +76,7 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, 
         if (blockState.getBlock() instanceof IPrismActionable iPrismActionable && user != null && !user.getItemCooldownManager().isCoolingDown(this)) {
             var side = context.getSide();
             if (iPrismActionable.onPrism(stack, user, world, blockPos, side)) {
+                user.getItemCooldownManager().set(this, REFRACT_COOLDOWN);
                 if (world.isClient) {
                     MinecraftClient.getInstance().gameRenderer.showFloatingItem(stack);
                 }
@@ -63,5 +86,10 @@ public class ElderPrismItem extends BiDimensionToggleItem implements IArtifact, 
         }
 
         return super.useOnBlock(context);
+    }
+
+    @Override
+    public int getCooldown(ItemStack itemStack) {
+        return REFRACT_COOLDOWN;
     }
 }
