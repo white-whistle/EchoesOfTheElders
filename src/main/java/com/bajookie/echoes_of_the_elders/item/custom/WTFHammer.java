@@ -1,9 +1,12 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
@@ -13,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WTFHammer extends UpgradeHammer {
+public class WTFHammer extends UpgradeHammer implements IArtifact {
     public WTFHammer() {
         super(new ArtifactItemSettings());
     }
@@ -37,11 +40,24 @@ public class WTFHammer extends UpgradeHammer {
 
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.wtf_hammer.info1"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.wtf_hammer.info2"));
+    public static final Ability PERFECT_TOUCH_ABILITY = new Ability("perfect_touch", Ability.AbilityType.SPECIAL, Ability.AbilityTrigger.CLICK_STACK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final Ability INFINITE_POTENTIAL_ABILITY = new Ability("infinite_potential", Ability.AbilityType.SPECIAL, Ability.AbilityTrigger.CLICK_STACK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(PERFECT_TOUCH_ABILITY, INFINITE_POTENTIAL_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

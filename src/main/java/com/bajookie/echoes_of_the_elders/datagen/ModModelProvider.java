@@ -2,7 +2,6 @@ package com.bajookie.echoes_of_the_elders.datagen;
 
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.block.ModBlocks;
-import com.bajookie.echoes_of_the_elders.block.custom.AncientGrainsCrop;
 import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
@@ -30,41 +29,39 @@ public class ModModelProvider extends FabricModelProvider {
         blockStateModelGenerator.registerTintableCross(ModBlocks.NETHER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.EXPLORER_FRUIT_BLOCK, ModBlocks.POTTED_EXPLORER_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.MINERS_FRUIT_BLOCK, ModBlocks.POTTED_MINERS_FRUIT_BLOCK, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.ELDER_LILY_FLOWER, ModBlocks.POTTED_ELDER_LILY_FLOWER, BlockStateModelGenerator.TintType.NOT_TINTED);
+        // blockStateModelGenerator.registerFlowerPotPlant(ModBlocks.ELDER_LILY_FLOWER, ModBlocks.POTTED_ELDER_LILY_FLOWER, BlockStateModelGenerator.TintType.NOT_TINTED);
         blockStateModelGenerator.registerTintableCross(ModBlocks.SPIRITAL_GRASS, BlockStateModelGenerator.TintType.TINTED);
-        blockStateModelGenerator.registerFlowerbed(ModBlocks.SPIRIT_PETALS);
+        // blockStateModelGenerator.registerFlowerbed(ModBlocks.SPIRIT_PETALS);
         // blockStateModelGenerator.registerPlantPart();
-        blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
+        // blockStateModelGenerator.registerSimpleState(ModBlocks.BEAR_TRAP_BLOCK);
         blockStateModelGenerator.registerSimpleState(ModBlocks.ARTIFACT_VAULT);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SUN_RUNE_BLOCK);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHISELED_MOSSY_STONE);
+        // blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.SUN_RUNE_BLOCK);
+        // blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.CHISELED_MOSSY_STONE);
         // Wood
-        blockStateModelGenerator.registerTintableCross(ModBlocks.ANCIENT_TREE_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_PLANKS);
-        blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_LEAVES);
-        blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
-        blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
-
-        blockStateModelGenerator.registerCrop(ModBlocks.ANCIENT_GRAINS_CROP, AncientGrainsCrop.AGE, 0, 1, 2, 3, 4, 5);
+        // blockStateModelGenerator.registerTintableCross(ModBlocks.ANCIENT_TREE_SAPLING, BlockStateModelGenerator.TintType.NOT_TINTED);
+        // blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_PLANKS);
+        // blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.ANCIENT_TREE_LEAVES);
+        // blockStateModelGenerator.registerLog(ModBlocks.ANCIENT_TREE_LOG).log(ModBlocks.ANCIENT_TREE_LOG).wood(ModBlocks.ANCIENT_TREE_WOOD);
+        // blockStateModelGenerator.registerLog(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).log(ModBlocks.STRIPPED_ANCIENT_TREE_LOG).wood(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
     }
 
     static class ItemModelConfig {
         protected static final List<Item> HANDHELD = List.of(
                 ModItems.ANCIENT_STONE_SWORD,
                 ModItems.SHINY_ANCIENT_STONE_SWORD,
-                ModItems.MIDAS_HAMMER
+                ModItems.MIDAS_HAMMER,
+                ModItems.WTF_HAMMER
         );
         protected static final List<Item> SKIP = List.of(
                 ModItems.WITHERS_BULWARK,
                 ModItems.ORB_OF_LIGHTNING,
                 ModItems.REALITY_PICK,
                 ModItems.SCORCHERS_MITTS,
-                ModItems.STASIS_STOPWATCH,
-                ModItems.TIME_TOKEN,
+                // ModItems.STASIS_STOPWATCH,
+                ModItems.TIME_GLYPH,
                 ModItems.WTF_TOKEN,
-                ModItems.VACUUM_RELIC,
-                ModItems.STARFALL_BOW,
-                ModItems.ANCIENT_GRAINS_SEEDS
+                ModItems.POCKET_GALAXY,
+                ModItems.STARFALL_BOW
         );
     }
 

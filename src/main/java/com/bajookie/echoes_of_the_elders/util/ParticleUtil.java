@@ -34,6 +34,7 @@ public class ParticleUtil {
             world.addParticle(particleType, pos.x + rotatedRadius.x, pos.y + rotatedRadius.y, pos.z + rotatedRadius.z, rotatedVelocity.x, rotatedVelocity.y, rotatedVelocity.z);
         }
 
+
     }
 
     public static Vector3f zAxis(float length) {

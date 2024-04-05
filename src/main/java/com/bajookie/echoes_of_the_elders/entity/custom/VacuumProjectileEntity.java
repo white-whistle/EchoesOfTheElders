@@ -19,7 +19,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ModStatus;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -34,6 +33,7 @@ import java.util.Random;
 public class VacuumProjectileEntity extends ThrownItemEntity {
     private static final TrackedData<Boolean> HIT = DataTracker.registerData(VacuumProjectileEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private List<Entity> entities = new ArrayList<>();
+
     public VacuumProjectileEntity(EntityType<? extends ThrownItemEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -45,7 +45,7 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected void initDataTracker() {
-        this.dataTracker.startTracking(HIT,false);
+        this.dataTracker.startTracking(HIT, false);
         super.initDataTracker();
     }
 
@@ -55,18 +55,18 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
 
     @Override
     public void tick() {
-        if (this.dataTracker.get(HIT)){
-            if (this.age <= 20){
-                this.setVelocity(0,0.23,0);
-            }else {
+        if (this.dataTracker.get(HIT)) {
+            if (this.age <= 20) {
+                this.setVelocity(0, 0.23, 0);
+            } else {
                 this.suckMonsters();
-                this.setVelocity(0,0,0);
-                if (!this.getWorld().isClient()){
+                this.setVelocity(0, 0, 0);
+                if (!this.getWorld().isClient()) {
                     Random r = new Random();
-                    ((ServerWorld)this.getWorld()).spawnParticles(ParticleTypes.PORTAL,this.getX(),this.getY(),this.getZ(),1,0,0,0,1);
+                    ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.PORTAL, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 1);
                 }
             }
-            if (this.age >= 160){
+            if (this.age >= 160) {
                 implode();
                 this.discard();
             }
@@ -78,20 +78,20 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
         getHits();
         if (!this.entities.isEmpty()) {
             for (Entity living : this.entities) {
-                if (living !=null){
-                    if (NoGravityEffect.tryApply((LivingEntity) living)){
-                        ((LivingEntity)living).addStatusEffect(new StatusEffectInstance(ModEffects.NO_GRAVITY_EFFECT,3,1,true,false));
+                if (living != null) {
+                    if (NoGravityEffect.tryApply((LivingEntity) living)) {
+                        ((LivingEntity) living).addStatusEffect(new StatusEffectInstance(ModEffects.NO_GRAVITY_EFFECT, 3, 1, true, false));
                     }
-                    living.addVelocity(this.getPos().add(Math.sin(this.age)*2,0,Math.cos(this.age)*2).subtract(living.getPos()).normalize().multiply( Math.min(0.8/this.getPos().distanceTo(living.getPos()),0.55)));
+                    living.addVelocity(this.getPos().add(Math.sin(this.age) * 2, 0, Math.cos(this.age) * 2).subtract(living.getPos()).normalize().multiply(Math.min(0.8 / this.getPos().distanceTo(living.getPos()), 0.55)));
                 }
             }
         }
     }
 
-    private void implode(){
+    private void implode() {
         Random r = new Random();
-        for(Entity entity:entities){
-            ((LivingEntity)entity).setVelocity(new Vec3d(r.nextInt(-5,5)*0.45,r.nextInt(-5,5)*0.45,r.nextInt(-5,5)*0.45).multiply(Math.min(1/this.getPos().distanceTo(entity.getPos()),1)));
+        for (Entity entity : entities) {
+            ((LivingEntity) entity).setVelocity(new Vec3d(r.nextInt(-5, 5) * 0.45, r.nextInt(-5, 5) * 0.45, r.nextInt(-5, 5) * 0.45).multiply(Math.min(1 / this.getPos().distanceTo(entity.getPos()), 1)));
         }
     }
     /*
@@ -102,7 +102,7 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
         prev=entity;
      */
 
-    private void getHits(){
+    private void getHits() {
         Box box = new Box(this.getX() - 20, this.getY() - 20, this.getZ() - 20, this.getX() + 20, this.getY() + 20, this.getZ() + 20);
         this.entities = this.getWorld().getOtherEntities(this, box, entity -> entity instanceof LivingEntity && !(entity instanceof PlayerEntity));
     }
@@ -114,7 +114,7 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        if (!this.dataTracker.get(HIT)){
+        if (!this.dataTracker.get(HIT)) {
             this.setData();
             return;
         }
@@ -123,14 +123,15 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
-        if (!this.dataTracker.get(HIT)){
+        if (!this.dataTracker.get(HIT)) {
             this.setData();
             return;
         }
         super.onBlockHit(blockHitResult);
     }
-    private void setData(){
-        this.dataTracker.set(HIT,true);
+
+    private void setData() {
+        this.dataTracker.set(HIT, true);
         this.setNoGravity(true);
         this.age = 0;
     }
@@ -141,9 +142,8 @@ public class VacuumProjectileEntity extends ThrownItemEntity {
     }
 
 
-
     @Override
     protected Item getDefaultItem() {
-        return ModItems.VACUUM_RELIC;
+        return ModItems.POCKET_GALAXY;
     }
 }

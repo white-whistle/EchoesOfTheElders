@@ -111,7 +111,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
 
         if (remainingWaves < 1) {
             sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.level_complete"));
-            self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_VICTORY_PHASE, 3 * 20));
+            self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_VICTORY_PHASE, 3 * 20, 0, true, false));
         } else {
             sendMessage(TextUtil.translatable("message.echoes_of_the_elders.raid.wave_complete"));
             spawnWave();
@@ -187,7 +187,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         // add item
         Soulbound.set(itemStack, user);
         items.add(itemStack);
-        self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_START_COOLDOWN, 20 * 10));
+        self.addStatusEffect(new StatusEffectInstance(ModEffects.RAID_OBJECTIVE_START_COOLDOWN, 20 * 10, 0, true, false));
 
         if (remainingWaves == -1) {
             // init vars

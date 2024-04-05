@@ -1,11 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.*;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.client.item.TooltipContext;
@@ -50,15 +50,18 @@ public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate
         super(ModItems.ARTIFACT_BASE_MATERIAL, 0, 0, new ArtifactItemSettings());
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.join(
-                TextUtil.translatable("ability.echoes_of_the_elders.auto_attack.name"),
-                IHasToggledEffect.getText(stack)
-        ));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.auto_attack.info1"));
+    public static final Ability AUTO_ATTACK = new Ability("auto_attack", Ability.AbilityType.PASSIVE, Ability.AbilityTrigger.TOGGLED) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final List<Ability> ABILITIES = List.of(AUTO_ATTACK);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

@@ -3,12 +3,15 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.ZapParticleEffect;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
+import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.util.HandUtil;
 import com.bajookie.echoes_of_the_elders.util.VectorUtil;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.data.client.Model;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,13 +19,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+
+import java.util.List;
 
 public class VoidRayItem extends Item implements IArtifact, IStackPredicate, IRaidReward {
     public static StackedItemStat.Float RAY_DAMAGE = new StackedItemStat.Float(2f, 8f);
@@ -80,5 +87,20 @@ public class VoidRayItem extends Item implements IArtifact, IStackPredicate, IRa
     @Override
     public Model getBaseModel() {
         return ModModelProvider.GUN;
+    }
+
+    public static final Ability VOID_RAY_ABILITY = new Ability("void_ray", Ability.AbilityType.ACTIVE, Ability.AbilityTrigger.RIGHT_CLICK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1", new TextArgs().putF("damage", RAY_DAMAGE.get(stack)));
+            section.line("info2");
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(VOID_RAY_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 }

@@ -7,6 +7,7 @@ import com.bajookie.echoes_of_the_elders.client.render.ModShaderTypes;
 import com.bajookie.echoes_of_the_elders.client.render.ModShaders;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipComponent;
 import com.bajookie.echoes_of_the_elders.client.tooltip.ItemTooltipData;
+import com.bajookie.echoes_of_the_elders.entity.client.ModEntityRenderers;
 import com.bajookie.echoes_of_the_elders.entity.client.ModModelLayers;
 import com.bajookie.echoes_of_the_elders.events.PlayerAttackHandler;
 import com.bajookie.echoes_of_the_elders.particles.*;
@@ -29,6 +30,7 @@ public class EOTEClient implements ClientModInitializer {
         ScreenParticleManager.INSTANCE.init();
 
         ModModelLayers.registerModMobLayers();
+        ModEntityRenderers.init();
         ModBlocks.registerModBlocksModelLayers();
 
         ModModelPredicateProvider.registerModModels();

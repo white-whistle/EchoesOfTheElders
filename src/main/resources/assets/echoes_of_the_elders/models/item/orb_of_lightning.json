@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "echoes_of_the_elders:item/chain_lightning_item"
+    "layer0": "echoes_of_the_elders:item/orb_of_lightning"
   },
   "overrides": [
     {
@@ -9,21 +9,21 @@
         "echoes_of_the_elders:ready": 1.0,
         "echoes_of_the_elders:stack_level": 0.0
       },
-      "model": "echoes_of_the_elders:item/chain_lightning_active"
+      "model": "echoes_of_the_elders:item/orb_of_lightning_active"
     },
     {
       "predicate": {
         "echoes_of_the_elders:ready": 0.0,
         "echoes_of_the_elders:stack_level": 1.0
       },
-      "model": "echoes_of_the_elders:item/chain_lightning_item_01"
+      "model": "echoes_of_the_elders:item/orb_of_lightning_01"
     },
     {
       "predicate": {
         "echoes_of_the_elders:ready": 1.0,
         "echoes_of_the_elders:stack_level": 1.0
       },
-      "model": "echoes_of_the_elders:item/chain_lightning_active_01"
+      "model": "echoes_of_the_elders:item/orb_of_lightning_active_01"
     }
   ]
 }

@@ -1,9 +1,11 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -11,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MagicHammer extends UpgradeHammer implements IStackPredicate, IRaidReward {
+public class MagicHammer extends UpgradeHammer implements IStackPredicate, IRaidReward, IArtifact {
     public MagicHammer(Settings settings) {
         super(settings);
     }
@@ -21,10 +23,38 @@ public class MagicHammer extends UpgradeHammer implements IStackPredicate, IRaid
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.magic_hammer.info1"));
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.one_time_use"));
+    public int getArtifactMaxStack() {
+        return 1;
+    }
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public boolean isOneTimeUse() {
+        return true;
+    }
+
+    public static final Ability ARTISANS_TOUCH_ABILITY = new Ability("artisans_touch", Ability.AbilityType.SPECIAL, Ability.AbilityTrigger.CLICK_STACK) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+            if (stack.getItem() instanceof MagicHammer magicHammer && magicHammer.isOneTimeUse()) {
+                section.line("one_time_use");
+            }
+        }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
+    };
+
+    public static final List<Ability> ABILITIES = List.of(ARTISANS_TOUCH_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
+    }
+
+    @Override
+    public Model getBaseModel() {
+        return Models.HANDHELD;
     }
 }

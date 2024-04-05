@@ -6,6 +6,6 @@ public class ModFuelItems {
     public static void init() {
         var r = FuelRegistry.INSTANCE;
 
-        r.add(ModItems.HEAT_STONE, 20);
+        r.add(ModItems.HEAT_STONE, 1);
     }
 }

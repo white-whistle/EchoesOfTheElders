@@ -1,14 +1,14 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "echoes_of_the_elders:item/vacuum_relic_01"
+    "layer0": "echoes_of_the_elders:item/pocket_galaxy_01"
   },
   "overrides": [
     {
       "predicate": {
         "echoes_of_the_elders:active": 1
       },
-      "model": "echoes_of_the_elders:item/vacuum_relic_01_active"
+      "model": "echoes_of_the_elders:item/pocket_galaxy_01_active"
     }
   ]
 }

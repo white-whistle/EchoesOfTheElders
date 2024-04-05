@@ -28,10 +28,8 @@ public abstract class ModelLoaderMixin {
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/model/ModelLoader;addModel(Lnet/minecraft/client/util/ModelIdentifier;)V", ordinal = 3, shift = At.Shift.AFTER))
     public void addCustomModels(BlockColors blockColors, Profiler profiler, Map<Identifier, JsonUnbakedModel> jsonUnbakedModels, Map<Identifier, List<ModelLoader.SourceTrackedData>> blockStates, CallbackInfo ci) {
-        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "ancient_stone_sword_3d", "inventory"));
-        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "shiny_ancient_stone_sword_3d", "inventory"));
-        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "arc_lightning_3d", "inventory"));
-        this.addModel(new ModelIdentifier(EOTE.MOD_ID, "scorchers_mitts_3d", "inventory"));
+        // this.addModel(new ModelIdentifier(EOTE.MOD_ID, "arc_lightning_3d", "inventory"));
+        // this.addModel(new ModelIdentifier(EOTE.MOD_ID, "scorchers_mitts_3d", "inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "soulbound", "inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "switch_off", "inventory"));
         this.addModel(new ModelIdentifier(EOTE.MOD_ID, "switch_on", "inventory"));

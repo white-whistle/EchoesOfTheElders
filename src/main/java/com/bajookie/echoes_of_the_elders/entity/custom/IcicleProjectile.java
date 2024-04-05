@@ -19,7 +19,6 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
@@ -29,44 +28,50 @@ import net.minecraft.world.World;
 
 public class IcicleProjectile extends ProjectileEntity implements FlyingItemEntity {
     private static final TrackedData<Boolean> FALL = DataTracker.registerData(IcicleProjectile.class, TrackedDataHandlerRegistry.BOOLEAN);
+
     public IcicleProjectile(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
     @Override
     public Packet<ClientPlayPacketListener> createSpawnPacket() {
-        return new EntitySpawnS2CPacket(this,this.getOwner() != null ? this.getOwner().getId() : 0);
+        return new EntitySpawnS2CPacket(this, this.getOwner() != null ? this.getOwner().getId() : 0);
     }
 
     public IcicleProjectile(World world, double x, double y, double z, Entity owner, boolean fall) {
         super((EntityType<? extends ProjectileEntity>) ModEntities.ICICLE_PROJECTILE_ENTITY_TYPE, world);
         this.setPosition(x, y, z);
         this.dataTracker.set(FALL, fall);
-        if (fall){
-            this.setVelocity(0,-0.7,0);
+        if (fall) {
+            this.setVelocity(0, -0.7, 0);
         }
         this.setOwner(owner);
-        this.refreshPositionAndAngles(x,y,z,this.getYaw(),this.getPitch());
+        this.refreshPositionAndAngles(x, y, z, this.getYaw(), this.getPitch());
     }
 
     @Override
     public void tick() {
         super.tick();
-        if (this.age > 80){
+        if (this.age > 80) {
             this.discard();
         }
-        if (!this.getWorld().isClient){
+        if (!this.getWorld().isClient) {
             HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
             this.checkBlockCollision();
             if (!this.noClip) {
                 this.onCollision(hitResult);
                 this.velocityDirty = true;
             }
-            for(int i=0;i<3;i++){
-                ((ServerWorld)this.getWorld()).spawnParticles(ModParticles.SNOW_FLAKE_PARTICLE,this.getX(),this.getY(),this.getZ(),1,0,0,0,0);
+
+        }
+
+        if (this.age % 5 == 0) {
+            for (int i = 0; i < 5; i++) {
+                this.getWorld().addParticle(ModParticles.SNOW_FLAKE_PARTICLE, false, this.getX(), this.getY() + (this.getHeight() / 4), this.getZ(), 0, 0, 0);
             }
         }
-        if (!this.dataTracker.get(FALL)){
+
+        if (!this.dataTracker.get(FALL)) {
             Vec3d vec3d = this.getVelocity();
             double d = this.getX() + vec3d.x;
             double e = this.getY() + vec3d.y;
@@ -91,7 +96,7 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        entityHitResult.getEntity().damage(this.getWorld().getDamageSources().create(DamageTypes.MAGIC,this.getOwner()),this.dataTracker.get(FALL) ? 30f:10f);
+        entityHitResult.getEntity().damage(this.getWorld().getDamageSources().create(DamageTypes.MAGIC, this.getOwner()), this.dataTracker.get(FALL) ? 30f : 10f);
         this.discard();
         super.onEntityHit(entityHitResult);
     }
@@ -101,7 +106,7 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
         super.onBlockCollision(state);
         if (!state.isSolid()) return;
         if (state.getBlock() == Blocks.AIR) return;
-        if (state.getBlock() == Blocks.WATER){
+        if (state.getBlock() == Blocks.WATER) {
             this.discard();
         }
         this.discard();
@@ -109,22 +114,22 @@ public class IcicleProjectile extends ProjectileEntity implements FlyingItemEnti
 
     @Override
     public void onRemoved() {
-        if (this.dataTracker.get(FALL)){
-            this.getWorld().playSound(this.getX(),this.getY(),this.getZ(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS,4f,4f,false);
+        if (this.dataTracker.get(FALL)) {
+            this.getWorld().playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 4f, 4f, false);
         } else {
-            this.getWorld().playSound(this.getX(),this.getY(),this.getZ(), SoundEvents.BLOCK_SNOW_BREAK, SoundCategory.PLAYERS,4f,4f,false);
+            this.getWorld().playSound(this.getX(), this.getY(), this.getZ(), SoundEvents.BLOCK_SNOW_BREAK, SoundCategory.PLAYERS, 4f, 4f, false);
         }
         super.onRemoved();
     }
 
     @Override
     protected void initDataTracker() {
-        this.dataTracker.startTracking(FALL,false);
+        this.dataTracker.startTracking(FALL, false);
     }
 
     @Override
     public ItemStack getStack() {
-        return this.dataTracker.get(FALL)? Blocks.PACKED_ICE.asItem().getDefaultStack() : Items.SNOWBALL.getDefaultStack();
+        return this.dataTracker.get(FALL) ? Blocks.PACKED_ICE.asItem().getDefaultStack() : Items.SNOWBALL.getDefaultStack();
     }
 
     @Override

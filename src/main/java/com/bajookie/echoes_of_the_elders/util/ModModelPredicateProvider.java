@@ -41,27 +41,27 @@ public class ModModelPredicateProvider {
                     }
                     return 0f;
                 }));
-        ModelPredicateProviderRegistry.register(ModItems.STASIS_STOPWATCH, new Identifier(MOD_ID, "tok"),
-                ((stack, world, entity, seed) -> {
-                    NbtCompound nbt = stack.getNbt();
-                    if (nbt != null) {
-                        int ticks = nbt.getInt("used_tick");
-                        if (ticks == 0) return 0f;
-                        if (ticks <= 20) return 0.125f;
-                        if (ticks <= 40) return 0.125f * 2;
-                        if (ticks <= 60) return 0.125f * 3;
-                        if (ticks <= 80) return 0.125f * 4;
-                        if (ticks <= 100) return 0.125f * 5;
-                        if (ticks <= 120) return 0.125f * 6;
-                        if (ticks <= 140) return 0.125f * 7;
-                        else return 0f;
-                    }
-                    return 0f;
-                }));
-        ModelPredicateProviderRegistry.register(ModItems.VACUUM_RELIC, new Identifier(MOD_ID, "active"),
+        // ModelPredicateProviderRegistry.register(ModItems.STASIS_STOPWATCH, new Identifier(MOD_ID, "tok"),
+        //         ((stack, world, entity, seed) -> {
+        //             NbtCompound nbt = stack.getNbt();
+        //             if (nbt != null) {
+        //                 int ticks = nbt.getInt("used_tick");
+        //                 if (ticks == 0) return 0f;
+        //                 if (ticks <= 20) return 0.125f;
+        //                 if (ticks <= 40) return 0.125f * 2;
+        //                 if (ticks <= 60) return 0.125f * 3;
+        //                 if (ticks <= 80) return 0.125f * 4;
+        //                 if (ticks <= 100) return 0.125f * 5;
+        //                 if (ticks <= 120) return 0.125f * 6;
+        //                 if (ticks <= 140) return 0.125f * 7;
+        //                 else return 0f;
+        //             }
+        //             return 0f;
+        //         }));
+        ModelPredicateProviderRegistry.register(ModItems.POCKET_GALAXY, new Identifier(MOD_ID, "active"),
                 (stack, world, entity, seed) -> {
                     if (entity != null && entity.isUsingItem()) {
-                        if (entity.getStackInHand(entity.getActiveHand()).getItem() == ModItems.VACUUM_RELIC) {
+                        if (entity.getStackInHand(entity.getActiveHand()).getItem() == ModItems.POCKET_GALAXY) {
                             return 1;
                         }
                     }

@@ -75,7 +75,7 @@ public class StarArrowProjectile extends ArrowEntity {
                 if (this.getOwner() instanceof LivingEntity living) {
                     entity.setAttacker(living);
                 }
-                entity.addStatusEffect(new StatusEffectInstance(ModEffects.STARFALL_EFFECT, 25 + r.nextInt(1, 4) * 5, 1));
+                entity.addStatusEffect(new StatusEffectInstance(ModEffects.STARFALL_EFFECT, 25 + r.nextInt(1, 4) * 5, 1, true, false));
             }
         }
     }

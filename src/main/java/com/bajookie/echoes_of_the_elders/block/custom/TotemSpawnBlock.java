@@ -25,8 +25,6 @@ public class TotemSpawnBlock extends Block implements IPrismActionable {
         if (side == Direction.UP) {
             world.setBlockState(blockPos, Blocks.AIR.getDefaultState());
 
-            var cdm = user.getItemCooldownManager();
-
             if (!world.isClient) {
                 var totem = ModEntities.RAID_TOTEM_ENTITY.create(world);
                 if (totem != null) {
@@ -39,8 +37,6 @@ public class TotemSpawnBlock extends Block implements IPrismActionable {
                     world.playSound(x, y, z, SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1f, 0.5f, true);
                 }
             }
-
-            cdm.set(ModItems.ELDER_PRISM, 20 * 300);
 
             return true;
         }

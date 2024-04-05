@@ -36,6 +36,7 @@ public class ModText {
     public static final Function<MutableText, Text> SHIELD = registerIconTag("shield", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> ARROW = registerIconTag("arrow", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> PICK = registerIconTag("pick", colored(Formatting.WHITE));
+    public static final Function<MutableText, Text> ITEM = registerIconTag("item", colored(Formatting.WHITE));
 
     public static final Function<MutableText, Text> INFO = registerIconTag("info");
     public static final Function<MutableText, Text> RECHARGE = registerIconTag("recharge", colored(0x6777ff));
@@ -53,7 +54,7 @@ public class ModText {
 
     public static final Function<MutableText, Text> RIGHT_CLICK = registerIconTag("right_click");
     public static final Function<MutableText, Text> LEFT_CLICK = registerIconTag("left_click");
-    public static final Function<MutableText, Text> KEY = registerIconTag("key");
+    public static final Function<MutableText, Text> KEY = registerIconTag("key", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> CURSOR = registerIconTag("cursor");
     public static final Function<MutableText, Text> SWITCH_ON = registerIconTag("switch_on", colored(Formatting.GREEN));
     public static final Function<MutableText, Text> SWITCH_OFF = registerIconTag("switch_off", colored(Formatting.GRAY));

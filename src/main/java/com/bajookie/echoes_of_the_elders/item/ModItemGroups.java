@@ -22,35 +22,20 @@ public class ModItemGroups {
     public static final ItemGroup MOD_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP, new Identifier(MOD_ID, "mod_item_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.echoes_of_the_elders")).icon(() -> new ItemStack(ModBlocks.MINERS_FRUIT_BLOCK)).entries((displayContext, entries) -> {
                 entries.add(ModItems.EXPLORER_FRUIT);
-                // blocks
-                // entries.add(ModBlocks.BEAR_TRAP_BLOCK);
-                // flowers
                 entries.add(ModBlocks.EXPLORER_FRUIT_BLOCK);
                 entries.add(ModBlocks.MINERS_FRUIT_BLOCK);
                 entries.add(ModBlocks.NETHER_FRUIT_BLOCK);
                 entries.add(ModBlocks.ARTIFACT_VAULT);
-                // entries.add(ModBlocks.SUN_RUNE_BLOCK);
-                // entries.add(ModBlocks.CHISELED_MOSSY_STONE);
-                // entries.add(ModBlocks.ELDER_LILY_FLOWER);
-                // trees
-                // entries.add(ModBlocks.ANCIENT_TREE_LEAVES);
-                // entries.add(ModBlocks.ANCIENT_TREE_LOG);
-                // entries.add(ModBlocks.ANCIENT_TREE_WOOD);
-                // entries.add(ModBlocks.ANCIENT_TREE_PLANKS);
-                // entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_LOG);
-                // entries.add(ModBlocks.STRIPPED_ANCIENT_TREE_WOOD);
                 entries.add(ModBlocks.ANCIENT_TREE_SAPLING);
                 entries.add(ModItems.OLD_KEY);
                 entries.add(ModItems.CORRUPTED_KEY);
                 entries.add(ModBlocks.SPIRITAL_GRASS);
                 // entries.add(ModItems.RAID_DEBUG_ITEM);
-                // entries.add(ModBlocks.SPIRIT_PETALS);
                 entries.add(ModBlocks.WOOL_TENT_DOOR);
                 entries.add(ModItems.SPIRIT_SPAWN_EGG);
                 entries.add(ModItems.RAID_TOTEM_EGG);
                 entries.add(ModItems.ELDERMAN_SPAWN_EGG);
                 entries.add(ModItems.ZOMBEE_SPAWN_EGG);
-                // entries.add(ModItems.ANCIENT_GRAINS_SEEDS);
                 entries.add(ModBlocks.TOTEM_SPAWN_BLOCK);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 1), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 5), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
@@ -90,11 +75,11 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.GUNHEELS);
                 addStackedVariants(entries, ModItems.ELDER_PRISM);
                 // addStackedVariants(entries, ModItems.STAT_FRUIT_HP);
-                addStackedVariants(entries, ModItems.TIME_TOKEN);
+                addStackedVariants(entries, ModItems.TIME_GLYPH);
                 addStackedVariants(entries, ModItems.WTF_TOKEN);
-                addStackedVariants(entries, ModItems.ARC_LIGHTNING);
-                addStackedVariants(entries, ModItems.AIR_SWEEPER);
-                addStackedVariants(entries, ModItems.VACUUM_RELIC);
+                addStackedVariants(entries, ModItems.SPARKING_MITTS);
+                addStackedVariants(entries, ModItems.SKY_WARD);
+                addStackedVariants(entries, ModItems.POCKET_GALAXY);
                 addStackedVariants(entries, ModItems.MOLTEN_CHAMBER);
                 addStackedVariants(entries, ModItems.ECHOING_SWORD);
                 addStackedVariants(entries, ModItems.ORB_OF_ANNIHILATION);
@@ -108,12 +93,12 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.WTF_HAMMER);
                 addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
                 addStackedVariants(entries, ModItems.VOID_RAY);
-                addStackedVariants(entries, ModItems.GANGWAY);
+                addStackedVariants(entries, ModItems.MASK_OF_DAWN);
                 addStackedVariants(entries, ModItems.COWPLATE);
                 addStackedVariants(entries, ModItems.HARELEAP_STRIDERS);
                 addStackedVariants(entries, ModItems.ATLAS_GREAVES);
                 addStackedVariants(entries, ModItems.SPIRAL_SWORD);
-                addStackedVariants(entries, ModItems.MONOLOOK_SPAWN);
+                // addStackedVariants(entries, ModItems.MONOLOOK_SPAWN);
             }).build());
 
     public static void registerGroups() {

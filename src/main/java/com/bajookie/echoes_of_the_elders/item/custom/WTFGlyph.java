@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ICooldownReduction;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.client.MinecraftClient;
@@ -17,8 +18,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class WTFToken extends Item implements IArtifact, ICooldownReduction {
-    public WTFToken() {
+public class WTFGlyph extends Item implements IArtifact, ICooldownReduction {
+    public WTFGlyph() {
         super(new FabricItemSettings().maxCount(1).rarity(Rarity.EPIC));
     }
 
@@ -27,7 +28,7 @@ public class WTFToken extends Item implements IArtifact, ICooldownReduction {
         var stack = user.getStackInHand(hand);
         var cdm = user.getItemCooldownManager();
 
-        TimeTokenItem.clearCooldowns(cdm);
+        TimeGlyph.clearCooldowns(cdm);
 
         if (world.isClient) {
             MinecraftClient.getInstance().gameRenderer.showFloatingItem(stack);
@@ -36,11 +37,11 @@ public class WTFToken extends Item implements IArtifact, ICooldownReduction {
         return TypedActionResult.success(stack);
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("tooltip.echoes_of_the_elders.time_token.info"));
+    public static final List<Ability> ABILITIES = List.of(TimeGlyph.REFRESH_ABILITY);
 
-        super.appendTooltip(stack, world, tooltip, context);
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     @Override

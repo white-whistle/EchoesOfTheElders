@@ -3,8 +3,8 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
+import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
-import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -27,13 +27,20 @@ public class AtlasGreaves extends ArmorItem implements IArtifact, IStackPredicat
         super(ATLAS_GREAVES_MATERIAL, Type.LEGGINGS, new ArtifactItemSettings());
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info1"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info2"));
-        tooltip.add(TextUtil.translatable("ability.echoes_of_the_elders.atlas_greaves.grounded.info3"));
+    public static final Ability IMMOVABLE_ABILITY = new Ability("immovable", Ability.AbilityType.PASSIVE) {
+        @Override
+        public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
+            section.line("info1");
+            section.line("info2");
+            section.line("info3");
+        }
+    };
 
-        super.appendTooltip(stack, world, tooltip, context);
+    public static final List<Ability> ABILITIES = List.of(IMMOVABLE_ABILITY);
+
+    @Override
+    public List<Ability> getAbilities(ItemStack itemStack) {
+        return ABILITIES;
     }
 
     public static boolean isEffectActive(LivingEntity entity) {

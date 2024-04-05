@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "echoes_of_the_elders:item/vacuum_relic_active"
-  }
-}

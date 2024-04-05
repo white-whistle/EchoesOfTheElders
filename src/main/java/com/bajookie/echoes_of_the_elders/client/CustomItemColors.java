@@ -61,7 +61,7 @@ public class CustomItemColors {
             }
 
             return 0x6DD307;
-        }, ModItems.TIME_TOKEN);
+        }, ModItems.TIME_GLYPH);
 
         ColorProviderRegistry.ITEM.register((stack, index) -> {
             if (index == 0) return 0xFFFFFF;

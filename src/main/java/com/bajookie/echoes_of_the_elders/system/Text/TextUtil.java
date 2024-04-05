@@ -37,8 +37,16 @@ public class TextUtil {
         return MutableText.of(new ModTextComponent(content, args));
     }
 
+    public static MutableText concat(MutableText t1, MutableText t2) {
+        return Text.translatable("tooltip.echoes_of_the_elders.join", t1, t2);
+    }
+
     public static MutableText join(MutableText t1, MutableText t2) {
         return Text.translatable("tooltip.echoes_of_the_elders.join_spaced", t1, t2);
+    }
+
+    public static MutableText plus(MutableText t1, MutableText t2) {
+        return Text.translatable("tooltip.echoes_of_the_elders.join_plus", t1, t2);
     }
 
     public static MutableText joinSmall(MutableText t1, MutableText t2) {

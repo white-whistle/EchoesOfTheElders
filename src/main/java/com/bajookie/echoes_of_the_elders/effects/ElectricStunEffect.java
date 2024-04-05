@@ -2,7 +2,6 @@ package com.bajookie.echoes_of_the_elders.effects;
 
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -20,7 +19,7 @@ public class ElectricStunEffect extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, int amplifier) {
-        entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,20*2,10),entity.getLastAttacker());
+        entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 20 * 2, 10, true, false), entity.getLastAttacker());
         super.onApplied(entity, amplifier);
     }
 
@@ -30,8 +29,8 @@ public class ElectricStunEffect extends StatusEffect {
         World world = entity.getWorld();
         Vec3d entityPos = entity.getPos();
         Random r = new Random();
-        if (!world.isClient){
-            ((ServerWorld)world).spawnParticles(ModParticles.LIGHTNING_PARTICLE, entityPos.x,entityPos.y+0.75,entityPos.z,1,r.nextInt(-5,5)*0.1,r.nextInt(3,5)*0.1, r.nextInt(-5,5)*0.1,0.5);
+        if (!world.isClient) {
+            ((ServerWorld) world).spawnParticles(ModParticles.ELECTRIC_SHOCK, entityPos.x, entityPos.y + 0.75, entityPos.z, 1, r.nextInt(-5, 5) * 0.1, r.nextInt(3, 5) * 0.1, r.nextInt(-5, 5) * 0.1, 0.5);
 
         }
     }

@@ -47,7 +47,6 @@ public class ItemStackMixin implements ItemstackDecrementEvent.ModItemstackExten
         }
     }
 
-
     @Inject(method = "decrement", at = @At("HEAD"))
     private void onStackDecrement(int amount, CallbackInfo ci) {
         var stack = (ItemStack) (Object) (this);
