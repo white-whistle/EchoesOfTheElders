@@ -6,6 +6,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
 public class TextArgs {
@@ -13,6 +14,12 @@ public class TextArgs {
 
     public TextArgs() {
         args = new HashMap<>();
+    }
+
+    public TextArgs(Consumer<TextArgs> consumer) {
+        this();
+
+        consumer.accept(this);
     }
 
     public TextArgs put(String k, Object v) {

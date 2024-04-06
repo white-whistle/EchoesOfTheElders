@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.ability.TooltipHelper;
 import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Soulbound;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.Tier;
@@ -13,6 +14,7 @@ import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
 import com.bajookie.echoes_of_the_elders.system.Text.TextUtil;
 import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,6 +43,8 @@ public class ClientItemMixin {
         if (player == null) return;
 
         var item = stack.getItem();
+
+        var shifting = Screen.hasShiftDown();
 
         boolean skipItemCooldown = false;
         if (item instanceof IArtifact iArtifact) {
@@ -102,6 +106,11 @@ public class ClientItemMixin {
             tryPad.run();
             var name = Soulbound.getName(stack);
             tooltip.add((TextUtil.translatable("tooltip.echoes_of_the_elders.soulbound", new TextArgs().put("player", name))));
+        }
+
+
+        if (shifting) {
+            DropCondition.appendTooltip(stack, world, tooltip, context);
         }
     }
 }
