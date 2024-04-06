@@ -1,6 +1,7 @@
 package com.bajookie.echoes_of_the_elders.item.ability;
 
 import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -33,9 +34,11 @@ public class TooltipHelper {
     }
 
     public TooltipHelper sections(TooltipSection... sections) {
+        var shifting = Screen.hasShiftDown();
+
         int i = 0;
         for (var s : sections) {
-            if (i > 0) emptyLine();
+            if (i > 0 && !shifting) emptyLine();
             section(s);
             i++;
         }

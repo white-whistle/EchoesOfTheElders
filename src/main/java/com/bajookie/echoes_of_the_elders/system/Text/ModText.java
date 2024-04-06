@@ -43,7 +43,7 @@ public class ModText {
     public static final Function<MutableText, Text> COOLDOWN = registerIconTag("cooldown", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_STATIC = registerIconTag("cooldown_static", colored(0x4A56C7));
     public static final Function<MutableText, Text> COOLDOWN_REDUCTION = registerIconTag("cooldown_reduction", colored(Formatting.BLUE));
-    public static final Function<MutableText, Text> STACK_LEVEL = registerIconTag("power_star");
+    public static final Function<MutableText, Text> STACK_LEVEL = registerIconTag("power_star", colored(Formatting.WHITE));
     public static final Function<MutableText, Text> TIER = registerIconTag("tier", ModText::rainbowText, "tier", () -> CustomItemColors.rainbow().getRGB());
     public static final Function<MutableText, Text> SOULBOUND = registerIconTag("soulbound", colored(0xc789d8));
     public static final Function<MutableText, Text> PRISM = registerIconTag("prism", ModText::rainbowText);

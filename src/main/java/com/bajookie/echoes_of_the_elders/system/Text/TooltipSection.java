@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.Text;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
@@ -30,7 +31,11 @@ public abstract class TooltipSection {
             }
         };
 
-        appendTooltipInfo(stack, world, tooltip, context, ctx);
+        var shifting = Screen.hasShiftDown();
+
+        if (!shifting) {
+            appendTooltipInfo(stack, world, tooltip, context, ctx);
+        }
     }
 
     public MutableText title(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {

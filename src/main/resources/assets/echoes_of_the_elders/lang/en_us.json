@@ -237,8 +237,10 @@
   "ability.echoes_of_the_elders.gangway.info1": "shoot a beam for <magic>{damage}</magic>",
   "ability.echoes_of_the_elders.impl.trigger": "<YELLOW>[{trigger}]</YELLOW>",
   "ability.echoes_of_the_elders.impl.trigger_over_stack": "<YELLOW>[<cursor/><right_click/>➡<item/>]</YELLOW>",
-  "raid_drops.echoes_of_the_elders.title": "Dropped in raids:",
-  "raid_drops.echoes_of_the_elders.level": "<power_star/> Level {min}-{max}",
+  "raid_drops.echoes_of_the_elders.title": "<ORANGE>Dropped in raids:</ORANGE>",
+  "raid_drops.echoes_of_the_elders.level": "<GRAY><power_star/> Level <WHITE>{min}-{max}</WHITE></GRAY>",
+  "raid_drops.echoes_of_the_elders.level.gt": "<GRAY><power_star/> Level <WHITE>>{min}</WHITE></GRAY>",
+  "raid_drops.echoes_of_the_elders.level.lt": "<GRAY><power_star/> Level <WHITE><{max}</WHITE></GRAY>",
   "raid_drops.echoes_of_the_elders.dimension": "<dimension/> Dimension {dimension}",
   "attribute.echoes_of_the_elders.name.generic.evasion": "Evasion",
   "key.echoes_of_the_elders.sneak": "sneak"
