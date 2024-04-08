@@ -1,9 +1,6 @@
 package com.bajookie.echoes_of_the_elders;
 
-import com.bajookie.echoes_of_the_elders.datagen.ModAdvancementProvider;
-import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
-import com.bajookie.echoes_of_the_elders.datagen.ModSurfaceRulesGenerator;
-import com.bajookie.echoes_of_the_elders.datagen.ModWorldGenerator;
+import com.bajookie.echoes_of_the_elders.datagen.*;
 import com.bajookie.echoes_of_the_elders.util.*;
 import com.bajookie.echoes_of_the_elders.world.ModConfiguredFeatures;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
@@ -14,6 +11,8 @@ import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
+
+import java.io.IOException;
 
 public class EOTEDataGenerator implements DataGeneratorEntrypoint {
     @Override
@@ -28,13 +27,19 @@ public class EOTEDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(ModWorldGenerator::new);
         pack.addProvider(ModAdvancementProvider::new);
         ModSurfaceRulesGenerator.generateSurfaceRules();
+
+        try {
+            ItemMetadataJsonifier.generateMetaFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-	@Override
-	public void buildRegistry(RegistryBuilder registryBuilder) {
-		registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
-		registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
-		registryBuilder.addRegistry(RegistryKeys.DIMENSION_TYPE, ModDimensions::bootstrapType);
+    @Override
+    public void buildRegistry(RegistryBuilder registryBuilder) {
+        registryBuilder.addRegistry(RegistryKeys.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.PLACED_FEATURE, ModPlacedFeatures::bootstrap);
+        registryBuilder.addRegistry(RegistryKeys.DIMENSION_TYPE, ModDimensions::bootstrapType);
         registryBuilder.addRegistry(RegistryKeys.BIOME, ModBiomes::bootstrap);
-	}
+    }
 }

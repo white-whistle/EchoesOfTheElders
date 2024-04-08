@@ -1,0 +1,272 @@
+[
+  {
+    "item": "void_ray",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "wtf_hammer",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "artifact_hammer",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "magic_hammer",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "raid_totem_egg",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "zombee_spawn_egg",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "elderman_spawn_egg",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "spirit_spawn_egg",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "spiral_sword",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "starfall_bow",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "stepping_stone",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "heat_stone",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "atlas_greaves",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "hareleap_striders",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "cowplate",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "monolook_spawn",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "gangway",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "ancient_minigun",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "icicle_staff",
+    "min": 0,
+    "max": 50
+  },
+  {
+    "item": "earth_spike_relic",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "pandoras_bag",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "orb_of_annihilation",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "molten_chamber_shot",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "molten_chamber",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "corrupted_key",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "pocket_galaxy",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "sky_ward_shot",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "sky_ward",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "sparking_mitts",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "raid_debug_item",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "wtf_token",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "time_token",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "elder_prism",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "reality_pick",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "gunheels",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "godslayer",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "echoing_sword",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "orb_of_lightning",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "wither_scales_item",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "old_key_item",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "quickening_band",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "potion_mirage_item",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "doomstick_item",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "scorchers_mitts",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "silent_fire",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "gale_arrow",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "gale_quiver",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "portal_ring",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "vitality_pump",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "midas_hammer",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "shiny_ancient_stone_sword",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "ancient_stone_sword",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "explorers_fruit",
+    "min": 0,
+    "max": 2147483647
+  },
+  {
+    "item": "radiant_lotus_item",
+    "min": 0,
+    "max": 2147483647
+  }
+]
