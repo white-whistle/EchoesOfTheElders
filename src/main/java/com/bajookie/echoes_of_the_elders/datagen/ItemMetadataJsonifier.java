@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.datagen;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
+import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import net.minecraft.item.Item;
@@ -12,27 +13,33 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ItemMetadataJsonifier {
-    record ItemMetadata(String item, int min, int max) {
-    }
-
     public static void generateMetaFile() throws IOException {
-
-
+        
         var outFile = "artifactItemMetadata";
 
-
         var itemMeta = ModItems.registeredModItems.stream().map(item -> {
+            JsonObject jsonObject = new JsonObject();
+
+            jsonObject.addProperty("item", item.toString());
+
             var clazz = item.getClass();
             var dropMeta = clazz.getAnnotation(DropCondition.RaidLevelBetween.class);
-            int min = 0, max = Integer.MAX_VALUE;
 
             if (dropMeta != null) {
-                min = dropMeta.min();
-                max = dropMeta.max();
+                var dropData = new JsonObject();
+                dropData.addProperty("min", dropMeta.min());
+                dropData.addProperty("max", dropMeta.max());
+
+                jsonObject.add("dropData", dropData);
             }
 
-            return new ItemMetadata(item.toString(), min, max);
-        }).toArray(ItemMetadata[]::new);
+            if (item instanceof IRaidReward iRaidReward) {
+                jsonObject.addProperty("isReward", true);
+                jsonObject.addProperty("rarity", iRaidReward.getRarity().toString());
+            }
+
+            return jsonObject;
+        }).toArray(JsonObject[]::new);
 
         writeFile(itemMeta, outFile);
     }

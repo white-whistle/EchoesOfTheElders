@@ -3,20 +3,21 @@ import { Item, ItemMeta } from './Item';
 
 export const ItemGrid = ({
 	items,
+	itemSize,
 	...rest
-}: BoxProps & { items: ItemMeta[] }) => {
+}: BoxProps & { items: ItemMeta[]; itemSize: number }) => {
 	return (
 		<Box
 			{...rest}
 			display='grid'
 			style={{
 				gridAutoFlow: 'row',
-				gap: '10px',
-				gridTemplateColumns: 'repeat(auto-fill, 200px)',
+
+				gridTemplateColumns: `repeat(auto-fill, ${itemSize}px)`,
 			}}
 		>
-			{items.map((item, index) => (
-				<Item key={item.item} index={index} item={item} />
+			{items.map((item) => (
+				<Item key={item.item} item={item} w={itemSize} h={itemSize} />
 			))}
 		</Box>
 	);
