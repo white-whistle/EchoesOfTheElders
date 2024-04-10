@@ -16,7 +16,7 @@ import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 @SuppressWarnings("unused")
 public class ModText {
-    private static final HashMap<String, Function<MutableText, Text>> registeredTags = new HashMap<>();
+    public static final HashMap<String, Function<MutableText, Text>> registeredTags = new HashMap<>();
     public static final Function<MutableText, Text> FIRE = registerIconTag("fire", colored(0xFFB12F));
     public static final Function<MutableText, Text> LIGHTNING = registerIconTag("lightning", colored(0xF8FF6F));
     public static final Function<MutableText, Text> MAGIC = registerIconTag("magic", colored(0xD874FF));

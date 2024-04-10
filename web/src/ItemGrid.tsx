@@ -1,5 +1,6 @@
 import { Box, BoxProps } from '@mantine/core';
-import { Item, ItemMeta } from './Item';
+import { Item } from './Item';
+import { ItemMeta } from './types';
 
 export const ItemGrid = ({
 	items,
