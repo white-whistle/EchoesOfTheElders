@@ -5,18 +5,8 @@ import { useState } from 'react';
 import styles from './Item.module.css';
 import { MCText } from './MCText';
 import { FormattedMessage } from 'react-intl';
-
-export type ItemMeta = {
-	item: string;
-
-	dropData?: {
-		min: number;
-		max: number;
-	};
-
-	rarity?: string;
-	isReward?: boolean;
-};
+import { ItemMeta } from './types';
+import { ArtifactAbilities } from './logic/mcTooltipToFmsg';
 
 export function textureFromItem(item: string) {
 	return '/item/' + item + '.png';
@@ -42,6 +32,9 @@ export const Item = ({ item, ...rest }: BoxProps & { item: ItemMeta }) => {
 								id={`item.echoes_of_the_elders.${item.item}`}
 							/>
 						</MCText>
+
+						<ArtifactAbilities item={item} />
+
 						{Boolean(item.dropData) && (
 							<Vertical>
 								<MCText>Drops from raids:</MCText>

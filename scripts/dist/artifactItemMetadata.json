@@ -1,168 +1,1079 @@
-[
-  {
-    "item": "void_ray"
-  },
-  {
-    "item": "wtf_hammer"
-  },
-  {
-    "item": "artifact_hammer"
-  },
-  {
-    "item": "magic_hammer"
-  },
-  {
-    "item": "raid_totem_egg"
-  },
-  {
-    "item": "zombee_spawn_egg"
-  },
-  {
-    "item": "elderman_spawn_egg"
-  },
-  {
-    "item": "spirit_spawn_egg"
-  },
-  {
-    "item": "spiral_sword"
-  },
-  {
-    "item": "starfall_bow"
-  },
-  {
-    "item": "stepping_stone"
-  },
-  {
-    "item": "heat_stone"
-  },
-  {
-    "item": "atlas_greaves"
-  },
-  {
-    "item": "hareleap_striders"
-  },
-  {
-    "item": "cowplate"
-  },
-  {
-    "item": "monolook_spawn"
-  },
-  {
-    "item": "gangway"
-  },
-  {
-    "item": "ancient_minigun"
-  },
-  {
-    "item": "icicle_staff",
-    "dropData": {
-      "min": 0,
-      "max": 50
+{
+  "items": [
+    {
+      "item": "void_ray",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.void_ray",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "2"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "wtf_hammer",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.perfect_touch",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.infinite_potential",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "artifact_hammer",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 128,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.artisans_touch",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "magic_hammer",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 1,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.artisans_touch",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "one_time_use"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "raid_totem_egg"
+    },
+    {
+      "item": "zombee_spawn_egg"
+    },
+    {
+      "item": "elderman_spawn_egg"
+    },
+    {
+      "item": "spirit_spawn_egg"
+    },
+    {
+      "item": "spiral_sword",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.auto_attack",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "starfall_bow",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.starfall",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "info2",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "4"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "stepping_stone",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.mountain_scaler",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "step_bonus": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "1"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "heat_stone",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 1,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.infiniburn",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "atlas_greaves",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.immovable",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "info2"
+            },
+            {
+              "name": "info3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "hareleap_striders",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.bunny_hop",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "cowplate",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.shrug",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.milkable",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "monolook_spawn"
+    },
+    {
+      "item": "gangway",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.gangway",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "20"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "ancient_minigun",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "icicle_staff",
+      "dropData": {
+        "min": 0,
+        "max": 50
+      },
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [
+        "ICE"
+      ],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.magic_snowball",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "10"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.heavy_ice",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "30"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "earth_spike_relic",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "pandoras_bag",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "orb_of_annihilation",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.mount",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "info2",
+              "args": {
+                "explosion_power": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "6"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.fiery_explosion",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "molten_chamber_shot"
+    },
+    {
+      "item": "molten_chamber",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.molten_shot",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage_min": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "10"
+                  ]
+                },
+                "damage_max": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "60"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "corrupted_key"
+    },
+    {
+      "item": "pocket_galaxy",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.vacuum",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.miniature_black_hole",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "sky_ward_shot"
+    },
+    {
+      "item": "sky_ward",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.punish_flight",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "info2"
+            },
+            {
+              "name": "info3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "sparking_mitts",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.overcharge",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "duration": {
+                  "with": {
+                    "seconds": {
+                      "translate": "number.echoes_of_the_elders.int",
+                      "with": [
+                        "2"
+                      ]
+                    }
+                  },
+                  "echoes_of_the_elders:translate": "tooltip.echoes_of_the_elders.seconds"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.sparking_touch",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "4"
+                  ]
+                },
+                "number_of_attacks": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "4"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "raid_debug_item",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "wtf_token",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.refresh",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "time_token",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.refresh",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "elder_prism",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.spiritual_shift",
+          "info": []
+        },
+        {
+          "name": "ability.echoes_of_the_elders.refract",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "reality_pick",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.cosmic_pick",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "gunheels",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.bullet_jump",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "godslayer",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.cosmic_edge",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "echoing_sword",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.echoed_strike",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "orb_of_lightning",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.lightning_barrage",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "strikes": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "wither_scales_item",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.wither_scales",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "old_key_item"
+    },
+    {
+      "item": "quickening_band",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.surge",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "level": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "2"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info2",
+              "args": {
+                "duration": {
+                  "with": {
+                    "seconds": {
+                      "translate": "number.echoes_of_the_elders.int",
+                      "with": [
+                        "15"
+                      ]
+                    }
+                  },
+                  "echoes_of_the_elders:translate": "tooltip.echoes_of_the_elders.seconds"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "potion_mirage_item",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.mirror_image",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "doomstick_item",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 32,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.doom_beam",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "20"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "scorchers_mitts",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.fire_snap",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "multiplier": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "1"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info2"
+            },
+            {
+              "name": "info3",
+              "args": {
+                "distance": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "16"
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.scorching_touch",
+          "info": [
+            {
+              "name": "info1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "silent_fire"
+    },
+    {
+      "item": "gale_arrow",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "gale_quiver",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": []
+    },
+    {
+      "item": "portal_ring",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.dimensional_shift",
+          "info": []
+        }
+      ]
+    },
+    {
+      "item": "vitality_pump",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.pump",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "heal": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "1"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "midas_hammer",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.executioners_fee",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "damage": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "20"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info2"
+            }
+          ]
+        },
+        {
+          "name": "ability.echoes_of_the_elders.greedy_strike",
+          "info": [
+            {
+              "name": "info1",
+              "args": {
+                "percent": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "10"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "item": "shiny_ancient_stone_sword"
+    },
+    {
+      "item": "ancient_stone_sword"
+    },
+    {
+      "item": "explorers_fruit"
+    },
+    {
+      "item": "radiant_lotus_item",
+      "isReward": true,
+      "rarity": "COMMON",
+      "isArtifact": true,
+      "artifactMaxStack": 16,
+      "tags": [],
+      "abilities": [
+        {
+          "name": "ability.echoes_of_the_elders.cleansing_resonance",
+          "info": [
+            {
+              "name": "info1"
+            },
+            {
+              "name": "info2",
+              "args": {
+                "hunger_amount": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "2"
+                  ]
+                },
+                "heal_percent": {
+                  "translate": "number.echoes_of_the_elders.int",
+                  "with": [
+                    "10"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "info3"
+            }
+          ]
+        }
+      ]
     }
-  },
-  {
-    "item": "earth_spike_relic"
-  },
-  {
-    "item": "pandoras_bag"
-  },
-  {
-    "item": "orb_of_annihilation"
-  },
-  {
-    "item": "molten_chamber_shot"
-  },
-  {
-    "item": "molten_chamber"
-  },
-  {
-    "item": "corrupted_key"
-  },
-  {
-    "item": "pocket_galaxy"
-  },
-  {
-    "item": "sky_ward_shot"
-  },
-  {
-    "item": "sky_ward"
-  },
-  {
-    "item": "sparking_mitts"
-  },
-  {
-    "item": "raid_debug_item"
-  },
-  {
-    "item": "wtf_token"
-  },
-  {
-    "item": "time_token"
-  },
-  {
-    "item": "elder_prism"
-  },
-  {
-    "item": "reality_pick"
-  },
-  {
-    "item": "gunheels"
-  },
-  {
-    "item": "godslayer"
-  },
-  {
-    "item": "echoing_sword"
-  },
-  {
-    "item": "orb_of_lightning"
-  },
-  {
-    "item": "wither_scales_item"
-  },
-  {
-    "item": "old_key_item"
-  },
-  {
-    "item": "quickening_band"
-  },
-  {
-    "item": "potion_mirage_item"
-  },
-  {
-    "item": "doomstick_item"
-  },
-  {
-    "item": "scorchers_mitts"
-  },
-  {
-    "item": "silent_fire"
-  },
-  {
-    "item": "gale_arrow"
-  },
-  {
-    "item": "gale_quiver"
-  },
-  {
-    "item": "portal_ring"
-  },
-  {
-    "item": "vitality_pump"
-  },
-  {
-    "item": "midas_hammer"
-  },
-  {
-    "item": "shiny_ancient_stone_sword"
-  },
-  {
-    "item": "ancient_stone_sword"
-  },
-  {
-    "item": "explorers_fruit"
-  },
-  {
-    "item": "radiant_lotus_item"
-  }
-]
+  ],
+  "richTextComponents": [
+    "magic",
+    "cooldown_static",
+    "power_star",
+    "arrow",
+    "OBFUSCATED",
+    "DARK_AQUA",
+    "RESET",
+    "positive_effect",
+    "pad",
+    "pick",
+    "soulbound",
+    "on_hit",
+    "cooldown",
+    "left_click",
+    "fire",
+    "LIGHT_PURPLE",
+    "BLACK",
+    "BOLD",
+    "prism",
+    "info",
+    "lightning",
+    "item",
+    "AQUA",
+    "switch_on",
+    "active",
+    "right_click",
+    "heart",
+    "hunger",
+    "rainbow",
+    "switch_off",
+    "DARK_PURPLE",
+    "unique",
+    "boost",
+    "YELLOW",
+    "dash",
+    "cursor",
+    "shield",
+    "GOLD",
+    "GRAY",
+    "BLUE",
+    "UNDERLINE",
+    "gold",
+    "negative_effect",
+    "tier",
+    "recharge",
+    "space_small",
+    "DARK_RED",
+    "physical",
+    "dimension",
+    "key",
+    "ITALIC",
+    "potion",
+    "cooldown_reduction",
+    "WHITE",
+    "star",
+    "passive",
+    "DARK_BLUE",
+    "GREEN",
+    "RED",
+    "explosion",
+    "STRIKETHROUGH",
+    "DARK_GREEN",
+    "DARK_GRAY"
+  ]
+}

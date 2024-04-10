@@ -9,10 +9,11 @@ import {
 import { IntlProvider } from 'react-intl';
 
 import { useMemo, useState } from 'react';
-import { ItemMeta } from './Item';
+import { ItemMeta } from './types';
 
-import ITEM_META from '../../scripts/dist/artifactItemMetadata.json';
 import EN_US from '../../src/main/resources/assets/echoes_of_the_elders/lang/en_us.json';
+import defaultRichTextComponents from './defaultRichTextComponents';
+import { ITEM_META } from './itemMeta';
 
 const theme = createTheme({
 	/** Your theme override here */
@@ -23,14 +24,19 @@ function App() {
 
 	const items = useMemo(
 		() =>
-			(ITEM_META as ItemMeta[]).filter(
+			(ITEM_META.items as ItemMeta[]).filter(
 				(itemEntry) => !filter || itemEntry.item.includes(filter)
 			),
 		[filter]
 	);
 
 	return (
-		<IntlProvider messages={EN_US} locale='en-US' defaultLocale='en-US'>
+		<IntlProvider
+			messages={EN_US}
+			locale='en-US'
+			defaultLocale='en-US'
+			defaultRichTextElements={defaultRichTextComponents}
+		>
 			<MantineProvider theme={theme}>
 				<AppShell header={{ height: 60 }} padding='md'>
 					<AppShell.Header>EOTE</AppShell.Header>
