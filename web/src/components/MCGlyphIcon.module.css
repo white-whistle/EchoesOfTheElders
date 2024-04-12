@@ -1,0 +1,5 @@
+.glyph {
+	&[data-glyph-id="echoes_of_the_elders:pad"] {
+		transform: translate(0px, calc(var(--pixel-scaling) * 1px)) scale(1, 1.15);
+	}
+}

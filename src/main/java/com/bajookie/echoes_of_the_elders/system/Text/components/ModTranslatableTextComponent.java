@@ -25,7 +25,7 @@ public class ModTranslatableTextComponent extends ModTextComponent {
         super("", args);
         this.key = key;
         this.fallback = fallback;
-        this.args = args;
+        this.args = args == null ? new TextArgs() : args;
     }
 
     @Override

@@ -1,0 +1,6 @@
+.gui {
+	/* background-color: #c6c6c6; */
+	border-image: url("../assets/texture/gui.png");
+	border-image-slice: 4 fill;
+	image-rendering: pixelated;
+}

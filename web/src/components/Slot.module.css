@@ -1,8 +1,11 @@
-.item {
+.slot {
 	background-image: url("/gui/slot.png");
 	background-size: 100% 100%;
 	image-rendering: pixelated;
 	position: relative;
+	
+	--slot-pad: calc(1/18 * 100%);
+	padding: var(--slot-pad);
 
 	&:hover::after {
 		content: '';
@@ -11,9 +14,9 @@
 		opacity: 0.56;
 		pointer-events: none;
 		position: absolute;
-		top: 4px;
-		left: 4px;
-		right: 4px;
-		bottom: 4px;
+		top: var(--slot-pad);
+		left: var(--slot-pad);
+		right: var(--slot-pad);
+		bottom: var(--slot-pad);
 	}
 }

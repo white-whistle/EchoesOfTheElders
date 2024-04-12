@@ -52,6 +52,9 @@
     "TooltipComponentMixin",
     "WorldRendererMixin"
   ],
+  "server": [
+    "ServerItemMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

@@ -1,7 +1,6 @@
 package com.bajookie.echoes_of_the_elders.client;
 
 import com.bajookie.echoes_of_the_elders.item.ability.IHasSlotAbility;
-import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SCastItemStack;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;

@@ -5,7 +5,6 @@ import com.bajookie.echoes_of_the_elders.util.*;
 import com.bajookie.echoes_of_the_elders.world.ModConfiguredFeatures;
 import com.bajookie.echoes_of_the_elders.world.ModPlacedFeatures;
 import com.bajookie.echoes_of_the_elders.world.biome.ModBiomes;
-import com.bajookie.echoes_of_the_elders.world.biome.ModMaterialRules;
 import com.bajookie.echoes_of_the_elders.world.dimension.ModDimensions;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -29,7 +28,7 @@ public class EOTEDataGenerator implements DataGeneratorEntrypoint {
         ModSurfaceRulesGenerator.generateSurfaceRules();
 
         try {
-            ItemMetadataJsonifier.generateMetaFile();
+            ItemMetadataJsonExtractor.generateMetaFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,8 +1,6 @@
 package com.bajookie.echoes_of_the_elders.mixin;
 
 import com.bajookie.echoes_of_the_elders.item.ModGenericTooltip;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,18 +15,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(Item.class)
-public class ClientItemMixin {
+public class ServerItemMixin {
 
     @Inject(method = "appendTooltip", at = @At("TAIL"))
     public void appendGenericTooltips(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
-        var mc = MinecraftClient.getInstance();
-        if (mc.world == null) return;
-
-        var player = mc.player;
-        if (player == null) return;
-
-        var isShifting = Screen.hasShiftDown();
-
-        ModGenericTooltip.appendGenericTooltips(stack, world, tooltip, context, isShifting);
+        ModGenericTooltip.appendGenericTooltips(stack, world, tooltip, context, false);
     }
 }

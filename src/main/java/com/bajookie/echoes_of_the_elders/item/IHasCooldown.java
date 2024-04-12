@@ -11,6 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public interface IHasCooldown {
@@ -24,9 +25,19 @@ public interface IHasCooldown {
         return true;
     }
 
+    @Nullable
+    static private MutableText getCooldownMessageBase(ItemStack stack) {
+        var item = stack.getItem();
+        if (!(item instanceof IHasCooldown iHasCooldown)) return null;
+
+        var cd = iHasCooldown.getCooldown(stack);
+
+        return TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().put("cd", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))));
+    }
+
     @Environment(EnvType.CLIENT)
     @Nullable
-    static MutableText getCooldownMessage(ItemStack stack) {
+    static private MutableText getClientCooldownMessage(ItemStack stack) {
         var item = stack.getItem();
         if (!(item instanceof IHasCooldown iHasCooldown)) return null;
 
@@ -46,13 +57,24 @@ public interface IHasCooldown {
                 var totalTicks = e.getEndTick() - e.getStartTick();
                 var remainingTime = (int) (cdm.getCooldownProgress(item, mc.getTickDelta()) * totalTicks);
 
-                return TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))).put("remaining", TextUtil.formatTime(remainingTime)));
+                return TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown.active", new TextArgs().put("cd", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))).put("remaining", TextUtil.formatTime(remainingTime)));
 
             }
         } else {
-            return TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().put("cooldown", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))));
+            return TextUtil.translatable("tooltip.echoes_of_the_elders.cooldown", new TextArgs().put("cd", TextUtil.formatTime(cd).styled(s -> s.withColor(Formatting.BLUE))));
         }
 
         return null;
+    }
+
+    @Nullable
+    static MutableText getCooldownMessage(ItemStack stack, @Nullable World world) {
+        var isServer = world == null || !world.isClient;
+
+        if (isServer) {
+            return getCooldownMessageBase(stack);
+        }
+
+        return getClientCooldownMessage(stack);
     }
 }
