@@ -10,8 +10,11 @@ export const SLOT_SIZE = 18;
 
 export const Slot = ({
 	style,
+	shade = false,
 	...rest
-}: PolymorphicComponentProps<'div', BoxComponentProps>) => {
+}: PolymorphicComponentProps<'div', BoxComponentProps> & {
+	shade?: boolean;
+}) => {
 	const { scaling } = PixelScaling.use();
 
 	const slotSize = SLOT_SIZE * scaling;
@@ -21,7 +24,11 @@ export const Slot = ({
 			className={styles.slot}
 			w={slotSize}
 			h={slotSize}
-			style={{ cursor: rest.onClick ? 'pointer' : undefined, ...style }}
+			style={{
+				cursor: rest.onClick ? 'pointer' : undefined,
+				'--slot-shade': Number(shade),
+				...style,
+			}}
 			{...rest}
 		/>
 	);

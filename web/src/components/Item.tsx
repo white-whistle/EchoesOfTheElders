@@ -2,6 +2,7 @@ import { Box, BoxProps, Image } from '@mantine/core';
 import { ItemMeta } from '../types';
 import { PixelScaling } from './PixelScaling';
 import { forwardRef } from 'react';
+import MissingTexture from '../assets/texture/missing.png';
 
 export function textureFromItem(item: string) {
 	return '/item/' + item + '.png';
@@ -23,6 +24,7 @@ export const Item = forwardRef(
 			<Box w={itemSize} h={itemSize} {...rest} ref={ref}>
 				<Image
 					src={textureFromItem(item.item)}
+					fallbackSrc={MissingTexture}
 					w='100%'
 					h='100%'
 					style={{
