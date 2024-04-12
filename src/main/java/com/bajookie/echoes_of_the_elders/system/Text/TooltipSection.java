@@ -1,6 +1,6 @@
 package com.bajookie.echoes_of_the_elders.system.Text;
 
-import net.minecraft.client.gui.screen.Screen;
+import com.bajookie.echoes_of_the_elders.util.sided.ShiftingUtil;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.MutableText;
@@ -31,7 +31,7 @@ public abstract class TooltipSection {
             }
         };
 
-        var shifting = Screen.hasShiftDown();
+        var shifting = ShiftingUtil.isShifting();
 
         if (!shifting) {
             appendTooltipInfo(stack, world, tooltip, context, ctx);

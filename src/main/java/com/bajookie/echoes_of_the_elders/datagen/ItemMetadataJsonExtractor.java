@@ -11,13 +11,16 @@ import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.text.Text;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class ItemMetadataJsonifier {
+public class ItemMetadataJsonExtractor {
     public static void generateMetaFile() throws IOException {
 
         var outFile = "artifactItemMetadata";
@@ -56,28 +59,28 @@ public class ItemMetadataJsonifier {
                 for (var ability : iArtifact.getAbilities(stack)) {
                     var abilityJson = new JsonObject();
                     abilityJson.addProperty("name", ability.name);
-                    var abilityInfo = new JsonArray();
-                    abilityJson.add("info", abilityInfo);
-
-                    var mockTooltipSection = new TooltipSection.TooltipSectionContext() {
-                        @Override
-                        public TooltipSection.TooltipSectionContext line(String id, TextArgs args) {
-                            var lineJson = new JsonObject();
-                            lineJson.addProperty("name", id);
-                            if (args != null) {
-                                lineJson.add("args", args.toJson());
-                            }
-
-                            abilityInfo.add(lineJson);
-                            return this;
-                        }
-                    };
-
-                    ability.appendTooltipInfo(stack, null, List.of(), null, mockTooltipSection);
-
                     abilities.add(abilityJson);
                 }
                 jsonObject.add("abilities", abilities);
+
+                var tooltip = new ArrayList<Text>();
+                item.appendTooltip(stack, null, tooltip, new TooltipContext() {
+                    @Override
+                    public boolean isAdvanced() {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean isCreative() {
+                        return true;
+                    }
+                });
+
+                var tooltipJsonArray = new JsonArray();
+
+                tooltip.stream().map(Text.Serializer::toJsonTree).forEach(tooltipJsonArray::add);
+
+                jsonObject.add("tooltip", tooltipJsonArray);
             }
 
             return jsonObject;

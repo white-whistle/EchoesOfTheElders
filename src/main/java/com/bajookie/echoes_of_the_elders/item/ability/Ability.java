@@ -31,7 +31,7 @@ public class Ability extends TooltipSection {
         super.appendTooltip(stack, world, tooltip, context);
 
         if (this.hasCooldown()) {
-            var msg = IHasCooldown.getCooldownMessage(stack);
+            var msg = IHasCooldown.getCooldownMessage(stack, world);
             if (msg != null) {
                 tooltip.add(info(msg));
             }
@@ -66,7 +66,7 @@ public class Ability extends TooltipSection {
             )));
         }),
         GEAR((stack, world, tooltip, context) -> {
-            return TextUtil.translatable("ability.echoes_of_the_elders.impl.trigger", new TextArgs().put("trigger", ModText.KEY.apply((MutableText) ModKeyBindings.HELMET_ABILITY.getBoundKeyLocalizedText())));
+            return TextUtil.translatable("ability.echoes_of_the_elders.impl.trigger", new TextArgs().put("trigger", ModText.KEY.apply((world != null && world.isClient) ? (MutableText) ModKeyBindings.HELMET_ABILITY.getBoundKeyLocalizedText() : Text.empty())));
         });
 
         final ITooltipMessageGetter messageGetter;

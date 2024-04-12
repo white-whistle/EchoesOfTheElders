@@ -70,7 +70,7 @@ public class ModText {
     }
 
     public static MutableText join(Text t1, Text t2) {
-        return Text.translatable("tooltip.echoes_of_the_elders.join", t1, t2);
+        return TextUtil.concat((MutableText) t1, (MutableText) t2);
     }
 
     public static Function<MutableText, Text> registerIconTag(String name, Function<MutableText, Text> fn, String iconName, int iconColor) {

@@ -1,0 +1,27 @@
+.input {
+	border-radius: 0;
+	border-width: var(--pixel-scaling);
+	border-color: #2d2d2d;
+	background-color: #5f5f5f;
+	
+	&:focus {
+		border-color: white;
+	}
+
+	&:hover {
+		border-color: white;
+	}
+
+	font-family: Minecraft;
+	font-size: calc(var(--pixel-scaling) * 10);
+	height: calc(var(--pixel-scaling) * 20);
+
+	caret-color: white;
+	
+	color: white;
+
+	&::selection{
+		color: black;
+		background: white;
+	}
+}

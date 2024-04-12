@@ -14,15 +14,24 @@ import com.bajookie.echoes_of_the_elders.particles.*;
 import com.bajookie.echoes_of_the_elders.screen.client.ModHandledScreens;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
 import com.bajookie.echoes_of_the_elders.util.ModModelPredicateProvider;
+import com.bajookie.echoes_of_the_elders.util.sided.ShiftingUtil;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.minecraft.client.gui.screen.Screen;
 
 public class EOTEClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        ShiftingUtil.IMPL = new ShiftingUtil() {
+            @Override
+            public boolean get() {
+                return Screen.hasShiftDown();
+            }
+        };
+
         ModShaderTypes.init();
         ModShaders.init();
         ModArmor.init();

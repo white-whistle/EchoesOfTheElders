@@ -1,0 +1,8 @@
+.text {
+	font-family: Minecraft;
+	font-size: calc(10 * var(--pixel-scaling));
+	line-height: calc(10 * var(--pixel-scaling));
+	min-height: calc(10 * var(--pixel-scaling));
+	font-smooth: never;
+	text-shadow: var(--pixel-scaling) var(--pixel-scaling) 0 var(--mc-text-shadow-color, #302f2f);
+}

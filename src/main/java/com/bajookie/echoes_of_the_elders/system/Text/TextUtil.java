@@ -38,19 +38,19 @@ public class TextUtil {
     }
 
     public static MutableText concat(MutableText t1, MutableText t2) {
-        return Text.translatable("tooltip.echoes_of_the_elders.join", t1, t2);
+        return translatable("tooltip.echoes_of_the_elders.join", new TextArgs().put("1", t1).put("2", t2));
     }
 
     public static MutableText join(MutableText t1, MutableText t2) {
-        return Text.translatable("tooltip.echoes_of_the_elders.join_spaced", t1, t2);
+        return translatable("tooltip.echoes_of_the_elders.join_spaced", new TextArgs().put("1", t1).put("2", t2));
     }
 
     public static MutableText plus(MutableText t1, MutableText t2) {
-        return Text.translatable("tooltip.echoes_of_the_elders.join_plus", t1, t2);
+        return translatable("tooltip.echoes_of_the_elders.join_plus", new TextArgs().put("1", t1).put("2", t2));
     }
 
     public static MutableText joinSmall(MutableText t1, MutableText t2) {
-        return TextUtil.translatable("tooltip.echoes_of_the_elders.join_spaced_small", new TextArgs().put("1", t1).put("2", t2));
+        return translatable("tooltip.echoes_of_the_elders.join_spaced_small", new TextArgs().put("1", t1).put("2", t2));
     }
 
     public static MutableText padded(MutableText t1) {
