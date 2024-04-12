@@ -7,16 +7,21 @@
 	--slot-pad: calc(1/18 * 100%);
 	padding: var(--slot-pad);
 
-	&:hover::after {
+	&::after {
 		content: '';
 		position: relative;
-		background: white;
-		opacity: 0.56;
+		background: black;
+		opacity: calc(var(--slot-shade, 0) * 0.56);
 		pointer-events: none;
 		position: absolute;
 		top: var(--slot-pad);
 		left: var(--slot-pad);
 		right: var(--slot-pad);
 		bottom: var(--slot-pad);
+	}
+
+	&:hover::after {
+		background: white;
+		opacity: 0.56;
 	}
 }

@@ -5,6 +5,11 @@ import { useItem } from '../hooks/useItem';
 import { MCTooltip, MCTooltipPanel } from '../components/MCTooltip';
 import { BasicTooltip } from '../components/BasicTooltip';
 import { PixelScaling } from '../components/PixelScaling';
+import { DropRateGraph } from '../components/DropRateGraph';
+import { MCGui } from '../components/MCGui';
+import { MCText } from '../components/MCText';
+import { Box } from '@mantine/core';
+import { MC_PALETTE } from '../logic/MCPalette';
 
 export const ItemPage = () => {
 	const params = useParams();
@@ -17,12 +22,27 @@ export const ItemPage = () => {
 
 	return (
 		<Horizontal justify='center'>
-			<Vertical gap={px(6)} align='center'>
-				<Item item={item} />
-				<MCTooltipPanel>
-					<BasicTooltip item={item} />
-				</MCTooltipPanel>
-			</Vertical>
+			<MCGui>
+				<Vertical gap={px(6)} p={px(6)} align='center'>
+					<MCText
+						c={MC_PALETTE.dark_gray}
+						shadowColor={MC_PALETTE.gray}
+					>
+						Item info
+					</MCText>
+					<Horizontal justify='center'>
+						<Vertical gap={px(6)} p={px(6)} align='center'>
+							<Item item={item} />
+							<MCTooltipPanel>
+								<BasicTooltip item={item} />
+							</MCTooltipPanel>
+						</Vertical>
+						<Box h='350px'>
+							<DropRateGraph item={item} />
+						</Box>
+					</Horizontal>
+				</Vertical>
+			</MCGui>
 		</Horizontal>
 	);
 };
