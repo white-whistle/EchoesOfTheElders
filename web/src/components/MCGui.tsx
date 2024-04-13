@@ -5,6 +5,7 @@ import {
 } from '@mantine/core';
 import styles from './MCGui.module.css';
 import { PixelScaling } from './PixelScaling';
+import { MCText, MCTextProps } from './MCText';
 
 export const MCGui = (
 	props: PolymorphicComponentProps<'div', BoxComponentProps>
@@ -21,4 +22,8 @@ export const MCGui = (
 			{...props}
 		/>
 	);
+};
+
+export const MCGuiTitle = (props: MCTextProps) => {
+	return <MCText c='dark' shadowColor='#9b9b9b' {...props} />;
 };

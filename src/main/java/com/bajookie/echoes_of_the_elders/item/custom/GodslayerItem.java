@@ -6,6 +6,7 @@ import com.bajookie.echoes_of_the_elders.item.IHasFlatOverlay;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
@@ -30,6 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 50)
 public class GodslayerItem extends SwordItem implements IArtifact, IHasUpscaledModel, FabricItem, IStackPredicate, IHasFlatOverlay, IRaidReward {
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(10f, 64f);
 

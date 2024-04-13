@@ -8,6 +8,7 @@ import com.bajookie.echoes_of_the_elders.item.IProjectileProvider;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
 import com.bajookie.echoes_of_the_elders.item.ability.TooltipHelper;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.ScreenParticleManager;
 import com.bajookie.echoes_of_the_elders.screen.client.particles.imps.RegenParticle;
@@ -35,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 10, max = 65)
 public class GaleQuiverItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward, IProjectileProvider {
     public static StackedItemStat.Float BONUS_ARROW_DAMAGE = new StackedItemStat.Float(1f, 10f);
     public static StackedItemStat.Int REGEN_RATE = new StackedItemStat.Int(20 * 6, 20);

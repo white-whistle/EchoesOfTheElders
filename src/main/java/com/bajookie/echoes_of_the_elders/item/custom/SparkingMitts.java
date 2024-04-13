@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.effects.ModEffects;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.ModParticles;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -31,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 5, max = 45)
 public class SparkingMitts extends Item implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward, GloveItem {
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 40, 20 * 20);
     public static final StackedItemStat.Int ATTACKS = new StackedItemStat.Int(4, 20);

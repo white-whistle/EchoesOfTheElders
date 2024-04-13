@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.mixin.ItemCooldownManagerAccessor;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 20, max = 60)
 public class TimeGlyph extends Item implements IArtifact, IHasCooldown, IRaidReward {
     protected final StackedItemStat.Int cooldown = new StackedItemStat.Int(1200 * 20, 60 * 20);
 

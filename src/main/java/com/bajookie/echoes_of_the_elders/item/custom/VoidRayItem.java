@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.datagen.ModModelProvider;
 import com.bajookie.echoes_of_the_elders.entity.ModDamageSources;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.ZapParticleEffect;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
@@ -31,6 +32,7 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 10, max = 40)
 public class VoidRayItem extends Item implements IArtifact, IStackPredicate, IRaidReward {
     public static StackedItemStat.Float RAY_DAMAGE = new StackedItemStat.Float(2f, 8f);
 

@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.entity.custom.MoltenChamberShotProjecti
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.sound.ModSounds;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 10, max = 60)
 public class MoltenChamber extends Item implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(10 * 6, 20 * 3);
     public static final StackedItemStat.Int SHOT_DAMAGE = new StackedItemStat.Int(10, 30);

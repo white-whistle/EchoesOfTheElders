@@ -84,7 +84,7 @@ public class DropCondition {
         int min() default 0;
 
         int max() default Integer.MAX_VALUE;
-
+        
         class Handler extends DropConditionHandler<RaidLevelBetween> {
             public Handler(RaidLevelBetween config) {
                 super(config);

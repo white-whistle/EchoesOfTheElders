@@ -1,0 +1,20 @@
+.button {
+	border-image: url("../assets/texture/button.png");
+	border-image-slice: 3 fill;
+	border-image-width: calc(var(--pixel-scaling) * 3px);
+	image-rendering: pixelated;
+	outline: calc(var(--pixel-scaling) * 1px) solid black;
+	border-radius: 0;
+	background-color: transparent !important;
+	font-family: Minecraft;
+	font-size: calc(var(--pixel-scaling) * 10px);
+	padding: calc(var(--pixel-scaling) * 2px);
+	
+	&:hover {
+		outline-color: white;
+	}
+
+	&:active {
+		outline-color: white;
+	}
+}

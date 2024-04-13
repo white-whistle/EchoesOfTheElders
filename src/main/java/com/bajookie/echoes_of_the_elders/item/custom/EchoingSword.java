@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 15, max = 100)
 public class EchoingSword extends SwordItem implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
     public static final StackedItemStat.Int ATTACK_DAMAGE = new StackedItemStat.Int(5, 16);
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);

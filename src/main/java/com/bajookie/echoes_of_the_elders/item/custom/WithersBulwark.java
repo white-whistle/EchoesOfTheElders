@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
+@DropCondition.RaidLevelBetween(max = 100)
 public class WithersBulwark extends Item implements IArtifact, IHasCooldown, IStackPredicate, IHasToggledEffect, IRaidReward {
     private final StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10);
 

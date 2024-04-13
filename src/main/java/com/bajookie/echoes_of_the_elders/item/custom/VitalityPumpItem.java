@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.client.animation.AnimationUtil;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(max = 50)
 public class VitalityPumpItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     public static final StackedItemStat.Int HEAL_AMT = new StackedItemStat.Int(2, 4);

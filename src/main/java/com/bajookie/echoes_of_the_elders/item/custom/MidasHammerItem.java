@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -28,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Random;
 
+@DropCondition.RaidLevelBetween(max = 50)
 public class MidasHammerItem extends PickaxeItem implements IArtifact, IHasCooldown, IRaidReward {
 
     public static final StackedItemStat.Float EFFECT_DAMAGE = new StackedItemStat.Float(20f, 100f);

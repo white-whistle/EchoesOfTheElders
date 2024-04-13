@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.Raid.networking.c2s.C2SSyncItemCooldown;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 50)
 public class ArtifactHammer extends MagicHammer implements IArtifact, IHasCooldown, IRaidReward {
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * (60 * 60) * 3, 20 * (60 * 30));
 

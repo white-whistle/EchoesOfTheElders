@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(max = 50)
 public class RadiantLotusItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
     public static StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60 * 5, 60);
     public static StackedItemStat.Float HEAL_PERCENT = new StackedItemStat.Float(0.1f, 0.25f);
