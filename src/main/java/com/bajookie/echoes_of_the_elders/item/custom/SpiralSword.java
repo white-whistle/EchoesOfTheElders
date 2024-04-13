@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.*;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
+@DropCondition.RaidLevelBetween(min = 35, max = 75)
 public class SpiralSword extends SwordItem implements IArtifact, IStackPredicate, IHasToggledEffect, IHasUpscaledModel, IHasFlatOverlay, IRaidReward {
     private static final StackedItemStat.Float ATTACK_DAMAGE = new StackedItemStat.Float(4f, 12f);
     private static final StackedItemStat.Float ATTACK_SPEED = new StackedItemStat.Float(-3.5f, -2f);

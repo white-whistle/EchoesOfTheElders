@@ -18,26 +18,31 @@ Chart.defaults.font = {
 	size: 10,
 };
 
+const MAX_VALUE = 2147483647;
+
 export function getRewardsInLevel(level: number) {
 	const rewards = ITEM_META.items.filter((item) => item.isReward);
 	const rewardsForLevel = rewards.filter(
 		(r) =>
 			level >= (r.dropData?.min ?? 0) &&
-			level <= (r.dropData?.max ?? Number.MAX_VALUE)
+			level <= (r.dropData?.max ?? MAX_VALUE)
 	);
 
 	return rewardsForLevel;
 }
 
 export function getRewardDropRate(item: ItemMeta, level: number) {
+	if (!item.dropData) return 0;
+	if (level < item.dropData.min) return 0;
+	if (level > item.dropData.max) return 0;
 	const rewards = getRewardsInLevel(level);
 	return 1 / rewards.length;
 }
 
-const globalLowestDropLevel = 0;
-const globalHighestDropLevel = ITEM_META.items.reduce((acc, curr) => {
+export const globalLowestDropLevel = 0;
+export const globalHighestDropLevel = ITEM_META.items.reduce((acc, curr) => {
 	if (!curr?.dropData?.max) return acc;
-	if (curr.dropData?.max === Number.MAX_VALUE) {
+	if (curr.dropData?.max === MAX_VALUE) {
 		return acc;
 	}
 
@@ -46,15 +51,26 @@ const globalHighestDropLevel = ITEM_META.items.reduce((acc, curr) => {
 	return acc;
 }, 0);
 
-export function getRewardDropRateForRange(item: ItemMeta) {
-	const min = item.dropData?.min ?? globalLowestDropLevel;
-	const max = item.dropData?.max ?? globalHighestDropLevel;
+function getDisplayMax(v: number | undefined) {
+	if (!v) return globalHighestDropLevel;
+	if (v === MAX_VALUE) return globalHighestDropLevel;
+
+	return v;
+}
+
+export function getRewardDropRateForRange(
+	item: ItemMeta,
+	minOverride?: number,
+	maxOverride?: number
+) {
+	if (!item.isReward) return [];
+
+	const min = minOverride ?? item.dropData?.min ?? globalLowestDropLevel;
+	const max = maxOverride ?? getDisplayMax(item.dropData?.max);
 
 	const data = [];
 	for (let i = min; i <= max; i++) {
 		data.push({
-			// level: i,
-			// chance: parseFloat((getRewardDropRate(item, i) * 100).toFixed(1)),
 			x: i,
 			y: parseFloat((getRewardDropRate(item, i) * 100).toFixed(1)),
 		});
@@ -74,6 +90,7 @@ export const DropRateGraph = ({ item }: { item: ItemMeta }) => {
 
 	const data = useMemo(() => {
 		const dropMetas = getRewardDropRateForRange(item);
+		if (!dropMetas.length) return {};
 		return {
 			datasets: [
 				{
@@ -106,7 +123,7 @@ export const DropRateGraph = ({ item }: { item: ItemMeta }) => {
 						},
 					},
 					ticks: {
-						stepSize: 10,
+						// stepSize: 10,
 						font: {
 							size: 10 * scaling,
 						},
@@ -129,7 +146,7 @@ export const DropRateGraph = ({ item }: { item: ItemMeta }) => {
 						},
 					},
 					suggestedMin: 0,
-					suggestedMax: 100,
+					// suggestedMax: 100,
 				},
 			},
 
@@ -145,6 +162,8 @@ export const DropRateGraph = ({ item }: { item: ItemMeta }) => {
 			},
 		};
 	}, [scaling]);
+
+	if (!data?.datasets?.length) return null;
 
 	return <Line data={data} options={options} style={{ height: '100%' }} />;
 };

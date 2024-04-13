@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 25, max = 75)
 public class GunheelsItem extends ArmorItem implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     public GunheelsItem() {

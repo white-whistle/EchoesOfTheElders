@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasUpscaledModel;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedAttributeModifiers;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 50)
 public class RealityPick extends PickaxeItem implements IArtifact, IHasUpscaledModel, IStackPredicate, IRaidReward {
     protected static final int MAX_COUNT = 16;
     private final StackedItemStat.Float stackedAttackDamage = new StackedItemStat.Float(4f, 16f);

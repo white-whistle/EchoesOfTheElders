@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.entity.custom.StarArrowProjectile;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -25,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 20, max = 70)
 public class StarfallBow extends BowItem implements IArtifact, IHasCooldown, IRaidReward {
     protected StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10 * 20);
     public static final int STARFALL_DAMAGE = 4;

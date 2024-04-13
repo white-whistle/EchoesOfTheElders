@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.entity.custom.OrbOfLightningProjectileE
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -22,6 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 15, max = 75)
 public class OrbOfLightning extends Item implements IArtifact, IStackPredicate, IHasCooldown, IRaidReward {
     protected final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 20, 20 * 5);
     public static final StackedItemStat.Int LIGHTNING_STRIKES = new StackedItemStat.Int(1, 3);

@@ -4,6 +4,7 @@ import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ModItems;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -21,6 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 27, max = 37)
 public class AtlasGreaves extends ArmorItem implements IArtifact, IStackPredicate, IRaidReward {
 
     public AtlasGreaves() {

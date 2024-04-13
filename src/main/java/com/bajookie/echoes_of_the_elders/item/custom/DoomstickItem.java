@@ -3,6 +3,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.particles.LineParticleEffect;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -31,6 +32,7 @@ import org.joml.Vector3f;
 import java.util.List;
 import java.util.Random;
 
+@DropCondition.RaidLevelBetween(min = 10, max = 60)
 public class DoomstickItem extends Item implements IArtifact, IHasCooldown, IStackPredicate, IRaidReward {
 
     public DoomstickItem() {

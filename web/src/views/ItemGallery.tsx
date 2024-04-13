@@ -5,13 +5,15 @@ import { Horizontal, Vertical } from '../Layout';
 import { ItemGrid } from '../components/ItemGrid';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { itemToKey } from '../components/Item';
-import { MCGui } from '../components/MCGui';
+import { MCGui, MCGuiTitle } from '../components/MCGui';
 import { PixelScaling } from '../components/PixelScaling';
 import { MCText } from '../components/MCText';
 import { MCTextInput } from '../components/MCTextInput';
 import { useLocation } from 'wouter';
 import { MCGlyphIcon } from '../components/MCGlyphIcon';
 import { MCTooltip } from '../components/MCTooltip';
+import { DropMapGraph } from '../components/DropMapGraph';
+import { Box } from '@mantine/core';
 
 const tooltipInfo = `\
 Smart filters
@@ -162,12 +164,10 @@ export const ItemGallery = () => {
 	);
 
 	return (
-		<Horizontal justify='center'>
-			<MCGui maw='800px' flex={1}>
+		<Vertical w='100%' align='center'>
+			<MCGui w='100%' maw='800px' flex={1}>
 				<Vertical p={scaling * 2}>
-					<MCText c='dark' shadowColor='#9b9b9b'>
-						Item Gallery
-					</MCText>
+					<MCGuiTitle>Item Gallery</MCGuiTitle>
 
 					<MCTextInput
 						value={filter}
@@ -197,6 +197,16 @@ export const ItemGallery = () => {
 					)}
 				</Vertical>
 			</MCGui>
-		</Horizontal>
+
+			<MCGui w='100%' maw='800px' flex={1}>
+				<Vertical p={scaling * 2}>
+					<MCGuiTitle>Drop Map</MCGuiTitle>
+
+					<Box w='100%' h='400px'>
+						<DropMapGraph items={filteredItems} />
+					</Box>
+				</Vertical>
+			</MCGui>
+		</Vertical>
 	);
 };

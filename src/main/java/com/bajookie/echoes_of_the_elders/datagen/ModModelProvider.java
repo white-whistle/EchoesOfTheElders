@@ -47,8 +47,6 @@ public class ModModelProvider extends FabricModelProvider {
 
     static class ItemModelConfig {
         protected static final List<Item> HANDHELD = List.of(
-                ModItems.ANCIENT_STONE_SWORD,
-                ModItems.SHINY_ANCIENT_STONE_SWORD,
                 ModItems.MIDAS_HAMMER,
                 ModItems.WTF_HAMMER
         );

@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
 import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@DropCondition.RaidLevelBetween(min = 25, max = 35)
 public class OrbOfAnnihilation extends Item implements IArtifact, IStackPredicate, IHasToggledEffect, IRaidReward, IHasCooldown {
     public static final StackedItemStat.Float EXPLOSION_POWER = new StackedItemStat.Float(6f, 20f);
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 60, 20 * 10);

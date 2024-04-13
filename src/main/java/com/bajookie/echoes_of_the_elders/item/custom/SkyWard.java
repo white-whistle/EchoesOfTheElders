@@ -5,6 +5,7 @@ import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.ItemStack.StackLevel;
 import com.bajookie.echoes_of_the_elders.system.StackedItem.StackedItemStat;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
+@DropCondition.RaidLevelBetween(max = 20)
 public class SkyWard extends Item implements IArtifact, IStackPredicate, IHasCooldown, IHasToggledEffect, IRaidReward {
     public static final StackedItemStat.Int COOLDOWN = new StackedItemStat.Int(20 * 10, 3 * 20);
     public static final StackedItemStat.Float MAX_PULL = new StackedItemStat.Float(0.1f, 0.4f);

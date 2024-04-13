@@ -2,6 +2,7 @@ package com.bajookie.echoes_of_the_elders.item.custom;
 
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.ability.Ability;
+import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+
+@DropCondition.RaidLevelBetween(max = 10)
 public class PortalRingItem extends BiDimensionToggleItem implements IArtifact, IRaidReward {
 
     public PortalRingItem() {
