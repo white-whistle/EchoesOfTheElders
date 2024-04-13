@@ -84,14 +84,14 @@ public class ModItemGroups {
                 addStackedVariants(entries, ModItems.ECHOING_SWORD);
                 addStackedVariants(entries, ModItems.ORB_OF_ANNIHILATION);
                 addStackedVariants(entries, ModItems.STARFALL_BOW);
-                addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
+                // addStackedVariants(entries, ModItems.EARTH_SPIKE_RELIC);
                 addStackedVariants(entries, ModItems.ICICLE_RELIC);
                 entries.add(ModItems.MAGIC_HAMMER);
                 entries.add(ModItems.HEAT_STONE);
                 entries.add(ModItems.STEPPING_STONE);
                 addStackedVariants(entries, ModItems.ARTIFACT_HAMMER);
                 addStackedVariants(entries, ModItems.WTF_HAMMER);
-                addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
+                // addStackedVariants(entries, ModItems.ANCIENT_MINIGUN);
                 addStackedVariants(entries, ModItems.VOID_RAY);
                 addStackedVariants(entries, ModItems.MASK_OF_DAWN);
                 addStackedVariants(entries, ModItems.COWPLATE);

@@ -24,18 +24,20 @@ public class BuiltinModelItemRendererMixin {
     @Unique
     private MinigunModel minigunModel;
 
-    @Inject(method = "render",at = @At(value = "INVOKE_ASSIGN",target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true)
+    @Inject(method = "render", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true)
     private void render(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo info) {
-        if (stack.isOf(ModItems.ANCIENT_MINIGUN)){
-            matrices.push();
-            VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, minigunModel.getLayer(MinigunModel.TEXTURE), false, false);
-            minigunModel.render(matrices, vertexConsumer2, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
-            matrices.pop();
-            info.cancel();
-        }
+        // TODO: enable after release
+        // if (stack.isOf(ModItems.ANCIENT_MINIGUN)){
+        //     matrices.push();
+        //     VertexConsumer vertexConsumer2 = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, minigunModel.getLayer(MinigunModel.TEXTURE), false, false);
+        //     minigunModel.render(matrices, vertexConsumer2, light, overlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        //     matrices.pop();
+        //     info.cancel();
+        // }
     }
-    @Inject(method = "reload",at = @At("HEAD"))
-    private void reload(ResourceManager manager,CallbackInfo info) {
-        this.minigunModel = new MinigunModel(((BuiltinModelItemRendererAccessor)this).getEntityModelLoader().getModelPart(ModModelLayers.MINIGUN_LAYER));
+
+    @Inject(method = "reload", at = @At("HEAD"))
+    private void reload(ResourceManager manager, CallbackInfo info) {
+        this.minigunModel = new MinigunModel(((BuiltinModelItemRendererAccessor) this).getEntityModelLoader().getModelPart(ModModelLayers.MINIGUN_LAYER));
     }
 }

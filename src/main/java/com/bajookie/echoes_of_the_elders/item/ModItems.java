@@ -3,15 +3,14 @@ package com.bajookie.echoes_of_the_elders.item;
 import com.bajookie.echoes_of_the_elders.EOTE;
 import com.bajookie.echoes_of_the_elders.entity.ModEntities;
 import com.bajookie.echoes_of_the_elders.item.custom.*;
-import com.bajookie.echoes_of_the_elders.item.custom.OrbOfLightning;
-import com.bajookie.echoes_of_the_elders.item.custom.ElderPrismItem;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Rarity;
 
 import java.util.LinkedList;
 
@@ -59,11 +58,11 @@ public class ModItems {
     public static final Item MOLTEN_CHAMBER_SHOT = registerItem("molten_chamber_shot", new Item(new FabricItemSettings()));
     public static final Item ORB_OF_ANNIHILATION = registerItem("orb_of_annihilation", new OrbOfAnnihilation());
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
-    public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic());
+    // public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic()); //ignore for rls
     public static final Item ICICLE_RELIC = registerItem("icicle_staff", new IcicleStaff());
-    public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun());
+    // public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun()); //ignore for rls
     public static final Item MASK_OF_DAWN = registerItem("gangway", new MaskOfDawn());
-    public static final Item MONOLOOK_SPAWN = registerItem("monolook_spawn", new MonolookSpawn());
+    // public static final Item MONOLOOK_SPAWN = registerItem("monolook_spawn", new MonolookSpawn());
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
     public static final Item HARELEAP_STRIDERS = registerItem("hareleap_striders", new HareleapStriders());
     public static final Item ATLAS_GREAVES = registerItem("atlas_greaves", new AtlasGreaves());
