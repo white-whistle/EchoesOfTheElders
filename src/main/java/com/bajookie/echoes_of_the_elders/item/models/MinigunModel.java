@@ -28,7 +28,7 @@ public class MinigunModel extends Model {
     private final ModelPart r_ind;
     private final ModelPart bone;
     private final ModelPart body;
-    private float rollSpeed =0f;
+    private float rollSpeed = 0f;
 
     public MinigunModel(ModelPart root) {
         super(RenderLayer::getEntitySolid);
@@ -64,48 +64,48 @@ public class MinigunModel extends Model {
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 
-        //TODO alpha Gradient
+        // TODO alpha Gradient
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         float a = 0;
-        if (player != null){
+        if (player != null) {
             Item item = player.getMainHandStack().getItem();
-            if (item == ModItems.ANCIENT_MINIGUN){
-                if (player.isUsingItem() && !player.getItemCooldownManager().isCoolingDown(item)){
-                    if (this.rollSpeed <=0.045f){
-                        this.rollSpeed =this.rollSpeed+ 0.0001f;
-                    }
-                } else {
-                    if (this.rollSpeed >0.004f) {
-                        this.rollSpeed =this.rollSpeed - 0.00007f;
-                    } else {
-                        if (Math.sin(this.barr.roll) >=0.9995 || Math.sin(this.barr.roll) <=-0.9995 || (Math.sin(this.barr.roll) <=0.001 && Math.sin(this.barr.roll) >=-0.001)){
-                            this.rollSpeed =0;
-                            this.barr.roll =0;
-                        }
-                    }
-                    if (this.rollSpeed <0f){
-                           this.rollSpeed =0;
-                    }
-                }
-                if (this.rollSpeed == 0){
-                    this.barr.roll = 0;
-                }
-                this.barr.roll += this.rollSpeed;
-                ItemStack stack = player.getMainHandStack();
-                a =0.5f * ((float)stack.getDamage())/stack.getMaxDamage();
-            }
+            // TODO: enable after release
+            // if (item == ModItems.ANCIENT_MINIGUN){
+            //     if (player.isUsingItem() && !player.getItemCooldownManager().isCoolingDown(item)){
+            //         if (this.rollSpeed <=0.045f){
+            //             this.rollSpeed =this.rollSpeed+ 0.0001f;
+            //         }
+            //     } else {
+            //         if (this.rollSpeed >0.004f) {
+            //             this.rollSpeed =this.rollSpeed - 0.00007f;
+            //         } else {
+            //             if (Math.sin(this.barr.roll) >=0.9995 || Math.sin(this.barr.roll) <=-0.9995 || (Math.sin(this.barr.roll) <=0.001 && Math.sin(this.barr.roll) >=-0.001)){
+            //                 this.rollSpeed =0;
+            //                 this.barr.roll =0;
+            //             }
+            //         }
+            //         if (this.rollSpeed <0f){
+            //                this.rollSpeed =0;
+            //         }
+            //     }
+            //     if (this.rollSpeed == 0){
+            //         this.barr.roll = 0;
+            //     }
+            //     this.barr.roll += this.rollSpeed;
+            //     ItemStack stack = player.getMainHandStack();
+            //     a =0.5f * ((float)stack.getDamage())/stack.getMaxDamage();
+            // }
         }
         body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        barr.render(matrices, vertexConsumer, light, overlay, red, green-a, blue-a, alpha);
+        barr.render(matrices, vertexConsumer, light, overlay, red, green - a, blue - a, alpha);
         r_ind.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
 
-    public static void applyTranslates(ModelTransformationMode renderMode,MatrixStack matrices){
-        if (renderMode == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND){
-            matrices.translate((1f/16f),-(0f/16f),-(1f/16f));
-        }
-        else if (renderMode == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND){
-            matrices.translate((1f/16f),(5f/16f),-(5f/16f));
+    public static void applyTranslates(ModelTransformationMode renderMode, MatrixStack matrices) {
+        if (renderMode == ModelTransformationMode.FIRST_PERSON_RIGHT_HAND) {
+            matrices.translate((1f / 16f), -(0f / 16f), -(1f / 16f));
+        } else if (renderMode == ModelTransformationMode.THIRD_PERSON_RIGHT_HAND) {
+            matrices.translate((1f / 16f), (5f / 16f), -(5f / 16f));
         }
     }
 }

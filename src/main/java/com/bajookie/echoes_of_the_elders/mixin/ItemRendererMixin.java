@@ -81,9 +81,10 @@ public abstract class ItemRendererMixin {
             // if (item == ModItems.SCORCHERS_MITTS) {
             //     return getCustomItemModel("scorchers_mitts_3d");
             // }
-            if (item == ModItems.ANCIENT_MINIGUN) {
-                return getCustomItemModel("ancient_minigun_3d");
-            }
+            // TODO: enable after release
+            // if (item == ModItems.ANCIENT_MINIGUN) {
+            //     return getCustomItemModel("ancient_minigun_3d");
+            // }
 
         }
 
@@ -92,14 +93,15 @@ public abstract class ItemRendererMixin {
 
     @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At("HEAD"), cancellable = true)
     private void renderAnimation(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
-        if (stack.isOf(ModItems.ANCIENT_MINIGUN)) {
-            matrices.push();
-            matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(180)));
-            MinigunModel.applyTranslates(renderMode, matrices);
-            ((ItemRendererAccessor) this).getBuiltinModelItemRenderer().render(stack, renderMode, matrices, vertexConsumers, light, overlay);
-            matrices.pop();
-            ci.cancel();
-        }
+        // TODO: enable after release
+        // if (stack.isOf(ModItems.ANCIENT_MINIGUN)) {
+        //     matrices.push();
+        //     matrices.multiply(new Quaternionf().rotateLocalZ((float) Math.toRadians(180)));
+        //     MinigunModel.applyTranslates(renderMode, matrices);
+        //     ((ItemRendererAccessor) this).getBuiltinModelItemRenderer().render(stack, renderMode, matrices, vertexConsumers, light, overlay);
+        //     matrices.pop();
+        //     ci.cancel();
+        // }
     }
 
     @Unique
