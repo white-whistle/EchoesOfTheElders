@@ -1,4 +1,10 @@
-import { AppShell, Image, MantineProvider, createTheme } from '@mantine/core';
+import {
+	Anchor,
+	AppShell,
+	Image,
+	MantineProvider,
+	createTheme,
+} from '@mantine/core';
 import { IntlProvider } from 'react-intl';
 
 import EN_US from '../../src/main/resources/assets/echoes_of_the_elders/lang/en_us.json';
@@ -6,6 +12,8 @@ import defaultRichTextComponents from './defaultRichTextComponents';
 import { PixelScaling } from './components/PixelScaling';
 import ModTitleImage from '../../design/title_spiritual_awakening.png';
 import { Routes } from './Routes';
+import { BGCanvas } from './components/BGCanvas';
+import { Link } from 'wouter';
 
 const theme = createTheme({
 	/** Your theme override here */
@@ -21,21 +29,27 @@ function App() {
 		>
 			<PixelScaling.Provider scaling={3}>
 				<MantineProvider theme={theme}>
-					<AppShell header={{ height: 120 }} padding='md'>
-						<AppShell.Header>
-							<Image
-								src={ModTitleImage}
-								h='120px'
-								w='fit-content'
-								p='md'
-								ml='auto'
-								mr='auto'
-							/>
-						</AppShell.Header>
-						<AppShell.Main>
-							<Routes />
-						</AppShell.Main>
-					</AppShell>
+					<BGCanvas>
+						<AppShell header={{ height: 120 }} padding='md'>
+							<AppShell.Header
+								style={{ border: 0, background: 'transparent' }}
+							>
+								<Anchor component={Link} to='/'>
+									<Image
+										src={ModTitleImage}
+										h='120px'
+										w='fit-content'
+										p='md'
+										ml='auto'
+										mr='auto'
+									/>
+								</Anchor>
+							</AppShell.Header>
+							<AppShell.Main>
+								<Routes />
+							</AppShell.Main>
+						</AppShell>
+					</BGCanvas>
 				</MantineProvider>
 			</PixelScaling.Provider>
 		</IntlProvider>
