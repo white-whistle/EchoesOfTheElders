@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { ItemMeta } from '../types';
-import { MC_PALETTE } from '../logic/MCPalette';
+import { MC_BRIGHT_PALETTE, MC_PALETTE } from '../logic/MCPalette';
 import {
 	getRewardDropRateForRange,
 	getRewardsInLevel,
@@ -17,7 +17,7 @@ import { MCText } from './MCText';
 
 Chart.register(Filler, Tooltip);
 
-const COLORS = Object.values(MC_PALETTE);
+const COLORS = Object.values(MC_BRIGHT_PALETTE);
 const indexToColor = (index: number) => {
 	return COLORS[index % COLORS.length];
 };
@@ -135,9 +135,9 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 					external: (context: any) => {
 						const { tooltip } = context;
 
-						const actualPoints = tooltip.dataPoints.filter(
-							(p) => p.raw.chance > 0
-						);
+						const actualPoints = tooltip.dataPoints
+							.filter((p) => p.raw.chance > 0)
+							.reverse();
 
 						const levelTotalRewards = getRewardsInLevel(
 							+tooltip.title[0]
