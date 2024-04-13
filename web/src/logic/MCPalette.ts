@@ -20,3 +20,7 @@ export const MC_PALETTE = {
 export function tryMcGetColor(color: string) {
 	return MC_PALETTE[color] ?? color;
 }
+
+const { black, ...MC_BRIGHT_PALETTE } = MC_PALETTE;
+
+export { MC_BRIGHT_PALETTE };

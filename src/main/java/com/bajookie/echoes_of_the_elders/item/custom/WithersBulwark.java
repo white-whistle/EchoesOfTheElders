@@ -1,5 +1,6 @@
 package com.bajookie.echoes_of_the_elders.item.custom;
 
+import com.bajookie.echoes_of_the_elders.datagen.WebView;
 import com.bajookie.echoes_of_the_elders.item.ArtifactItemSettings;
 import com.bajookie.echoes_of_the_elders.item.IHasCooldown;
 import com.bajookie.echoes_of_the_elders.item.IHasToggledEffect;
@@ -27,6 +28,7 @@ import java.util.List;
 import static com.bajookie.echoes_of_the_elders.system.ItemStack.CustomItemNbt.EFFECT_ENABLED;
 
 @DropCondition.RaidLevelBetween(max = 100)
+@WebView.OverrideTexture("wither_scales_closed")
 public class WithersBulwark extends Item implements IArtifact, IHasCooldown, IStackPredicate, IHasToggledEffect, IRaidReward {
     private final StackedItemStat.Int cooldown = new StackedItemStat.Int(10 * 20, 10);
 

@@ -44,6 +44,7 @@ export type Ability = {
 
 export type ItemMeta = {
 	item: string;
+	texture: string;
 	name: string;
 
 	dropData?: {

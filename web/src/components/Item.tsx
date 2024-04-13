@@ -23,7 +23,7 @@ export const Item = forwardRef(
 		return (
 			<Box w={itemSize} h={itemSize} {...rest} ref={ref}>
 				<Image
-					src={textureFromItem(item.item)}
+					src={textureFromItem(item.texture)}
 					fallbackSrc={MissingTexture}
 					w='100%'
 					h='100%'

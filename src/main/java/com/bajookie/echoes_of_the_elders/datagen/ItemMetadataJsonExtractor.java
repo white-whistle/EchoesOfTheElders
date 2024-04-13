@@ -6,8 +6,6 @@ import com.bajookie.echoes_of_the_elders.item.custom.IArtifact;
 import com.bajookie.echoes_of_the_elders.item.reward.DropCondition;
 import com.bajookie.echoes_of_the_elders.item.reward.IRaidReward;
 import com.bajookie.echoes_of_the_elders.system.Text.ModText;
-import com.bajookie.echoes_of_the_elders.system.Text.TextArgs;
-import com.bajookie.echoes_of_the_elders.system.Text.TooltipSection;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,7 +16,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemMetadataJsonExtractor {
     public static void generateMetaFile() throws IOException {
@@ -81,6 +78,13 @@ public class ItemMetadataJsonExtractor {
                 tooltip.stream().map(Text.Serializer::toJsonTree).forEach(tooltipJsonArray::add);
 
                 jsonObject.add("tooltip", tooltipJsonArray);
+            }
+
+            var overrideTexture = clazz.getAnnotation(WebView.OverrideTexture.class);
+            if (overrideTexture != null) {
+                jsonObject.addProperty("texture", overrideTexture.value());
+            } else {
+                jsonObject.addProperty("texture", item.toString());
             }
 
             return jsonObject;
