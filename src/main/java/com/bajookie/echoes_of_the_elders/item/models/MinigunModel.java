@@ -24,40 +24,56 @@ import java.util.function.Function;
 @Environment(EnvType.CLIENT)
 public class MinigunModel extends Model {
     public static final Identifier TEXTURE = new Identifier(EOTE.MOD_ID, "textures/item/ancient_minigun_new.png");
-    private final ModelPart barr;
-    private final ModelPart r_ind;
-    private final ModelPart bone;
     private final ModelPart body;
     private float rollSpeed = 0f;
 
+    private final ModelPart model;
+    //private final ModelPart cube_r1;
+    private final ModelPart barrel;
+    private final ModelPart blaster;
+    private final ModelPart metal;
+    private final ModelPart light;
+
+
     public MinigunModel(ModelPart root) {
         super(RenderLayer::getEntitySolid);
-        this.bone = root.getChild("bone");
-        this.body = this.bone.getChild("body");
-        this.barr = this.bone.getChild("barr");
-        this.r_ind = this.bone.getChild("r_ind");
+        this.model = root.getChild("model");
+        this.body = this.model.getChild("body");
+        this.barrel = this.model.getChild("barrel");
+        this.blaster = this.barrel.getChild("blaster");
+        this.metal = this.barrel.getChild("metal");
+        this.light = this.model.getChild("light");
     }
 
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData bone = modelPartData.addChild("bone", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData model = modelPartData.addChild("model", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
 
-        ModelPartData body = bone.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -4.0F, -1.0F, 3.0F, 3.0F, 7.0F, new Dilation(0.0F))
-                .uv(20, 11).cuboid(1.0F, -4.0F, 1.0F, 4.0F, 4.0F, 4.0F, new Dilation(0.0F))
-                .uv(10, 11).cuboid(-2.0F, -6.0F, 7.0F, 1.0F, 4.0F, 1.0F, new Dilation(0.0F))
-                .uv(0, 0).cuboid(-2.0F, -2.0F, 6.0F, 1.0F, 1.0F, 2.0F, new Dilation(0.0F))
-                .uv(0, 0).cuboid(-1.5F, -5.0F, 6.0F, 0.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(0, 10).cuboid(-4.0F, -3.0F, 4.0F, 2.0F, 1.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData body = model.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -7.5F, 0.0F, 5.0F, 5.0F, 8.0F, new Dilation(0.0F))
+                .uv(18, 0).cuboid(-1.0F, -9.5F, 11.0F, 1.0F, 4.0F, 1.0F, new Dilation(0.0F))
+                .uv(4, 4).cuboid(-0.5F, -8.0F, 10.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
+                .uv(0, 13).cuboid(-1.0F, -5.5F, 8.0F, 1.0F, 2.0F, 4.0F, new Dilation(0.0F))
+                .uv(0, 0).cuboid(3.0F, -8.0F, 2.0F, 3.0F, 4.0F, 1.0F, new Dilation(0.0F))
+                .uv(28, 7).cuboid(-3.0F, -11.0F, 2.0F, 6.0F, 4.0F, 1.0F, new Dilation(0.0F))
+                .uv(0, 5).cuboid(-3.0F, -7.0F, 2.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F))
+                .uv(24, 26).cuboid(-1.0F, -3.0F, 1.0F, 3.0F, 2.0F, 6.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
-        ModelPartData r_ind = bone.addChild("r_ind", ModelPartBuilder.create().uv(0, 5).cuboid(-2.0F, -5.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(0, 3).cuboid(-2.0F, -6.0F, -1.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F))
-                .uv(3, 4).cuboid(-2.0F, -5.0F, 3.0F, 1.0F, 1.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        //ModelPartData cube_r1 = body.addChild("cube_r1", ModelPartBuilder.create().uv(12, 14).cuboid(0.0F, -2.001F, 0.0F, 4.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(6.0F, -5.0F, 2.0F, 0.0F, -0.6545F, 0.0F));
 
-        ModelPartData barr = bone.addChild("barr", ModelPartBuilder.create().uv(0, 19).cuboid(-0.5F, 0.5F, -8.0F, 1.0F, 1.0F, 8.0F, new Dilation(0.0F))
-                .uv(12, 2).cuboid(-0.5F, -1.5F, -8.0F, 1.0F, 1.0F, 8.0F, new Dilation(0.0F))
-                .uv(10, 11).cuboid(-1.5F, -0.5F, -8.0F, 1.0F, 1.0F, 8.0F, new Dilation(0.0F))
-                .uv(0, 10).cuboid(0.5F, -0.5F, -8.0F, 1.0F, 1.0F, 8.0F, new Dilation(0.0F)), ModelTransform.pivot(-0.5F, -2.5F, -1.0F));
+        ModelPartData barrel = model.addChild("barrel", ModelPartBuilder.create(), ModelTransform.pivot(0.5F, -5.0F, -3.0F));
+
+        ModelPartData blaster = barrel.addChild("blaster", ModelPartBuilder.create().uv(36, 0).cuboid(-1.0F, -4.0F, -10.0F, 3.0F, 0.0F, 10.0F, new Dilation(0.0F))
+                .uv(36, 0).cuboid(-1.0F, -6.0F, -10.0F, 3.0F, 0.0F, 10.0F, new Dilation(0.0F)), ModelTransform.pivot(-0.5F, 5.0F, 3.0F));
+
+        ModelPartData metal = barrel.addChild("metal", ModelPartBuilder.create().uv(12, 25).cuboid(-2.25F, -1.5F, -7.0F, 1.0F, 1.0F, 10.0F, new Dilation(0.0F))
+                .uv(24, 15).cuboid(1.25F, -1.5F, -7.0F, 1.0F, 1.0F, 10.0F, new Dilation(0.0F))
+                .uv(12, 14).cuboid(1.25F, 0.5F, -7.0F, 1.0F, 1.0F, 10.0F, new Dilation(0.0F))
+                .uv(0, 13).cuboid(-2.25F, 0.5F, -7.0F, 1.0F, 1.0F, 10.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+
+        ModelPartData light = model.addChild("light", ModelPartBuilder.create().uv(12, 17).cuboid(-3.0F, -7.0F, 5.0F, 1.0F, 2.0F, 2.0F, new Dilation(0.0F))
+                .uv(29, 34).cuboid(-3.0F, -5.0F, 2.0F, 1.0F, 1.0F, 5.0F, new Dilation(0.0F))
+                .uv(28, 0).cuboid(-4.0F, -5.0F, -2.0F, 1.0F, 1.0F, 6.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 64, 64);
     }
 
@@ -96,9 +112,9 @@ public class MinigunModel extends Model {
             //     a =0.5f * ((float)stack.getDamage())/stack.getMaxDamage();
             // }
         }
-        body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        barr.render(matrices, vertexConsumer, light, overlay, red, green - a, blue - a, alpha);
-        r_ind.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        model.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        //barr.render(matrices, vertexConsumer, light, overlay, red, green - a, blue - a, alpha);
+        //r_ind.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
     }
 
     public static void applyTranslates(ModelTransformationMode renderMode, MatrixStack matrices) {

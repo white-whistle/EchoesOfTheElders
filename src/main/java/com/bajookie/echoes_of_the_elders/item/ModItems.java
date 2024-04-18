@@ -60,7 +60,7 @@ public class ModItems {
     public static final Item PANDORAS_BAG = registerItem("pandoras_bag", new PandorasBag());
     // public static final Item EARTH_SPIKE_RELIC = registerItem("earth_spike_relic", new EarthSpikeRelic()); //ignore for rls
     public static final Item ICICLE_RELIC = registerItem("icicle_staff", new IcicleStaff());
-    // public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun()); //ignore for rls
+    public static final Item ANCIENT_MINIGUN = registerItem("ancient_minigun", new AncientMinigun()); //ignore for rls
     public static final Item MASK_OF_DAWN = registerItem("gangway", new MaskOfDawn());
     // public static final Item MONOLOOK_SPAWN = registerItem("monolook_spawn", new MonolookSpawn());
     public static final Item COWPLATE = registerItem("cowplate", new Cowplate());
