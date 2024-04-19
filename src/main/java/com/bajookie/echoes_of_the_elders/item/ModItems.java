@@ -82,6 +82,8 @@ public class ModItems {
     public static final Item WTF_HAMMER = registerItem("wtf_hammer", new WTFHammer());
     public static final Item VOID_RAY = registerItem("void_ray", new VoidRayItem());
 
+    public static final Item RELICOMICON = registerItem("relicomicon",new Relicomicon());
+
     // Register methods
     public static <T extends Item> T registerItem(String name, T item) {
         registeredModItems.push(item);

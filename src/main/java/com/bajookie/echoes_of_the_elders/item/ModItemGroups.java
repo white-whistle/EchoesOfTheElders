@@ -43,6 +43,7 @@ public class ModItemGroups {
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 28), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(Tier.set(new ItemStack(ModItems.OLD_KEY), 100), ItemGroup.StackVisibility.SEARCH_TAB_ONLY);
                 entries.add(ModItems.GALE_ARROW);
+                entries.add(ModItems.RELICOMICON);
             }).build());
 
     public static void addStackedVariants(ItemGroup.Entries entries, Item item) {
