@@ -70,7 +70,7 @@ public class ModEffects {
     public static final StatusEffect SHOCK_EFFECT = registerStatusEffect("shock_effect", new ShockEffect());
     public static final StatusEffect ELECTRIC_STUN_EFFECT = registerStatusEffect("electric_stun", new ElectricStunEffect());
     public static final StatusEffect NO_GRAVITY_EFFECT = registerStatusEffect("no_gravity_effect", new NoGravityEffect());
-    public static final StatusEffect ECHO_HIT = registerStatusEffect("echo_hit_effect", DelayedEffect.create(StatusEffectCategory.HARMFUL, (effectInstance, living) -> {
+    public static final StatusEffect ECHO_HIT = registerStatusEffect("echo_hit_effect", DelayedEffect.create(StatusEffectCategory.BENEFICIAL, (effectInstance, living) -> {
     }));
     public static final StatusEffect CONDUCTING_EFFECT = registerStatusEffect("conducting_effect", DelayedEffect.create(StatusEffectCategory.HARMFUL, (instance, entity) -> {
         if (!entity.getWorld().isClient && instance.getAmplifier() > 1) {

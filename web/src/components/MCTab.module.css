@@ -1,0 +1,18 @@
+.tab {
+	padding: calc(var(--pixel-scaling) * 2px) calc(var(--pixel-scaling) * 4px) calc(var(--pixel-scaling) * 6px) calc(var(--pixel-scaling) * 4px);
+	border-image: url("../assets/texture/tab.png");
+	border-image-slice: 4 fill;
+	border-image-width: calc(var(--pixel-scaling) * 4px);
+	image-rendering: pixelated;
+	position: relative;
+	cursor: pointer;
+
+}
+
+.selected {
+	border-image: url("../assets/texture/tab_selected.png");
+	border-image-slice: 4 fill;
+	border-image-width: calc(var(--pixel-scaling) * 4px);
+	image-rendering: pixelated;
+	padding-top: calc(var(--pixel-scaling) * 8px);
+}

@@ -20,6 +20,12 @@ dependencies:
   chart.js:
     specifier: ^4.4.2
     version: 4.4.2
+  chartjs-plugin-crosshair:
+    specifier: ^2.0.0
+    version: 2.0.0(chart.js@4.4.2)
+  clsx:
+    specifier: ^2.1.0
+    version: 2.1.0
   glslCanvas:
     specifier: ^0.2.6
     version: 0.2.6
@@ -79,6 +85,9 @@ devDependencies:
   vite:
     specifier: ^5.2.0
     version: 5.2.8
+  vite-multiple-assets:
+    specifier: ^1.2.10
+    version: 1.2.10(mime-types@2.1.35)(vite@5.2.8)
 
 packages:
 
@@ -1264,6 +1273,14 @@ packages:
       '@kurkle/color': 0.3.2
     dev: false
 
+  /chartjs-plugin-crosshair@2.0.0(chart.js@4.4.2):
+    resolution: {integrity: sha512-Vs6strRvYpzL92v40r/rAWhh+7au8VnfyC/m2ZHXcXeLEWeFjDgMvXjWdX+eARhbgHQo+uGIKyq9fmkS79GIyQ==}
+    peerDependencies:
+      chart.js: ^4.0.1
+    dependencies:
+      chart.js: 4.4.2
+    dev: false
+
   /clsx@2.1.0:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
@@ -1846,6 +1863,18 @@ packages:
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
+    dev: true
+
+  /mime-db@1.52.0:
+    resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+    dev: true
+
+  /mime-types@2.1.35:
+    resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
+    engines: {node: '>= 0.6'}
+    dependencies:
+      mime-db: 1.52.0
     dev: true
 
   /min-document@2.19.0:
@@ -2479,6 +2508,16 @@ packages:
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+    dev: true
+
+  /vite-multiple-assets@1.2.10(mime-types@2.1.35)(vite@5.2.8):
+    resolution: {integrity: sha512-G8PUqp4XRC0H6qYD4tzRFBSCv4tWAs30C/3Nzuz5QK57DpcSzOapQ6BUJrqYEEy2wU/od83B+hH/gOeXWTOFLg==}
+    peerDependencies:
+      mime-types: ^2.1.35
+      vite: '>=2.9.6'
+    dependencies:
+      mime-types: 2.1.35
+      vite: 5.2.8
     dev: true
 
   /vite@5.2.8:

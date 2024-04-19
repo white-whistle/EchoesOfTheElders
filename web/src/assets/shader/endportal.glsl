@@ -9,6 +9,8 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
+uniform float ReducedMotion;
+
 uniform vec3 COLORS[16];
 
 const mat4 SCALE_TRANSLATE=mat4(
@@ -28,7 +30,7 @@ mat2 mat2_rotate_z(float radians){
 mat4 end_portal_layer(float layer){
 	mat4 translate=mat4(
 		1.,0.,0.,17./layer,
-		0.,1.,0.,(2.+layer/1.5)*((u_time/1000.)*1.5),
+		0.,1.,0.,(2.+layer/1.5)*(((u_time*(1.-ReducedMotion))/1000.)*1.5),
 		0.,0.,1.,0.,
 		0.,0.,0.,1.
 	);
@@ -47,7 +49,8 @@ void main(){
 	vec3 color=texture2D(Sampler0,st).rgb*COLORS[0];
 	
 	for(int i=0;i<EndPortalLayers;i++){
-		color+=texture2D(Sampler1,(vec4(st,1.,1.)*end_portal_layer(float(i+1))).rg).rgb*COLORS[i];
+		vec2 pos=st+((u_mouse/u_resolution)*float(i*i)*.002*(1.-ReducedMotion));
+		color+=texture2D(Sampler1,(vec4(pos,1.,1.)*end_portal_layer(float(i+1))).rg).rgb*COLORS[i];
 	}
 	
 	gl_FragColor=vec4(color,1.);

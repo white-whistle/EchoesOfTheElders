@@ -13,7 +13,11 @@ export const MCButton = forwardRef(
 			<Button
 				ref={ref}
 				classNames={{ root: styles.button }}
-				style={{ '--pixel-scaling': scaling, ...style }}
+				style={{
+					'--pixel-scaling': scaling,
+					height: 'fit-content',
+					...style,
+				}}
 				{...rest}
 			/>
 		);

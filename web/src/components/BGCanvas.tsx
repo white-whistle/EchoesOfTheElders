@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import GlslCanvas from 'glslCanvas';
 import endPortalShader from '../assets/shader/endportal.glsl?raw';
 import endPortalSkyTexture from '../assets/texture/end_sky.png';
@@ -15,7 +15,14 @@ export const BGCanvas = ({
 }: PolymorphicComponentProps<'div', BoxComponentProps>) => {
 	const ref = useRef<HTMLCanvasElement>(null);
 
+	const isReduced = useMemo(
+		() => window.matchMedia(`(prefers-reduced-motion: reduce)`).matches,
+		[]
+	);
+
 	useEffect(() => {
+		if (isReduced) return;
+
 		const canvas = ref.current;
 		const sandbox = new GlslCanvas(canvas);
 
@@ -43,6 +50,7 @@ export const BGCanvas = ({
 
 		sandbox.setUniform('Sampler0', endPortalSkyTexture);
 		sandbox.setUniform('Sampler1', endPortalTexture);
+		sandbox.setUniform('ReducedMotion', Number(isReduced));
 
 		canvas?.setAttribute('width', sandbox.width);
 		canvas?.setAttribute('height', sandbox.height);
@@ -50,7 +58,7 @@ export const BGCanvas = ({
 		return () => {
 			sandbox.unsubscribeAll();
 		};
-	}, []);
+	}, [isReduced]);
 
 	return (
 		<Box pos='relative' {...rest}>
@@ -65,8 +73,10 @@ export const BGCanvas = ({
 					right: 0,
 					bottom: 0,
 					zIndex: 0,
+					backgroundColor: '#030c17',
 				}}
 			/>
+
 			<Box
 				w='100%'
 				h='100%'

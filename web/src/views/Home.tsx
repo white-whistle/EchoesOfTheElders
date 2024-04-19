@@ -1,47 +1,160 @@
 import { Link } from 'wouter';
-import { MCGui } from '../components/MCGui';
+import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
 import { MCText } from '../components/MCText';
-import { Anchor, Grid } from '@mantine/core';
+import { Grid, Image } from '@mantine/core';
 import { MC_PALETTE } from '../logic/MCPalette';
 import { Horizontal, Vertical } from '../Layout';
 import { PixelScaling } from '../components/PixelScaling';
+import { ItemMeta } from '../types';
+import { UberSlot } from '../components/Slot';
+import { Item } from '../components/Item';
+import { MCTooltipPanel } from '../components/MCTooltip';
+import { BasicTooltip } from '../components/BasicTooltip';
+import { Items } from '../itemMeta';
+import ScrollContainer from '../components/ScrollContainer';
+import { FormattedMessage } from 'react-intl';
+import { MCButton } from '../components/MCButton';
+import { MCGlyphIcon, MCGlyphIconBase } from '../components/MCGlyphIcon';
+import ExternalIcon from '../assets/texture/external.png';
+
+const philosophy = `\
+<star></star> Unique<DARK_GRAY> - Relics have unique effects and interactions</DARK_GRAY>
+<explosion></explosion> Unapologetic<DARK_GRAY> - Relics are not afraid to be unbalanced</DARK_GRAY>
+<on_hit></on_hit> Powerful<DARK_GRAY> - Receiving items should feel instantly rewarding</DARK_GRAY>
+<unique></unique> Clean<DARK_GRAY> -  No ammo, No durability, No boring ingredients</DARK_GRAY>
+<heart></heart> Coexist<DARK_GRAY> - Relics aim to not make other items obsolete</DARK_GRAY>
+<prism></prism> Pretty<DARK_GRAY> - GPU goes brrr</DARK_GRAY>\
+`;
 
 export const Home = () => {
 	const { px } = PixelScaling.use();
 	return (
-		<Horizontal justify='center'>
-			<MCGui>
-				<Vertical gap={px(10)} p={px(4)}>
-					<MCText
-						c={MC_PALETTE.dark_gray}
-						shadowColor={MC_PALETTE.gray}
-					>
-						Welcome to EOTE's web interface!
-					</MCText>
+		<Vertical align='center' gap={px(48)}>
+			<Vertical align='center'>
+				<MCGui>
+					<Vertical gap='0px' p={px(4)}>
+						<MCGuiTitle>Echoes of the Elders</MCGuiTitle>
+						<MCGuiText>An opinionated relic mod</MCGuiText>
+					</Vertical>
+				</MCGui>
 
-					<Grid gutter={px(4)} columns={16}>
-						<Grid.Col span={4}>
-							<MCGui>getting started</MCGui>
-						</Grid.Col>
+				<ScrollContainer>
+					<Vertical gap='0px' p={`${px(1)} ${px(4)}`}>
+						<MCGuiTitle>Philosophy</MCGuiTitle>
+						<MCGuiTitle></MCGuiTitle>
+						<MCGuiTitle
+							style={{ whiteSpace: 'pre' }}
+							shadowColor='transparent'
+						>
+							<FormattedMessage
+								id='#invalid'
+								defaultMessage={philosophy}
+							/>
+						</MCGuiTitle>
+					</Vertical>
+				</ScrollContainer>
+				<MCGui>
+					<Vertical gap={px(4)} p={px(4)} align='center'>
+						<MCGuiText>
+							Learn about our core mechanics, gameplay loop, and
+							progression
+						</MCGuiText>
+						<MCButton component={Link} to='/getting_started'>
+							<MCText>Take me there!</MCText>
+						</MCButton>
+					</Vertical>
+				</MCGui>
+			</Vertical>
 
-						<Grid.Col span={4}>
-							<MCGui>items</MCGui>
-						</Grid.Col>
+			<Vertical align='center'>
+				<MCText c={MC_PALETTE.light_purple}>
+					... Some of our coolest items ...
+				</MCText>
+				<Grid>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.godslayer} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.spiral_sword} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.starfall_bow} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.elder_prism} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.pocket_galaxy} />
+					</Grid.Col>
+					<Grid.Col span={4}>
+						<ItemSpotlight item={Items.orb_of_annihilation} />
+					</Grid.Col>
+				</Grid>
 
-						<Grid.Col span={4}>
-							<MCGui>philosophy</MCGui>
-						</Grid.Col>
+				<MCGui>
+					<Vertical align='center' gap={0} p={px(4)}>
+						<MCGuiTitle>More items</MCGuiTitle>
+						<MCGuiText>
+							Explore all items in our item gallery
+						</MCGuiText>
+						<MCGuiText />
+						<MCButton style={{ height: 'fit-content' }}>
+							<MCText>Take me there!</MCText>
+						</MCButton>
+					</Vertical>
+				</MCGui>
+			</Vertical>
 
-						<Grid.Col span={4}>
-							<MCGui>technology</MCGui>
-						</Grid.Col>
-					</Grid>
+			<Vertical align='center'>
+				<MCText c={MC_PALETTE.light_purple}>
+					... Now were just showing off ...
+				</MCText>
 
-					<Anchor component={Link} to='/items'>
-						<MCText>Items</MCText>
-					</Anchor>
-				</Vertical>
-			</MCGui>
-		</Horizontal>
+				<MCGui>
+					<Image />
+				</MCGui>
+			</Vertical>
+
+			<Vertical align='center'>
+				<MCGui>
+					<Vertical align='center' gap={0} p={px(4)}>
+						<MCGuiTitle>Love our work?</MCGuiTitle>
+						<MCGuiText>
+							Star us on github!
+							<MCGlyphIcon font='echoes_of_the_elders:star' />
+						</MCGuiText>
+						<MCGuiText />
+						<Horizontal>
+							<MCButton style={{ height: 'fit-content' }}>
+								<MCText>
+									EOTE&nbsp;
+									<MCGlyphIconBase src={ExternalIcon} />
+								</MCText>
+							</MCButton>
+
+							<MCButton style={{ height: 'fit-content' }}>
+								<MCText>
+									White Whistle&nbsp;
+									<MCGlyphIconBase src={ExternalIcon} />
+								</MCText>
+							</MCButton>
+						</Horizontal>
+					</Vertical>
+				</MCGui>
+			</Vertical>
+		</Vertical>
+	);
+};
+
+const ItemSpotlight = ({ item }: { item: ItemMeta }) => {
+	return (
+		<Vertical align='center'>
+			<UberSlot>
+				<Item item={item} />
+			</UberSlot>
+			<MCTooltipPanel>
+				<BasicTooltip item={item} />
+			</MCTooltipPanel>
+		</Vertical>
 	);
 };

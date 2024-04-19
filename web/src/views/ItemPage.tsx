@@ -6,11 +6,12 @@ import { MCTooltip, MCTooltipPanel } from '../components/MCTooltip';
 import { BasicTooltip } from '../components/BasicTooltip';
 import { PixelScaling } from '../components/PixelScaling';
 import { DropRateGraph } from '../components/DropRateGraph';
-import { MCGui } from '../components/MCGui';
+import { MCGui, MCGuiTitle } from '../components/MCGui';
 import { MCText } from '../components/MCText';
 import { Box } from '@mantine/core';
 import { MC_PALETTE } from '../logic/MCPalette';
 import { MCButton } from '../components/MCButton';
+import Shell from '../components/Shell';
 
 export const ItemPage = () => {
 	const params = useParams();
@@ -39,12 +40,7 @@ export const ItemPage = () => {
 							</MCButton>
 						</MCTooltip>
 
-						<MCText
-							c={MC_PALETTE.dark_gray}
-							shadowColor={MC_PALETTE.gray}
-						>
-							Item info
-						</MCText>
+						<MCGuiTitle>Item info</MCGuiTitle>
 					</Horizontal>
 					<Horizontal justify='center'>
 						<Vertical gap={px(6)} p={px(6)} align='center'>

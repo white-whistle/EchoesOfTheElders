@@ -27,3 +27,7 @@ export const MCGui = (
 export const MCGuiTitle = (props: MCTextProps) => {
 	return <MCText c='dark' shadowColor='#9b9b9b' {...props} />;
 };
+
+export const MCGuiText = (props: MCTextProps) => {
+	return <MCText c='#5f5f5f' shadowColor='#adadad' {...props} />;
+};

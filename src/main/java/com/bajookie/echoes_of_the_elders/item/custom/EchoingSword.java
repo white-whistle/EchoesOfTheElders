@@ -92,6 +92,11 @@ public class EchoingSword extends SwordItem implements IArtifact, IStackPredicat
         public void appendTooltipInfo(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, TooltipSectionContext section) {
             section.line("info1");
         }
+
+        @Override
+        public boolean hasCooldown() {
+            return true;
+        }
     };
 
     public static List<Ability> ABILITIES = List.of(ECHOED_STRIKE_ABILITY);
