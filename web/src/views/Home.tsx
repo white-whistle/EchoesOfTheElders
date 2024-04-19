@@ -16,6 +16,7 @@ import { FormattedMessage } from 'react-intl';
 import { MCButton } from '../components/MCButton';
 import { MCGlyphIcon, MCGlyphIconBase } from '../components/MCGlyphIcon';
 import ExternalIcon from '../assets/texture/external.png';
+import { useMediaQuery } from '@mantine/hooks';
 
 const philosophy = `\
 <star></star> Unique<DARK_GRAY> - Relics have unique effects and interactions</DARK_GRAY>
@@ -28,6 +29,9 @@ const philosophy = `\
 
 export const Home = () => {
 	const { px } = PixelScaling.use();
+	const isSM = useMediaQuery(`(max-width: 1250px)`);
+	const isMD = useMediaQuery(`(max-width: 1900px)`);
+
 	return (
 		<Vertical align='center' gap={px(48)}>
 			<Vertical align='center'>
@@ -68,9 +72,9 @@ export const Home = () => {
 
 			<Vertical align='center'>
 				<MCText c={MC_PALETTE.light_purple}>
-					... Some of our coolest items ...
+					... Some of our cool items ...
 				</MCText>
-				<Grid>
+				<Grid columns={isSM ? 4 : isMD ? 8 : 12}>
 					<Grid.Col span={4}>
 						<ItemSpotlight item={Items.godslayer} />
 					</Grid.Col>
@@ -107,11 +111,17 @@ export const Home = () => {
 
 			<Vertical align='center'>
 				<MCText c={MC_PALETTE.light_purple}>
-					... Now were just showing off ...
+					... Now we're just showing off ...
 				</MCText>
 
 				<MCGui>
-					<Image />
+					<Image src='/screenshots/showoff1.png' />
+				</MCGui>
+				<MCGui>
+					<Image src='/screenshots/doomstick.png' />
+				</MCGui>
+				<MCGui>
+					<Image src='/screenshots/totem_spawn.png' />
 				</MCGui>
 			</Vertical>
 

@@ -17,7 +17,6 @@ import { MCGlyphIconBase } from './MCGlyphIcon';
 
 function Shell({ children }) {
 	const { px } = PixelScaling.use();
-	console.log({ Items });
 	return (
 		<AppShell header={{ height: 120 }} padding='md'>
 			<AppShell.Header
@@ -89,9 +88,6 @@ function Shell({ children }) {
 					</Horizontal>
 				</Vertical>
 			</AppShell.Main>
-			{/* <AppShell.Footer bg='transparent' withBorder={false}>
-				
-			</AppShell.Footer> */}
 		</AppShell>
 	);
 }
