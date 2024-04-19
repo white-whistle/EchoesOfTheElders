@@ -126,7 +126,7 @@ public class RaidObjectiveCapability extends Capability<LivingEntity> {
         remainingEnemies.clear();
 
         for (LivingEntity entity : wave) {
-            var pos = RaidPositioner.random(50, 100).next(entity.getWorld(), self, entity);
+            var pos = RaidPositioner.random(30, 60).next(entity.getWorld(), self, entity);
 
             entity.setPosition(pos.getX() + RaidPositioner.r.nextFloat(), pos.getY(), pos.getZ() + RaidPositioner.r.nextFloat());
             entity.getWorld().spawnEntity(entity);

@@ -15,6 +15,8 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.RotationAxis;
 
+import java.util.List;
+
 import static com.bajookie.echoes_of_the_elders.EOTE.MOD_ID;
 
 public class RaidTotemRenderer extends MobEntityRenderer<RaidTotemEntity, RaidTotemModel> {
@@ -60,7 +62,7 @@ public class RaidTotemRenderer extends MobEntityRenderer<RaidTotemEntity, RaidTo
 
         ModCapabilities.RAID_OBJECTIVE.use(mobEntity, o -> {
             if (mobEntity.isDead()) return;
-            
+
             if (o.active) {
                 matrixStack.push();
                 matrixStack.translate(-0.5, -0.5, -0.5);
@@ -86,6 +88,7 @@ public class RaidTotemRenderer extends MobEntityRenderer<RaidTotemEntity, RaidTo
 
                     itemRenderer.renderItem(stack, ModelTransformationMode.GROUND, i, OverlayTexture.DEFAULT_UV, matrixStack, vertexConsumerProvider, mobEntity.getWorld(), 0);
                     matrixStack.pop();
+                    j++;
                 }
                 matrixStack.pop();
             }

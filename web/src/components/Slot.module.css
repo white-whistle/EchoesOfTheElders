@@ -1,11 +1,6 @@
 .slot {
-	background-image: url("/gui/slot.png");
-	background-size: 100% 100%;
 	image-rendering: pixelated;
 	position: relative;
-	
-	--slot-pad: calc(1/18 * 100%);
-	padding: var(--slot-pad);
 
 	&::after {
 		content: '';

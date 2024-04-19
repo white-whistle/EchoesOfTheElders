@@ -8,27 +8,21 @@ export function fontToImageSrc(font: string) {
 	return '/font/' + tex + '.png';
 }
 
-export const MCGlyphIcon = forwardRef(
+export const MCGlyphIconBase = forwardRef(
 	(
-		{
-			font,
-			style,
-			...rest
-		}: PolymorphicComponentProps<'img', ImageProps> & { font: string },
+		{ src, style, ...rest }: PolymorphicComponentProps<'img', ImageProps>,
 		ref
 	) => {
-		const src = useMemo(() => fontToImageSrc(font), [font]);
 		const { scaling } = PixelScaling.use();
 
 		return (
 			<Image
-				ref={ref}
+				ref={ref as any}
 				src={src}
 				w={scaling * 9}
 				h={scaling * 9}
 				display='inline-block'
 				className={styles.glyph}
-				data-glyph-id={font}
 				style={{
 					imageRendering: 'pixelated',
 					verticalAlign: 'text-top',
@@ -36,6 +30,27 @@ export const MCGlyphIcon = forwardRef(
 					...style,
 				}}
 				{...rest}
+			/>
+		);
+	}
+);
+
+export const MCGlyphIcon = forwardRef(
+	(
+		{
+			font,
+			...rest
+		}: PolymorphicComponentProps<'img', ImageProps> & { font: string },
+		ref
+	) => {
+		const src = useMemo(() => fontToImageSrc(font), [font]);
+
+		return (
+			<MCGlyphIconBase
+				src={src}
+				{...rest}
+				ref={ref}
+				data-glyph-id={font}
 			/>
 		);
 	}

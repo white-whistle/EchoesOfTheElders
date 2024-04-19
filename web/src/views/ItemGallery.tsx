@@ -1,11 +1,11 @@
 import { useMemo, useState } from 'react';
 import { ITEM_META } from '../itemMeta';
 import { ItemMeta } from '../types';
-import { Horizontal, Vertical } from '../Layout';
+import { Vertical } from '../Layout';
 import { ItemGrid } from '../components/ItemGrid';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { itemToKey } from '../components/Item';
-import { MCGui, MCGuiTitle } from '../components/MCGui';
+import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
 import { PixelScaling } from '../components/PixelScaling';
 import { MCText } from '../components/MCText';
 import { MCTextInput } from '../components/MCTextInput';
@@ -14,6 +14,8 @@ import { MCGlyphIcon } from '../components/MCGlyphIcon';
 import { MCTooltip } from '../components/MCTooltip';
 import { DropMapGraph } from '../components/DropMapGraph';
 import { Box } from '@mantine/core';
+import Shell from '../components/Shell';
+import DeferredRendering from '../components/DeferredRendering';
 
 const tooltipInfo = `\
 Smart filters
@@ -115,7 +117,7 @@ export const ItemGallery = () => {
 
 	const items = useMemo(
 		() =>
-			(ITEM_META.items as ItemMeta[]).map(
+			(ITEM_META.items as unknown as ItemMeta[]).map(
 				(item) =>
 					({
 						...item,
@@ -168,6 +170,9 @@ export const ItemGallery = () => {
 			<MCGui w='100%' maw='800px' flex={1}>
 				<Vertical p={scaling * 2}>
 					<MCGuiTitle>Item Gallery</MCGuiTitle>
+					<MCGuiText>
+						Click items to display more information
+					</MCGuiText>
 
 					<MCTextInput
 						value={filter}
@@ -183,24 +188,30 @@ export const ItemGallery = () => {
 						rightSection={infoSection}
 					/>
 
-					{filteredItems.length ? (
-						<ItemGrid
-							items={filteredItems}
-							highlight={highlightedItems}
-							onItemClick={(item) => {
-								console.log({ item });
-								setLocation(`/item/${item.item}`);
-							}}
-						/>
-					) : (
-						<MCText>No matching items found...</MCText>
-					)}
+					<DeferredRendering>
+						{filteredItems.length ? (
+							<ItemGrid
+								items={filteredItems}
+								highlight={highlightedItems}
+								onItemClick={(item) => {
+									console.log({ item });
+									setLocation(`/item/${item.item}`);
+								}}
+							/>
+						) : (
+							<MCText>No matching items found...</MCText>
+						)}
+					</DeferredRendering>
 				</Vertical>
 			</MCGui>
 
 			<MCGui w='100%' maw='800px' flex={1}>
 				<Vertical p={scaling * 2}>
 					<MCGuiTitle>Drop Map</MCGuiTitle>
+					<MCGuiText>
+						Hover over the map to see which items drop at which raid
+						level
+					</MCGuiText>
 
 					<Box w='100%' h='400px'>
 						<DropMapGraph items={filteredItems} />

@@ -1,4 +1,9 @@
 @font-face {
     font-family: Minecraft;
-    src: url("assets/font/MinecraftRegular-Bmg3.otf") format("opentype");
+    /* src: url("assets/font/MinecraftRegular-Bmg3.otf") format("opentype"); */
+    src: url("/mc-regular.otf") format("opentype");
+}
+
+::-webkit-scrollbar {
+	display: none;
 }

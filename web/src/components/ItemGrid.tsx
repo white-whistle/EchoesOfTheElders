@@ -34,12 +34,16 @@ export const ItemGrid = ({
 					Boolean(highlight?.length) && !highlight?.includes(item);
 
 				return (
-					<Slot onClick={() => onItemClick?.(item)} shade={isShaded}>
+					<Slot
+						key={item.item}
+						onClick={() => onItemClick?.(item)}
+						shade={isShaded}
+					>
 						<MCFloatingTooltip
 							position='right-start'
 							label={<BasicTooltip item={item} />}
 						>
-							<Item key={item.item} item={item} />
+							<Item item={item} />
 						</MCFloatingTooltip>
 					</Slot>
 				);

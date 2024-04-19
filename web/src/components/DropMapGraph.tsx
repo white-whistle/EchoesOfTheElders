@@ -14,8 +14,9 @@ import { MCFloatingTooltip } from './MCTooltip';
 import { Box } from '@mantine/core';
 import { Horizontal, Vertical } from '../Layout';
 import { MCText } from './MCText';
+import Crosshair from 'chartjs-plugin-crosshair';
 
-Chart.register(Filler, Tooltip);
+Chart.register(Filler, Tooltip, Crosshair);
 
 const COLORS = Object.values(MC_BRIGHT_PALETTE);
 const indexToColor = (index: number) => {
@@ -199,6 +200,36 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 								)}
 							</Vertical>
 						);
+					},
+				},
+
+				crosshair: {
+					line: {
+						color: '#F66', // crosshair line color
+						width: 2, // crosshair line width
+					},
+					sync: {
+						enabled: true, // enable trace line syncing with other charts
+						group: 1, // chart group
+						suppressTooltips: false, // suppress tooltips when showing a synced tracer
+					},
+					zoom: {
+						enabled: true, // enable zooming
+						zoomboxBackgroundColor: 'rgba(66,133,244,0.2)', // background color of zoom box
+						zoomboxBorderColor: '#48F', // border color of zoom box
+						zoomButtonText: 'Reset Zoom', // reset zoom button text
+						zoomButtonClass: 'reset-zoom', // reset zoom button class
+					},
+					callbacks: {
+						beforeZoom: () =>
+							function (start, end) {
+								// called before zoom, return false to prevent zoom
+								return true;
+							},
+						afterZoom: () =>
+							function (start, end) {
+								// called after zoom
+							},
 					},
 				},
 			},
