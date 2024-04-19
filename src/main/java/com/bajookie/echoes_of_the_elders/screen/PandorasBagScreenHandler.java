@@ -137,7 +137,7 @@ public class PandorasBagScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return true;
+        return player.getInventory().contains(bag);
     }
 
     @Override

@@ -7,6 +7,8 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -36,5 +38,10 @@ public class PandorasBagScreen extends HandledScreen<PandorasBagScreenHandler> {
     protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
         context.drawText(this.textRenderer, this.title, this.titleX, this.titleY, 0xf284ec, false);
         context.drawText(this.textRenderer, this.playerInventoryTitle, this.playerInventoryTitleX, this.playerInventoryTitleY, 0xf284ec, false);
+    }
+
+    @Override
+    protected void onMouseClick(Slot slot, int slotId, int button, SlotActionType actionType) {
+        super.onMouseClick(slot, slotId, button, actionType);
     }
 }

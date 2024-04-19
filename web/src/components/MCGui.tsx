@@ -7,9 +7,10 @@ import styles from './MCGui.module.css';
 import { PixelScaling } from './PixelScaling';
 import { MCText, MCTextProps } from './MCText';
 
-export const MCGui = (
-	props: PolymorphicComponentProps<'div', BoxComponentProps>
-) => {
+export const MCGui = ({
+	style,
+	...props
+}: PolymorphicComponentProps<'div', BoxComponentProps>) => {
 	const { scaling } = PixelScaling.use();
 
 	return (
@@ -18,6 +19,7 @@ export const MCGui = (
 			style={{
 				borderImageWidth: `${scaling * 4}px`,
 				padding: scaling * 4,
+				...style,
 			}}
 			{...props}
 		/>

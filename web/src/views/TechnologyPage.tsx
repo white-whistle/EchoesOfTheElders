@@ -1,6 +1,5 @@
 import { Vertical } from '../Layout';
 import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
-import { MCText } from '../components/MCText';
 import { PixelScaling } from '../components/PixelScaling';
 
 function TechnologyPage() {
@@ -87,6 +86,17 @@ function TechnologyPage() {
 						translatable messages, our mod messages conform to the
 						format used by FormatJS, making them integrate into this
 						website kind of seamlessly
+					</MCGuiText>
+				</Vertical>
+			</MCGui>
+
+			<MCGui w='100%' maw='800px' flex={1}>
+				<Vertical p={px(2)} gap='0'>
+					<MCGuiTitle>End portal background</MCGuiTitle>
+					<MCGuiText>
+						We literally backported the end portal shader from
+						minecraft glsl ES 3 to glsl ES 1.0 and ran it on a
+						canvas
 					</MCGuiText>
 				</Vertical>
 			</MCGui>

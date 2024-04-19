@@ -13,6 +13,15 @@ function AboutPage() {
 			<MCGui w='100%' maw='800px' flex={1}>
 				<Vertical p={px(2)}>
 					<MCGuiTitle>About</MCGuiTitle>
+					<MCGuiText>
+						The motivation behind this mod is to create an alternate
+						play-path via giving access to powerful abilities,
+						throwing balance out of the window in the process
+					</MCGuiText>
+					<MCGuiText>
+						Too many mods try to balance things, we basically try to
+						do the opposite
+					</MCGuiText>
 				</Vertical>
 			</MCGui>
 
