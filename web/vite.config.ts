@@ -6,6 +6,7 @@ const dirAssets = ["public", "../src/main/resources/assets/echoes_of_the_elders/
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	base: '/EchoesOfTheElders/',
 	plugins: [
 		DynamicPublicDirectory(dirAssets),
 		react()
