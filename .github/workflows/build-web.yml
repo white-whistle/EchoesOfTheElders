@@ -4,7 +4,7 @@
 # against bad commits.
 
 name: build
-on: [ pull_request, push, workflow_dispatch ]
+on: [ workflow_dispatch ]
 
 jobs:
   build:
@@ -45,11 +45,10 @@ jobs:
         run: pnpm build
         working-directory: ./web
       - name: Deploy
-        working-directory: ./web
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./web/dist
 
 #      - name: capture build artifacts
 #        if: ${{ matrix.java == '21' }} # Only upload artifacts built from latest java
