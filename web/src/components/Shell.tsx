@@ -123,7 +123,7 @@ const infoTabs = [
 		route: '/github',
 		icon: <ItemTexture src={GithubIcon} />,
 		tooltip: 'Github',
-		link: 'https://github.com/LiorBuch/EchoesOfTheElders',
+		link: 'https://github.com/white-whistle/EchoesOfTheElders',
 	},
 ];
 

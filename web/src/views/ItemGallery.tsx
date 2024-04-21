@@ -14,7 +14,6 @@ import { MCGlyphIcon } from '../components/MCGlyphIcon';
 import { MCTooltip } from '../components/MCTooltip';
 import { DropMapGraph } from '../components/DropMapGraph';
 import { Box } from '@mantine/core';
-import Shell from '../components/Shell';
 import DeferredRendering from '../components/DeferredRendering';
 
 const tooltipInfo = `\
