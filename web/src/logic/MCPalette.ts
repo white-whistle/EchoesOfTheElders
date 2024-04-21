@@ -17,7 +17,9 @@ export const MC_PALETTE = {
 	black: '#000000',
 } as const;
 
-export function tryMcGetColor(color: string) {
+export function tryMcGetColor(color: string | undefined) {
+	if (!color) return undefined;
+
 	return MC_PALETTE[color] ?? color;
 }
 

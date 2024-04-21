@@ -60,8 +60,7 @@ export const Home = () => {
 				<MCGui>
 					<Vertical gap={px(4)} p={px(4)} align='center'>
 						<MCGuiText>
-							Learn about our core mechanics, gameplay loop, and
-							progression
+							Learn about our core mechanics and progression
 						</MCGuiText>
 						<MCButton component={Link} to='/getting_started'>
 							<MCText>Take me there!</MCText>
@@ -135,14 +134,24 @@ export const Home = () => {
 						</MCGuiText>
 						<MCGuiText />
 						<Horizontal>
-							<MCButton style={{ height: 'fit-content' }}>
+							<MCButton
+								style={{ height: 'fit-content' }}
+								component='a'
+								target='_blank'
+								href='https://github.com/white-whistle/EchoesOfTheElders'
+							>
 								<MCText>
 									EOTE&nbsp;
 									<MCGlyphIconBase src={ExternalIcon} />
 								</MCText>
 							</MCButton>
 
-							<MCButton style={{ height: 'fit-content' }}>
+							<MCButton
+								style={{ height: 'fit-content' }}
+								component='a'
+								target='_blank'
+								href='https://github.com/white-whistle'
+							>
 								<MCText>
 									White Whistle&nbsp;
 									<MCGlyphIconBase src={ExternalIcon} />

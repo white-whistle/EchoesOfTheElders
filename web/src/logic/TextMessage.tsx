@@ -34,7 +34,7 @@ export function textMessageToFmsg(msg: TextMessage) {
 
 		if (TextMessage.isMC(msg)) {
 			if (msg.translate === 'number.echoes_of_the_elders.int')
-				return msg.with[0];
+				return msg.with[0] as number;
 			if (msg.translate === 'number.echoes_of_the_elders.f1')
 				return Number(msg.with[0]).toFixed(1);
 			// technically we cant support this really and should shift to using eote messages instead where possible
@@ -59,7 +59,7 @@ export function textMessageToFmsg(msg: TextMessage) {
 	if (!content) return null;
 	const style = { color: tryMcGetColor(msg.color) };
 
-	return <span style={style}>{content}</span>;
+	return <span style={style}>{content as any}</span>;
 }
 
 export function textMessageIdentifier(msg: TextMessage) {

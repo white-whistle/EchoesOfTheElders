@@ -68,7 +68,7 @@ export function getRewardDropRateForRange(
 	const min = minOverride ?? item.dropData?.min ?? globalLowestDropLevel;
 	const max = maxOverride ?? getDisplayMax(item.dropData?.max);
 
-	const data = [];
+	const data: { x: number; y: number }[] = [];
 	for (let i = min; i <= max; i++) {
 		data.push({
 			x: i,
@@ -165,5 +165,11 @@ export const DropRateGraph = ({ item }: { item: ItemMeta }) => {
 
 	if (!data?.datasets?.length) return null;
 
-	return <Line data={data} options={options} style={{ height: '100%' }} />;
+	return (
+		<Line
+			data={data as any}
+			options={options as any}
+			style={{ height: '100%' }}
+		/>
+	);
 };

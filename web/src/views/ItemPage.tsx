@@ -9,9 +9,7 @@ import { DropRateGraph } from '../components/DropRateGraph';
 import { MCGui, MCGuiTitle } from '../components/MCGui';
 import { MCText } from '../components/MCText';
 import { Box } from '@mantine/core';
-import { MC_PALETTE } from '../logic/MCPalette';
 import { MCButton } from '../components/MCButton';
-import Shell from '../components/Shell';
 
 export const ItemPage = () => {
 	const params = useParams();

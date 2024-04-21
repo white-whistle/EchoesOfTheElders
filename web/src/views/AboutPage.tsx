@@ -2,7 +2,6 @@ import { Anchor } from '@mantine/core';
 import { Vertical } from '../Layout';
 import { MCGlyphIcon } from '../components/MCGlyphIcon';
 import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
-import { MCText } from '../components/MCText';
 import { PixelScaling } from '../components/PixelScaling';
 
 function AboutPage() {
