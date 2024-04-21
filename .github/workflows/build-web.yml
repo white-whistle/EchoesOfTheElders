@@ -13,7 +13,7 @@ jobs:
         # Use these Java versions
         java: [
           17,    # Current Java LTS & minimum supported by Minecraft
-          21,    # Current Java LTS
+          #          21,    # Current Java LTS
         ]
         node-version: [ 18 ]
     runs-on: ubuntu-22.04
@@ -45,6 +45,7 @@ jobs:
         run: pnpm build
         working-directory: ./web
       - name: Deploy
+        working-directory: ./web
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
