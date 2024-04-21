@@ -14,9 +14,12 @@ import TechnologyIcon from '../assets/texture/technology.png';
 import InfoIcon from '../assets/texture/info.png';
 import ExternalIcon from '../assets/texture/external.png';
 import { MCGlyphIconBase } from './MCGlyphIcon';
+import { useMediaQuery } from '@mantine/hooks';
 
 function Shell({ children }) {
 	const { px } = PixelScaling.use();
+	const isSM = useMediaQuery(`(max-width: 924px)`);
+
 	return (
 		<AppShell header={{ height: 120 }} padding='md'>
 			<AppShell.Header
@@ -36,19 +39,21 @@ function Shell({ children }) {
 						<Tabs tabs={gameTabs} />
 					</Box>
 
-					<Anchor component={Link} to='/'>
-						<Image
-							src={ModTitleImage}
-							h='120px'
-							w='fit-content'
-							p='md'
-							ml='auto'
-							mr='auto'
-							style={{
-								filter: 'drop-shadow(2px 4px 6px black)',
-							}}
-						/>
-					</Anchor>
+					{!isSM && (
+						<Anchor component={Link} to='/'>
+							<Image
+								src={ModTitleImage}
+								h='120px'
+								w='fit-content'
+								p='md'
+								ml='auto'
+								mr='auto'
+								style={{
+									filter: 'drop-shadow(2px 4px 6px black)',
+								}}
+							/>
+						</Anchor>
+					)}
 
 					<Box
 						flex={1}

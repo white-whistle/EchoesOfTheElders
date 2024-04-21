@@ -2,10 +2,12 @@ import { Image, ImageProps, PolymorphicComponentProps } from '@mantine/core';
 import { forwardRef, useMemo } from 'react';
 import { PixelScaling } from './PixelScaling';
 import styles from './MCGlyphIcon.module.css';
+import { basePath } from '../util';
 
 export function fontToImageSrc(font: string) {
 	const tex = font.replace('echoes_of_the_elders:', '');
-	return '/font/' + tex + '.png';
+	// return '/font/' + tex + '.png';
+	return `${basePath}/font/${tex}.png?raw=true`;
 }
 
 export const MCGlyphIconBase = forwardRef(

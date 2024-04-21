@@ -1,0 +1,1 @@
+export const basePath = 'https://github.com/white-whistle/EchoesOfTheElders/blob/gh-pages'
