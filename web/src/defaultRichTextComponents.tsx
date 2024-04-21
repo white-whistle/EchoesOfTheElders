@@ -2,8 +2,6 @@ import { MCGlyphIcon } from './components/MCGlyphIcon';
 import { ITEM_META } from './itemMeta';
 import { MC_PALETTE } from './logic/MCPalette';
 
-const NOOP = (chunks: any) => chunks;
-
 const ICON_TEST = (iconId: string) => (chunks: any) =>
 	(
 		<>

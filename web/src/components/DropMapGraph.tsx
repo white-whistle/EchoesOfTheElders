@@ -222,12 +222,12 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 					},
 					callbacks: {
 						beforeZoom: () =>
-							function (start, end) {
+							function () {
 								// called before zoom, return false to prevent zoom
 								return true;
 							},
 						afterZoom: () =>
-							function (start, end) {
+							function () {
 								// called after zoom
 							},
 					},
@@ -242,8 +242,8 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 		<MCFloatingTooltip label={tooltipData ?? ''}>
 			<Box style={{ height: '100%' }}>
 				<Line
-					data={data}
-					options={options}
+					data={data as any}
+					options={options as any}
 					style={{ height: '100%' }}
 				/>
 			</Box>

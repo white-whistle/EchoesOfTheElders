@@ -4,7 +4,10 @@ import { ItemMeta } from '../types';
 
 export function useItem(itemId: string | undefined) {
 	return React.useMemo(
-		() => ITEM_META.items.find((item) => item.item === itemId) as ItemMeta,
+		() =>
+			ITEM_META.items.find(
+				(item) => item.item === itemId
+			) as unknown as ItemMeta,
 		[itemId]
 	);
 }

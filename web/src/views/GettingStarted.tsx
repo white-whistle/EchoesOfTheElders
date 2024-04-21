@@ -1,10 +1,8 @@
-import { Box, Image } from '@mantine/core';
+import { Box } from '@mantine/core';
 import { Vertical } from '../Layout';
 import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
-import { MCText } from '../components/MCText';
 import { PixelScaling } from '../components/PixelScaling';
 import MCSoiler from '../components/MCSpoiler';
-import ScrollContainer from '../components/ScrollContainer';
 import BorderImage from '../components/BorderImage';
 import TweenImage from '../components/TweenImage';
 
