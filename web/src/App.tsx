@@ -7,6 +7,8 @@ import { PixelScaling } from './components/PixelScaling';
 import { Routes } from './Routes';
 import { BGCanvas } from './components/BGCanvas';
 import Shell from './components/Shell';
+import { useHashLocation } from 'wouter/use-hash-location';
+import { Router } from 'wouter';
 
 const theme = createTheme({
 	/** Your theme override here */
@@ -14,22 +16,24 @@ const theme = createTheme({
 
 function App() {
 	return (
-		<IntlProvider
-			messages={EN_US}
-			locale='en-US'
-			defaultLocale='en-US'
-			defaultRichTextElements={defaultRichTextComponents}
-		>
-			<PixelScaling.Provider scaling={3}>
-				<MantineProvider theme={theme}>
-					<BGCanvas>
-						<Shell>
-							<Routes />
-						</Shell>
-					</BGCanvas>
-				</MantineProvider>
-			</PixelScaling.Provider>
-		</IntlProvider>
+		<Router hook={useHashLocation}>
+			<IntlProvider
+				messages={EN_US}
+				locale='en-US'
+				defaultLocale='en-US'
+				defaultRichTextElements={defaultRichTextComponents}
+			>
+				<PixelScaling.Provider scaling={3}>
+					<MantineProvider theme={theme}>
+						<BGCanvas>
+							<Shell>
+								<Routes />
+							</Shell>
+						</BGCanvas>
+					</MantineProvider>
+				</PixelScaling.Provider>
+			</IntlProvider>
+		</Router>
 	);
 }
 

@@ -5,6 +5,7 @@ import { PixelScaling } from '../components/PixelScaling';
 import MCSoiler from '../components/MCSpoiler';
 import BorderImage from '../components/BorderImage';
 import TweenImage from '../components/TweenImage';
+import { basePath } from '../util';
 
 function GettingStarted() {
 	const { px } = PixelScaling.use();
@@ -37,7 +38,9 @@ function GettingStarted() {
 						Relics can be upgraded via combining two relics of the
 						same type (right click artifact on artifact)
 					</MCGuiText>
-					<BorderImage src='/upgrade_relic_relic.gif' />
+					<BorderImage
+						src={`${basePath}/upgrade_relic_relic.gif?raw=true`}
+					/>
 
 					<MCGuiText />
 					<MCGuiText>
@@ -45,19 +48,25 @@ function GettingStarted() {
 						hammers (right click hammer on artifact)
 					</MCGuiText>
 
-					<BorderImage src='/upgrade_relic_hammer.gif' />
+					<BorderImage
+						src={`${basePath}/upgrade_relic_hammer.gif?raw=true`}
+					/>
 					<MCGuiText />
 					<MCGuiText>
 						Relics change their appearance every 16 levels (swag)
 					</MCGuiText>
-					<BorderImage src='/upgrade_relic_max.gif' />
+					<BorderImage
+						src={`${basePath}/upgrade_relic_max.gif?raw=true`}
+					/>
 
 					<MCGuiText />
 					<MCGuiTitle>Toggled items</MCGuiTitle>
 					<MCGuiText>
 						Some items can be toggled ON/OFF (right click item)
 					</MCGuiText>
-					<BorderImage src='/toggle_relic.gif' />
+					<BorderImage
+						src={`${basePath}/toggle_relic.gif?raw=true`}
+					/>
 				</Vertical>
 			</MCGui>
 
@@ -78,13 +87,17 @@ function GettingStarted() {
 							Makes you wonder how he is able to shift between
 							dimensions...
 						</MCGuiText>
-						<BorderImage src='/screenshots/elderman.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/elderman.png?raw=true`}
+						/>
 					</MCSoiler>
 
 					<MCSoiler label='Dimension Access - step 2'>
 						<MCGuiTitle>Kill the Elder Man</MCGuiTitle>
 						<MCGuiText>...</MCGuiText>
-						<BorderImage src='/screenshots/doomstick.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/doomstick.png?raw=true`}
+						/>
 					</MCSoiler>
 
 					<MCSoiler label='Dimension Access - step 3'>
@@ -94,7 +107,9 @@ function GettingStarted() {
 							between dimensions, although you are not confident
 							you can get it to work like he did
 						</MCGuiText>
-						<BorderImage src='/screenshots/prism.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/prism.png?raw=true`}
+						/>
 					</MCSoiler>
 
 					<MCSoiler label='Dimension Access - step 4'>
@@ -102,7 +117,9 @@ function GettingStarted() {
 						<MCGuiText>
 							Using the Elder Prism shift into the Spirit Realm
 						</MCGuiText>
-						<BorderImage src='/screenshots/spirit_realm.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/spirit_realm.png?raw=true`}
+						/>
 						<MCGuiText />
 						<MCGuiText>
 							The spirit realm's terrain is identical to that of
@@ -111,9 +128,11 @@ function GettingStarted() {
 							death!
 						</MCGuiText>
 						<Box pos='relative'>
-							<BorderImage src='/screenshots/terrain_overworld.png' />
+							<BorderImage
+								src={`${basePath}/screenshots/terrain_overworld.png?raw=true`}
+							/>
 							<TweenImage
-								src='/screenshots/terrain_spirit_realm.png'
+								src={`${basePath}/screenshots/terrain_spirit_realm.png?raw=true`}
 								pos='absolute'
 								top={0}
 								left={0}
@@ -128,7 +147,9 @@ function GettingStarted() {
 							some holding food, while others old looking keys..
 						</MCGuiText>
 						<MCGuiText>Wonder what the keys can open...</MCGuiText>
-						<BorderImage src='/screenshots/key_spirit.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/key_spirit.png?raw=true`}
+						/>
 					</MCSoiler>
 
 					<MCSoiler label='Caches'>
@@ -144,7 +165,9 @@ function GettingStarted() {
 							only be picked up and opened by the player that
 							opened the cache
 						</MCGuiText>
-						<BorderImage src='/screenshots/cache.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/cache.png?raw=true`}
+						/>
 					</MCSoiler>
 
 					<MCSoiler label='Raids'>
@@ -166,9 +189,11 @@ function GettingStarted() {
 							awaken the shrine and summon the raid totem.
 						</MCGuiText>
 						<Box pos='relative'>
-							<BorderImage src='/screenshots/totem_spawn.png' />
+							<BorderImage
+								src={`${basePath}/screenshots/totem_spawn.png?raw=true`}
+							/>
 							<TweenImage
-								src='/screenshots/totem_entity.png'
+								src={`${basePath}/screenshots/totem_entity.png?raw=true`}
 								pos='absolute'
 								top={0}
 								left={0}
@@ -194,7 +219,9 @@ function GettingStarted() {
 							rewards while risking all of the rewards obtained so
 							far.
 						</MCGuiText>
-						<BorderImage src='/screenshots/raid_active.png' />
+						<BorderImage
+							src={`${basePath}/screenshots/raid_active.png?raw=true`}
+						/>
 						<MCGuiText />
 						<MCGuiText>
 							When the raid totem dies, the raid fails - failed

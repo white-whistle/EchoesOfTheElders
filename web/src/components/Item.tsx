@@ -3,9 +3,11 @@ import { ItemMeta } from '../types';
 import { PixelScaling } from './PixelScaling';
 import { forwardRef } from 'react';
 import MissingTexture from '../assets/texture/missing.png';
+import { basePath } from '../util';
 
 export function textureFromItem(item: string) {
-	return '/item/' + item + '.png';
+	// return '/EchoesOfTheElders/item/' + item + '.png';
+	return `${basePath}/item/${item}.png?raw=true/`;
 }
 
 export function itemToKey(item: string) {
