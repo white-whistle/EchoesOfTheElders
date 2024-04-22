@@ -105,7 +105,11 @@ export const Home = () => {
 							Explore all items in our item gallery
 						</MCGuiText>
 						<MCGuiText />
-						<MCButton style={{ height: 'fit-content' }}>
+						<MCButton
+							component={Link}
+							to='/items'
+							style={{ height: 'fit-content' }}
+						>
 							<MCText>Take me there!</MCText>
 						</MCButton>
 					</Vertical>
