@@ -5,7 +5,6 @@ import { useItem } from '../hooks/useItem';
 import { MCTooltip, MCTooltipPanel } from '../components/MCTooltip';
 import { BasicTooltip } from '../components/BasicTooltip';
 import { PixelScaling } from '../components/PixelScaling';
-import { DropRateGraph } from '../components/DropRateGraph';
 import { MCGui, MCGuiTitle } from '../components/MCGui';
 import { MCText } from '../components/MCText';
 import { Box } from '@mantine/core';
