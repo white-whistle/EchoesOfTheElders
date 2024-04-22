@@ -17,7 +17,10 @@ import { MCButton } from '../components/MCButton';
 import { MCGlyphIcon, MCGlyphIconBase } from '../components/MCGlyphIcon';
 import ExternalIcon from '../assets/texture/external.png';
 import { useMediaQuery } from '@mantine/hooks';
-import { basePath } from '../util';
+
+import showoff1 from '../assets/screenshots/showoff1.png';
+import doomstick from '../assets/screenshots/doomstick.png';
+import totem_spawn from '../assets/screenshots/totem_spawn.png';
 
 const philosophy = `\
 <star></star> Unique<DARK_GRAY> - Relics have unique effects and interactions</DARK_GRAY>
@@ -115,19 +118,13 @@ export const Home = () => {
 				</MCText>
 
 				<MCGui>
-					<Image
-						src={`${basePath}/screenshots/showoff1.png?raw=true`}
-					/>
+					<Image src={showoff1} />
 				</MCGui>
 				<MCGui>
-					<Image
-						src={`${basePath}/screenshots/doomstick.png?raw=true`}
-					/>
+					<Image src={doomstick} />
 				</MCGui>
 				<MCGui>
-					<Image
-						src={`${basePath}/screenshots/totem_spawn.png?raw=true`}
-					/>
+					<Image src={totem_spawn} />
 				</MCGui>
 			</Vertical>
 
