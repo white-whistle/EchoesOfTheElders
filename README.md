@@ -12,7 +12,7 @@ Honestly this wiki might just be cooler than this mod
 We put a lot of effort into it so please check it out!
 
 
-<a href="" target="_blank"><img src="https://img.shields.io/badge/take%20me%20there-050505?style=for-the-badge" /></a>
+<a href="https://white-whistle.github.io/EchoesOfTheElders/" target="_blank"><img src="https://img.shields.io/badge/take%20me%20there-050505?style=for-the-badge" /></a>
 
 # Download
 <a href="https://www.curseforge.com/minecraft/mc-mods/echoes-of-the-elders" target="_blank"><img src="https://img.shields.io/badge/curseforge-050505?style=for-the-badge&logo=curseforge" /></a>
