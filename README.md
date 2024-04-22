@@ -2,13 +2,25 @@
 <p>&nbsp;</p>
 <h3 style="text-align: center;"><img src="https://raw.githubusercontent.com/white-whistle/EchoesOfTheElders/master/web/src/assets/screenshots/totem_entity.png" alt="splash image showcasing the new raid totem entity"  /></h3>
 <h3 style="text-align: center;">&nbsp;</h3>
-<img align="left" width="100px" src="https://raw.githubusercontent.com/white-whistle/EchoesOfTheElders/master/design/simplified.svg" alt="echoes of the elders title" />
-<h3 style="text-align: center;">Echoes of the Elders</h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <img align="left" width="100px" src="https://raw.githubusercontent.com/white-whistle/EchoesOfTheElders/master/design/simplified.svg" alt="echoes of the elders title" />
+      </td>
+      <td>
+<h2 style="text-align: center;">Echoes of the Elders</h2>
 <p style="text-align: center;"><span style="font-size: 18px;">A mod with strong artifacts - and even stronger opinions</span>&nbsp;</p>
-<p>&nbsp;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 
 # Wiki
-Honestly this wiki might just be cooler than this mod
+Honestly this wiki might just be cooler than this mod!!
 We put a lot of effort into it so please check it out!
 
 
