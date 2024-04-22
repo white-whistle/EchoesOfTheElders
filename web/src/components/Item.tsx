@@ -3,11 +3,18 @@ import { ItemMeta } from '../types';
 import { PixelScaling } from './PixelScaling';
 import { forwardRef } from 'react';
 import MissingTexture from '../assets/texture/missing.png';
-import { basePath } from '../util';
+
+const textures = import.meta.glob(
+	'../../../src/main/resources/assets/echoes_of_the_elders/textures/item/*.png',
+	{ eager: true }
+);
 
 export function textureFromItem(item: string) {
-	// return '/EchoesOfTheElders/item/' + item + '.png';
-	return `${basePath}/item/${item}.png?raw=true/`;
+	return (
+		textures[
+			`../../../src/main/resources/assets/echoes_of_the_elders/textures/item/${item}.png`
+		] as any
+	).default;
 }
 
 export function itemToKey(item: string) {

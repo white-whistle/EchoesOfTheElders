@@ -9,18 +9,42 @@ import {
 } from './DropRateGraph';
 import { PixelScaling } from './PixelScaling';
 import { Line } from 'react-chartjs-2';
-import { Chart, Filler, Tooltip } from 'chart.js';
+import {
+	CategoryScale,
+	Chart,
+	Filler,
+	LineElement,
+	LinearScale,
+	PointElement,
+	Tooltip,
+} from 'chart.js';
 import { MCFloatingTooltip } from './MCTooltip';
 import { Box } from '@mantine/core';
 import { Horizontal, Vertical } from '../Layout';
 import { MCText } from './MCText';
 import Crosshair from 'chartjs-plugin-crosshair';
 
-Chart.register(Filler, Tooltip, Crosshair);
+Chart.defaults.font = {
+	family: 'Minecraft',
+	size: 10,
+};
+Chart.register(
+	Filler,
+	Tooltip,
+	Crosshair,
+	CategoryScale,
+	LinearScale,
+	PointElement,
+	LineElement
+);
 
 const COLORS = Object.values(MC_BRIGHT_PALETTE);
 const indexToColor = (index: number) => {
-	return COLORS[index % COLORS.length];
+	const color = COLORS[index % COLORS.length];
+
+	return {
+		color,
+	};
 };
 
 export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
@@ -45,15 +69,18 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 					acc[x] += y;
 				});
 
+				const { color } = indexToColor(index);
+
 				return {
 					data: dropMetas,
 					fill: 'stack',
 					borderColor: 'transparent',
 					radius: 0,
-					color: indexToColor(index),
-					fillColor: indexToColor(index),
+					color,
+					// fillColor: color,
+
 					segment: {
-						backgroundColor: indexToColor(index),
+						backgroundColor: color,
 					},
 				};
 			})
@@ -166,14 +193,14 @@ export const DropMapGraph = ({ items }: { items: ItemMeta[] }) => {
 									return (
 										<Horizontal key={p.raw.item.item}>
 											<MCText
-												c={p.dataset.fillColor}
+												c={p.dataset.color}
 												shadowColor='transparent'
 												w='4ch'
 											>
 												{p.raw.chance}%
 											</MCText>
 											<MCText
-												c={p.dataset.fillColor}
+												c={p.dataset.color}
 												shadowColor='transparent'
 											>
 												{p.raw.item.name}

@@ -1,8 +1,9 @@
-import { Anchor } from '@mantine/core';
+import { Anchor, Image } from '@mantine/core';
 import { Vertical } from '../Layout';
 import { MCGlyphIcon } from '../components/MCGlyphIcon';
 import { MCGui, MCGuiText, MCGuiTitle } from '../components/MCGui';
 import { PixelScaling } from '../components/PixelScaling';
+import { VERSIONS } from '../versions';
 
 function AboutPage() {
 	const { px } = PixelScaling.use();
@@ -60,6 +61,31 @@ function AboutPage() {
 						protected, and you are not allowed to use them outside
 						of this mod
 					</MCGuiText>
+				</Vertical>
+			</MCGui>
+
+			<MCGui w='100%' maw='800px' flex={1}>
+				<Vertical p={px(2)} gap={px(8)}>
+					<MCGuiTitle>Versions</MCGuiTitle>
+
+					<Vertical
+						gap={px(8)}
+						style={{ flexDirection: 'column-reverse' }}
+					>
+						{VERSIONS.map((v) => (
+							<MCGui key={v.name} w='100%' maw='800px' flex={1}>
+								<Image
+									h='100px'
+									style={{ objectFit: 'contain' }}
+									src={v.image}
+								/>
+								<MCGuiText />
+								{v.changes.map((c) => (
+									<MCGuiText key={c}>{c}</MCGuiText>
+								))}
+							</MCGui>
+						))}
+					</Vertical>
 				</Vertical>
 			</MCGui>
 		</Vertical>

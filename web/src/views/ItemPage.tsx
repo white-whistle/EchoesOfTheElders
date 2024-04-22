@@ -10,6 +10,7 @@ import { MCGui, MCGuiTitle } from '../components/MCGui';
 import { MCText } from '../components/MCText';
 import { Box } from '@mantine/core';
 import { MCButton } from '../components/MCButton';
+import { DropMapGraph } from '../components/DropMapGraph';
 
 export const ItemPage = () => {
 	const params = useParams();
@@ -48,7 +49,8 @@ export const ItemPage = () => {
 							</MCTooltipPanel>
 						</Vertical>
 						<Box h='350px'>
-							<DropRateGraph item={item} />
+							{/* <DropRateGraph item={item} /> */}
+							<DropMapGraph items={[item]} />
 						</Box>
 					</Horizontal>
 				</Vertical>

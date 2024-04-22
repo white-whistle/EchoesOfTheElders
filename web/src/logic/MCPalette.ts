@@ -1,8 +1,8 @@
 export const MC_PALETTE = {
+	red: '#FF5555',
 	white: '#FFFFFF',
 	yellow: '#FFFF55',
 	light_purple: '#FF55FF',
-	red: '#FF5555',
 	aqua: '#55FFFF',
 	green: '#55FF55',
 	blue: '#5555FF',

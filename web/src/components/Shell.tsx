@@ -1,6 +1,5 @@
 import { Anchor, AppShell, Box, Image } from '@mantine/core';
 import { Link, useLocation } from 'wouter';
-import ModTitleImage from '../../../design/title_spiritual_awakening.png';
 import { Horizontal, Vertical } from '../Layout';
 import { PixelScaling } from './PixelScaling';
 import { Item, ItemTexture } from './Item';
@@ -15,6 +14,7 @@ import InfoIcon from '../assets/texture/info.png';
 import ExternalIcon from '../assets/texture/external.png';
 import { MCGlyphIconBase } from './MCGlyphIcon';
 import { useMediaQuery } from '@mantine/hooks';
+import { CURRENT_VERSION } from '../versions';
 
 function Shell({ children }) {
 	const { px } = PixelScaling.use();
@@ -42,7 +42,7 @@ function Shell({ children }) {
 					{!isSM && (
 						<Anchor component={Link} to='/'>
 							<Image
-								src={ModTitleImage}
+								src={CURRENT_VERSION.image}
 								h='120px'
 								w='fit-content'
 								p='md'
